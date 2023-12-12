@@ -1,0 +1,86 @@
+{
+  "name": "4-vocab-fsprep-validate",
+  "isActive": true,
+  "order": "50",
+  "condition": {
+    "objectTypeId": "00000000-0000-0000-0000-000000000000",
+    "condition": "AND",
+    "field": null,
+    "operator": "00000000-0000-0000-0000-000000000000",
+    "rules": [
+      {
+        "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+        "condition": "AND",
+        "field": "Properties[gr.fsprep.DW_SourceKey]",
+        "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+        "rules": [],
+        "type": "string",
+        "value": []
+      }
+    ],
+    "type": null,
+    "value": null
+  },
+  "actions": null,
+  "rules": [
+    {
+      "name": "ValidateRequired-Name",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 1,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "OR",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.fsprep.RepresentativeName]",
+            "operator": "16b2dc07-94e3-4c29-bc60-a7a1d25de53b",
+            "rules": [],
+            "type": "string",
+            "value": []
+          },
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.fsprep.RepresentativeName]",
+            "operator": "9ad76320-021e-4211-9e9a-8b148c9c600d",
+            "rules": [],
+            "type": "string",
+            "value": []
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "Add Tag",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "Value",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "Invalid-fsprep-Name-Missing",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Rules.Actions.AddTag, CluedIn.Rules"
+        }
+      ]
+    }
+  ],
+  "scope": "DataPart"
+}

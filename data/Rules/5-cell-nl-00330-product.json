@@ -1,0 +1,178 @@
+{
+  "name": "5-cell-nl-00330-product",
+  "isActive": true,
+  "order": "44",
+  "condition": {
+    "objectTypeId": "00000000-0000-0000-0000-000000000000",
+    "condition": "AND",
+    "field": null,
+    "operator": "00000000-0000-0000-0000-000000000000",
+    "rules": [
+      {
+        "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+        "condition": "AND",
+        "field": "Properties[gr.product.DW_SourceKey]",
+        "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+        "rules": [],
+        "type": "string",
+        "value": []
+      },
+      {
+        "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+        "condition": "AND",
+        "field": "Properties[gr.product.DW_CellNumber]",
+        "operator": "0bafc522-8011-43ba-978a-babe222ba466",
+        "rules": [],
+        "type": "string",
+        "value": [
+          "00330"
+        ]
+      },
+      {
+        "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+        "condition": "AND",
+        "field": "Properties[gr.product.DW_InsuranceType]",
+        "operator": "0bafc522-8011-43ba-978a-babe222ba466",
+        "rules": [],
+        "type": "string",
+        "value": [
+          "NL"
+        ]
+      }
+    ],
+    "type": null,
+    "value": null
+  },
+  "actions": null,
+  "rules": [
+    {
+      "name": "Set-LineOfBusinessCode-CL",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 1,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.product.ProductCode]",
+            "operator": "0bafc522-8011-43ba-978a-babe222ba466",
+            "rules": [],
+            "type": "string",
+            "value": [
+              "COMCC"
+            ]
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "Set Value",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.product.LineOfBusinessCode",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "Value",
+              "type": "System.Object",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "CL",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Rules.Actions.SetValue, CluedIn.Rules"
+        }
+      ]
+    },
+    {
+      "name": "Set-LineOfBusinessCode-PL",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 2,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.product.ProductCode]",
+            "operator": "31feed84-ce0e-435f-ba94-ce01b9c7bd15",
+            "rules": [],
+            "type": "string",
+            "value": [
+              "PERCM",
+              "PERCC",
+              "IDSURE"
+            ]
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "Set Value",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.product.LineOfBusinessCode",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "Value",
+              "type": "System.Object",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "PL",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Rules.Actions.SetValue, CluedIn.Rules"
+        }
+      ]
+    }
+  ],
+  "scope": "DataPart"
+}

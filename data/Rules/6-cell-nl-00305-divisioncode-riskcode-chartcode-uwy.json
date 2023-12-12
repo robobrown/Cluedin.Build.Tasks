@@ -1,0 +1,1215 @@
+{
+  "name": "6-cell-nl-00305-divisioncode-riskcode-chartcode-uwy",
+  "isActive": true,
+  "order": "63",
+  "condition": {
+    "objectTypeId": "00000000-0000-0000-0000-000000000000",
+    "condition": "AND",
+    "field": null,
+    "operator": "00000000-0000-0000-0000-000000000000",
+    "rules": [
+      {
+        "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+        "condition": "AND",
+        "field": "Properties[gr.bdxpolicyclassification.DW_CellNumber]",
+        "operator": "0bafc522-8011-43ba-978a-babe222ba466",
+        "rules": [],
+        "type": "string",
+        "value": [
+          "00305"
+        ]
+      },
+      {
+        "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+        "condition": "AND",
+        "field": "Properties[gr.bdxpolicyclassification.DW_SourceKey]",
+        "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+        "rules": [],
+        "type": "string",
+        "value": []
+      },
+      {
+        "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+        "condition": "AND",
+        "field": "Properties[gr.bdxpolicyclassification.DW_InsuranceType]",
+        "operator": "0bafc522-8011-43ba-978a-babe222ba466",
+        "rules": [],
+        "type": "string",
+        "value": [
+          "NL"
+        ]
+      }
+    ],
+    "type": null,
+    "value": null
+  },
+  "actions": null,
+  "rules": [
+    {
+      "name": "Set-DivisionCode-35",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 1,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.bdxpolicyclassification.ProductName]",
+            "operator": "31feed84-ce0e-435f-ba94-ce01b9c7bd15",
+            "rules": [],
+            "type": "string",
+            "value": [
+              "Supercars",
+              "Supercar"
+            ]
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "Set Value",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.bdxpolicyclassification.DivisionCode",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "Value",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "003050035",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Rules.Actions.SetValue, CluedIn.Rules"
+        }
+      ]
+    },
+    {
+      "name": "Set-DivisionCode-31",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 2,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.bdxpolicyclassification.ProductName]",
+            "operator": "31feed84-ce0e-435f-ba94-ce01b9c7bd15",
+            "rules": [],
+            "type": "string",
+            "value": [
+              "IUM Liability",
+              "Liability"
+            ]
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "Set Value",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.bdxpolicyclassification.DivisionCode",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "Value",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "003050031",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Rules.Actions.SetValue, CluedIn.Rules"
+        }
+      ]
+    },
+    {
+      "name": "Set-DivisionCode-62",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 3,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.bdxpolicyclassification.ProductName]",
+            "operator": "31feed84-ce0e-435f-ba94-ce01b9c7bd15",
+            "rules": [],
+            "type": "string",
+            "value": [
+              "IUM Property All Risk",
+              "Property All Risk",
+              "Property all risks: Sectional plan",
+              "Property all risks: Commercial"
+            ]
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "Set Value",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.bdxpolicyclassification.DivisionCode",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "Value",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "003050062",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Rules.Actions.SetValue, CluedIn.Rules"
+        }
+      ]
+    },
+    {
+      "name": "Set-DivisionCode-33",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 4,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.bdxpolicyclassification.ProductName]",
+            "operator": "31feed84-ce0e-435f-ba94-ce01b9c7bd15",
+            "rules": [],
+            "type": "string",
+            "value": [
+              "IUM Agriculture",
+              "Agriculture"
+            ]
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "Set Value",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.bdxpolicyclassification.DivisionCode",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "Value",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "003050033",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Rules.Actions.SetValue, CluedIn.Rules"
+        }
+      ]
+    },
+    {
+      "name": "Set-DivisionCode-60",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 5,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.bdxpolicyclassification.ProductName]",
+            "operator": "31feed84-ce0e-435f-ba94-ce01b9c7bd15",
+            "rules": [],
+            "type": "string",
+            "value": [
+              "IUM Alpha Pharm",
+              "Alpha Pharm",
+              "Pharmacy"
+            ]
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "Set Value",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.bdxpolicyclassification.DivisionCode",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "Value",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "003050060",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Rules.Actions.SetValue, CluedIn.Rules"
+        }
+      ]
+    },
+    {
+      "name": "Set-DivisionCode-58",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 6,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.bdxpolicyclassification.ProductName]",
+            "operator": "31feed84-ce0e-435f-ba94-ce01b9c7bd15",
+            "rules": [],
+            "type": "string",
+            "value": [
+              "IUM Beemersure",
+              "Beemersure",
+              "Beemersurance"
+            ]
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "Set Value",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.bdxpolicyclassification.DivisionCode",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "Value",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "003050058",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Rules.Actions.SetValue, CluedIn.Rules"
+        }
+      ]
+    },
+    {
+      "name": "Set-DivisionCode-02",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 7,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.bdxpolicyclassification.ProductName]",
+            "operator": "31feed84-ce0e-435f-ba94-ce01b9c7bd15",
+            "rules": [],
+            "type": "string",
+            "value": [
+              "IUM Commercial",
+              "Commercial"
+            ]
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "Set Value",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.bdxpolicyclassification.DivisionCode",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "Value",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "003050002",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Rules.Actions.SetValue, CluedIn.Rules"
+        }
+      ]
+    },
+    {
+      "name": "Set-DivisionCode-52",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 8,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.bdxpolicyclassification.ProductName]",
+            "operator": "31feed84-ce0e-435f-ba94-ce01b9c7bd15",
+            "rules": [],
+            "type": "string",
+            "value": [
+              "IUM Domestic",
+              "Domestic",
+              "Personal"
+            ]
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "Set Value",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.bdxpolicyclassification.DivisionCode",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "Value",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "003050052",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Rules.Actions.SetValue, CluedIn.Rules"
+        }
+      ]
+    },
+    {
+      "name": "Set-DivisionCode-56",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 9,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.bdxpolicyclassification.ProductName]",
+            "operator": "31feed84-ce0e-435f-ba94-ce01b9c7bd15",
+            "rules": [],
+            "type": "string",
+            "value": [
+              "IUM Eminence",
+              "Eminence"
+            ]
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "Set Value",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.bdxpolicyclassification.DivisionCode",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "Value",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "003050056",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Rules.Actions.SetValue, CluedIn.Rules"
+        }
+      ]
+    },
+    {
+      "name": "Set-DivisionCode-38",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 10,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.bdxpolicyclassification.ProductName]",
+            "operator": "31feed84-ce0e-435f-ba94-ce01b9c7bd15",
+            "rules": [],
+            "type": "string",
+            "value": [
+              "IUM Fleet",
+              "Fleet",
+              "Motor Fleet"
+            ]
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "Set Value",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.bdxpolicyclassification.DivisionCode",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "Value",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "003050038",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Rules.Actions.SetValue, CluedIn.Rules"
+        }
+      ]
+    },
+    {
+      "name": "Set-DivisionCode-03",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 11,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.bdxpolicyclassification.ProductName]",
+            "operator": "31feed84-ce0e-435f-ba94-ce01b9c7bd15",
+            "rules": [],
+            "type": "string",
+            "value": [
+              "IUM Leisuresure",
+              "Leisuresure",
+              "Leisure"
+            ]
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "Set Value",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.bdxpolicyclassification.DivisionCode",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "Value",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "003050003",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Rules.Actions.SetValue, CluedIn.Rules"
+        }
+      ]
+    },
+    {
+      "name": "Set-DivisionCode-32",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 12,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.bdxpolicyclassification.ProductName]",
+            "operator": "31feed84-ce0e-435f-ba94-ce01b9c7bd15",
+            "rules": [],
+            "type": "string",
+            "value": [
+              "Marine",
+              "Marine (Zero VAT Rated)"
+            ]
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "Set Value",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.bdxpolicyclassification.DivisionCode",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "Value",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "003050032",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Rules.Actions.SetValue, CluedIn.Rules"
+        }
+      ]
+    },
+    {
+      "name": "Set-DivisionCode-54",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 13,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.bdxpolicyclassification.ProductName]",
+            "operator": "31feed84-ce0e-435f-ba94-ce01b9c7bd15",
+            "rules": [],
+            "type": "string",
+            "value": [
+              "IUM Mont Blanc Blue Diamond",
+              "Mont Blanc Blue Diamond"
+            ]
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "Set Value",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.bdxpolicyclassification.DivisionCode",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "Value",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "003050054",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Rules.Actions.SetValue, CluedIn.Rules"
+        }
+      ]
+    },
+    {
+      "name": "Set-DivisionCode-55",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 14,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.bdxpolicyclassification.ProductName]",
+            "operator": "31feed84-ce0e-435f-ba94-ce01b9c7bd15",
+            "rules": [],
+            "type": "string",
+            "value": [
+              "IUM Opulence",
+              "Opulence"
+            ]
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "Set Value",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.bdxpolicyclassification.DivisionCode",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "Value",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "003050055",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Rules.Actions.SetValue, CluedIn.Rules"
+        }
+      ]
+    },
+    {
+      "name": "Set-DivisionCode-63",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 15,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.bdxpolicyclassification.ProductName]",
+            "operator": "31feed84-ce0e-435f-ba94-ce01b9c7bd15",
+            "rules": [],
+            "type": "string",
+            "value": [
+              "Prime Edge",
+              "PrimeEdge"
+            ]
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "Set Value",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.bdxpolicyclassification.DivisionCode",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "Value",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "003050063",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Rules.Actions.SetValue, CluedIn.Rules"
+        }
+      ]
+    },
+    {
+      "name": "Set-DivisionCode-01",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 16,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.bdxpolicyclassification.ProductName]",
+            "operator": "31feed84-ce0e-435f-ba94-ce01b9c7bd15",
+            "rules": [],
+            "type": "string",
+            "value": [
+              "IUM Haulage (HCV)",
+              "Haulage (HCV)",
+              "Haulage",
+              "Transport"
+            ]
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "Set Value",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.bdxpolicyclassification.DivisionCode",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "Value",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "003050001",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Rules.Actions.SetValue, CluedIn.Rules"
+        }
+      ]
+    },
+    {
+      "name": "Set-DivisionCode-04",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 17,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.bdxpolicyclassification.ProductName]",
+            "operator": "31feed84-ce0e-435f-ba94-ce01b9c7bd15",
+            "rules": [],
+            "type": "string",
+            "value": [
+              "IUM VAPS",
+              "VAPS"
+            ]
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "Set Value",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.bdxpolicyclassification.DivisionCode",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "Value",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "003050004",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Rules.Actions.SetValue, CluedIn.Rules"
+        }
+      ]
+    },
+    {
+      "name": "Set-DivisionCode-61",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 18,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.bdxpolicyclassification.ProductName]",
+            "operator": "31feed84-ce0e-435f-ba94-ce01b9c7bd15",
+            "rules": [],
+            "type": "string",
+            "value": [
+              "IUM Wine, Vine & Dine",
+              "Wine, Vine & Dine",
+              "Wine",
+              "Vine",
+              "Dine",
+              "Wine Vine and Dine"
+            ]
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "Set Value",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.bdxpolicyclassification.DivisionCode",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "Value",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "003050061",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Rules.Actions.SetValue, CluedIn.Rules"
+        }
+      ]
+    }
+  ],
+  "scope": "DataPart"
+}

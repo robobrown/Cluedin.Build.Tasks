@@ -1,0 +1,79 @@
+{
+  "name": "4-vocab-policyholder-validate",
+  "isActive": true,
+  "order": "52",
+  "condition": {
+    "objectTypeId": "00000000-0000-0000-0000-000000000000",
+    "condition": "AND",
+    "field": null,
+    "operator": "00000000-0000-0000-0000-000000000000",
+    "rules": [
+      {
+        "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+        "condition": "AND",
+        "field": "Properties[gr.policyholder.DW_SourceKey]",
+        "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+        "rules": [],
+        "type": "string",
+        "value": []
+      }
+    ],
+    "type": null,
+    "value": null
+  },
+  "actions": null,
+  "rules": [
+    {
+      "name": "Invalid-policyholder-CompanyInPerson-PtyLtd",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 1,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.policyholder.LastName]",
+            "operator": "4988d076-3ec1-4414-9f56-5b9b30e25f72",
+            "rules": [],
+            "type": "string",
+            "value": [
+              "Pty Ltd"
+            ]
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "Add Tag",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "Value",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "Invalid-policyholder-CompanyNameInPersonDetails",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Rules.Actions.AddTag, CluedIn.Rules"
+        }
+      ]
+    }
+  ],
+  "scope": "DataPart"
+}

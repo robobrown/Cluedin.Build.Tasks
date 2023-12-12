@@ -1,0 +1,2976 @@
+{
+  "name": "Premium Bordereau",
+  "editors": null,
+  "dataSources": [
+    {
+      "type": "endpoint",
+      "name": "Premium Bordereau V1",
+      "connectorConfigurationId": "0AFED627-AE31-4A2C-B53C-8BC9AAECCC08",
+      "dataSets": [
+        {
+          "name": "premiumbdx_v1.productcover",
+          "configuration": {
+            "entityTypeConfiguration": {
+              "displayName": "Insurance Product Cover",
+              "entityType": "/InsuranceProductCover",
+              "icon": "Gift",
+              "new": false
+            },
+            "object": {
+              "autoSubmit": true,
+              "endPointName": "premiumbdx_v1.productcover",
+              "entityType": "/InsuranceProductCover"
+            },
+            "store": true
+          },
+          "annotation": {
+            "name": "Auto-generated 4a25a5ef-dd8e-4418-967e-ca8282f3568b",
+            "entityType": "/InsuranceProductCover",
+            "originEntityCodeKey": "gr.productcover.DW_SourceKey",
+            "origin": "prembdx",
+            "nameKey": "gr.productcover.CoverCode",
+            "vocabularyId": "276670ef-e330-f73e-1a8d-8028a9d040ec",
+            "isDynamicVocab": true,
+            "useStrictEdgeCode": false,
+            "useDefaultSourceCode": false,
+            "annotationProperties": [
+              {
+                "displayName": "Cover Code",
+                "key": "gr_productcover_CoverCode",
+                "vocabKey": "gr.productcover.CoverCode",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Cover Name",
+                "key": "gr_productcover_CoverName",
+                "vocabKey": "gr.productcover.CoverName",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Cell Number",
+                "key": "gr_productcover_DW_CellNumber",
+                "vocabKey": "gr.productcover.DW_CellNumber",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Data Adapter Name",
+                "key": "gr_productcover_DW_DataAdapterName",
+                "vocabKey": "gr.productcover.DW_DataAdapterName",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Deletion Date",
+                "key": "gr_productcover_DW_DeletionDate",
+                "vocabKey": "gr.productcover.DW_DeletionDate",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Insurance Company Code",
+                "key": "gr_productcover_DW_InsuranceCompanyCode",
+                "vocabKey": "gr.productcover.DW_InsuranceCompanyCode",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Insurance Type",
+                "key": "gr_productcover_DW_InsuranceType",
+                "vocabKey": "gr.productcover.DW_InsuranceType",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Is Deleted",
+                "key": "gr_productcover_DW_IsDeleted",
+                "vocabKey": "gr.productcover.DW_IsDeleted",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Job Id",
+                "key": "gr_productcover_DW_JobId",
+                "vocabKey": "gr.productcover.DW_JobId",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Source Key",
+                "key": "gr_productcover_DW_SourceKey",
+                "vocabKey": "gr.productcover.DW_SourceKey",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Product Code",
+                "key": "gr_productcover_ProductCode",
+                "vocabKey": "gr.productcover.ProductCode",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Product Source Key",
+                "key": "gr_productcover_ProductSourceKey",
+                "vocabKey": "gr.productcover.ProductSourceKey",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Sub Cover Code",
+                "key": "gr_productcover_SubCoverCode",
+                "vocabKey": "gr.productcover.SubCoverCode",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Sub Cover Name",
+                "key": "gr_productcover_SubCoverName",
+                "vocabKey": "gr.productcover.SubCoverName",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              }
+            ],
+            "vocabulary": {
+              "vocabularyId": "276670ef-e330-f73e-1a8d-8028a9d040ec",
+              "vocabularyName": "Insurance Product Cover",
+              "grouping": "/InsuranceProductCover",
+              "keyPrefix": "gr.productcover",
+              "isActive": true,
+              "isCluedInCore": false,
+              "isDynamic": false,
+              "isProvider": true,
+              "isVocabularyOwner": true,
+              "providerId": "5882bb46-44d7-4688-bb4a-1a6283edc67d",
+              "description": null
+            },
+            "entityTypeConfiguration": {
+              "icon": null,
+              "displayName": null,
+              "entityType": null
+            }
+          },
+          "fieldMappings": [
+            {
+              "originalField": "DW_InsuranceType",
+              "key": "gr.productcover.DW_InsuranceType",
+              "edges": null
+            },
+            {
+              "originalField": "CoverCode",
+              "key": "gr.productcover.CoverCode",
+              "edges": null
+            },
+            {
+              "originalField": "DW_IsDeleted",
+              "key": "gr.productcover.DW_IsDeleted",
+              "edges": null
+            },
+            {
+              "originalField": "DW_InsuranceCompanyCode",
+              "key": "gr.productcover.DW_InsuranceCompanyCode",
+              "edges": null
+            },
+            {
+              "originalField": "CoverName",
+              "key": "gr.productcover.CoverName",
+              "edges": null
+            },
+            {
+              "originalField": "DW_JobId",
+              "key": "gr.productcover.DW_JobId",
+              "edges": null
+            },
+            {
+              "originalField": "DW_DeletionDate",
+              "key": "gr.productcover.DW_DeletionDate",
+              "edges": null
+            },
+            {
+              "originalField": "SubCoverCode",
+              "key": "gr.productcover.SubCoverCode",
+              "edges": null
+            },
+            {
+              "originalField": "DW_CellNumber",
+              "key": "gr.productcover.DW_CellNumber",
+              "edges": null
+            },
+            {
+              "originalField": "ProductSourceKey",
+              "key": "gr.productcover.ProductSourceKey",
+              "edges": null
+            },
+            {
+              "originalField": "DW_DataAdapterName",
+              "key": "gr.productcover.DW_DataAdapterName",
+              "edges": null
+            },
+            {
+              "originalField": "DW_ActiveStartTime",
+              "key": "--ignore--",
+              "edges": null
+            },
+            {
+              "originalField": "ProductCode",
+              "key": "gr.productcover.ProductCode",
+              "edges": null
+            },
+            {
+              "originalField": "DW_SourceId",
+              "key": "--ignore--",
+              "edges": null
+            },
+            {
+              "originalField": "DW_SourceKey",
+              "key": "gr.productcover.DW_SourceKey",
+              "edges": null
+            },
+            {
+              "originalField": "SubCoverName",
+              "key": "gr.productcover.SubCoverName",
+              "edges": null
+            }
+          ],
+          "originalFields": null
+        },
+        {
+          "name": "premiumbdx_v1.product",
+          "configuration": {
+            "entityTypeConfiguration": {
+              "displayName": "Insurance Product",
+              "entityType": "/InsuranceProduct",
+              "icon": "Gift",
+              "new": false
+            },
+            "object": {
+              "autoSubmit": true,
+              "endPointName": "premiumbdx_v1.product",
+              "entityType": "/InsuranceProduct"
+            },
+            "store": true
+          },
+          "annotation": {
+            "name": "Auto-generated e88d32fe-bec5-429c-996d-5fc3cca30395",
+            "entityType": "/InsuranceProduct",
+            "originEntityCodeKey": "gr.product.DW_SourceKey",
+            "origin": "prembdx",
+            "nameKey": "gr.product.ProductCode",
+            "vocabularyId": "e8d7613a-3907-821e-f50f-cd2cbcb9d187",
+            "isDynamicVocab": true,
+            "useStrictEdgeCode": false,
+            "useDefaultSourceCode": false,
+            "annotationProperties": [
+              {
+                "displayName": "DW Cell Number",
+                "key": "gr_product_DW_CellNumber",
+                "vocabKey": "gr.product.DW_CellNumber",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Data Adapter Name",
+                "key": "gr_product_DW_DataAdapterName",
+                "vocabKey": "gr.product.DW_DataAdapterName",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Deletion Date",
+                "key": "gr_product_DW_DeletionDate",
+                "vocabKey": "gr.product.DW_DeletionDate",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Insurance Company Code",
+                "key": "gr_product_DW_InsuranceCompanyCode",
+                "vocabKey": "gr.product.DW_InsuranceCompanyCode",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Insurance Type",
+                "key": "gr_product_DW_InsuranceType",
+                "vocabKey": "gr.product.DW_InsuranceType",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Is Deleted",
+                "key": "gr_product_DW_IsDeleted",
+                "vocabKey": "gr.product.DW_IsDeleted",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Job Id",
+                "key": "gr_product_DW_JobId",
+                "vocabKey": "gr.product.DW_JobId",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Source Key",
+                "key": "gr_product_DW_SourceKey",
+                "vocabKey": "gr.product.DW_SourceKey",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Line Of Business Name",
+                "key": "gr_product_LineOfBusinessName",
+                "vocabKey": "gr.product.LineOfBusinessName",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Product Code",
+                "key": "gr_product_ProductCode",
+                "vocabKey": "gr.product.ProductCode",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Product Name",
+                "key": "gr_product_ProductName",
+                "vocabKey": "gr.product.ProductName",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              }
+            ],
+            "vocabulary": {
+              "vocabularyId": "e8d7613a-3907-821e-f50f-cd2cbcb9d187",
+              "vocabularyName": "Insurance Product",
+              "grouping": "/InsuranceProduct",
+              "keyPrefix": "gr.product",
+              "isActive": true,
+              "isCluedInCore": false,
+              "isDynamic": false,
+              "isProvider": true,
+              "isVocabularyOwner": true,
+              "providerId": "5882bb46-44d7-4688-bb4a-1a6283edc67d",
+              "description": null
+            },
+            "entityTypeConfiguration": {
+              "icon": "Gift",
+              "displayName": "Insurance Product",
+              "entityType": "/InsuranceProduct"
+            }
+          },
+          "fieldMappings": [
+            {
+              "originalField": "DW_JobId",
+              "key": "gr.product.DW_JobId",
+              "edges": null
+            },
+            {
+              "originalField": "LineofBusiness",
+              "key": "gr.product.LineOfBusinessName",
+              "edges": null
+            },
+            {
+              "originalField": "DW_DeletionDate",
+              "key": "gr.product.DW_DeletionDate",
+              "edges": null
+            },
+            {
+              "originalField": "DW_SourceId",
+              "key": "--ignore--",
+              "edges": null
+            },
+            {
+              "originalField": "DW_IsDeleted",
+              "key": "gr.product.DW_IsDeleted",
+              "edges": null
+            },
+            {
+              "originalField": "ProductCode",
+              "key": "gr.product.ProductCode",
+              "edges": null
+            },
+            {
+              "originalField": "ProductName",
+              "key": "gr.product.ProductName",
+              "edges": null
+            },
+            {
+              "originalField": "DW_InsuranceType",
+              "key": "gr.product.DW_InsuranceType",
+              "edges": null
+            },
+            {
+              "originalField": "DW_SourceKey",
+              "key": "gr.product.DW_SourceKey",
+              "edges": null
+            },
+            {
+              "originalField": "DW_ActiveStartTime",
+              "key": "--ignore--",
+              "edges": null
+            },
+            {
+              "originalField": "DW_DataAdapterName",
+              "key": "gr.product.DW_DataAdapterName",
+              "edges": null
+            },
+            {
+              "originalField": "DW_CellNumber",
+              "key": "gr.product.DW_CellNumber",
+              "edges": null
+            },
+            {
+              "originalField": "DW_InsuranceCompanyCode",
+              "key": "gr.product.DW_InsuranceCompanyCode",
+              "edges": null
+            }
+          ],
+          "originalFields": null
+        },
+        {
+          "name": "premiumbdx_v1.policy",
+          "configuration": {
+            "entityTypeConfiguration": {
+              "displayName": "Policy",
+              "entityType": "/Policy",
+              "icon": "Consent",
+              "new": false
+            },
+            "object": {
+              "autoSubmit": true,
+              "endPointName": "premiumbdx_v1.policy",
+              "entityType": "/Policy"
+            },
+            "store": true
+          },
+          "annotation": {
+            "name": "Auto-generated 46601e96-12af-410c-a25f-52cbada5b57b",
+            "entityType": "/Policy",
+            "originEntityCodeKey": "gr.policy.DW_SourceKey",
+            "origin": "prembdx",
+            "nameKey": "gr.policy.PolicyNumber",
+            "vocabularyId": "50302b09-7a80-3636-34db-e21013105116",
+            "isDynamicVocab": true,
+            "useStrictEdgeCode": false,
+            "useDefaultSourceCode": false,
+            "annotationProperties": [
+              {
+                "displayName": "Collecting Intermediary FSPNo",
+                "key": "gr_policy_CollectingIntermediaryFSPNo",
+                "vocabKey": "gr.policy.CollectingIntermediaryFSPNo",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Current Inception Date",
+                "key": "gr_policy_CurrentInceptionDate",
+                "vocabKey": "gr.policy.CurrentInceptionDate",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Cell Number",
+                "key": "gr_policy_DW_CellNumber",
+                "vocabKey": "gr.policy.DW_CellNumber",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Data Adapter Name",
+                "key": "gr_policy_DW_DataAdapterName",
+                "vocabKey": "gr.policy.DW_DataAdapterName",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Deletion Date",
+                "key": "gr_policy_DW_DeletionDate",
+                "vocabKey": "gr.policy.DW_DeletionDate",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Insurance Company Code",
+                "key": "gr_policy_DW_InsuranceCompanyCode",
+                "vocabKey": "gr.policy.DW_InsuranceCompanyCode",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Insurance Type",
+                "key": "gr_policy_DW_InsuranceType",
+                "vocabKey": "gr.policy.DW_InsuranceType",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Is Deleted",
+                "key": "gr_policy_DW_IsDeleted",
+                "vocabKey": "gr.policy.DW_IsDeleted",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Job Id",
+                "key": "gr_policy_DW_JobId",
+                "vocabKey": "gr.policy.DW_JobId",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Source Key",
+                "key": "gr_policy_DW_SourceKey",
+                "vocabKey": "gr.policy.DW_SourceKey",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Fsp Number",
+                "key": "gr_policy_FspNumber",
+                "vocabKey": "gr.policy.FspNumber",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Income Source Key",
+                "key": "gr_policy_IncomeSourceKey",
+                "vocabKey": "gr.policy.IncomeSourceKey",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Is In Bordereau Data",
+                "key": "gr_policy_IsInBordereauData",
+                "vocabKey": "gr.policy.IsInBordereauData",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Original Inception Date",
+                "key": "gr_policy_OriginalInceptionDate",
+                "vocabKey": "gr.policy.OriginalInceptionDate",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Payment Frequency Name",
+                "key": "gr_policy_PaymentFrequencyName",
+                "vocabKey": "gr.policy.PaymentFrequencyName",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Policy Holder Source Key",
+                "key": "gr_policy_PolicyHolderSourceKey",
+                "vocabKey": "gr.policy.PolicyHolderSourceKey",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Policy Number",
+                "key": "gr_policy_PolicyNumber",
+                "vocabKey": "gr.policy.PolicyNumber",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Premium Type Name",
+                "key": "gr_policy_PremiumTypeName",
+                "vocabKey": "gr.policy.PremiumTypeName",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Product Source Key",
+                "key": "gr_policy_ProductSourceKey",
+                "vocabKey": "gr.policy.ProductSourceKey",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Re Insurer",
+                "key": "gr_policy_ReInsurer",
+                "vocabKey": "gr.policy.ReInsurer",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Treaty Effective Date",
+                "key": "gr_policy_TreatyEffectiveDate",
+                "vocabKey": "gr.policy.TreatyEffectiveDate",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Treaty Reference",
+                "key": "gr_policy_TreatyReference",
+                "vocabKey": "gr.policy.TreatyReference",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Treaty Year",
+                "key": "gr_policy_TreatyYear",
+                "vocabKey": "gr.policy.TreatyYear",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              }
+            ],
+            "vocabulary": {
+              "vocabularyId": "50302b09-7a80-3636-34db-e21013105116",
+              "vocabularyName": "Policy",
+              "grouping": "/Policy",
+              "keyPrefix": "gr.policy",
+              "isActive": true,
+              "isCluedInCore": false,
+              "isDynamic": false,
+              "isProvider": true,
+              "isVocabularyOwner": true,
+              "providerId": "5882bb46-44d7-4688-bb4a-1a6283edc67d",
+              "description": null
+            },
+            "entityTypeConfiguration": {
+              "icon": "Consent",
+              "displayName": "Policy",
+              "entityType": "/Policy"
+            }
+          },
+          "fieldMappings": [
+            {
+              "originalField": "PremiumType",
+              "key": "gr.policy.PremiumTypeName",
+              "edges": null
+            },
+            {
+              "originalField": "TreatyReference",
+              "key": "gr.policy.TreatyReference",
+              "edges": null
+            },
+            {
+              "originalField": "TreatyEffectiveDate",
+              "key": "gr.policy.TreatyEffectiveDate",
+              "edges": null
+            },
+            {
+              "originalField": "TreatyYear",
+              "key": "gr.policy.TreatyYear",
+              "edges": null
+            },
+            {
+              "originalField": "PolicyHolderSourceKey",
+              "key": "gr.policy.PolicyHolderSourceKey",
+              "edges": null
+            },
+            {
+              "originalField": "PolicyEffectiveDate",
+              "key": "gr.policy.CurrentInceptionDate",
+              "edges": null
+            },
+            {
+              "originalField": "ProductSourceKey",
+              "key": "gr.policy.ProductSourceKey",
+              "edges": null
+            },
+            {
+              "originalField": "DW_InsuranceType",
+              "key": "gr.policy.DW_InsuranceType",
+              "edges": null
+            },
+            {
+              "originalField": "IsInBordereauData",
+              "key": "gr.policy.IsInBordereauData",
+              "edges": null
+            },
+            {
+              "originalField": "ReInsurer",
+              "key": "gr.policy.ReInsurer",
+              "edges": null
+            },
+            {
+              "originalField": "DW_SourceKey",
+              "key": "gr.policy.DW_SourceKey",
+              "edges": null
+            },
+            {
+              "originalField": "DW_JobId",
+              "key": "gr.policy.DW_JobId",
+              "edges": null
+            },
+            {
+              "originalField": "CollectingIntermediaryFSPNo",
+              "key": "gr.policy.CollectingIntermediaryFSPNo",
+              "edges": null
+            },
+            {
+              "originalField": "DW_DataAdapterName",
+              "key": "gr.policy.DW_DataAdapterName",
+              "edges": null
+            },
+            {
+              "originalField": "DW_CellNumber",
+              "key": "gr.policy.DW_CellNumber",
+              "edges": null
+            },
+            {
+              "originalField": "PolicyInceptionDate",
+              "key": "gr.policy.OriginalInceptionDate",
+              "edges": null
+            },
+            {
+              "originalField": "PolicyRefNo",
+              "key": "gr.policy.PolicyNumber",
+              "edges": null
+            },
+            {
+              "originalField": "IncomeSourceKey",
+              "key": "gr.policy.IncomeSourceKey",
+              "edges": null
+            },
+            {
+              "originalField": "DW_ActiveStartTime",
+              "key": "--ignore--",
+              "edges": null
+            },
+            {
+              "originalField": "CommissionIntermediaryFSPNo",
+              "key": "gr.policy.FspNumber",
+              "edges": null
+            },
+            {
+              "originalField": "PremiumFrequency",
+              "key": "gr.policy.PaymentFrequencyName",
+              "edges": null
+            },
+            {
+              "originalField": "DW_IsDeleted",
+              "key": "gr.policy.DW_IsDeleted",
+              "edges": null
+            },
+            {
+              "originalField": "DW_InsuranceCompanyCode",
+              "key": "gr.policy.DW_InsuranceCompanyCode",
+              "edges": null
+            },
+            {
+              "originalField": "DW_DeletionDate",
+              "key": "gr.policy.DW_DeletionDate",
+              "edges": null
+            },
+            {
+              "originalField": "DW_SourceId",
+              "key": "--ignore--",
+              "edges": null
+            }
+          ],
+          "originalFields": null
+        },
+        {
+          "name": "premiumbdx_v1.commissionfsp",
+          "configuration": {
+            "entityTypeConfiguration": {
+              "displayName": "FSP",
+              "entityType": "/FSP",
+              "icon": "Competitoropportunity",
+              "new": false
+            },
+            "object": {
+              "autoSubmit": true,
+              "endPointName": "premiumbdx_v1.commissionfsp",
+              "entityType": "/FSP"
+            },
+            "store": true
+          },
+          "annotation": {
+            "name": "Auto-generated cd50757e-bb1d-4082-b15b-2da93a94f414",
+            "entityType": "/FSP",
+            "originEntityCodeKey": "gr.fsp.DW_SourceKey",
+            "origin": "prembdx",
+            "nameKey": "gr.fsp.FspName",
+            "vocabularyId": "f262eeaa-bb17-42da-5a33-dccc4ec0d48d",
+            "isDynamicVocab": true,
+            "useStrictEdgeCode": false,
+            "useDefaultSourceCode": false,
+            "annotationProperties": [
+              {
+                "displayName": "DW Cell Number",
+                "key": "gr_fsp_DW_CellNumber",
+                "vocabKey": "gr.fsp.DW_CellNumber",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Data Adapter Name",
+                "key": "gr_fsp_DW_DataAdapterName",
+                "vocabKey": "gr.fsp.DW_DataAdapterName",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Deletion Date",
+                "key": "gr_fsp_DW_DeletionDate",
+                "vocabKey": "gr.fsp.DW_DeletionDate",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Insurance Company Code",
+                "key": "gr_fsp_DW_InsuranceCompanyCode",
+                "vocabKey": "gr.fsp.DW_InsuranceCompanyCode",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Insurance Type",
+                "key": "gr_fsp_DW_InsuranceType",
+                "vocabKey": "gr.fsp.DW_InsuranceType",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Is Deleted",
+                "key": "gr_fsp_DW_IsDeleted",
+                "vocabKey": "gr.fsp.DW_IsDeleted",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Job Id",
+                "key": "gr_fsp_DW_JobId",
+                "vocabKey": "gr.fsp.DW_JobId",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Source Key",
+                "key": "gr_fsp_DW_SourceKey",
+                "vocabKey": "gr.fsp.DW_SourceKey",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Fsp Name",
+                "key": "gr_fsp_FspName",
+                "vocabKey": "gr.fsp.FspName",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Fsp Number",
+                "key": "gr_fsp_FspNumber",
+                "vocabKey": "gr.fsp.FspNumber",
+                "coreVocab": null,
+                "useAsEntityCode": true,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": "prembdx",
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Fsp Tax Number",
+                "key": "gr_fsp_FspTaxNumber",
+                "vocabKey": "gr.fsp.FspTaxNumber",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              }
+            ],
+            "vocabulary": {
+              "vocabularyId": "f262eeaa-bb17-42da-5a33-dccc4ec0d48d",
+              "vocabularyName": "FSP",
+              "grouping": "/FSP",
+              "keyPrefix": "gr.fsp",
+              "isActive": true,
+              "isCluedInCore": false,
+              "isDynamic": false,
+              "isProvider": true,
+              "isVocabularyOwner": true,
+              "providerId": "5882bb46-44d7-4688-bb4a-1a6283edc67d",
+              "description": null
+            },
+            "entityTypeConfiguration": {
+              "icon": "Competitoropportunity",
+              "displayName": "FSP",
+              "entityType": "/FSP"
+            }
+          },
+          "fieldMappings": [
+            {
+              "originalField": "DW_JobId",
+              "key": "gr.fsp.DW_JobId",
+              "edges": null
+            },
+            {
+              "originalField": "CommissionIntermediaryVATRegNo",
+              "key": "gr.fsp.FspTaxNumber",
+              "edges": null
+            },
+            {
+              "originalField": "DW_InsuranceType",
+              "key": "gr.fsp.DW_InsuranceType",
+              "edges": null
+            },
+            {
+              "originalField": "DW_ActiveStartTime",
+              "key": "--ignore--",
+              "edges": null
+            },
+            {
+              "originalField": "DW_DeletionDate",
+              "key": "gr.fsp.DW_DeletionDate",
+              "edges": null
+            },
+            {
+              "originalField": "CommissionIntermediaryFSPName",
+              "key": "gr.fsp.FspName",
+              "edges": null
+            },
+            {
+              "originalField": "DW_DataAdapterName",
+              "key": "gr.fsp.DW_DataAdapterName",
+              "edges": null
+            },
+            {
+              "originalField": "DW_InsuranceCompanyCode",
+              "key": "gr.fsp.DW_InsuranceCompanyCode",
+              "edges": null
+            },
+            {
+              "originalField": "DW_SourceKey",
+              "key": "gr.fsp.DW_SourceKey",
+              "edges": null
+            },
+            {
+              "originalField": "DW_CellNumber",
+              "key": "gr.fsp.DW_CellNumber",
+              "edges": null
+            },
+            {
+              "originalField": "DW_SourceId",
+              "key": "--ignore--",
+              "edges": null
+            },
+            {
+              "originalField": "CommissionIntermediaryFSPNo",
+              "key": "gr.fsp.FspNumber",
+              "edges": null
+            },
+            {
+              "originalField": "DW_IsDeleted",
+              "key": "gr.fsp.DW_IsDeleted",
+              "edges": null
+            }
+          ],
+          "originalFields": null
+        },
+        {
+          "name": "premiumbdx_v1.collectingfsp",
+          "configuration": {
+            "entityTypeConfiguration": {
+              "displayName": "FSP",
+              "entityType": "/FSP",
+              "icon": "Competitoropportunity",
+              "new": false
+            },
+            "object": {
+              "autoSubmit": true,
+              "endPointName": "premiumbdx_v1.collectingfsp",
+              "entityType": "/FSP"
+            },
+            "store": true
+          },
+          "annotation": {
+            "name": "Auto-generated 9689f975-955b-4c11-99e4-f509e70d0a88",
+            "entityType": "/FSP",
+            "originEntityCodeKey": "gr.fsp.DW_SourceKey",
+            "origin": "prembdx",
+            "nameKey": "gr.fsp.FspName",
+            "vocabularyId": "f262eeaa-bb17-42da-5a33-dccc4ec0d48d",
+            "isDynamicVocab": true,
+            "useStrictEdgeCode": false,
+            "useDefaultSourceCode": false,
+            "annotationProperties": [
+              {
+                "displayName": "DW Cell Number",
+                "key": "gr_fsp_DW_CellNumber",
+                "vocabKey": "gr.fsp.DW_CellNumber",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Data Adapter Name",
+                "key": "gr_fsp_DW_DataAdapterName",
+                "vocabKey": "gr.fsp.DW_DataAdapterName",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Deletion Date",
+                "key": "gr_fsp_DW_DeletionDate",
+                "vocabKey": "gr.fsp.DW_DeletionDate",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Insurance Company Code",
+                "key": "gr_fsp_DW_InsuranceCompanyCode",
+                "vocabKey": "gr.fsp.DW_InsuranceCompanyCode",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Insurance Type",
+                "key": "gr_fsp_DW_InsuranceType",
+                "vocabKey": "gr.fsp.DW_InsuranceType",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Is Deleted",
+                "key": "gr_fsp_DW_IsDeleted",
+                "vocabKey": "gr.fsp.DW_IsDeleted",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Job Id",
+                "key": "gr_fsp_DW_JobId",
+                "vocabKey": "gr.fsp.DW_JobId",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Source Key",
+                "key": "gr_fsp_DW_SourceKey",
+                "vocabKey": "gr.fsp.DW_SourceKey",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Fsp Name",
+                "key": "gr_fsp_FspName",
+                "vocabKey": "gr.fsp.FspName",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Fsp Number",
+                "key": "gr_fsp_FspNumber",
+                "vocabKey": "gr.fsp.FspNumber",
+                "coreVocab": null,
+                "useAsEntityCode": true,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": "prembdx",
+                "type": "String",
+                "vocabularyKeyId": true
+              }
+            ],
+            "vocabulary": {
+              "vocabularyId": "f262eeaa-bb17-42da-5a33-dccc4ec0d48d",
+              "vocabularyName": "FSP",
+              "grouping": "/FSP",
+              "keyPrefix": "gr.fsp",
+              "isActive": true,
+              "isCluedInCore": false,
+              "isDynamic": false,
+              "isProvider": true,
+              "isVocabularyOwner": true,
+              "providerId": "5882bb46-44d7-4688-bb4a-1a6283edc67d",
+              "description": null
+            },
+            "entityTypeConfiguration": {
+              "icon": "Competitoropportunity",
+              "displayName": "FSP",
+              "entityType": "/FSP"
+            }
+          },
+          "fieldMappings": [
+            {
+              "originalField": "DW_DeletionDate",
+              "key": "gr.fsp.DW_DeletionDate",
+              "edges": null
+            },
+            {
+              "originalField": "DW_SourceId",
+              "key": "--ignore--",
+              "edges": null
+            },
+            {
+              "originalField": "DW_InsuranceCompanyCode",
+              "key": "gr.fsp.DW_InsuranceCompanyCode",
+              "edges": null
+            },
+            {
+              "originalField": "DW_SourceKey",
+              "key": "gr.fsp.DW_SourceKey",
+              "edges": null
+            },
+            {
+              "originalField": "IntermediaryVATNumber",
+              "key": "--ignore--",
+              "edges": null
+            },
+            {
+              "originalField": "DW_IsDeleted",
+              "key": "gr.fsp.DW_IsDeleted",
+              "edges": null
+            },
+            {
+              "originalField": "CollectingIntermediaryFSPName",
+              "key": "gr.fsp.FspName",
+              "edges": null
+            },
+            {
+              "originalField": "DW_DataAdapterName",
+              "key": "gr.fsp.DW_DataAdapterName",
+              "edges": null
+            },
+            {
+              "originalField": "CollectingIntermediaryFSPNo",
+              "key": "gr.fsp.FspNumber",
+              "edges": null
+            },
+            {
+              "originalField": "DW_ActiveStartTime",
+              "key": "--ignore--",
+              "edges": null
+            },
+            {
+              "originalField": "DW_CellNumber",
+              "key": "gr.fsp.DW_CellNumber",
+              "edges": null
+            },
+            {
+              "originalField": "DW_InsuranceType",
+              "key": "gr.fsp.DW_InsuranceType",
+              "edges": null
+            },
+            {
+              "originalField": "DW_JobId",
+              "key": "gr.fsp.DW_JobId",
+              "edges": null
+            }
+          ],
+          "originalFields": null
+        },
+        {
+          "name": "premiumbdx_v1.bdxPolicyClassification",
+          "configuration": {
+            "entityTypeConfiguration": {
+              "displayName": "Bordereau Policy Classification",
+              "entityType": "/BdxPolicyClassification",
+              "icon": "Gridview",
+              "new": false
+            },
+            "object": {
+              "autoSubmit": true,
+              "endPointName": "premiumbdx_v1.bdxPolicyClassification",
+              "entityType": "/BdxPolicyClassification"
+            },
+            "store": true
+          },
+          "annotation": {
+            "name": "Auto-generated d2b9eaf7-94b6-4387-bc78-6fffc652f596",
+            "entityType": "/BdxPolicyClassification",
+            "originEntityCodeKey": "gr.bdxpolicyclassification.DW_SourceKey",
+            "origin": "prembdx",
+            "nameKey": "gr.bdxpolicyclassification.DW_SourceKey",
+            "vocabularyId": "f9deb33f-e807-020f-6618-e7e267da3b92",
+            "isDynamicVocab": true,
+            "useStrictEdgeCode": false,
+            "useDefaultSourceCode": false,
+            "annotationProperties": [
+              {
+                "displayName": "Chart Code",
+                "key": "gr_bdxpolicyclassification_ChartCode",
+                "vocabKey": "gr.bdxpolicyclassification.ChartCode",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Class Name",
+                "key": "gr_bdxpolicyclassification_ClassName",
+                "vocabKey": "gr.bdxpolicyclassification.ClassName",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Class Of Business",
+                "key": "gr_bdxpolicyclassification_ClassOfBusiness",
+                "vocabKey": "gr.bdxpolicyclassification.ClassOfBusiness",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Cover Code",
+                "key": "gr_bdxpolicyclassification_CoverCode",
+                "vocabKey": "gr.bdxpolicyclassification.CoverCode",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Cover Name",
+                "key": "gr_bdxpolicyclassification_CoverName",
+                "vocabKey": "gr.bdxpolicyclassification.CoverName",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Division Code",
+                "key": "gr_bdxpolicyclassification_DivisionCode",
+                "vocabKey": "gr.bdxpolicyclassification.DivisionCode",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Division Description",
+                "key": "gr_bdxpolicyclassification_DivisionDescription",
+                "vocabKey": "gr.bdxpolicyclassification.DivisionDescription",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Cell Number",
+                "key": "gr_bdxpolicyclassification_DW_CellNumber",
+                "vocabKey": "gr.bdxpolicyclassification.DW_CellNumber",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Data Adapter Name",
+                "key": "gr_bdxpolicyclassification_DW_DataAdapterName",
+                "vocabKey": "gr.bdxpolicyclassification.DW_DataAdapterName",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Deletion Date",
+                "key": "gr_bdxpolicyclassification_DW_DeletionDate",
+                "vocabKey": "gr.bdxpolicyclassification.DW_DeletionDate",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Insurance Company Code",
+                "key": "gr_bdxpolicyclassification_DW_InsuranceCompanyCode",
+                "vocabKey": "gr.bdxpolicyclassification.DW_InsuranceCompanyCode",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Insurance Type",
+                "key": "gr_bdxpolicyclassification_DW_InsuranceType",
+                "vocabKey": "gr.bdxpolicyclassification.DW_InsuranceType",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Is Deleted",
+                "key": "gr_bdxpolicyclassification_DW_IsDeleted",
+                "vocabKey": "gr.bdxpolicyclassification.DW_IsDeleted",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Job Id",
+                "key": "gr_bdxpolicyclassification_DW_JobId",
+                "vocabKey": "gr.bdxpolicyclassification.DW_JobId",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Source Key",
+                "key": "gr_bdxpolicyclassification_DW_SourceKey",
+                "vocabKey": "gr.bdxpolicyclassification.DW_SourceKey",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Narrative",
+                "key": "gr_bdxpolicyclassification_Narrative",
+                "vocabKey": "gr.bdxpolicyclassification.Narrative",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Premium Frequency",
+                "key": "gr_bdxpolicyclassification_PremiumFrequency",
+                "vocabKey": "gr.bdxpolicyclassification.PremiumFrequency",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Product Code",
+                "key": "gr_bdxpolicyclassification_ProductCode",
+                "vocabKey": "gr.bdxpolicyclassification.ProductCode",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Product Name",
+                "key": "gr_bdxpolicyclassification_ProductName",
+                "vocabKey": "gr.bdxpolicyclassification.ProductName",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Re Insurer",
+                "key": "gr_bdxpolicyclassification_ReInsurer",
+                "vocabKey": "gr.bdxpolicyclassification.ReInsurer",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Risk Code",
+                "key": "gr_bdxpolicyclassification_RiskCode",
+                "vocabKey": "gr.bdxpolicyclassification.RiskCode",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Sub Class Non Life",
+                "key": "gr_bdxpolicyclassification_SubClassNonLife",
+                "vocabKey": "gr.bdxpolicyclassification.SubClassNonLife",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Sub Cover Code",
+                "key": "gr_bdxpolicyclassification_SubCoverCode",
+                "vocabKey": "gr.bdxpolicyclassification.SubCoverCode",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Sub Cover Name",
+                "key": "gr_bdxpolicyclassification_SubCoverName",
+                "vocabKey": "gr.bdxpolicyclassification.SubCoverName",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Sub Sub Class Life",
+                "key": "gr_bdxpolicyclassification_SubSubClassLife",
+                "vocabKey": "gr.bdxpolicyclassification.SubSubClassLife",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "VATIndicator",
+                "key": "gr_bdxpolicyclassification_VATIndicator",
+                "vocabKey": "gr.bdxpolicyclassification.VATIndicator",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              }
+            ],
+            "vocabulary": {
+              "vocabularyId": "f9deb33f-e807-020f-6618-e7e267da3b92",
+              "vocabularyName": "Bordereau Policy Classification",
+              "grouping": "/BdxPolicyClassification",
+              "keyPrefix": "gr.bdxpolicyclassification",
+              "isActive": true,
+              "isCluedInCore": false,
+              "isDynamic": false,
+              "isProvider": true,
+              "isVocabularyOwner": true,
+              "providerId": "5882bb46-44d7-4688-bb4a-1a6283edc67d",
+              "description": null
+            },
+            "entityTypeConfiguration": {
+              "icon": "Gridview",
+              "displayName": "Bordereau Policy Classification",
+              "entityType": "/BdxPolicyClassification"
+            }
+          },
+          "fieldMappings": [
+            {
+              "originalField": "SubCoverName",
+              "key": "gr.bdxpolicyclassification.SubCoverName",
+              "edges": null
+            },
+            {
+              "originalField": "ProductCode",
+              "key": "gr.bdxpolicyclassification.ProductCode",
+              "edges": null
+            },
+            {
+              "originalField": "DivisionDescription",
+              "key": "gr.bdxpolicyclassification.DivisionDescription",
+              "edges": null
+            },
+            {
+              "originalField": "SubClassNonLife",
+              "key": "gr.bdxpolicyclassification.SubClassNonLife",
+              "edges": null
+            },
+            {
+              "originalField": "IncomeSourceKey",
+              "key": "gr.bdxpolicyclassification.DW_SourceKey",
+              "edges": null
+            },
+            {
+              "originalField": "PremiumFrequency",
+              "key": "gr.bdxpolicyclassification.PremiumFrequency",
+              "edges": null
+            },
+            {
+              "originalField": "DW_InsuranceType",
+              "key": "gr.bdxpolicyclassification.DW_InsuranceType",
+              "edges": null
+            },
+            {
+              "originalField": "DW_JobId",
+              "key": "gr.bdxpolicyclassification.DW_JobId",
+              "edges": null
+            },
+            {
+              "originalField": "SubSubClassLife",
+              "key": "gr.bdxpolicyclassification.SubSubClassLife",
+              "edges": null
+            },
+            {
+              "originalField": "GRFinancialDivisionCode",
+              "key": "gr.bdxpolicyclassification.DivisionCode",
+              "edges": null
+            },
+            {
+              "originalField": "Class",
+              "key": "gr.bdxpolicyclassification.ClassName",
+              "edges": null
+            },
+            {
+              "originalField": "LineofBusiness",
+              "key": "gr.bdxpolicyclassification.ClassOfBusiness",
+              "edges": null
+            },
+            {
+              "originalField": "ReInsurer",
+              "key": "gr.bdxpolicyclassification.ReInsurer",
+              "edges": null
+            },
+            {
+              "originalField": "DW_DataAdapterName",
+              "key": "gr.bdxpolicyclassification.DW_DataAdapterName",
+              "edges": null
+            },
+            {
+              "originalField": "ClassOfBusiness",
+              "key": "--ignore--",
+              "edges": null
+            },
+            {
+              "originalField": "DW_DeletionDate",
+              "key": "gr.bdxpolicyclassification.DW_DeletionDate",
+              "edges": null
+            },
+            {
+              "originalField": "Narrative",
+              "key": "gr.bdxpolicyclassification.Narrative",
+              "edges": null
+            },
+            {
+              "originalField": "DW_InsuranceCompanyCode",
+              "key": "gr.bdxpolicyclassification.DW_InsuranceCompanyCode",
+              "edges": null
+            },
+            {
+              "originalField": "DW_CellNumber",
+              "key": "gr.bdxpolicyclassification.DW_CellNumber",
+              "edges": null
+            },
+            {
+              "originalField": "DW_IsDeleted",
+              "key": "gr.bdxpolicyclassification.DW_IsDeleted",
+              "edges": null
+            },
+            {
+              "originalField": "DW_SourceId",
+              "key": "--ignore--",
+              "edges": null
+            },
+            {
+              "originalField": "CoverName",
+              "key": "gr.bdxpolicyclassification.CoverName",
+              "edges": null
+            },
+            {
+              "originalField": "CoverCode",
+              "key": "gr.bdxpolicyclassification.CoverCode",
+              "edges": null
+            },
+            {
+              "originalField": "GRFinancialRiskCode",
+              "key": "gr.bdxpolicyclassification.RiskCode",
+              "edges": null
+            },
+            {
+              "originalField": "DW_ActiveStartTime",
+              "key": "--ignore--",
+              "edges": null
+            },
+            {
+              "originalField": "ChartCode",
+              "key": "gr.bdxpolicyclassification.ChartCode",
+              "edges": null
+            },
+            {
+              "originalField": "SubCoverCode",
+              "key": "gr.bdxpolicyclassification.SubCoverCode",
+              "edges": null
+            },
+            {
+              "originalField": "ProductName",
+              "key": "gr.bdxpolicyclassification.ProductName",
+              "edges": null
+            },
+            {
+              "originalField": "VATIndicator",
+              "key": "gr.bdxpolicyclassification.VATIndicator",
+              "edges": null
+            }
+          ],
+          "originalFields": null
+        },
+        {
+          "name": "premiumbdx_v1.bdxinvoicesummary",
+          "configuration": {
+            "entityTypeConfiguration": {
+              "displayName": "Bordereau Invoice Summary",
+              "entityType": "/BdxInvoiceSummary",
+              "icon": "Creditcard",
+              "new": false
+            },
+            "object": {
+              "autoSubmit": true,
+              "endPointName": "premiumbdx_v1.bdxinvoicesummary",
+              "entityType": "/BdxInvoiceSummary"
+            },
+            "store": true
+          },
+          "annotation": {
+            "name": "Auto-generated a809358c-349a-4191-ae85-2fc7f24621a2",
+            "entityType": "/BdxInvoiceSummary",
+            "originEntityCodeKey": "gr.bdxinvoicesummary.DW_SourceKey",
+            "origin": "prembdx",
+            "nameKey": "gr.bdxinvoicesummary.DW_SourceKey",
+            "vocabularyId": "5fd92368-861d-93d2-e984-d78f15b5ae6e",
+            "isDynamicVocab": true,
+            "useStrictEdgeCode": false,
+            "useDefaultSourceCode": false,
+            "annotationProperties": [
+              {
+                "displayName": "DW Cell Number",
+                "key": "gr_bdxinvoicesummary_DW_CellNumber",
+                "vocabKey": "gr.bdxinvoicesummary.DW_CellNumber",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Data Adapter Name",
+                "key": "gr_bdxinvoicesummary_DW_DataAdapterName",
+                "vocabKey": "gr.bdxinvoicesummary.DW_DataAdapterName",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Deletion Date",
+                "key": "gr_bdxinvoicesummary_DW_DeletionDate",
+                "vocabKey": "gr.bdxinvoicesummary.DW_DeletionDate",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Insurance Company Code",
+                "key": "gr_bdxinvoicesummary_DW_InsuranceCompanyCode",
+                "vocabKey": "gr.bdxinvoicesummary.DW_InsuranceCompanyCode",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Insurance Type",
+                "key": "gr_bdxinvoicesummary_DW_InsuranceType",
+                "vocabKey": "gr.bdxinvoicesummary.DW_InsuranceType",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Is Deleted",
+                "key": "gr_bdxinvoicesummary_DW_IsDeleted",
+                "vocabKey": "gr.bdxinvoicesummary.DW_IsDeleted",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Job Id",
+                "key": "gr_bdxinvoicesummary_DW_JobId",
+                "vocabKey": "gr.bdxinvoicesummary.DW_JobId",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Source Key",
+                "key": "gr_bdxinvoicesummary_DW_SourceKey",
+                "vocabKey": "gr.bdxinvoicesummary.DW_SourceKey",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Expense Source Key",
+                "key": "gr_bdxinvoicesummary_ExpenseSourceKey",
+                "vocabKey": "gr.bdxinvoicesummary.ExpenseSourceKey",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "File Transaction Reference Number",
+                "key": "gr_bdxinvoicesummary_FileTransactionReferenceNumber",
+                "vocabKey": "gr.bdxinvoicesummary.FileTransactionReferenceNumber",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Inception Year Month",
+                "key": "gr_bdxinvoicesummary_InceptionYearMonth",
+                "vocabKey": "gr.bdxinvoicesummary.InceptionYearMonth",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Income Source Key",
+                "key": "gr_bdxinvoicesummary_IncomeSourceKey",
+                "vocabKey": "gr.bdxinvoicesummary.IncomeSourceKey",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Posting Period Year Month",
+                "key": "gr_bdxinvoicesummary_PostingPeriodYearMonth",
+                "vocabKey": "gr.bdxinvoicesummary.PostingPeriodYearMonth",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Re Insurance Treaty Year Month",
+                "key": "gr_bdxinvoicesummary_ReInsuranceTreatyYearMonth",
+                "vocabKey": "gr.bdxinvoicesummary.ReInsuranceTreatyYearMonth",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Total Amount Excl VAT",
+                "key": "gr_bdxinvoicesummary_TotalAmountExclVAT",
+                "vocabKey": "gr.bdxinvoicesummary.TotalAmountExclVAT",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Total Amount Inc VAT",
+                "key": "gr_bdxinvoicesummary_TotalAmountIncVAT",
+                "vocabKey": "gr.bdxinvoicesummary.TotalAmountIncVAT",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Total Non Vatable Amount",
+                "key": "gr_bdxinvoicesummary_TotalNonVatableAmount",
+                "vocabKey": "gr.bdxinvoicesummary.TotalNonVatableAmount",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Total VATAmount",
+                "key": "gr_bdxinvoicesummary_TotalVATAmount",
+                "vocabKey": "gr.bdxinvoicesummary.TotalVATAmount",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Transaction Count",
+                "key": "gr_bdxinvoicesummary_TransactionCount",
+                "vocabKey": "gr.bdxinvoicesummary.TransactionCount",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Transaction Year Month",
+                "key": "gr_bdxinvoicesummary_TransactionYearMonth",
+                "vocabKey": "gr.bdxinvoicesummary.TransactionYearMonth",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "VATIndicator",
+                "key": "gr_bdxinvoicesummary_VATIndicator",
+                "vocabKey": "gr.bdxinvoicesummary.VATIndicator",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "VATPercentage",
+                "key": "gr_bdxinvoicesummary_VATPercentage",
+                "vocabKey": "gr.bdxinvoicesummary.VATPercentage",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              }
+            ],
+            "vocabulary": {
+              "vocabularyId": "5fd92368-861d-93d2-e984-d78f15b5ae6e",
+              "vocabularyName": "Bordereau Invoice Summary",
+              "grouping": "/BdxInvoiceSummary",
+              "keyPrefix": "gr.bdxinvoicesummary",
+              "isActive": true,
+              "isCluedInCore": false,
+              "isDynamic": false,
+              "isProvider": true,
+              "isVocabularyOwner": true,
+              "providerId": "5882bb46-44d7-4688-bb4a-1a6283edc67d",
+              "description": null
+            },
+            "entityTypeConfiguration": {
+              "icon": "Creditcard",
+              "displayName": "Bordereau Invoice Summary",
+              "entityType": "/BdxInvoiceSummary"
+            }
+          },
+          "fieldMappings": [
+            {
+              "originalField": "DW_InsuranceType",
+              "key": "gr.bdxinvoicesummary.DW_InsuranceType",
+              "edges": null
+            },
+            {
+              "originalField": "TotalVATAmount",
+              "key": "gr.bdxinvoicesummary.TotalVATAmount",
+              "edges": null
+            },
+            {
+              "originalField": "TransactionYearMonth",
+              "key": "gr.bdxinvoicesummary.TransactionYearMonth",
+              "edges": null
+            },
+            {
+              "originalField": "PostingPeriodYearMonth",
+              "key": "gr.bdxinvoicesummary.PostingPeriodYearMonth",
+              "edges": null
+            },
+            {
+              "originalField": "TransactionCount",
+              "key": "gr.bdxinvoicesummary.TransactionCount",
+              "edges": null
+            },
+            {
+              "originalField": "ExpenseSourceKey",
+              "key": "gr.bdxinvoicesummary.ExpenseSourceKey",
+              "edges": null
+            },
+            {
+              "originalField": "DW_JobId",
+              "key": "gr.bdxinvoicesummary.DW_JobId",
+              "edges": null
+            },
+            {
+              "originalField": "TotalAmountExclVAT",
+              "key": "gr.bdxinvoicesummary.TotalAmountExclVAT",
+              "edges": null
+            },
+            {
+              "originalField": "DW_IsDeleted",
+              "key": "gr.bdxinvoicesummary.DW_IsDeleted",
+              "edges": null
+            },
+            {
+              "originalField": "VATPercentage",
+              "key": "gr.bdxinvoicesummary.VATPercentage",
+              "edges": null
+            },
+            {
+              "originalField": "DW_DataAdapterName",
+              "key": "gr.bdxinvoicesummary.DW_DataAdapterName",
+              "edges": null
+            },
+            {
+              "originalField": "DW_CellNumber",
+              "key": "gr.bdxinvoicesummary.DW_CellNumber",
+              "edges": null
+            },
+            {
+              "originalField": "IncomeSourceKey",
+              "key": "gr.bdxinvoicesummary.IncomeSourceKey",
+              "edges": null
+            },
+            {
+              "originalField": "DW_DeletionDate",
+              "key": "gr.bdxinvoicesummary.DW_DeletionDate",
+              "edges": null
+            },
+            {
+              "originalField": "DW_SourceKey",
+              "key": "gr.bdxinvoicesummary.DW_SourceKey",
+              "edges": null
+            },
+            {
+              "originalField": "InceptionYearMonth",
+              "key": "gr.bdxinvoicesummary.InceptionYearMonth",
+              "edges": null
+            },
+            {
+              "originalField": "VATIndicator",
+              "key": "gr.bdxinvoicesummary.VATIndicator",
+              "edges": null
+            },
+            {
+              "originalField": "ReInsuranceTreatyYearMonth",
+              "key": "gr.bdxinvoicesummary.ReInsuranceTreatyYearMonth",
+              "edges": null
+            },
+            {
+              "originalField": "FileTransactionReferenceNumber",
+              "key": "gr.bdxinvoicesummary.FileTransactionReferenceNumber",
+              "edges": null
+            },
+            {
+              "originalField": "DW_InsuranceCompanyCode",
+              "key": "gr.bdxinvoicesummary.DW_InsuranceCompanyCode",
+              "edges": null
+            },
+            {
+              "originalField": "TotalNonVatableAmount",
+              "key": "gr.bdxinvoicesummary.TotalNonVatableAmount",
+              "edges": null
+            },
+            {
+              "originalField": "TotalAmountIncVAT",
+              "key": "gr.bdxinvoicesummary.TotalAmountIncVAT",
+              "edges": null
+            }
+          ],
+          "originalFields": null
+        },
+        {
+          "name": "premiumbdx_v1.bdxinvoice",
+          "configuration": {
+            "entityTypeConfiguration": {
+              "displayName": "Bordereau Invoice",
+              "entityType": "/BdxInvoice",
+              "icon": "Creditcard",
+              "new": false
+            },
+            "object": {
+              "autoSubmit": true,
+              "endPointName": "premiumbdx_v1.bdxinvoice",
+              "entityType": "/BdxInvoice"
+            },
+            "store": true
+          },
+          "annotation": {
+            "name": "Auto-generated 0344fa48-58be-4877-803b-79fa1c729fe2",
+            "entityType": "/BdxInvoice",
+            "originEntityCodeKey": "gr.bdxinvoice.DW_SourceKey",
+            "origin": "prembdx",
+            "nameKey": "gr.bdxinvoice.DW_SourceKey",
+            "vocabularyId": "be6cd79d-1c10-75ce-7f55-60c66849ad69",
+            "isDynamicVocab": true,
+            "useStrictEdgeCode": false,
+            "useDefaultSourceCode": false,
+            "annotationProperties": [
+              {
+                "displayName": "DW Cell Number",
+                "key": "gr_bdxinvoice_DW_CellNumber",
+                "vocabKey": "gr.bdxinvoice.DW_CellNumber",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Data Adapter Name",
+                "key": "gr_bdxinvoice_DW_DataAdapterName",
+                "vocabKey": "gr.bdxinvoice.DW_DataAdapterName",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Deletion Date",
+                "key": "gr_bdxinvoice_DW_DeletionDate",
+                "vocabKey": "gr.bdxinvoice.DW_DeletionDate",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Insurance Company Code",
+                "key": "gr_bdxinvoice_DW_InsuranceCompanyCode",
+                "vocabKey": "gr.bdxinvoice.DW_InsuranceCompanyCode",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Insurance Type",
+                "key": "gr_bdxinvoice_DW_InsuranceType",
+                "vocabKey": "gr.bdxinvoice.DW_InsuranceType",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Is Deleted",
+                "key": "gr_bdxinvoice_DW_IsDeleted",
+                "vocabKey": "gr.bdxinvoice.DW_IsDeleted",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Job Id",
+                "key": "gr_bdxinvoice_DW_JobId",
+                "vocabKey": "gr.bdxinvoice.DW_JobId",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Source Key",
+                "key": "gr_bdxinvoice_DW_SourceKey",
+                "vocabKey": "gr.bdxinvoice.DW_SourceKey",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Financial Period End Date",
+                "key": "gr_bdxinvoice_FinancialPeriodEndDate",
+                "vocabKey": "gr.bdxinvoice.FinancialPeriodEndDate",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Financial Period Start Date",
+                "key": "gr_bdxinvoice_FinancialPeriodStartDate",
+                "vocabKey": "gr.bdxinvoice.FinancialPeriodStartDate",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Posting Period",
+                "key": "gr_bdxinvoice_PostingPeriod",
+                "vocabKey": "gr.bdxinvoice.PostingPeriod",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Submission Date",
+                "key": "gr_bdxinvoice_SubmissionDate",
+                "vocabKey": "gr.bdxinvoice.SubmissionDate",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Submission Transaction Reference Number",
+                "key": "gr_bdxinvoice_SubmissionTransactionReferenceNumber",
+                "vocabKey": "gr.bdxinvoice.SubmissionTransactionReferenceNumber",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              }
+            ],
+            "vocabulary": {
+              "vocabularyId": "be6cd79d-1c10-75ce-7f55-60c66849ad69",
+              "vocabularyName": "Bordereau Invoice",
+              "grouping": "/BdxInvoice",
+              "keyPrefix": "gr.bdxinvoice",
+              "isActive": true,
+              "isCluedInCore": false,
+              "isDynamic": false,
+              "isProvider": true,
+              "isVocabularyOwner": true,
+              "providerId": "5882bb46-44d7-4688-bb4a-1a6283edc67d",
+              "description": null
+            },
+            "entityTypeConfiguration": {
+              "icon": "Creditcard",
+              "displayName": "Bordereau Invoice",
+              "entityType": "/BdxInvoice"
+            }
+          },
+          "fieldMappings": [
+            {
+              "originalField": "FinancialPeriodEndDate",
+              "key": "gr.bdxinvoice.FinancialPeriodEndDate",
+              "edges": null
+            },
+            {
+              "originalField": "DW_CellNumber",
+              "key": "gr.bdxinvoice.DW_CellNumber",
+              "edges": null
+            },
+            {
+              "originalField": "DW_DeletionDate",
+              "key": "gr.bdxinvoice.DW_DeletionDate",
+              "edges": null
+            },
+            {
+              "originalField": "SubmissionTransactionReferenceNumber",
+              "key": "gr.bdxinvoice.SubmissionTransactionReferenceNumber",
+              "edges": null
+            },
+            {
+              "originalField": "DW_JobId",
+              "key": "gr.bdxinvoice.DW_JobId",
+              "edges": null
+            },
+            {
+              "originalField": "PostingPeriod",
+              "key": "gr.bdxinvoice.PostingPeriod",
+              "edges": null
+            },
+            {
+              "originalField": "SubmissionDate",
+              "key": "gr.bdxinvoice.SubmissionDate",
+              "edges": null
+            },
+            {
+              "originalField": "DW_InsuranceCompanyCode",
+              "key": "gr.bdxinvoice.DW_InsuranceCompanyCode",
+              "edges": null
+            },
+            {
+              "originalField": "DW_ActiveStartTime",
+              "key": "--ignore--",
+              "edges": null
+            },
+            {
+              "originalField": "DW_SourceId",
+              "key": "--ignore--",
+              "edges": null
+            },
+            {
+              "originalField": "FinancialPeriodStartDate",
+              "key": "gr.bdxinvoice.FinancialPeriodStartDate",
+              "edges": null
+            },
+            {
+              "originalField": "DW_IsDeleted",
+              "key": "gr.bdxinvoice.DW_IsDeleted",
+              "edges": null
+            },
+            {
+              "originalField": "DW_DataAdapterName",
+              "key": "gr.bdxinvoice.DW_DataAdapterName",
+              "edges": null
+            },
+            {
+              "originalField": "DW_InsuranceType",
+              "key": "gr.bdxinvoice.DW_InsuranceType",
+              "edges": null
+            },
+            {
+              "originalField": "DW_SourceKey",
+              "key": "gr.bdxinvoice.DW_SourceKey",
+              "edges": null
+            }
+          ],
+          "originalFields": null
+        },
+        {
+          "name": "premiumbdx_v1.bdxcostandchargeclassification",
+          "configuration": {
+            "entityTypeConfiguration": {
+              "displayName": "Bordereau Cost And Charge Classification",
+              "entityType": "/BdxCostAndChargeClassification",
+              "icon": "Tabularview",
+              "new": false
+            },
+            "object": {
+              "autoSubmit": true,
+              "endPointName": "premiumbdx_v1.bdxcostandchargeclassification",
+              "entityType": "/BdxCostAndChargeClassification"
+            },
+            "store": true
+          },
+          "annotation": {
+            "name": "Auto-generated 2874940b-cfcc-4b10-b710-e4c64be2303c",
+            "entityType": "/BdxCostAndChargeClassification",
+            "originEntityCodeKey": "gr.bdxcostandchargeclassification.DW_SourceKey",
+            "origin": "prembdx",
+            "nameKey": "gr.bdxcostandchargeclassification.TransactionDescription",
+            "vocabularyId": "e929951c-2253-56bd-4541-fce9e620b6c2",
+            "isDynamicVocab": true,
+            "useStrictEdgeCode": false,
+            "useDefaultSourceCode": false,
+            "annotationProperties": [
+              {
+                "displayName": "Charge Code",
+                "key": "gr_bdxcostandchargeclassification_ChargeCode",
+                "vocabKey": "gr.bdxcostandchargeclassification.ChargeCode",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Cost Code",
+                "key": "gr_bdxcostandchargeclassification_CostCode",
+                "vocabKey": "gr.bdxcostandchargeclassification.CostCode",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Cell Number",
+                "key": "gr_bdxcostandchargeclassification_DW_CellNumber",
+                "vocabKey": "gr.bdxcostandchargeclassification.DW_CellNumber",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Data Adapter Name",
+                "key": "gr_bdxcostandchargeclassification_DW_DataAdapterName",
+                "vocabKey": "gr.bdxcostandchargeclassification.DW_DataAdapterName",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Deletion Date",
+                "key": "gr_bdxcostandchargeclassification_DW_DeletionDate",
+                "vocabKey": "gr.bdxcostandchargeclassification.DW_DeletionDate",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Insurance Company Code",
+                "key": "gr_bdxcostandchargeclassification_DW_InsuranceCompanyCode",
+                "vocabKey": "gr.bdxcostandchargeclassification.DW_InsuranceCompanyCode",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Insurance Type",
+                "key": "gr_bdxcostandchargeclassification_DW_InsuranceType",
+                "vocabKey": "gr.bdxcostandchargeclassification.DW_InsuranceType",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Is Deleted",
+                "key": "gr_bdxcostandchargeclassification_DW_IsDeleted",
+                "vocabKey": "gr.bdxcostandchargeclassification.DW_IsDeleted",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Job Id",
+                "key": "gr_bdxcostandchargeclassification_DW_JobId",
+                "vocabKey": "gr.bdxcostandchargeclassification.DW_JobId",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "DW Source Key",
+                "key": "gr_bdxcostandchargeclassification_DW_SourceKey",
+                "vocabKey": "gr.bdxcostandchargeclassification.DW_SourceKey",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Income Source Key",
+                "key": "gr_bdxcostandchargeclassification_IncomeSourceKey",
+                "vocabKey": "gr.bdxcostandchargeclassification.IncomeSourceKey",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              },
+              {
+                "displayName": "Transaction Description",
+                "key": "gr_bdxcostandchargeclassification_TransactionDescription",
+                "vocabKey": "gr.bdxcostandchargeclassification.TransactionDescription",
+                "coreVocab": null,
+                "useAsEntityCode": false,
+                "useAsAlias": false,
+                "useSourceCode": false,
+                "entityCodeOrigin": null,
+                "type": "String",
+                "vocabularyKeyId": true
+              }
+            ],
+            "vocabulary": {
+              "vocabularyId": "e929951c-2253-56bd-4541-fce9e620b6c2",
+              "vocabularyName": "Bordereau Cost And Charge Classification",
+              "grouping": "/BdxCostAndChargeClassification",
+              "keyPrefix": "gr.bdxcostandchargeclassification",
+              "isActive": true,
+              "isCluedInCore": false,
+              "isDynamic": false,
+              "isProvider": true,
+              "isVocabularyOwner": true,
+              "providerId": "5882bb46-44d7-4688-bb4a-1a6283edc67d",
+              "description": null
+            },
+            "entityTypeConfiguration": {
+              "icon": "Tabularview",
+              "displayName": "Bordereau Cost And Charge Classification",
+              "entityType": "/BdxCostAndChargeClassification"
+            }
+          },
+          "fieldMappings": [
+            {
+              "originalField": "DW_DataAdapterName",
+              "key": "gr.bdxcostandchargeclassification.DW_DataAdapterName",
+              "edges": null
+            },
+            {
+              "originalField": "DW_SourceId",
+              "key": "--ignore--",
+              "edges": null
+            },
+            {
+              "originalField": "ChargeCode",
+              "key": "gr.bdxcostandchargeclassification.ChargeCode",
+              "edges": null
+            },
+            {
+              "originalField": "DW_ActiveStartTime",
+              "key": "--ignore--",
+              "edges": null
+            },
+            {
+              "originalField": "IncomeSourceKey",
+              "key": "gr.bdxcostandchargeclassification.IncomeSourceKey",
+              "edges": null
+            },
+            {
+              "originalField": "DW_InsuranceCompanyCode",
+              "key": "gr.bdxcostandchargeclassification.DW_InsuranceCompanyCode",
+              "edges": null
+            },
+            {
+              "originalField": "DW_IsDeleted",
+              "key": "gr.bdxcostandchargeclassification.DW_IsDeleted",
+              "edges": null
+            },
+            {
+              "originalField": "DW_JobId",
+              "key": "gr.bdxcostandchargeclassification.DW_JobId",
+              "edges": null
+            },
+            {
+              "originalField": "CostCode",
+              "key": "gr.bdxcostandchargeclassification.CostCode",
+              "edges": null
+            },
+            {
+              "originalField": "TrxTypeDescription",
+              "key": "gr.bdxcostandchargeclassification.TransactionDescription",
+              "edges": null
+            },
+            {
+              "originalField": "DW_CellNumber",
+              "key": "gr.bdxcostandchargeclassification.DW_CellNumber",
+              "edges": null
+            },
+            {
+              "originalField": "DW_DeletionDate",
+              "key": "gr.bdxcostandchargeclassification.DW_DeletionDate",
+              "edges": null
+            },
+            {
+              "originalField": "DW_SourceKey",
+              "key": "gr.bdxcostandchargeclassification.DW_SourceKey",
+              "edges": null
+            },
+            {
+              "originalField": "DW_InsuranceType",
+              "key": "gr.bdxcostandchargeclassification.DW_InsuranceType",
+              "edges": null
+            }
+          ],
+          "originalFields": null
+        }
+      ]
+    }
+  ]
+}

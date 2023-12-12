@@ -1,0 +1,659 @@
+{
+  "name": "2-vocab-repudiation-clean",
+  "isActive": true,
+  "order": "27",
+  "condition": {
+    "objectTypeId": "00000000-0000-0000-0000-000000000000",
+    "condition": "AND",
+    "field": null,
+    "operator": "00000000-0000-0000-0000-000000000000",
+    "rules": [
+      {
+        "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+        "condition": "AND",
+        "field": "Properties[gr.repudiation.DW_SourceKey]",
+        "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+        "rules": [],
+        "type": "string",
+        "value": []
+      }
+    ],
+    "type": null,
+    "value": null
+  },
+  "actions": null,
+  "rules": [
+    {
+      "name": "Copy Insured First Name",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 1,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.repudiation.InsuredFirstName]",
+            "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+            "rules": [],
+            "type": "string",
+            "value": []
+          },
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.repudiation.PolicyHolderFirstName]",
+            "operator": "16b2dc07-94e3-4c29-bc60-a7a1d25de53b",
+            "rules": [],
+            "type": "string",
+            "value": []
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "GR - Copy Property",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "SourceProperty",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.InsuredFirstName",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "TargetProperty",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.PolicyHolderFirstName",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Guardrisk.Common.Rules.Cleaning.CopyProperty, CluedIn.Guardrisk.Common"
+        }
+      ]
+    },
+    {
+      "name": "Copy Insured Last Name",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 2,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.repudiation.InsuredLastName]",
+            "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+            "rules": [],
+            "type": "string",
+            "value": []
+          },
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.repudiation.PolicyHolderLastName]",
+            "operator": "16b2dc07-94e3-4c29-bc60-a7a1d25de53b",
+            "rules": [],
+            "type": "string",
+            "value": []
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "GR - Copy Property",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "SourceProperty",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.InsuredLastName",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "TargetProperty",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.PolicyHolderLastName",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Guardrisk.Common.Rules.Cleaning.CopyProperty, CluedIn.Guardrisk.Common"
+        }
+      ]
+    },
+    {
+      "name": "Copy Reason",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 3,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.repudiation.RepudiationReasonName]",
+            "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+            "rules": [],
+            "type": "string",
+            "value": []
+          },
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.repudiation.Reason]",
+            "operator": "16b2dc07-94e3-4c29-bc60-a7a1d25de53b",
+            "rules": [],
+            "type": "string",
+            "value": []
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "GR - Copy Property",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "SourceProperty",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.RepudiationReasonName",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "TargetProperty",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.Reason",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Guardrisk.Common.Rules.Cleaning.CopyProperty, CluedIn.Guardrisk.Common"
+        }
+      ]
+    },
+    {
+      "name": "Set TCF",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 4,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.repudiation.ApplicationTCF]",
+            "operator": "16b2dc07-94e3-4c29-bc60-a7a1d25de53b",
+            "rules": [],
+            "type": "string",
+            "value": []
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "Set Value",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.ApplicationTCF",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "Value",
+              "type": "System.Object",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "True",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Rules.Actions.SetValue, CluedIn.Rules"
+        }
+      ]
+    },
+    {
+      "name": "Set Disclosure",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 5,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.repudiation.WasDisclosureMade]",
+            "operator": "16b2dc07-94e3-4c29-bc60-a7a1d25de53b",
+            "rules": [],
+            "type": "string",
+            "value": []
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "Set Value",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.WasDisclosureMade",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "Value",
+              "type": "System.Object",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "True",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Rules.Actions.SetValue, CluedIn.Rules"
+        }
+      ]
+    },
+    {
+      "name": "Set Merit Assessment",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 6,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.repudiation.MeritAssessment]",
+            "operator": "16b2dc07-94e3-4c29-bc60-a7a1d25de53b",
+            "rules": [],
+            "type": "string",
+            "value": []
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "Set Value",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.MeritAssessment",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "Value",
+              "type": "System.Object",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "Approved",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Rules.Actions.SetValue, CluedIn.Rules"
+        }
+      ]
+    },
+    {
+      "name": "Copy Claimant First Name",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 7,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.repudiation.ClaimantFirstName]",
+            "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+            "rules": [],
+            "type": "string",
+            "value": []
+          },
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.repudiation.PolicyHolderFirstName]",
+            "operator": "16b2dc07-94e3-4c29-bc60-a7a1d25de53b",
+            "rules": [],
+            "type": "string",
+            "value": []
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "GR - Copy Property",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "SourceProperty",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.ClaimantFirstName",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "TargetProperty",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.PolicyHolderFirstName",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Guardrisk.Common.Rules.Cleaning.CopyProperty, CluedIn.Guardrisk.Common"
+        }
+      ]
+    },
+    {
+      "name": "Copy Claimant Last Name",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 8,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.repudiation.ClaimantLastName]",
+            "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+            "rules": [],
+            "type": "string",
+            "value": []
+          },
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.repudiation.PolicyHolderLastName]",
+            "operator": "16b2dc07-94e3-4c29-bc60-a7a1d25de53b",
+            "rules": [],
+            "type": "string",
+            "value": []
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "GR - Copy Property",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "SourceProperty",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.ClaimantLastName",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "TargetProperty",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.PolicyHolderLastName",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Guardrisk.Common.Rules.Cleaning.CopyProperty, CluedIn.Guardrisk.Common"
+        }
+      ]
+    },
+    {
+      "name": "Trim Repudiation Reason",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 9,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.repudiation.RepudiationReasonName]",
+            "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+            "rules": [],
+            "type": "string",
+            "value": []
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "GR - Trim",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldNames",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.RepudiationReasonName",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Guardrisk.Common.Rules.Formatting.Trim, CluedIn.Guardrisk.Common"
+        }
+      ]
+    },
+    {
+      "name": "Trim Reason",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 10,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.repudiation.Reason]",
+            "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+            "rules": [],
+            "type": "string",
+            "value": []
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "GR - Trim",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldNames",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.Reason",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Guardrisk.Common.Rules.Formatting.Trim, CluedIn.Guardrisk.Common"
+        }
+      ]
+    }
+  ],
+  "scope": "DataPart"
+}

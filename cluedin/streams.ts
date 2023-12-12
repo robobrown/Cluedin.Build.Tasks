@@ -1,0 +1,356 @@
+import utils from "./utils";
+
+  async function exportStreams(authToken: string, hostname: string, outputPath: string){
+    var pageNumber = 1;
+    var total = 0;
+    var count = 0;
+   
+     while (count <= total){
+       var result = await exportStreamsPage(pageNumber, authToken, hostname, outputPath);
+       total = result.data.consume.streams.total;
+       count += result.data.consume.streams.data.length;
+       pageNumber = pageNumber + 1;
+       if (count == total)
+       { 
+         break;
+       }
+    }
+  }
+  
+  async function exportStreamsPage(pageNumber: number, authToken: string, hostname: string, outputPath: string){
+     const axios = require('axios');
+     let data = JSON.stringify({
+       query: `query getStreams($pageNumber: Int) {
+        consume {
+            streams(pageNumber: $pageNumber) {
+                total
+                data {
+                    name
+                    isActive
+                    condition
+                    rules
+                    rulesApplied
+                    containerName
+                    connectorProviderDefinitionId
+                    mappingConfiguration
+                    mode
+                    exportOutgoingEdges
+                    exportIncomingEdges
+                }
+            }
+        }
+    }`,
+       variables: {
+         pageNumber: pageNumber
+       }
+     });
+     
+     let config = {
+       method: 'post',
+       maxBodyLength: Infinity,
+       url: 'https://' + hostname + '/graphql',
+       headers: { 
+         'Content-Type': 'application/json', 
+         'Authorization': 'Bearer ' + authToken
+       },
+       data : data
+     };
+  
+     return axios.request(config)
+     .then((response: any) => {
+        if (response.data.errors != null && response.data.errors.length > 0){
+          throw new Error(response.data.errors[0].message);
+        }
+        response.data.data.consume.streams.data.forEach((stream: any) => {
+              utils.saveToDisk(outputPath, "Streams", stream.name, stream)
+        });
+        return response.data;
+     })
+     .catch((error: Error) => {
+       console.log(error);
+     });
+  }
+  
+   
+  async function importStreams(authToken: string, hostname: string, sourcePath: string){
+    const fs = require('fs');
+    const directoryPath = sourcePath + 'Streams';
+
+    fs.readdir(directoryPath, function (err: string, files: string[]) {
+        //handling error
+        if (err) {
+            return console.log('Unable to scan Streams directory: ' + err);
+        } 
+        //listing all files using forEach
+        files.forEach(async function (file: string) {
+            // Do whatever you want to do with the file
+            await importStream(authToken, hostname, file.replace('.json', ''), sourcePath);
+        });
+    });
+  }
+
+  async function importStream(authToken: string, hostname: string, streamName: string, sourcePath: string){
+    let existingStream = await getStreamByName(authToken, hostname, streamName);
+    var savedStream = await utils.readFile(sourcePath + 'Streams/' + streamName + '.json');
+
+    if (existingStream == null || existingStream.id == null) {
+        //create the rule
+        console.log('Creating Stream');
+        var createdStream = await createStream(authToken, hostname, existingStream);
+        await updateStream(authToken, hostname, savedStream, createdStream.id);
+        await setupConnectorStream(authToken, hostname, savedStream, createdStream.id);
+        if (savedStream.isActive)
+        {
+            await activateStream( authToken, hostname, createdStream.id);
+        }
+    }
+    else {
+        //update the rule
+        console.log('Updating Stream ' + existingStream.id);
+        await updateStream(authToken, hostname, savedStream, existingStream.id);
+        await setupConnectorStream(authToken, hostname, savedStream, createdStream.id);
+        if (savedStream.isActive)
+        {
+            await activateStream(authToken, hostname, existingStream.id);
+        }
+    }
+    
+  }
+
+  async function getStreamByName(authToken: string, hostname: string, streamName: string){
+  const axios = require('axios');
+  let data = JSON.stringify({
+    query: `query getStreamByName($name: String) {
+      consume {
+          streams(searchName: $name) {
+              total
+              data {
+                  id
+                  name
+                  isActive
+                  condition
+                  rules
+                  rulesApplied
+                  containerName
+                  connectorProviderDefinitionId
+                  mappingConfiguration
+                  mode
+                  exportOutgoingEdges
+                  exportIncomingEdges
+              }
+          }
+      }
+  }`,
+    variables: {
+        name: streamName
+    }
+  });
+  
+  let config = {
+    method: 'post',
+    maxBodyLength: Infinity,
+    url: 'https://' + hostname + '/graphql',
+    headers: { 
+      'Content-Type': 'application/json', 
+      'Authorization': 'Bearer ' + authToken
+    },
+    data : data
+  };
+
+  return axios.request(config)
+  .then((response: any) => {
+        if (response.data.errors != null && response.data.errors.length > 0){
+            throw new Error(response.data.errors[0].message);
+        }
+        return response.data.data.consume.streams.data.find(function(x: any) { return x.name == streamName; });
+  })
+  .catch((error: Error) => {
+    console.log(error);
+  });
+  }
+
+  async function createStream(authToken: string, hostname: string, savedStream: any){
+    const axios = require('axios');
+    let data = JSON.stringify({
+      query: `mutation createStream($stream: InputCreateStream!) {
+        consume {
+          id
+          createStream(stream: $stream) {
+            id
+          }
+        }
+      }`,
+      variables: {
+        rule: {
+            name: savedStream.name,
+        }
+      }
+    });
+    
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'https://' + hostname + '/graphql',
+      headers: { 
+        'Content-Type': 'application/json', 
+        'Authorization': 'Bearer ' + authToken
+      },
+      data : data
+    };
+
+    return axios.request(config)
+    .then((response: any) => {
+        if (response.data.errors != null && response.data.errors.length > 0){
+            throw new Error(response.data.errors[0].message);
+        }
+        return response.data.data.consume.createStream;
+    })
+    .catch((error: Error) => {
+      console.log(error);
+    });
+  }
+
+  async function updateStream(authToken: string, hostname: string, savedStream: any, streamId: string){
+    const axios = require('axios');
+    let data = JSON.stringify({
+      query: `mutation saveStream($stream: InputStream!) {
+        consume {
+          id
+          saveStream(stream: $stream) {
+            id
+          }
+        }
+      }`,
+      variables: {
+        stream: {
+            id: streamId,
+            name: savedStream.name,
+            isActive: savedStream.isActive,
+            condition: savedStream.condition,
+            rules: savedStream.rules
+        }
+      }
+    });
+    
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'https://' + hostname + '/graphql',
+      headers: { 
+        'Content-Type': 'application/json', 
+        'Authorization': 'Bearer ' + authToken
+      },
+      data : data
+    };
+
+    return axios.request(config)
+    .then((response: any) => {
+        if (response.data.errors != null && response.data.errors.length > 0){
+            throw new Error(response.data.errors[0].message);
+        }
+        return response.data.data;
+    })
+    .catch((error: Error) => {
+      console.log(error);
+    });
+  }
+
+  async function setupConnectorStream(authToken: string, hostname: string, savedStream: any, streamId: string){
+    const axios = require('axios');
+
+    var dataTypes = savedStream.mappingConfiguration.map(mapDataTypes);
+              
+    let data = JSON.stringify({
+      query: `mutation setupConnectorStream($streamId: ID!, $exportConfiguration: InputExportConfiguration) {
+        consume {
+          id
+          setupConnectorStream(
+            streamId: $streamId
+            exportConfiguration: $exportConfiguration
+          ) {
+            id
+            name
+          }
+        }
+      }`,
+      variables: {
+        streamId: streamId,
+        exportConfiguration: {
+          connectorProviderDefinitionId: savedStream.connectorProviderDefinitionId,
+          containerName: savedStream.containerName,
+          mode: savedStream.mode,
+          exportOutgoingEdges: savedStream.exportOutgoingEdges,
+          exportIncomingEdges: savedStream.exportIncomingEdges,
+          dataTypes: dataTypes,
+        }
+      }
+    });
+    
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'https://' + hostname + '/graphql',
+      headers: { 
+        'Content-Type': 'application/json', 
+        'Authorization': 'Bearer ' + authToken
+      },
+      data : data
+    };
+
+    return axios.request(config)
+    .then((response: any) => {
+        if (response.data.errors != null && response.data.errors.length > 0){
+            throw new Error(response.data.errors[0].message);
+        }
+        return response.data.data;
+    })
+    .catch((error: Error) => {
+      console.log(error);
+    });
+  }
+
+  function mapDataTypes (item:any){
+    return { key: item.sourceDataType, type: item.sourceObjectType };
+  }
+
+  async function activateStream(authToken: string, hostname: string, streamId: string){
+    const axios = require('axios');
+    let data = JSON.stringify({
+      query: `mutation activateStream($streamId: ID!) {
+        consume {
+          id
+          activateStream(streamId: $streamId) {
+            id
+            name
+          }
+        }
+      }`,
+      variables: {
+        streamId: streamId
+      }
+    });
+    
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'https://' + hostname + '/graphql',
+      headers: { 
+        'Content-Type': 'application/json', 
+        'Authorization': 'Bearer ' + authToken
+      },
+      data : data
+    };
+
+    return axios.request(config)
+    .then((response: any) => {
+        if (response.data.errors != null && response.data.errors.length > 0){
+            throw new Error(response.data.errors[0].message);
+        }
+        return response.data.data;
+    })
+    .catch((error: Error) => {
+      console.log(error);
+    });
+  }
+
+export default { exportStreams, importStreams };

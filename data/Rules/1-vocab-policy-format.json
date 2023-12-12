@@ -1,0 +1,106 @@
+{
+  "name": "1-vocab-policy-format",
+  "isActive": true,
+  "order": "9",
+  "condition": {
+    "objectTypeId": "00000000-0000-0000-0000-000000000000",
+    "condition": "AND",
+    "field": null,
+    "operator": "00000000-0000-0000-0000-000000000000",
+    "rules": [
+      {
+        "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+        "condition": "AND",
+        "field": "Properties[gr.policy.DW_SourceKey]",
+        "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+        "rules": [],
+        "type": "string",
+        "value": []
+      }
+    ],
+    "type": null,
+    "value": null
+  },
+  "actions": null,
+  "rules": [
+    {
+      "name": "Format TitleCase Fields",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 1,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "GR - ToTitleCase",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldNames",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.policy.BankAccountHolderName,gr.policy.BankName,gr.policy.BranchName,gr.policy.CancellationReason,gr.policy.PaymentFrequencyName,gr.policy.PaymentMethodName,gr.policy.CurrencyName,gr.policy.CountryName,gr.policy.PolicyTypeName,gr.policy.DataProviderPolicyStatus",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Guardrisk.Common.Rules.Formatting.ToTitleCase, CluedIn.Guardrisk.Common"
+        }
+      ]
+    },
+    {
+      "name": "Format UpperCase Fields",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 2,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "GR - ToUpperCase",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldNames",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": "Field Names (Comma Separated)",
+              "defaultValue": null,
+              "value": "gr.policy.PolicyNumber,gr.policy.RenewalPolicyNumber,gr.policy.FspNumber,gr.policy.RepCode,gr.policy.ProductCode",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Guardrisk.Common.Rules.Formatting.ToUpperCase, CluedIn.Guardrisk.Common"
+        }
+      ]
+    }
+  ],
+  "scope": "DataPart"
+}

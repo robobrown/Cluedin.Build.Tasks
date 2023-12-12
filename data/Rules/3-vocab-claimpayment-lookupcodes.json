@@ -1,0 +1,454 @@
+{
+  "name": "3-vocab-claimpayment-lookupcodes",
+  "isActive": true,
+  "order": "31",
+  "condition": {
+    "objectTypeId": "00000000-0000-0000-0000-000000000000",
+    "condition": "AND",
+    "field": null,
+    "operator": "00000000-0000-0000-0000-000000000000",
+    "rules": [
+      {
+        "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+        "condition": "AND",
+        "field": "Properties[gr.claimpayment.DW_SourceKey]",
+        "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+        "rules": [],
+        "type": "string",
+        "value": []
+      }
+    ],
+    "type": null,
+    "value": null
+  },
+  "actions": null,
+  "rules": [
+    {
+      "name": "NeoLookup-SupplierCountryCode",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 1,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.claimpayment.CounterPartyCountryName]",
+            "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+            "rules": [],
+            "type": "string",
+            "value": []
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "GR - Populate Code from Name",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.claimpayment.CounterPartyCountryName",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "NeoLookupName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "Country",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "CodeFieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.claimpayment.CounterPartyCountryCode",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Guardrisk.Common.Rules.Lookups.PopulateCodeField, CluedIn.Guardrisk.Common"
+        }
+      ]
+    },
+    {
+      "name": "NeoLookup-ExGratiaIndicatorCode",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 2,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.claimpayment.ExGratiaIndicator]",
+            "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+            "rules": [],
+            "type": "string",
+            "value": []
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "GR - Populate Code from Name",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.claimpayment.ExGratiaIndicator",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "CodeFieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.claimpayment.ExGratiaIndicator",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "NeoLookupName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "Ex-Gratia Indicator",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "UnknownValue",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Guardrisk.Common.Rules.Lookups.PopulateCodeField, CluedIn.Guardrisk.Common"
+        }
+      ]
+    },
+    {
+      "name": "NeoLookup-ClaimPaymentTypeCode",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 3,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.claimpayment.ClaimPaymentTypeName]",
+            "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+            "rules": [],
+            "type": "string",
+            "value": []
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "GR - Populate Code from Name",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.claimpayment.ClaimPaymentTypeName",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "CodeFieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.claimpayment.ClaimPaymentTypeCode",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "NeoLookupName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "Claim Payment Type",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "UnknownValue",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "NP",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Guardrisk.Common.Rules.Lookups.PopulateCodeField, CluedIn.Guardrisk.Common"
+        }
+      ]
+    },
+    {
+      "name": "Copy Claim Payment Code",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 4,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.claimpayment.ClaimPaymentTypeCode]",
+            "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+            "rules": [],
+            "type": "string",
+            "value": []
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "GR - Copy Property",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "SourceProperty",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.claimpayment.ClaimPaymentTypeCode",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "TargetProperty",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.claimpayment.InsurerPaymentTypeCode",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Guardrisk.Common.Rules.Cleaning.CopyProperty, CluedIn.Guardrisk.Common"
+        }
+      ]
+    },
+    {
+      "name": "Copy Insurer Payment Code",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 5,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.claimpayment.InsurerPaymentTypeCode]",
+            "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+            "rules": [],
+            "type": "string",
+            "value": []
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "GR - Copy Property",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "SourceProperty",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.claimpayment.InsurerPaymentTypeCode",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "TargetProperty",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.claimpayment.ClaimPaymentClass",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Guardrisk.Common.Rules.Cleaning.CopyProperty, CluedIn.Guardrisk.Common"
+        }
+      ]
+    },
+    {
+      "name": "Copy Claim Payment Type Name",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 6,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.claimpayment.ClaimPaymentTypeName]",
+            "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+            "rules": [],
+            "type": "string",
+            "value": []
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "GR - Copy Property",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "SourceProperty",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.claimpayment.ClaimPaymentTypeName",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "TargetProperty",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.claimpayment.ClientPaymentType",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Guardrisk.Common.Rules.Cleaning.CopyProperty, CluedIn.Guardrisk.Common"
+        }
+      ]
+    }
+  ],
+  "scope": "DataPart"
+}

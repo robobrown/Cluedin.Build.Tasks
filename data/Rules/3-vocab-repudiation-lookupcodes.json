@@ -1,0 +1,757 @@
+{
+  "name": "3-vocab-repudiation-lookupcodes",
+  "isActive": true,
+  "order": "40",
+  "condition": {
+    "objectTypeId": "00000000-0000-0000-0000-000000000000",
+    "condition": "AND",
+    "field": null,
+    "operator": "00000000-0000-0000-0000-000000000000",
+    "rules": [
+      {
+        "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+        "condition": "AND",
+        "field": "Properties[gr.repudiation.ClaimReference]",
+        "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+        "rules": [],
+        "type": "string",
+        "value": []
+      }
+    ],
+    "type": null,
+    "value": null
+  },
+  "actions": null,
+  "rules": [
+    {
+      "name": "NeoRepudiationLookup - RepudiationReason",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 1,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.repudiation.RepudiationReasonName]",
+            "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+            "rules": [],
+            "type": "string",
+            "value": []
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "GR - Populate Repudiation Code from Name",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.RepudiationReasonName",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "CodeFieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.RepudiationReasonId",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "RepudiationLookupName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "repudiationreason",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "InsuranceLicenseTypeName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.DW_InsuranceType",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Guardrisk.Common.Rules.Lookups.PopulateRepudiationCodeField, CluedIn.Guardrisk.Common"
+        }
+      ]
+    },
+    {
+      "name": "NeoRepudiationLookup - RootCause",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 2,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.repudiation.RootCauseName]",
+            "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+            "rules": [],
+            "type": "string",
+            "value": []
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "GR - Populate Repudiation Code from Name",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.RootCauseName",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "CodeFieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.RootCauseId",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "RepudiationLookupName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "rootcause",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "InsuranceLicenseTypeName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.DW_InsuranceType",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Guardrisk.Common.Rules.Lookups.PopulateRepudiationCodeField, CluedIn.Guardrisk.Common"
+        }
+      ]
+    },
+    {
+      "name": "NeoRepudiationLookup - Province",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 3,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.repudiation.ClaimEventRegionName]",
+            "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+            "rules": [],
+            "type": "string",
+            "value": []
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "GR - Populate Repudiation Code from Name",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.ClaimEventRegionName",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "CodeFieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.ClaimEventRegionId",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "RepudiationLookupName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "claimeventregion",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "InsuranceLicenseTypeName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.DW_InsuranceType",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Guardrisk.Common.Rules.Lookups.PopulateRepudiationCodeField, CluedIn.Guardrisk.Common"
+        }
+      ]
+    },
+    {
+      "name": "NeoRepudiationLookup - Gender",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 4,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.repudiation.InsuredGender]",
+            "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+            "rules": [],
+            "type": "string",
+            "value": []
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "GR - Populate Repudiation Code from Name",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.InsuredGender",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "CodeFieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.InsuredGenderId",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "RepudiationLookupName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gender",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "InsuranceLicenseTypeName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.DW_InsuranceType",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Guardrisk.Common.Rules.Lookups.PopulateRepudiationCodeField, CluedIn.Guardrisk.Common"
+        }
+      ]
+    },
+    {
+      "name": "NeoRepudiationLookup - ClaimType",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 5,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.repudiation.ClaimTypeName]",
+            "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+            "rules": [],
+            "type": "string",
+            "value": []
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "GR - Populate Repudiation Code from Name",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.ClaimTypeName",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "CodeFieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.ClaimTypeId",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "RepudiationLookupName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "claimtype",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "InsuranceLicenseTypeName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.DW_InsuranceType",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Guardrisk.Common.Rules.Lookups.PopulateRepudiationCodeField, CluedIn.Guardrisk.Common"
+        }
+      ]
+    },
+    {
+      "name": "NeoRepudiationLookup - BenefitType",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 6,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.repudiation.ClaimBenefitTypeName]",
+            "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+            "rules": [],
+            "type": "string",
+            "value": []
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "GR - Populate Repudiation Code from Name",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.ClaimBenefitTypeName",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "CodeFieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.ClaimBenefitTypeId",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "RepudiationLookupName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "claimbenefittype",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "InsuranceLicenseTypeName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.DW_InsuranceType",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Guardrisk.Common.Rules.Lookups.PopulateRepudiationCodeField, CluedIn.Guardrisk.Common"
+        }
+      ]
+    },
+    {
+      "name": "NeoRepudiationLookup - InsuranceCompany",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 7,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.repudiation.InsuranceCompanyName]",
+            "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+            "rules": [],
+            "type": "string",
+            "value": []
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "GR - Populate Repudiation Reference from Name",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.InsuranceCompanyName",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "ReferenceFieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.InsuranceCompanyItemReference",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "LookupTypeName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "insurancecompany",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Guardrisk.Common.Rules.Lookups.PopulateRepudiationReferenceField, CluedIn.Guardrisk.Common"
+        }
+      ]
+    },
+    {
+      "name": "NeoRepudiationLookup - CellReference",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 8,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.repudiation.CellName]",
+            "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+            "rules": [],
+            "type": "string",
+            "value": []
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "GR - Populate Repudiation Reference from Name",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.CellName",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "ReferenceFieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.CellItemReference",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "LookupTypeName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "cell",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Guardrisk.Common.Rules.Lookups.PopulateRepudiationReferenceField, CluedIn.Guardrisk.Common"
+        }
+      ]
+    },
+    {
+      "name": "NeoRepudiationLookup - BinderHolder",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 9,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.repudiation.BinderHolderName]",
+            "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+            "rules": [],
+            "type": "string",
+            "value": []
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "GR - Populate Repudiation Reference from Name",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.BinderHolderName",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "ReferenceFieldName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.repudiation.BinderHolderItemReference",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "LookupTypeName",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "binderholder",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Guardrisk.Common.Rules.Lookups.PopulateRepudiationReferenceField, CluedIn.Guardrisk.Common"
+        }
+      ]
+    }
+  ],
+  "scope": "DataPart"
+}

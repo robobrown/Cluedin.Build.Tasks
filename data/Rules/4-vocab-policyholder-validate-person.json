@@ -1,0 +1,227 @@
+{
+  "name": "4-vocab-policyholder-validate-person",
+  "isActive": true,
+  "order": "54",
+  "condition": {
+    "objectTypeId": "00000000-0000-0000-0000-000000000000",
+    "condition": "AND",
+    "field": null,
+    "operator": "00000000-0000-0000-0000-000000000000",
+    "rules": [
+      {
+        "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+        "condition": "AND",
+        "field": "Properties[gr.policyholder.DW_SourceKey]",
+        "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+        "rules": [],
+        "type": "string",
+        "value": []
+      },
+      {
+        "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+        "condition": "AND",
+        "field": "Properties[gr.policyholder.PolicyHolderType]",
+        "operator": "0bafc522-8011-43ba-978a-babe222ba466",
+        "rules": [],
+        "type": "string",
+        "value": [
+          "Individual"
+        ]
+      }
+    ],
+    "type": null,
+    "value": null
+  },
+  "actions": null,
+  "rules": [
+    {
+      "name": "ValidateRegex-SAIdNumber",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 1,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.policyholder.IdNumber]",
+            "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+            "rules": [],
+            "type": "string",
+            "value": []
+          },
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.policyholder.IdTypeCode]",
+            "operator": "0bafc522-8011-43ba-978a-babe222ba466",
+            "rules": [],
+            "type": "string",
+            "value": [
+              "ID"
+            ]
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "GR - Tag Invalid SA ID Number",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "FieldToValidate",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "gr.policyholder.IdNumber",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            },
+            {
+              "name": "TagValue",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "Invalid-policyholder-SAIdNumber",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Guardrisk.Common.Rules.RegexValidations.TagInvalidSAIdNumber, CluedIn.Guardrisk.Common"
+        }
+      ]
+    },
+    {
+      "name": "ValidateRequired-LastName",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 2,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.policyholder.LastName]",
+            "operator": "16b2dc07-94e3-4c29-bc60-a7a1d25de53b",
+            "rules": [],
+            "type": "string",
+            "value": []
+          },
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.policyholder.LastName]",
+            "operator": "9ad76320-021e-4211-9e9a-8b148c9c600d",
+            "rules": [],
+            "type": "string",
+            "value": []
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "Add Tag",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "Value",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "Invalid-policyholder-LastName-Missing",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Rules.Actions.AddTag, CluedIn.Rules"
+        }
+      ]
+    },
+    {
+      "name": "ValidateRequired-FirstNames",
+      "description": null,
+      "type": "ProcessingRule",
+      "order": 3,
+      "isActive": false,
+      "conditions": {
+        "objectTypeId": "00000000-0000-0000-0000-000000000000",
+        "condition": "AND",
+        "field": null,
+        "operator": "00000000-0000-0000-0000-000000000000",
+        "rules": [
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.policyholder.FirstNames]",
+            "operator": "16b2dc07-94e3-4c29-bc60-a7a1d25de53b",
+            "rules": [],
+            "type": "string",
+            "value": []
+          },
+          {
+            "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+            "condition": "AND",
+            "field": "Properties[gr.policyholder.FirstNames]",
+            "operator": "9ad76320-021e-4211-9e9a-8b148c9c600d",
+            "rules": [],
+            "type": "string",
+            "value": []
+          }
+        ],
+        "type": null,
+        "value": null
+      },
+      "actions": [
+        {
+          "name": "Add Tag",
+          "supportsPreview": false,
+          "supportsProcessingRuleScopes": null,
+          "supportsRuleUsages": null,
+          "properties": [
+            {
+              "name": "Value",
+              "type": "System.String",
+              "kind": "None",
+              "friendlyType": null,
+              "friendlyName": null,
+              "defaultValue": null,
+              "value": "Invalid-policyholder-FirstNames-Missing",
+              "isStringOnly": false,
+              "excludedProperties": null,
+              "isRequired": false
+            }
+          ],
+          "type": "CluedIn.Rules.Actions.AddTag, CluedIn.Rules"
+        }
+      ]
+    }
+  ],
+  "scope": "DataPart"
+}

@@ -1,0 +1,33 @@
+{
+  "name": "Cell Admin 3",
+  "editors": null,
+  "dataSources": [
+    {
+      "type": "endpoint",
+      "name": "Cell Admin 3",
+      "connectorConfigurationId": "84631B62-21B4-4A15-9A55-12D8C96C468F",
+      "dataSets": [
+        {
+          "name": "celldetails3",
+          "configuration": {
+            "object": {
+              "endPointName": "celldetails3",
+              "autoSubmit": false,
+              "entityType": "/Cell"
+            },
+            "entityTypeConfiguration": {
+              "new": false,
+              "icon": "Directoryopen",
+              "entityType": "/Cell",
+              "displayName": "Cell"
+            },
+            "store": true
+          },
+          "annotation": null,
+          "fieldMappings": [],
+          "originalFields": null
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,258 @@
+{
+  "name": "Neo-ClaimPayment",
+  "isActive": true,
+  "condition": {
+    "objectTypeId": "00000000-0000-0000-0000-000000000000",
+    "condition": "AND",
+    "field": null,
+    "operator": "00000000-0000-0000-0000-000000000000",
+    "rules": [
+      {
+        "objectTypeId": "011ac3b4-0b46-4f9c-a82a-8c14f9dd642b",
+        "condition": "AND",
+        "field": "Properties[gr.claimpayment.DW_SourceKey]",
+        "operator": "306e5d29-832f-41e7-a6db-1c02eb5ebf74",
+        "rules": [],
+        "type": "string",
+        "value": []
+      },
+      {
+        "objectTypeId": "3be85371-cbe0-4180-8820-73e6e37a6c32",
+        "condition": "AND",
+        "field": "EntityType",
+        "operator": "0bafc522-8011-43ba-978a-babe222ba466",
+        "rules": [],
+        "type": "string",
+        "value": [
+          "/ClaimPayment"
+        ]
+      }
+    ],
+    "type": null,
+    "value": null
+  },
+  "rules": [],
+  "rulesApplied": 0,
+  "containerName": "sbq-cluedin-claimpayment",
+  "connectorProviderDefinitionId": "f431b54e-2e88-4953-b5c2-41dd0d41c9df",
+  "mappingConfiguration": [
+    {
+      "sourceDataType": "gr.claimpayment.DW_DeletionDate",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentDWDeletionDate"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.CounterPartyLatitude",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentCounterPartyLatitude"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.GrossClaimSalvage",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentGrossClaimSalvage"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.GrossClaimSalvageTax",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentGrossClaimSalvageTax"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.DW_IsDeleted",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentDWIsDeleted"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.ClaimPaymentTypeCode",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentClaimPaymentTypeCode"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.CounterPartyProvince",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentCounterPartyProvince"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.GrossClaimPaidTax",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentGrossClaimPaidTax"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.InsurerPaymentTypeCode",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentInsurerPaymentTypeCode"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.DW_InsuranceType",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentDWInsuranceType"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.GrossClaimRecoveryTax",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentGrossClaimRecoveryTax"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.GrossClaimPaid",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentGrossClaimPaid"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.CounterPartyAddressLine1",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentCounterPartyAddressLine1"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.CounterPartySuburb",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentCounterPartySuburb"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.CounterPartyName",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentCounterPartyName"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.DW_CellNumber",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentDWCellNumber"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.ClientPaymentType",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentClientPaymentType"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.CounterPartyTaxNumber",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentCounterPartyTaxNumber"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.CounterPartyIdNumber",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentCounterPartyIdNumber"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.CounterPartyAddressLine2",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentCounterPartyAddressLine2"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.CounterPartyBBBEELevel",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentCounterPartyBBBEELevel"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.GrossClaimRecovery",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentGrossClaimRecovery"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.DW_DataAdapterName",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentDWDataAdapterName"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.ClaimPaymentTypeName",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentClaimPaymentTypeName"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.RiskItemSourceKey",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentRiskItemSourceKey"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.CounterPartyType",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentCounterPartyType"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.CounterPartyCompanyRegistrationNumber",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentCounterPartyCompanyRegistrationNumber"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.CounterPartyPassportNumber",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentCounterPartyPassportNumber"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.CounterPartyPostalCode",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentCounterPartyPostalCode"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.CounterPartyCity",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentCounterPartyCity"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.TransactionDate",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentTransactionDate"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.CounterPartyLongitude",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentCounterPartyLongitude"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.ClaimItemSourceKey",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentClaimItemSourceKey"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.CounterPartyCountryCode",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentCounterPartyCountryCode"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.CounterPartyAddressLine3",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentCounterPartyAddressLine3"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.DW_SourceKey",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentDWSourceKey"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.ClaimPaymentClass",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentClaimPaymentClass"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.DW_InsuranceCompanyCode",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentDWInsuranceCompanyCode"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.CounterPartyCountryName",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentCounterPartyCountryName"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.ClaimNumber",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentClaimNumber"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.ClaimSourceKey",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentClaimSourceKey"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.DW_JobId",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentDWJobId"
+    },
+    {
+      "sourceDataType": "gr.claimpayment.ExGratiaIndicator",
+      "sourceObjectType": "VocabKey",
+      "destDataType": "grclaimpaymentExGratiaIndicator"
+    }
+  ],
+  "mode": "Sync",
+  "exportOutgoingEdges": true,
+  "exportIncomingEdges": false
+}
