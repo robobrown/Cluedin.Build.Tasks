@@ -100,9 +100,9 @@ import auth from "./auth";
          if (response.data.errors != null && response.data.errors.length > 0){
            throw new Error(response.data.errors[0].message);
          }
-         response.data.data.inbound.dataSourceSets.data.forEach((dataSourceSet: any) => {
+         for (const dataSourceSet of response.data.data.inbound.dataSourceSets.data){
              utils.saveToDisk(outputPath, "DataSourceSets", dataSourceSet.name, dataSourceSet)
-         });
+         };
          return response.data;
     })
     .catch((error: Error) => {
@@ -137,68 +137,71 @@ import auth from "./auth";
         existingDataSourceSet = await getDataSourceSetByName(authToken, hostname, savedDataSourceSet.name);
     }
 
-    savedDataSourceSet.dataSources.forEach(async (savedDataSource: any) => {
-        var dataSourceId: string;
-        var existingDataSource = existingDataSourceSet.dataSources.find(function(x: any) { return x.name == savedDataSource.name; });
-        
-        if (existingDataSource == null || existingDataSource.id == null) {
-            console.log('Creating DataSource');
-            var createdDataSource = await createDataSource(authToken, hostname, userId, savedDataSource, existingDataSourceSet.id);
-            dataSourceId = createdDataSource.id;
-            
-            existingDataSourceSet = await getDataSourceSetByName(authToken, hostname, savedDataSourceSet.name);
-            existingDataSource = existingDataSourceSet.dataSources.find(function(x: any) { return x.name == savedDataSource.name; })
-        }
-        else {
-            dataSourceId = existingDataSource.id;
-        }
+    var areEqual = utils.isEqual(existingDataSourceSet, savedDataSourceSet); 
+    if (!areEqual) {
+        for (const savedDataSource of savedDataSourceSet.dataSources){
+          var dataSourceId: string;
+          var existingDataSource = existingDataSourceSet.dataSources.find(function(x: any) { return x.name == savedDataSource.name; });
+          
+          if (existingDataSource == null || existingDataSource.id == null) {
+              console.log('Creating DataSource');
+              var createdDataSource = await createDataSource(authToken, hostname, userId, savedDataSource, existingDataSourceSet.id);
+              dataSourceId = createdDataSource.id;
+              
+              existingDataSourceSet = await getDataSourceSetByName(authToken, hostname, savedDataSourceSet.name);
+              existingDataSource = existingDataSourceSet.dataSources.find(function(x: any) { return x.name == savedDataSource.name; })
+          }
+          else {
+              dataSourceId = existingDataSource.id;
+          }
 
-        savedDataSource.dataSets.forEach(async (savedDataSet: any) => {
-            var dataSetId: string;
-            var existingDataSet = existingDataSource.dataSets.find(function(x: any) { return x.name == savedDataSet.name; });
-            if (existingDataSet == null || existingDataSet.id == null) {
-                var createdDataSet = await createDataSet(authToken, hostname, userId, savedDataSet, dataSourceId);
-                dataSetId = createdDataSet.id;
-                await createManualAnnotation(authToken, hostname, savedDataSet, createdDataSet);
-            
-                existingDataSourceSet = await getDataSourceSetByName(authToken, hostname, savedDataSourceSet.name);
+          for (const savedDataSet of savedDataSource.dataSets){
+              var dataSetId: string;
+              var existingDataSet = existingDataSource.dataSets.find(function(x: any) { return x.name == savedDataSet.name; });
+              if (existingDataSet == null || existingDataSet.id == null) {
+                  var createdDataSet = await createDataSet(authToken, hostname, userId, savedDataSet, dataSourceId);
+                  dataSetId = createdDataSet.id;
+                  await createManualAnnotation(authToken, hostname, savedDataSet, createdDataSet);
+              
+                  existingDataSourceSet = await getDataSourceSetByName(authToken, hostname, savedDataSourceSet.name);
 
-                existingDataSource = existingDataSourceSet.dataSources.find(function(x: any) { return x.name == savedDataSource.name; });
-                existingDataSet = existingDataSource.dataSets.find(function(x: any) { return x.name == savedDataSet.name; });
-            } 
-            else {
-                dataSetId = existingDataSource.dataSets.find(function(x: any) { return x.name == savedDataSet.name; }).id;
-            }
+                  existingDataSource = existingDataSourceSet.dataSources.find(function(x: any) { return x.name == savedDataSource.name; });
+                  existingDataSet = existingDataSource.dataSets.find(function(x: any) { return x.name == savedDataSet.name; });
+              } 
+              else {
+                  dataSetId = existingDataSource.dataSets.find(function(x: any) { return x.name == savedDataSet.name; }).id;
+              }
 
-            if (savedDataSet.annotation != null) {
-                var vocab = await getVocabByName(authToken, hostname, savedDataSet.annotation.vocabulary.vocabularyName);
-                var vocabKeys = await getVocabKeysForVocabId(authToken, hostname, vocab.vocabularyId);
+              if (savedDataSet.annotation != null) {
+                  var vocab = await getVocabByName(authToken, hostname, savedDataSet.annotation.vocabulary.vocabularyName);
+                  var vocabKeys = await getVocabKeysForVocabId(authToken, hostname, vocab.vocabularyId);
 
-                var savedMappedFields = savedDataSet.fieldMappings.filter((mapping: any) => mapping.key != "--ignore--");
-                var savedIgnoredFields = savedDataSet.fieldMappings.filter((mapping: any) => mapping.key == "--ignore--").map(selectOriginalField);
-                var existingMappedFields = existingDataSet.fieldMappings.filter((mapping: any) => mapping.key != "--ignore--");
-                var existingIgnoredFields = existingDataSet.fieldMappings.filter((mapping: any) => mapping.key == "--ignore--").map(selectOriginalField);
+                  var savedMappedFields = savedDataSet.fieldMappings.filter((mapping: any) => mapping.key != "--ignore--");
+                  var savedIgnoredFields = savedDataSet.fieldMappings.filter((mapping: any) => mapping.key == "--ignore--").map(selectOriginalField);
+                  var existingMappedFields = existingDataSet.fieldMappings.filter((mapping: any) => mapping.key != "--ignore--");
+                  var existingIgnoredFields = existingDataSet.fieldMappings.filter((mapping: any) => mapping.key == "--ignore--").map(selectOriginalField);
 
-                var ignoredFields = savedIgnoredFields.filter((mapping: string) => !existingIgnoredFields.includes(mapping));
+                  var ignoredFields = savedIgnoredFields.filter((mapping: string) => !existingIgnoredFields.includes(mapping));
 
-                if (ignoredFields.Any())
-                {
-                    await addIgnoredFieldsToDataSet(authToken, hostname, dataSetId, ignoredFields);
-                }
+                  if (ignoredFields.Any())
+                  {
+                      await addIgnoredFieldsToDataSet(authToken, hostname, dataSetId, ignoredFields);
+                  }
 
-                savedMappedFields.forEach(async (fieldMapping: any) => {
-                    //Add the field if it doesn't exist
-                    var match = existingMappedFields.find(function(x: any) { return x.originalField == fieldMapping.originalField && x.key == fieldMapping.key; });
+                  for (const fieldMapping of savedMappedFields){
+                      //Add the field if it doesn't exist
+                      var match = existingMappedFields.find(function(x: any) { return x.originalField == fieldMapping.originalField && x.key == fieldMapping.key; });
 
-                    if (match == null)
-                    {
-                        var vocabKey = vocabKeys.find(function(x: any) { return x.key == fieldMapping.key; });
-                        await addPropertyMappingToCluedMappingConfiguration(authToken, hostname, fieldMapping.originalField, vocabKey.vocabularyId, vocabKey.vocabularyKeyId, dataSetId);
-                    }
-                });
-            }
-        });
-    });
+                      if (match == null)
+                      {
+                          var vocabKey = vocabKeys.find(function(x: any) { return x.key == fieldMapping.key; });
+                          await addPropertyMappingToCluedMappingConfiguration(authToken, hostname, fieldMapping.originalField, vocabKey.vocabularyId, vocabKey.vocabularyKeyId, dataSetId);
+                      }
+                  };
+              }
+          };
+      };
+    }
   }
 
   async function createDataSourceSet(authToken: string, hostname: string, userId: string, dataSourceSetName: string){

@@ -38,7 +38,17 @@ function readFile(filePath: string){
   
     var data = fs.readFileSync(filePath);
     return JSON.parse(data);
-  }
+}
 
+function isEqual(obj1: any, obj2: any){
+    var one = JSON.stringify(obj1, replacer);
+    var two = JSON.stringify(obj2, replacer);
+    var areEqual = one === two;
+    // if (!areEqual) {
+    //     console.log(one);
+    //     console.log(two);
+    // }
+    return areEqual;
+}
   
-export default { saveToDisk, readFile };
+export default { saveToDisk, readFile, isEqual };

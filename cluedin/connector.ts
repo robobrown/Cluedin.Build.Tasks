@@ -47,9 +47,9 @@ async function exportConnectors(authToken: string, hostname: string, outputPath:
         if (response.data.errors != null && response.data.errors.length > 0){
           throw new Error(response.data.errors[0].message);
         }
-        response.data.data.inbound.connectorConfigurations.configurations.forEach((connector: any) => {
+        for (const connector of response.data.data.inbound.connectorConfigurations.configurations){
             utils.saveToDisk(outputPath, "Connectors", connector.name, connector)
-       });
+        };
     })
     .catch((error: Error) => {
       console.log(error);
@@ -82,8 +82,8 @@ async function importConnector(authToken: string, hostname: string, connectorNam
       await createConnector(authToken, hostname, savedItem);
   }
   else {
-      console.log('Updating connector: ' + connectorName);
-      console.warn('Updating connectors is not yet supported');
+      // console.log('Updating connector: ' + connectorName);
+      // console.warn('Updating connectors is not yet supported');
   }
   
 }

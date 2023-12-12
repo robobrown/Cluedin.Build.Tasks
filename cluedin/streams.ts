@@ -61,9 +61,10 @@ import utils from "./utils";
         if (response.data.errors != null && response.data.errors.length > 0){
           throw new Error(response.data.errors[0].message);
         }
-        response.data.data.consume.streams.data.forEach((stream: any) => {
+        
+        for (const stream of response.data.data.consume.streams.data){
               utils.saveToDisk(outputPath, "Streams", stream.name, stream)
-        });
+        };
         return response.data;
      })
      .catch((error: Error) => {
@@ -89,31 +90,25 @@ import utils from "./utils";
   }
 
   async function importStream(authToken: string, hostname: string, streamName: string, sourcePath: string){
-    let existingStream = await getStreamByName(authToken, hostname, streamName);
+    var existingStream = await getStreamByName(authToken, hostname, streamName);
     var savedStream = utils.readFile(sourcePath + 'Streams/' + streamName + '.json');
 
     if (existingStream == null || existingStream.id == null) {
-        //create the rule
         console.log('Creating Stream');
         var createdStream = await createStream(authToken, hostname, existingStream);
-        await updateStream(authToken, hostname, savedStream, createdStream.id);
-        await setupConnectorStream(authToken, hostname, savedStream, createdStream.id);
-        if (savedStream.isActive)
-        {
-            await activateStream( authToken, hostname, createdStream.id);
-        }
+        existingStream = await getStreamByName(authToken, hostname, streamName);
     }
-    else {
-        //update the rule
-        console.log('Updating Stream ' + existingStream.id);
-        await updateStream(authToken, hostname, savedStream, existingStream.id);
-        await setupConnectorStream(authToken, hostname, savedStream, createdStream.id);
-        if (savedStream.isActive)
-        {
-            await activateStream(authToken, hostname, existingStream.id);
-        }
+
+    var areEqual = utils.isEqual(existingStream, savedStream); 
+    if (!areEqual) {
+      console.log('Updating Stream ' + existingStream.id);
+      await updateStream(authToken, hostname, savedStream, existingStream.id);
+      await setupConnectorStream(authToken, hostname, savedStream, createdStream.id);
+      if (savedStream.isActive)
+      {
+          await activateStream(authToken, hostname, existingStream.id);
+      }
     }
-    
   }
 
   async function getStreamByName(authToken: string, hostname: string, streamName: string){

@@ -14,10 +14,10 @@ async function exportAll(authToken: string, hostname: string, outputPath: string
 
 async function importAll(authToken: string, hostname: string, outputPath: string){
     console.log("Importing data into Cluedin");
-    // await connector.importConnectors(authToken, hostname, outputPath);
+    await connector.importConnectors(authToken, hostname, outputPath);
     await rules.importRules(authToken, hostname, outputPath);
-    // await streams.importStreams(authToken, hostname, outputPath);
-    // await datasources.importDataSources(authToken, hostname, outputPath);
+    await streams.importStreams(authToken, hostname, outputPath);
+    await datasources.importDataSources(authToken, hostname, outputPath);
     console.log("Importing complete");
 }
 

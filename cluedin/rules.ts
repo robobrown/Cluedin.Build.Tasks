@@ -57,9 +57,9 @@ async function exportRules(authToken: string, hostname: string, outputPath: stri
        if (response.data.errors != null && response.data.errors.length > 0){
          throw new Error(response.data.errors[0].message);
        }
-       response.data.data.management.rules.data.forEach((rule: any) => {
+       for (const rule of response.data.data.management.rules.data){
              utils.saveToDisk(outputPath, "Rules", rule.name, rule)
-        });
+       };
         return response.data;
      })
      .catch((error: Error) => {
@@ -95,13 +95,16 @@ async function importRule(authToken: string, hostname: string, ruleName: string,
   }
 
   //update the rule
-  console.log('Updating rule: ' + ruleName);
-  await updateRule(authToken, hostname, savedRule, existingRule.id);
+  var areEqual = utils.isEqual(existingRule, savedRule); 
+  if (!areEqual) {
+    console.log('Updating rule: ' + ruleName);
+    await updateRule(authToken, hostname, savedRule, existingRule.id);
 
-  if (savedRule.isActive)
-  {
-      console.debug('Activating rule ' + existingRule.name);
-      await activateRule(authToken, hostname, existingRule.id);
+    if (savedRule.isActive)
+    {
+        console.debug('Activating rule ' + existingRule.name);
+        await activateRule(authToken, hostname, existingRule.id);
+    }
   }
 }
 
