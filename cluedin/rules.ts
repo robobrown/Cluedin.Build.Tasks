@@ -71,22 +71,21 @@ async function exportRules(authToken: string, hostname: string, outputPath: stri
   const fs = require('fs');
   const directoryPath = sourcePath + 'Rules';
 
-  fs.readdir(directoryPath, function (err: string, files: string[]) {
+  fs.readdir(directoryPath, async function (err: string, files: string[]) {
       //handling error
       if (err) {
           return console.log('Unable to scan Rules directory: ' + err);
       } 
-      //listing all files using forEach
-      files.forEach(async function (file: string) {
-          // Do whatever you want to do with the file
-          await importRule(authToken, hostname, file.replace('.json', ''), sourcePath);
-      });
+
+      for (const file of files) {
+        await importRule(authToken, hostname, file.replace('.json', ''), sourcePath);
+      }
   });
 }
 
 async function importRule(authToken: string, hostname: string, ruleName: string, sourcePath: string){
-  let existingRule = await getRuleByName(authToken, hostname, ruleName);
-  var savedRule = await utils.readFile(sourcePath + 'Rules/' + ruleName + '.json');
+  var savedRule = utils.readFile(sourcePath + 'Rules/' + ruleName + '.json');
+  var existingRule = await getRuleByName(authToken, hostname, ruleName);
 
   if (existingRule == null || existingRule.id == null) {
       //create the rule

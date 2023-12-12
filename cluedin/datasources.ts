@@ -115,22 +115,21 @@ import auth from "./auth";
     const directoryPath = sourcePath + 'DataSourceSets';
     const userId = await auth.getUserId(authToken, hostname);
 
-    fs.readdir(directoryPath, function (err: string, files: string[]) {
+    fs.readdir(directoryPath, async function (err: string, files: string[]) {
         //handling error
         if (err) {
             return console.log('Unable to scan DataSourceSets directory: ' + err);
         } 
-        //listing all files using forEach
-        files.forEach(async function (file: string) {
-            // Do whatever you want to do with the file
-            await importDataSourceSet(authToken, hostname, userId, file.replace('.json', ''), sourcePath);
-        });
+          
+        for (const file of files) {
+          await importDataSourceSet(authToken, hostname, userId, file.replace('.json', ''), sourcePath);
+        }
     });
   }
 
   async function importDataSourceSet(authToken: string, hostname: string, userId: string, datasourceSetName: string, sourcePath: string){
     let existingDataSourceSet = await getDataSourceSetByName(authToken, hostname, datasourceSetName);
-    var savedDataSourceSet = await utils.readFile(sourcePath + 'DataSourceSets/' + datasourceSetName + '.json');
+    var savedDataSourceSet = utils.readFile(sourcePath + 'DataSourceSets/' + datasourceSetName + '.json');
 
     if (existingDataSourceSet == null || existingDataSourceSet.id == null) {
         console.log('Creating DataSourceSet');

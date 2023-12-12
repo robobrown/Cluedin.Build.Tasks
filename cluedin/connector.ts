@@ -60,22 +60,21 @@ async function importConnectors(authToken: string, hostname: string, sourcePath:
   const fs = require('fs');
   const directoryPath = sourcePath + 'Connectors';
 
-  fs.readdir(directoryPath, function (err: string, files: string[]) {
+  fs.readdir(directoryPath, async function (err: string, files: string[]) {
       //handling error
       if (err) {
           return console.log('Unable to scan Connectors directory: ' + err);
       } 
-      //listing all files using forEach
-      files.forEach(async function (file: string) {
-          // Do whatever you want to do with the file
-          await importConnector(authToken, hostname, file.replace('.json', ''), sourcePath);
-      });
+
+      for (const file of files) {
+        await importConnector(authToken, hostname, file.replace('.json', ''), sourcePath);
+      }
   });
 }
 
 async function importConnector(authToken: string, hostname: string, connectorName: string, sourcePath: string){
   let existingItem = await getConnectorByName(authToken, hostname, connectorName);
-  var savedItem = await utils.readFile(sourcePath + '/Connectors/' + connectorName + '.json');
+  var savedItem = utils.readFile(sourcePath + '/Connectors/' + connectorName + '.json');
 
   if (existingItem == null || existingItem.id == null) {
       //create the connector

@@ -76,22 +76,21 @@ import utils from "./utils";
     const fs = require('fs');
     const directoryPath = sourcePath + 'Streams';
 
-    fs.readdir(directoryPath, function (err: string, files: string[]) {
+    fs.readdir(directoryPath, async function (err: string, files: string[]) {
         //handling error
         if (err) {
             return console.log('Unable to scan Streams directory: ' + err);
         } 
-        //listing all files using forEach
-        files.forEach(async function (file: string) {
-            // Do whatever you want to do with the file
-            await importStream(authToken, hostname, file.replace('.json', ''), sourcePath);
-        });
+      
+        for (const file of files) {
+          await importStream(authToken, hostname, file.replace('.json', ''), sourcePath);
+        }
     });
   }
 
   async function importStream(authToken: string, hostname: string, streamName: string, sourcePath: string){
     let existingStream = await getStreamByName(authToken, hostname, streamName);
-    var savedStream = await utils.readFile(sourcePath + 'Streams/' + streamName + '.json');
+    var savedStream = utils.readFile(sourcePath + 'Streams/' + streamName + '.json');
 
     if (existingStream == null || existingStream.id == null) {
         //create the rule

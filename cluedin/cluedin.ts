@@ -5,10 +5,10 @@ import streams from './streams'
 
 async function exportAll(authToken: string, hostname: string, outputPath: string){
     console.log("Exporting data from Cluedin");
-    // await connector.exportConnectors(authToken, hostname, outputPath);
-    // await datasources.exportDataSources(authToken, hostname, outputPath);
+    await connector.exportConnectors(authToken, hostname, outputPath);
+    await datasources.exportDataSources(authToken, hostname, outputPath);
     await rules.exportRules(authToken, hostname, outputPath);
-    // await streams.exportStreams(authToken, hostname, outputPath);
+    await streams.exportStreams(authToken, hostname, outputPath);
     console.log("Export complete");
 }
 

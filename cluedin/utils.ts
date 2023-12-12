@@ -33,20 +33,11 @@ function replacer(key: string, value: string)
     else return value;
 }
 
-async function readFile(filePath: string){
-    const fs = require('fs/promises');
+function readFile(filePath: string){
+    const fs = require('fs');
   
-    var data = await fs.readFile(filePath);
+    var data = fs.readFileSync(filePath);
     return JSON.parse(data);
-    // .then((data: string) => {
-    //     // Do something with the data
-    //     return JSON.parse(data);
-    // })
-    // .catch((error: Error) => {
-    //     // Do something if error 
-    //     console.log('Error reading file: ' + filePath);
-    //     console.log(error);
-    // });
   }
 
   
