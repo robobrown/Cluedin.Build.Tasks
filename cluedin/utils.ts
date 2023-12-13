@@ -45,10 +45,10 @@ function isEqual(obj1: any, obj2: any){
     var one = JSON.stringify(obj1, replacer);
     var two = JSON.stringify(obj2, replacer);
     var areEqual = one === two;
-    if (!areEqual) {
-        console.log(one);
-        console.log(two);
-    }
+    // if (!areEqual) {
+    //     console.log(one);
+    //     console.log(two);
+    // }
     return areEqual;
 }
   
