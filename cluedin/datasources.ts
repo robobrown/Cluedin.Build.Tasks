@@ -139,6 +139,8 @@ import auth from "./auth";
 
     var areEqual = utils.isEqual(existingDataSourceSet, savedDataSourceSet); 
     if (!areEqual) {
+        console.log(existingDataSourceSet.name + ' is not equal to ' + savedDataSourceSet.name);
+
         for (const savedDataSource of savedDataSourceSet.dataSources){
           var dataSourceId: string;
           var existingDataSource = existingDataSourceSet.dataSources.find(function(x: any) { return x.name == savedDataSource.name; });
@@ -182,16 +184,15 @@ import auth from "./auth";
                   var existingIgnoredFields = existingDataSet.fieldMappings.filter((mapping: any) => mapping.key == "--ignore--").map(selectOriginalField);
 
                   var ignoredFields = savedIgnoredFields.filter((mapping: string) => !existingIgnoredFields.includes(mapping));
-
-                  if (ignoredFields.Any())
+                  
+                  if (ignoredFields.length > 0)
                   {
                       await addIgnoredFieldsToDataSet(authToken, hostname, dataSetId, ignoredFields);
                   }
-
                   for (const fieldMapping of savedMappedFields){
                       //Add the field if it doesn't exist
                       var match = existingMappedFields.find(function(x: any) { return x.originalField == fieldMapping.originalField && x.key == fieldMapping.key; });
-
+                      
                       if (match == null)
                       {
                           var vocabKey = vocabKeys.find(function(x: any) { return x.key == fieldMapping.key; });
@@ -539,7 +540,7 @@ import auth from "./auth";
         if (response.data.errors != null && response.data.errors.length > 0){
             throw new Error(response.data.errors[0].message);
         }
-        return response.data.data.management.vocabularies.data.find(function(x: any) { return x.name == vocabularyName; });
+        return response.data.data.management.vocabularies.data.find(function(x: any) { return x.vocabularyName == vocabularyName; });
     })
     .catch((error: Error) => {
         console.log(error);
@@ -711,7 +712,7 @@ import auth from "./auth";
   }
 
   function selectOriginalField (item:any){
-    return { originalField: item.originalField };
+    return item.originalField;
   }
     
 export default { exportDataSources, importDataSources };

@@ -28,7 +28,8 @@ function replacer(key: string, value: string)
     else if (key=="modifiedAt") return undefined;
     else if (key=="ownedBy") return undefined;
     else if (key=="organizationId") return undefined;
-    
+    else if (key=="updatedAt") return undefined;
+    else if (key=="vocabularyId") return undefined;
     
     else return value;
 }
@@ -44,10 +45,10 @@ function isEqual(obj1: any, obj2: any){
     var one = JSON.stringify(obj1, replacer);
     var two = JSON.stringify(obj2, replacer);
     var areEqual = one === two;
-    // if (!areEqual) {
-    //     console.log(one);
-    //     console.log(two);
-    // }
+    if (!areEqual) {
+        console.log(one);
+        console.log(two);
+    }
     return areEqual;
 }
   
