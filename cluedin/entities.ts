@@ -1,3 +1,4 @@
+import auth from './auth'
 
 async function deleteEntities(authToken: string, hostname: string, entityType: string, filter: string, pageSize: number){
     if (filter == null || filter == "" || filter == "*") {
@@ -14,9 +15,7 @@ async function deleteAllEntities(authToken: string, hostname: string, entityType
         search(query: $entityType, pageSize: $pageSize) {
           totalResults
           entries {
-            actions {
-              deleteEntity
-            }
+id
           }
         }
       }
@@ -57,9 +56,7 @@ async function deleteAllEntitiesWithFilter(authToken: string, hostname: string, 
       search(query: $entityType, filter: $filter, pageSize: $pageSize) {
         totalResults
         entries {
-          actions {
-            deleteEntity
-          }
+id
         }
       }
     }
@@ -94,4 +91,89 @@ async function deleteAllEntitiesWithFilter(authToken: string, hostname: string, 
   });    
 }
 
-export default { deleteEntities };
+async function reprocessAllRules(authToken: string, hostname: string){
+  var userInfo = await auth.getUserInfo(authToken, hostname);
+  if (!userInfo.roles.includes("Admin")){
+    throw new Error("User is not an admin, add the user to the Admin Role on the Cluedin Database");
+  }
+
+  const axios = require('axios');
+
+  let config = {
+    method: 'get',
+    maxBodyLength: Infinity,
+    url: 'https://' + hostname + '/api/api/admin/commands/process/all?organizationId=' + userInfo.organizationId + '&minSize=0',
+    headers: { 
+      'Authorization': 'Bearer ' + authToken
+    }
+  };
+
+  console.log(config.url);
+  axios.request(config)
+  .then((response: any) => {
+    // console.log(JSON.stringify(response.data));
+    return response.data;
+  })
+  .catch((error: Error) => {
+    console.log(error);
+  });
+
+}
+
+async function reprocessRulesByEntityType(authToken: string, hostname: string, entityType: string){
+  var userInfo = await auth.getUserInfo(authToken, hostname);
+  if (!userInfo.roles.includes("Admin")){
+    throw new Error("User is not an admin, add the user to the Admin Role on the Cluedin Database");
+  }
+
+  const axios = require('axios');
+
+  let config = {
+    method: 'get',
+    maxBodyLength: Infinity,
+    url: 'https://' + hostname + '/api/api/admin/commands/process/all/entityType?organizationId=' + userInfo.organizationId + '&entityType=' + entityType + '&minSize=0',
+    headers: { 
+      'Authorization': 'Bearer ' + authToken
+    }
+  };
+console.log(config.url);
+
+  axios.request(config)
+  .then((response: any) => {
+    // console.log(JSON.stringify(response.data));
+    return response.data;
+  })
+  .catch((error: Error) => {
+    console.log(error);
+  });
+}
+
+async function resyncDatastores(authToken: string, hostname: string){
+  var userInfo = await auth.getUserInfo(authToken, hostname);
+  if (!userInfo.roles.includes("Admin")){
+    throw new Error("User is not an admin, add the user to the Admin Role on the Cluedin Database");
+  }
+
+  const axios = require('axios');
+
+  let config = {
+    method: 'get',
+    maxBodyLength: Infinity,
+    url: 'https://' + hostname + '/api/api/admin/commands/resync/datastores/all?organizationId=' + userInfo.organizationId,
+    headers: { 
+      'Authorization': 'Bearer ' + authToken
+    }
+  };
+console.log(config.url);
+
+  axios.request(config)
+  .then((response: any) => {
+    return response.data;
+  })
+  .catch((error: Error) => {
+    console.log(error);
+  });
+
+}
+
+export default { deleteEntities, reprocessAllRules, reprocessRulesByEntityType, resyncDatastores };

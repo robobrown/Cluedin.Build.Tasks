@@ -28,7 +28,17 @@ async function getToken(username: string, password: string, client_id: string, c
   });
 }
 
-async function getUserId(authToken: string, hostname: string){
+// async function getUserId(authToken: string, hostname: string){
+//   var user = await getUserInfo(authToken, hostname);
+//   return user.id;
+// }
+
+// async function getOrganizationId(authToken: string, hostname: string){
+//   var user = await getUserInfo(authToken, hostname);
+//   return user.organizationId;
+// }
+
+async function getUserInfo(authToken: string, hostname: string){
   const axios = require('axios');
   let data = JSON.stringify({
       query: `query Administration {
@@ -58,12 +68,11 @@ async function getUserId(authToken: string, hostname: string){
       if (response.data.errors != null && response.data.errors.length > 0){
           throw new Error(response.data.errors[0].message);
       }
-      return response.data.data.administration.me.client.id;
+      return response.data.data.administration.me.client;
   })
   .catch((error: Error) => {
       console.log(error);
   });
 }
 
-
-export default { getToken, getUserId };
+export default { getToken, getUserInfo };

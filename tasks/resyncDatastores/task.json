@@ -45,30 +45,6 @@
             "defaultValue": "app-oranization.yourdomain.com",
             "required": true,
             "helpMarkDown": "Enter the Hostname the Cluedin App Instance"
-          },
-          {
-            "name": "entityType",
-            "type": "string",
-            "label": "Entity Type",
-            "defaultValue": "/Person",
-            "required": true,
-            "helpMarkDown": "Enter the entity type to search on"
-          },
-          {
-            "name": "filter",
-            "type": "string",
-            "label": "Filter",
-            "defaultValue": "*",
-            "required": true,
-            "helpMarkDown": "Enter the search filter to apply"
-          },
-          {
-            "name": "pageSize",
-            "type": "int",
-            "label": "Page Size",
-            "defaultValue": "1000",
-            "required": true,
-            "helpMarkDown": "Enter the size of the page to delete"
           }
     ],
     "execution": {

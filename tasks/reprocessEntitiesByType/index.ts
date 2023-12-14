@@ -9,11 +9,9 @@ async function run() {
         const cluedinClientId: string = tl.getInputRequired('cluedinClientId');
         const cluedinHostname: string = tl.getInputRequired('cluedinHostname');
         const entityType: string = tl.getInputRequired('entityType');
-        const filter: string = tl.getInputRequired('filter');
-        const pageSize: number = parseInt(tl.getInputRequired('pageSize'));
 
         const token = await auth.getToken(cluedinUsername, cluedinPassword, cluedinClientId, cluedinHostname);
-        await entities.deleteEntities(token, cluedinHostname, entityType, filter, pageSize);
+        await entities.reprocessRulesByEntityType(token, cluedinHostname, entityType);
     }
     catch (err) {
         if (err instanceof Error) {

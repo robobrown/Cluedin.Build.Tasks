@@ -113,7 +113,7 @@ import auth from "./auth";
   async function importDataSources(authToken: string, hostname: string, sourcePath: string){
     const fs = require('fs');
     const directoryPath = sourcePath + 'DataSourceSets';
-    const userId = await auth.getUserId(authToken, hostname);
+    const userInfo = await auth.getUserInfo(authToken, hostname);
 
     fs.readdir(directoryPath, async function (err: string, files: string[]) {
         //handling error
@@ -122,7 +122,7 @@ import auth from "./auth";
         } 
           
         for (const file of files) {
-          await importDataSourceSet(authToken, hostname, userId, file.replace('.json', ''), sourcePath);
+          await importDataSourceSet(authToken, hostname, userInfo.id, file.replace('.json', ''), sourcePath);
         }
     });
   }

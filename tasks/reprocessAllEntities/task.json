@@ -1,9 +1,9 @@
 {
     "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
-    "id": "5f0303bc-97bc-4b87-bdd7-002ad3239636",
-    "name": "CluedinDeleteRulesTask",
-    "friendlyName": "Cluedin Delete Rules Task",
-    "description": "Task for Removing Rules From Cluedin",
+    "id": "3350cc23-5cd7-42a8-93d4-20723c75c081",
+    "name": "CluedinReprocessAllEntities",
+    "friendlyName": "Cluedin Reprocess Rules on all Entity Types",
+    "description": "Task to Reprocess Rules on all Entity Types",
     "helpMarkDown": "",
     "category": "Utility",
     "author": "Robert Brown",
@@ -12,7 +12,7 @@
         "Minor": 1,
         "Patch": 0
     },
-    "instanceNameFormat": "Cluedin Remove Entities",
+    "instanceNameFormat": "Cluedin Reprocess Entity Rules",
     "inputs": [
         {
             "name": "cluedinUsername",
@@ -45,30 +45,6 @@
             "defaultValue": "app-oranization.yourdomain.com",
             "required": true,
             "helpMarkDown": "Enter the Hostname the Cluedin App Instance"
-          },
-          {
-            "name": "entityType",
-            "type": "string",
-            "label": "Entity Type",
-            "defaultValue": "/Person",
-            "required": true,
-            "helpMarkDown": "Enter the entity type to search on"
-          },
-          {
-            "name": "filter",
-            "type": "string",
-            "label": "Filter",
-            "defaultValue": "*",
-            "required": true,
-            "helpMarkDown": "Enter the search filter to apply"
-          },
-          {
-            "name": "pageSize",
-            "type": "int",
-            "label": "Page Size",
-            "defaultValue": "1000",
-            "required": true,
-            "helpMarkDown": "Enter the size of the page to delete"
           }
     ],
     "execution": {
