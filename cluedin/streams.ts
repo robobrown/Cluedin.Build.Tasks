@@ -6,18 +6,23 @@ import utils from "./utils";
     var count = 0;
    
      while (count <= total){
-       var result = await exportStreamsPage(pageNumber, authToken, hostname, outputPath);
-       total = result.data.consume.streams.total;
-       count += result.data.consume.streams.data.length;
-       pageNumber = pageNumber + 1;
-       if (count == total)
-       { 
-         break;
-       }
+      var result = await getStreamsByPage(pageNumber, authToken, hostname);
+       
+      for (const stream of result.data.consume.streams.data){
+        utils.saveToDisk(outputPath, "Streams", stream.name, stream)
+      };
+
+      total = result.data.consume.streams.total;
+      count += result.data.consume.streams.data.length;
+      pageNumber = pageNumber + 1;
+      if (count == total)
+      { 
+        break;
+      }
     }
   }
   
-  async function exportStreamsPage(pageNumber: number, authToken: string, hostname: string, outputPath: string){
+  async function getStreamsByPage(pageNumber: number, authToken: string, hostname: string){
      const axios = require('axios');
      let data = JSON.stringify({
        query: `query getStreams($pageNumber: Int) {
@@ -62,9 +67,6 @@ import utils from "./utils";
           throw new Error(response.data.errors[0].message);
         }
         
-        for (const stream of response.data.data.consume.streams.data){
-              utils.saveToDisk(outputPath, "Streams", stream.name, stream)
-        };
         return response.data;
      })
      .catch((error: Error) => {
@@ -72,7 +74,6 @@ import utils from "./utils";
      });
   }
   
-   
   async function importStreams(authToken: string, hostname: string, sourcePath: string){
     const fs = require('fs');
     const directoryPath = sourcePath + 'Streams';
@@ -347,4 +348,76 @@ import utils from "./utils";
     });
   }
 
-export default { exportStreams, importStreams };
+  async function deleteStreamsByName(authToken: string, hostname: string, streamNames: string){
+    var streamIds:string[] = [];
+
+    if (streamNames == "*"){
+      var pageNumber = 1;
+      var total = 0;
+      var count = 0;
+    
+      while (count <= total){
+        var result = await getStreamsByPage(pageNumber, authToken, hostname);
+
+        for (const stream of result.data.management.rules.data){
+          streamIds.push(stream.id);
+        };
+
+        total = result.data.management.rules.total;
+        count += result.data.management.rules.data.length;
+        pageNumber = pageNumber + 1;
+        if (count == total)
+        { 
+          break;
+        }
+      }
+    }
+    else {
+      for (const streamName of streamNames.split(',')) {
+        var stream = await getStreamByName(authToken, hostname, streamName);
+        if (stream != null && stream.id != null) {
+          streamIds.push(stream.id);
+        }
+      }
+    }
+
+    await deleteStreamsById(authToken, hostname, streamIds);
+  }
+
+  async function deleteStreamsById(authToken: string, hostname: string, streamIds: string[]){
+    const axios = require('axios');
+    let data = JSON.stringify({
+      query: `mutation deleteStreams($streamIds: [ID]) {
+        consume {
+          deleteStreams(streamIds: $streamIds)
+        }
+    }`,
+      variables: {
+        streamIds: streamIds
+      }
+    });
+    
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'https://' + hostname + '/graphql',
+      headers: { 
+        'Content-Type': 'application/json', 
+        'Authorization': 'Bearer ' + authToken
+      },
+      data : data
+    };
+
+    return axios.request(config)
+    .then((response: any) => {
+        if (response.data.errors != null && response.data.errors.length > 0){
+            throw new Error(response.data.errors[0].message);
+        }
+        return response.data;
+    })
+    .catch((error: Error) => {
+      console.log(error);
+    });
+  }
+
+export default { exportStreams, importStreams, deleteStreamsByName };

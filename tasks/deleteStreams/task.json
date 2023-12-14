@@ -1,0 +1,66 @@
+{
+    "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
+    "id": "e974e920-59e9-4f89-a68d-8aba920e38cd",
+    "name": "CluedinDeleteStreamsTask",
+    "friendlyName": "Cluedin Delete Streams Task",
+    "description": "Task for Removing Streams From Cluedin",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "author": "Robert Brown",
+    "version": {
+        "Major": 0,
+        "Minor": 1,
+        "Patch": 0
+    },
+    "instanceNameFormat": "Cluedin Delete Streams",
+    "inputs": [
+        {
+            "name": "cluedinUsername",
+            "type": "string",
+            "label": "Cluedin Username",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the username used to access the Cluedin App Isntance"
+          },
+          {
+            "name": "cluedinPassword",
+            "type": "string",
+            "label": "Cluedin Password",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the username used to access the Cluedin App Isntance"
+          },
+          {
+            "name": "cluedinClientId",
+            "type": "string",
+            "label": "Cluedin ClientId",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the ClientId of the Cluedin App"
+          },
+          {
+            "name": "cluedinHostname",
+            "type": "string",
+            "label": "Cluedin Hostname",
+            "defaultValue": "app-oranization.yourdomain.com",
+            "required": true,
+            "helpMarkDown": "Enter the Hostname the Cluedin App Instance"
+          },
+          {
+            "name": "ruleNames",
+            "type": "string",
+            "label": "Rule Names",
+            "defaultValue": "*",
+            "required": true,
+            "helpMarkDown": "Enter a comma seperated list of rule names to delete, or * for all rules"
+          }
+    ],
+    "execution": {
+        "Node10": {
+            "target": "index.js"
+        },
+        "Node16": {
+          "target": "index.js"
+        }
+    }
+    }

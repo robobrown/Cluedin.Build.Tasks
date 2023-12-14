@@ -4,6 +4,7 @@ import datasources from './datasources'
 import rules from './rules'
 import streams from './streams'
 import cluedin from './cluedin'
+import entities from './entities'
 
 const mainmodule = {
     auth,
@@ -11,6 +12,7 @@ const mainmodule = {
     datasources,
     rules,
     streams,
-    cluedin
+    cluedin,
+    entities
 }
 export = mainmodule

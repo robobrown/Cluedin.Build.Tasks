@@ -1,0 +1,82 @@
+{
+    "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
+    "id": "5f0303bc-97bc-4b87-bdd7-002ad3239636",
+    "name": "CluedinDeleteRulesTask",
+    "friendlyName": "Cluedin Delete Rules Task",
+    "description": "Task for Removing Rules From Cluedin",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "author": "Robert Brown",
+    "version": {
+        "Major": 0,
+        "Minor": 1,
+        "Patch": 0
+    },
+    "instanceNameFormat": "Cluedin Cleanup",
+    "inputs": [
+        {
+            "name": "cluedinUsername",
+            "type": "string",
+            "label": "Cluedin Username",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the username used to access the Cluedin App Isntance"
+          },
+          {
+            "name": "cluedinPassword",
+            "type": "string",
+            "label": "Cluedin Password",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the username used to access the Cluedin App Isntance"
+          },
+          {
+            "name": "cluedinClientId",
+            "type": "string",
+            "label": "Cluedin ClientId",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the ClientId of the Cluedin App"
+          },
+          {
+            "name": "cluedinHostname",
+            "type": "string",
+            "label": "Cluedin Hostname",
+            "defaultValue": "app-oranization.yourdomain.com",
+            "required": true,
+            "helpMarkDown": "Enter the Hostname the Cluedin App Instance"
+          },
+          {
+            "name": "entityType",
+            "type": "string",
+            "label": "Entity Type",
+            "defaultValue": "/Person",
+            "required": true,
+            "helpMarkDown": "Enter the entity type to search on"
+          },
+          {
+            "name": "filter",
+            "type": "string",
+            "label": "Filter",
+            "defaultValue": "*",
+            "required": true,
+            "helpMarkDown": "Enter the search filter to apply"
+          },
+          {
+            "name": "pageSize",
+            "type": "int",
+            "label": "Page Size",
+            "defaultValue": "1000",
+            "required": true,
+            "helpMarkDown": "Enter the size of the page to delete"
+          }
+    ],
+    "execution": {
+        "Node10": {
+            "target": "index.js"
+        },
+        "Node16": {
+          "target": "index.js"
+        }
+    }
+    }

@@ -1,0 +1,66 @@
+{
+    "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
+    "id": "208d160a-dea1-402c-b1aa-958df15548dc",
+    "name": "CluedinImportAllConfigTask",
+    "friendlyName": "Cluedin Import All Config Task",
+    "description": "Task for Importing All Cluedin Configuration from Json Files",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "author": "Robert Brown",
+    "version": {
+        "Major": 0,
+        "Minor": 1,
+        "Patch": 0
+    },
+    "instanceNameFormat": "Cluedin Config Importer",
+    "inputs": [
+        {
+            "name": "cluedinUsername",
+            "type": "string",
+            "label": "Cluedin Username",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the username used to access the Cluedin App Isntance"
+          },
+          {
+            "name": "cluedinPassword",
+            "type": "string",
+            "label": "Cluedin Password",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the username used to access the Cluedin App Isntance"
+          },
+          {
+            "name": "cluedinClientId",
+            "type": "string",
+            "label": "Cluedin ClientId",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the ClientId of the Cluedin App"
+          },
+          {
+            "name": "cluedinHostname",
+            "type": "string",
+            "label": "Cluedin Hostname",
+            "defaultValue": "app-oranization.yourdomain.com",
+            "required": true,
+            "helpMarkDown": "Enter the Hostname the Cluedin App Instance"
+          },
+          {
+            "name": "sourcePath",
+            "type": "string",
+            "label": "Json Source Path",
+            "defaultValue": "../../data/",
+            "required": true,
+            "helpMarkDown": "Enter the path where to get the json data"
+          }
+    ],
+    "execution": {
+        "Node10": {
+            "target": "index.js"
+        },
+        "Node16": {
+          "target": "index.js"
+        }
+    }
+    }

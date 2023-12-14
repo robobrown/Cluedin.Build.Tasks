@@ -6,7 +6,12 @@ async function exportRules(authToken: string, hostname: string, outputPath: stri
     var count = 0;
    
      while (count <= total){
-       var result = await exportRulesPage(pageNumber, authToken, hostname, outputPath);
+       var result = await getRulesByPage(pageNumber, authToken, hostname);
+
+       for (const rule of result.data.management.rules.data){
+             utils.saveToDisk(outputPath, "Rules", rule.name, rule)
+       };
+
        total = result.data.management.rules.total;
        count += result.data.management.rules.data.length;
        pageNumber = pageNumber + 1;
@@ -15,56 +20,6 @@ async function exportRules(authToken: string, hostname: string, outputPath: stri
          break;
        }
     }
- }
- 
- async function exportRulesPage(pageNumber: number, authToken: string, hostname: string, outputPath: string){
-     const axios = require('axios');
-     let data = JSON.stringify({
-       query: `query getRules($pageNumber: Int) {
-         management {
-             rules(pageNumber: $pageNumber) {
-                 total
-                 data {
-                     name
-                     isActive
-                     order
-                     condition
-                     actions
-                     rules
-                     scope
-                 }
-             }
-         }
-     }`,
-       variables: {
-         pageNumber: pageNumber
-       }
-     });
-     
-     let config = {
-       method: 'post',
-       maxBodyLength: Infinity,
-       url: 'https://' + hostname + '/graphql',
-       headers: { 
-         'Content-Type': 'application/json', 
-         'Authorization': 'Bearer ' + authToken
-       },
-       data : data
-     };
- 
-     return axios.request(config)
-     .then((response: any) => {
-       if (response.data.errors != null && response.data.errors.length > 0){
-         throw new Error(response.data.errors[0].message);
-       }
-       for (const rule of response.data.data.management.rules.data){
-             utils.saveToDisk(outputPath, "Rules", rule.name, rule)
-       };
-        return response.data;
-     })
-     .catch((error: Error) => {
-       console.log(error);
-     });
  }
  
  async function importRules(authToken: string, hostname: string, sourcePath: string){
@@ -106,6 +61,54 @@ async function importRule(authToken: string, hostname: string, ruleName: string,
         await activateRule(authToken, hostname, existingRule.id);
     }
   }
+}
+
+async function getRulesByPage(pageNumber: number, authToken: string, hostname: string){
+  const axios = require('axios');
+  let data = JSON.stringify({
+    query: `query getRules($pageNumber: Int) {
+      management {
+          rules(pageNumber: $pageNumber) {
+              total
+              data {
+                  name
+                  isActive
+                  order
+                  condition
+                  actions
+                  rules
+                  scope
+              }
+          }
+      }
+  }`,
+    variables: {
+      pageNumber: pageNumber
+    }
+  });
+  
+  let config = {
+    method: 'post',
+    maxBodyLength: Infinity,
+    url: 'https://' + hostname + '/graphql',
+    headers: { 
+      'Content-Type': 'application/json', 
+      'Authorization': 'Bearer ' + authToken
+    },
+    data : data
+  };
+
+  return axios.request(config)
+  .then((response: any) => {
+    if (response.data.errors != null && response.data.errors.length > 0){
+      throw new Error(response.data.errors[0].message);
+    }
+
+     return response.data;
+  })
+  .catch((error: Error) => {
+    console.log(error);
+  });
 }
 
 async function getRuleByName(authToken: string, hostname: string, ruleName: string){
@@ -285,5 +288,76 @@ async function activateRule(authToken: string, hostname: string, ruleId: string)
   });
 }
 
+async function deleteRulesByName(authToken: string, hostname: string, ruleNames: string){
+  var ruleIds:string[] = [];
 
-export default { exportRules, importRules };
+  if (ruleNames == "*"){
+    var pageNumber = 1;
+    var total = 0;
+    var count = 0;
+   
+     while (count <= total){
+       var result = await getRulesByPage(pageNumber, authToken, hostname);
+
+       for (const rule of result.data.management.rules.data){
+         ruleIds.push(rule.id);
+       };
+
+       total = result.data.management.rules.total;
+       count += result.data.management.rules.data.length;
+       pageNumber = pageNumber + 1;
+       if (count == total)
+       { 
+         break;
+       }
+    }
+  }
+  else {
+    for (const ruleName of ruleNames.split(',')) {
+      var rule = await getRuleByName(authToken, hostname, ruleName);
+      if (rule != null && rule.id != null) {
+        ruleIds.push(rule.id);
+      }
+    }
+  }
+
+  await deleteRulesById(authToken, hostname, ruleIds);
+}
+
+async function deleteRulesById(authToken: string, hostname: string, ruleIds: string[]){
+  const axios = require('axios');
+  let data = JSON.stringify({
+    query: `mutation deleteRules($ruleIds: [ID]) {
+      management {
+          deleteRules(ruleIds: $ruleIds)
+      }
+  }`,
+    variables: {
+        ruleIds: ruleIds
+    }
+  });
+  
+  let config = {
+    method: 'post',
+    maxBodyLength: Infinity,
+    url: 'https://' + hostname + '/graphql',
+    headers: { 
+      'Content-Type': 'application/json', 
+      'Authorization': 'Bearer ' + authToken
+    },
+    data : data
+  };
+
+  return axios.request(config)
+  .then((response: any) => {
+      if (response.data.errors != null && response.data.errors.length > 0){
+          throw new Error(response.data.errors[0].message);
+      }
+      return response.data;
+  })
+  .catch((error: Error) => {
+    console.log(error);
+  });
+}
+
+export default { exportRules, importRules, deleteRulesByName };

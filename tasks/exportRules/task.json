@@ -1,9 +1,9 @@
 {
     "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
-    "id": "c57e47ae-03a8-4179-a16b-f83f1921bb07",
-    "name": "CluedinImportTask",
-    "friendlyName": "Cluedin Import Task",
-    "description": "Task for Importing Cluedin Data from Json Files",
+    "id": "96bf76f2-8048-43b0-a113-5d68394bbd12",
+    "name": "CluedinExportRulesTask",
+    "friendlyName": "Cluedin Export Rules Task",
+    "description": "Task for Exporting Rules to Json Files",
     "helpMarkDown": "",
     "category": "Utility",
     "author": "Robert Brown",
@@ -12,7 +12,7 @@
         "Minor": 1,
         "Patch": 0
     },
-    "instanceNameFormat": "Cluedin Importer",
+    "instanceNameFormat": "Cluedin Rule Exporter",
     "inputs": [
         {
             "name": "cluedinUsername",
@@ -47,12 +47,12 @@
             "helpMarkDown": "Enter the Hostname the Cluedin App Instance"
           },
           {
-            "name": "sourcePath",
+            "name": "outputPath",
             "type": "string",
-            "label": "Json Source Path",
+            "label": "output path",
             "defaultValue": "../../data/",
             "required": true,
-            "helpMarkDown": "Enter the path where to get the json data"
+            "helpMarkDown": "Enter the path where to output the data"
           }
     ],
     "execution": {
