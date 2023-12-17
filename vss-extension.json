@@ -1,7 +1,7 @@
 {
     "manifestVersion": 1,
     "id": "build-release-task",
-    "name": "Cluedin Build and Release Tools",
+    "name": "CluedIn Build and Release Tools",
     "version": "0.0.1",
     "publisher": "Robert Brown",
     "targets": [
@@ -9,7 +9,7 @@
             "id": "Microsoft.VisualStudio.Services"
         }
     ],    
-    "description": "Tools for building/releasing with Cluedin. Includes a set of build/release tasks.",
+    "description": "Tools for building/releasing with CluedIn. Includes a set of build/release tasks.",
     "categories": [
         "Azure Pipelines"
     ],

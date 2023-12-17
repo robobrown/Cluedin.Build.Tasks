@@ -94,7 +94,7 @@ id
 async function reprocessAllRules(authToken: string, hostname: string){
   var userInfo = await auth.getUserInfo(authToken, hostname);
   if (!userInfo.roles.includes("Admin")){
-    throw new Error("User is not an admin, add the user to the Admin Role on the Cluedin Database");
+    throw new Error("User is not an admin, add the user to the Admin Role on the CluedIn Database");
   }
 
   const axios = require('axios');
@@ -123,7 +123,7 @@ async function reprocessAllRules(authToken: string, hostname: string){
 async function reprocessRulesByEntityType(authToken: string, hostname: string, entityType: string){
   var userInfo = await auth.getUserInfo(authToken, hostname);
   if (!userInfo.roles.includes("Admin")){
-    throw new Error("User is not an admin, add the user to the Admin Role on the Cluedin Database");
+    throw new Error("User is not an admin, add the user to the Admin Role on the CluedIn Database");
   }
 
   const axios = require('axios');
@@ -151,7 +151,7 @@ console.log(config.url);
 async function resyncDatastores(authToken: string, hostname: string){
   var userInfo = await auth.getUserInfo(authToken, hostname);
   if (!userInfo.roles.includes("Admin")){
-    throw new Error("User is not an admin, add the user to the Admin Role on the Cluedin Database");
+    throw new Error("User is not an admin, add the user to the Admin Role on the CluedIn Database");
   }
 
   const axios = require('axios');

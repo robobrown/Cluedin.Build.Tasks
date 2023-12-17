@@ -68,7 +68,7 @@ async function getRulesByPage(pageNumber: number, authToken: string, hostname: s
   let data = JSON.stringify({
     query: `query getRules($pageNumber: Int) {
       management {
-          rules(pageNumber: $pageNumber) {
+          rules(pageNumber: $pageNumber, pageSize: 20) {
               total
               data {
                   name

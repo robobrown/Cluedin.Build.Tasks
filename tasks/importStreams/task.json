@@ -1,8 +1,8 @@
 {
     "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
     "id": "25bc2c43-ad03-4fa2-a953-4c3d15ae6ee4",
-    "name": "CluedinImportStreamsTask",
-    "friendlyName": "Cluedin Import Streams Task",
+    "name": "CluedInImportStreamsTask",
+    "friendlyName": "CluedIn Import Streams Task",
     "description": "Task for Importing Streams from Json Files",
     "helpMarkDown": "",
     "category": "Utility",
@@ -12,39 +12,39 @@
         "Minor": 1,
         "Patch": 0
     },
-    "instanceNameFormat": "Cluedin Stream Importer",
+    "instanceNameFormat": "CluedIn Stream Importer",
     "inputs": [
         {
             "name": "cluedinUsername",
             "type": "string",
-            "label": "Cluedin Username",
+            "label": "CluedIn Username",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Enter the username used to access the Cluedin App Isntance"
+            "helpMarkDown": "Enter the username used to access the CluedIn App Isntance"
           },
           {
             "name": "cluedinPassword",
             "type": "string",
-            "label": "Cluedin Password",
+            "label": "CluedIn Password",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Enter the username used to access the Cluedin App Isntance"
+            "helpMarkDown": "Enter the username used to access the CluedIn App Isntance"
           },
           {
             "name": "cluedinClientId",
             "type": "string",
-            "label": "Cluedin ClientId",
+            "label": "CluedIn ClientId",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Enter the ClientId of the Cluedin App"
+            "helpMarkDown": "Enter the ClientId of the CluedIn App"
           },
           {
             "name": "cluedinHostname",
             "type": "string",
-            "label": "Cluedin Hostname",
+            "label": "CluedIn Hostname",
             "defaultValue": "app-oranization.yourdomain.com",
             "required": true,
-            "helpMarkDown": "Enter the Hostname the Cluedin App Instance"
+            "helpMarkDown": "Enter the Hostname the CluedIn App Instance"
           },
           {
             "name": "sourcePath",

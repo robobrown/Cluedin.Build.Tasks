@@ -1,8 +1,8 @@
 {
     "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
     "id": "3350cc23-5cd7-42a8-93d4-20723c75c081",
-    "name": "CluedinReprocessAllEntities",
-    "friendlyName": "Cluedin Reprocess Rules on all Entity Types",
+    "name": "CluedInReprocessAllEntities",
+    "friendlyName": "CluedIn Reprocess Rules on all Entity Types",
     "description": "Task to Reprocess Rules on all Entity Types",
     "helpMarkDown": "",
     "category": "Utility",
@@ -12,39 +12,39 @@
         "Minor": 1,
         "Patch": 0
     },
-    "instanceNameFormat": "Cluedin Reprocess Entity Rules",
+    "instanceNameFormat": "CluedIn Reprocess Entity Rules",
     "inputs": [
         {
             "name": "cluedinUsername",
             "type": "string",
-            "label": "Cluedin Username",
+            "label": "CluedIn Username",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Enter the username used to access the Cluedin App Isntance"
+            "helpMarkDown": "Enter the username used to access the CluedIn App Isntance"
           },
           {
             "name": "cluedinPassword",
             "type": "string",
-            "label": "Cluedin Password",
+            "label": "CluedIn Password",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Enter the username used to access the Cluedin App Isntance"
+            "helpMarkDown": "Enter the username used to access the CluedIn App Isntance"
           },
           {
             "name": "cluedinClientId",
             "type": "string",
-            "label": "Cluedin ClientId",
+            "label": "CluedIn ClientId",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Enter the ClientId of the Cluedin App"
+            "helpMarkDown": "Enter the ClientId of the CluedIn App"
           },
           {
             "name": "cluedinHostname",
             "type": "string",
-            "label": "Cluedin Hostname",
+            "label": "CluedIn Hostname",
             "defaultValue": "app-oranization.yourdomain.com",
             "required": true,
-            "helpMarkDown": "Enter the Hostname the Cluedin App Instance"
+            "helpMarkDown": "Enter the Hostname the CluedIn App Instance"
           }
     ],
     "execution": {

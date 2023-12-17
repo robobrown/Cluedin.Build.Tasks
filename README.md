@@ -14,7 +14,7 @@ A brief description of your Azure DevOps Task project.
 ## Overview
 
 Provide an overview of your Azure DevOps Task project, explaining its purpose and key features.
-Tested against Cluedin version 2023.07.02
+Tested against CluedIn version 2023.07.02
 
 ## Prerequisites
 

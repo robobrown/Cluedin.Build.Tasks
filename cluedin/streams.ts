@@ -27,7 +27,7 @@ import utils from "./utils";
      let data = JSON.stringify({
        query: `query getStreams($pageNumber: Int) {
         consume {
-            streams(pageNumber: $pageNumber) {
+            streams(pageNumber: $pageNumber, pageSize: 20) {
                 total
                 data {
                     name

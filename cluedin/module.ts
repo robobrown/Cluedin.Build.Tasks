@@ -5,6 +5,9 @@ import rules from './rules'
 import streams from './streams'
 import cluedin from './cluedin'
 import entities from './entities'
+import vocabularies from './vocabularies'
+import hierarchies from './hierarchies'
+import glossaries from './glossaries'
 
 const mainmodule = {
     auth,
@@ -13,6 +16,9 @@ const mainmodule = {
     rules,
     streams,
     cluedin,
-    entities
+    entities,
+    vocabularies,
+    hierarchies,
+    glossaries
 }
 export = mainmodule
