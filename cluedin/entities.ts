@@ -1,6 +1,6 @@
 import auth from './auth'
 
-async function deleteEntities(authToken: string, hostname: string, entityType: string, filter: string, pageSize: number){
+export async function deleteEntities(authToken: string, hostname: string, entityType: string, filter: string, pageSize: number){
     if (filter == null || filter == "" || filter == "*") {
       return deleteAllEntities(authToken, hostname, entityType, pageSize)
     } else {
@@ -91,7 +91,7 @@ id
   });    
 }
 
-async function reprocessAllRules(authToken: string, hostname: string){
+export async function reprocessAllRules(authToken: string, hostname: string){
   var userInfo = await auth.getUserInfo(authToken, hostname);
   if (!userInfo.roles.includes("Admin")){
     throw new Error("User is not an admin, add the user to the Admin Role on the CluedIn Database");
@@ -120,7 +120,7 @@ async function reprocessAllRules(authToken: string, hostname: string){
 
 }
 
-async function reprocessRulesByEntityType(authToken: string, hostname: string, entityType: string){
+export async function reprocessRulesByEntityType(authToken: string, hostname: string, entityType: string){
   var userInfo = await auth.getUserInfo(authToken, hostname);
   if (!userInfo.roles.includes("Admin")){
     throw new Error("User is not an admin, add the user to the Admin Role on the CluedIn Database");
@@ -148,7 +148,7 @@ console.log(config.url);
   });
 }
 
-async function resyncDatastores(authToken: string, hostname: string){
+export async function resyncDatastores(authToken: string, hostname: string){
   var userInfo = await auth.getUserInfo(authToken, hostname);
   if (!userInfo.roles.includes("Admin")){
     throw new Error("User is not an admin, add the user to the Admin Role on the CluedIn Database");

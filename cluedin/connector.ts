@@ -1,6 +1,6 @@
 import utils from "./utils";
   
-async function exportConnectors(authToken: string, hostname: string, outputPath: string){
+export async function exportConnectors(authToken: string, hostname: string, outputPath: string){
     const axios = require('axios');
     let data = JSON.stringify({
       query: `query getAllConnectors {
@@ -56,7 +56,7 @@ async function exportConnectors(authToken: string, hostname: string, outputPath:
     });
 }
 
-async function importConnectors(authToken: string, hostname: string, sourcePath: string){
+export async function importConnectors(authToken: string, hostname: string, sourcePath: string){
   const fs = require('fs');
   const directoryPath = sourcePath + 'Connectors';
 

@@ -1,6 +1,6 @@
 import utils from "./utils";
 
-async function exportEntityTypes(authToken: string, hostname: string, outputPath: string, entityTypeNames: string){
+export async function exportEntityTypes(authToken: string, hostname: string, outputPath: string, entityTypeNames: string){
   if (entityTypeNames != null && entityTypeNames != "*"){
     for(const entityType of entityTypeNames.split(',')){
         var entityTypeDetails = await getEntityTypeByName(authToken, hostname, entityType);
@@ -144,7 +144,7 @@ async function getEntityTypeByName(authToken: string, hostname: string, entityNa
   });
 }
 
-async function importEntityTypes(authToken: string, hostname: string, sourcePath: string) {
+export async function importEntityTypes(authToken: string, hostname: string, sourcePath: string) {
   const fs = require('fs');
   const directoryPath = sourcePath + 'EntityTypes';
 

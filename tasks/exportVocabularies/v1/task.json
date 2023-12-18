@@ -1,0 +1,90 @@
+{
+    "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
+    "id": "c0e3a7ac-0502-425c-ba0f-27ca9b440fa6",
+    "name": "CluedInExportVocabularies",
+    "friendlyName": "CluedIn Export Vocabularies",
+    "description": "Task for Exporting Vocabularies to Json Files",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "author": "Robert Brown",
+    "version": {
+        "Major": 1,
+        "Minor": 1,
+        "Patch": 0
+    },
+    "visibility": [
+      "Build",
+      "Release"
+    ],
+    "demands": [
+      "npm"
+    ],
+    "minimumAgentVersion": "1.83.0",
+    "instanceNameFormat": "Cluedin Export Vocabularies: $(publisherId).$(extensionId)",
+    "inputs": [
+        {
+            "name": "cluedinUsername",
+            "type": "string",
+            "label": "CluedIn Username",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the username used to access the CluedIn App Isntance"
+          },
+          {
+            "name": "cluedinPassword",
+            "type": "string",
+            "label": "CluedIn Password",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the username used to access the CluedIn App Isntance"
+          },
+          {
+            "name": "cluedinClientId",
+            "type": "string",
+            "label": "CluedIn ClientId",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the ClientId of the CluedIn App"
+          },
+          {
+            "name": "cluedinHostname",
+            "type": "string",
+            "label": "CluedIn Hostname",
+            "defaultValue": "app-oranization.yourdomain.com",
+            "required": true,
+            "helpMarkDown": "Enter the Hostname the CluedIn App Instance"
+          },
+          {
+            "name": "outputPath",
+            "type": "string",
+            "label": "output path",
+            "defaultValue": "../../data/",
+            "required": true,
+            "helpMarkDown": "Enter the path where to output the data"
+          },
+          {
+            "name": "vocabularyNames",
+            "type": "string",
+            "label": "Vocabulary Names",
+            "defaultValue": "*",
+            "required": true,
+            "helpMarkDown": "Enter a comma selarated list of vocabulary names to export, * to export all values"
+          },
+          {
+            "name": "includeCluedInCore",
+            "type": "boolean",
+            "label": "Include CluedIn Core Vocabularies",
+            "defaultValue": "false",
+            "required": true,
+            "helpMarkDown": "Include CluedIn Core Vocabularies"
+          }
+    ],
+    "execution": {
+        "Node10": {
+            "target": "index.js"
+        },
+        "Node16": {
+          "target": "index.js"
+        }
+    }
+    }

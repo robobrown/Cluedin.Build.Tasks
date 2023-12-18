@@ -1,4 +1,4 @@
-function saveToDisk(outputPath: string, folderName: string, filename: string, data: any){
+export function saveToDisk(outputPath: string, folderName: string, filename: string, data: any){
     var fs = require('fs');
 
     var dir = outputPath + folderName;
@@ -34,14 +34,14 @@ function replacer(key: string, value: string)
     else return value;
 }
 
-function readFile(filePath: string){
+export function readFile(filePath: string){
     const fs = require('fs');
   
     var data = fs.readFileSync(filePath);
     return JSON.parse(data);
 }
 
-function isEqual(obj1: any, obj2: any){
+export function isEqual(obj1: any, obj2: any){
     var one = JSON.stringify(obj1, replacer);
     var two = JSON.stringify(obj2, replacer);
     var areEqual = one === two;

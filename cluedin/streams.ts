@@ -1,6 +1,6 @@
 import utils from "./utils";
 
-  async function exportStreams(authToken: string, hostname: string, outputPath: string){
+export async function exportStreams(authToken: string, hostname: string, outputPath: string){
     var pageNumber = 1;
     var total = 0;
     var count = 0;
@@ -74,7 +74,7 @@ import utils from "./utils";
      });
   }
   
-  async function importStreams(authToken: string, hostname: string, sourcePath: string){
+  export async function importStreams(authToken: string, hostname: string, sourcePath: string){
     const fs = require('fs');
     const directoryPath = sourcePath + 'Streams';
 
@@ -348,7 +348,7 @@ import utils from "./utils";
     });
   }
 
-  async function deleteStreamsByName(authToken: string, hostname: string, streamNames: string){
+  export async function deleteStreamsByName(authToken: string, hostname: string, streamNames: string){
     var streamIds:string[] = [];
 
     if (streamNames == "*"){

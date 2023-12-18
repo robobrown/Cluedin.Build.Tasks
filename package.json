@@ -1,26 +1,46 @@
 {
   "name": "cluedin.build.tasks",
-  "version": "1.0.0",
-  "description": "A brief description of your Azure DevOps Task project.",
-  "main": "index.js",
+  "description": "A collection of build tasks for CluedIn",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/robobrown/Cluedin.Build.Tasks.git"
+  },
+  "keywords": [
+    "cluedin",
+    "azure-pipelines",
+    "vsts"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "initdev": "npm run initdev:npm",
+    "initdev:npm": "npm run initdev:npm:base & npm run initdev:npm:tasks",
+    "initdev:npm:base": "npm install --no-progress --no-update-notifier --legacy-peer-deps --no-fund",
+    "initdev:npm:tasks": "glob-exec --parallel --foreach \"tasks/*/*/tsconfig.json\" -- \"cd {{file.dir}} && npm install --no-update-notifier --no-progress --legacy-peer-deps --no-fund\"",
+    "compile:tasks": "glob-exec \"tasks/*/*/tsconfig.json\" -- \"tsc -b {{files.join(' ')}}\"",
+    "postcompile:tasks": "npm run lint:tasks",
+    "lint:tasks": "glob-exec --parallel --foreach \"tasks/*/*/tsconfig.json\" -- \"eslint {{file.dir}} --parser-options \"{'project':['{{file}}','tasks/tsconfig.json']}\"",
+    "package:tasks": "tfx extension create --root . --output-path dist --manifest-globs vss-extension.json",
+    "build": "npm run build:tasks",
+    "build:clean": "npm run clean && npm run initdev && npm run build",
+    "build:tasks": "npm run compile:tasks",
+    "package": "npm run build:clean && npm run package:tasks",
+    "clean": "git clean -fdX"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "axios": "^1.6.2",
-    "azure-pipelines-task-lib": "^4.7.0",
-    "qs": "^6.11.2"
-  },
+  "author": "Robert Brown",
+  "license": "MIT",
   "devDependencies": {
-    "@types/mocha": "^10.0.6",
-    "@types/node": "^20.10.4",
+    "@types/core-js": "^2.5.8",
+    "@types/node": "^20.10.5",
+    "@types/promise-retry": "^1.1.6",
     "@types/q": "^1.5.8",
-    "sync-request": "^6.1.0"
-  },
-  "directories": {
-    "test": "tests"
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/eslint-plugin-tslint": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "eslint": "^8.56.0",
+    "eslint-config-airbnb-typescript": "^17.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "glob-exec": "^0.1.1",
+    "tfx-cli": "^0.16.0",
+    "tslint": "^6.1.3",
+    "typescript": "^5.3.3"
   }
 }

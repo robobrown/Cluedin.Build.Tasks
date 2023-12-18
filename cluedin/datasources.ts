@@ -2,7 +2,7 @@ import utils from "./utils";
 import auth from "./auth";
 import vocabularies from "./vocabularies";
 
-  async function exportDataSources(authToken: string, hostname: string, outputPath: string){
+  export async function exportDataSources(authToken: string, hostname: string, outputPath: string){
     const axios = require('axios');
     let data = JSON.stringify({
       query: `query getDataSources {
@@ -111,7 +111,7 @@ import vocabularies from "./vocabularies";
     });
   }
  
-  async function importDataSources(authToken: string, hostname: string, sourcePath: string){
+  export async function importDataSources(authToken: string, hostname: string, sourcePath: string){
     const fs = require('fs');
     const directoryPath = sourcePath + 'DataSourceSets';
     const userInfo = await auth.getUserInfo(authToken, hostname);

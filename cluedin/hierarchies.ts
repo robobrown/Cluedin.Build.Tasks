@@ -1,6 +1,6 @@
 import utils from "./utils";
 
-async function exportHierarchies(authToken: string, hostname: string, outputPath: string){
+export async function exportHierarchies(authToken: string, hostname: string, outputPath: string){
     var pageNumber = 1;
     var total = 0;
     var count = 0;
@@ -70,7 +70,7 @@ async function getHierarchiesByPage(authToken: string, hostname: string, pageNum
   });
 }
 
-async function importHierarchies(authToken: string, hostname: string, outputPath: string){
+export async function importHierarchies(authToken: string, hostname: string, outputPath: string){
   throw new Error("Not implemented");
 }
 

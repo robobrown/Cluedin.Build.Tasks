@@ -1,6 +1,6 @@
 import utils from "./utils";
 
-async function exportVocabularies(authToken: string, hostname: string, outputPath: string, vocabularyNames: string, includeCluedInCore: boolean){
+export async function exportVocabularies(authToken: string, hostname: string, outputPath: string, vocabularyNames: string, includeCluedInCore: boolean){
     var pageNumber = 1;
     var total = 0;
     var count = 0;
@@ -167,7 +167,7 @@ async function getVocabularyDetails(authToken: string, hostname: string, vocabul
   });
 }
 
-async function getVocabKeysForVocabId(authToken: string, hostname: string, vocabularyId: string){
+export async function getVocabKeysForVocabId(authToken: string, hostname: string, vocabularyId: string){
   const axios = require('axios');
   let data = JSON.stringify({
       query: `query getVocabularyKeysFromVocabularyId($vocabId: ID!) {
@@ -212,7 +212,7 @@ async function getVocabKeysForVocabId(authToken: string, hostname: string, vocab
   });
 }
 
-async function getBasicVocabularyByName(authToken: string, hostname: string, vocabularyName: string){
+export async function getBasicVocabularyByName(authToken: string, hostname: string, vocabularyName: string){
   const axios = require('axios');
   let data = JSON.stringify({
       query: `query getVocabularyByName($name: String!) {
@@ -307,7 +307,7 @@ async function getVocabularyByName(authToken: string, hostname: string, vocabula
   });
 }
 
-async function importVocabularies(authToken: string, hostname: string, sourcePath: string){
+export async function importVocabularies(authToken: string, hostname: string, sourcePath: string){
   const fs = require('fs');
   const directoryPath = sourcePath + 'Vocabularies';
 

@@ -7,7 +7,7 @@ import hierarchies from './hierarchies'
 import glossaries from './glossaries'
 import entitytypes from './entitytypes'
 
-async function exportAll(authToken: string, hostname: string, outputPath: string){
+export async function exportAll(authToken: string, hostname: string, outputPath: string){
     console.log("Exporting data from CluedIn");
     await connector.exportConnectors(authToken, hostname, outputPath);
     await datasources.exportDataSources(authToken, hostname, outputPath);
@@ -20,7 +20,7 @@ async function exportAll(authToken: string, hostname: string, outputPath: string
     console.log("Export complete");
 }
 
-async function importAll(authToken: string, hostname: string, sourcePath: string){
+export async function importAll(authToken: string, hostname: string, sourcePath: string){
     console.log("Importing data into CluedIn");
     await connector.importConnectors(authToken, hostname, sourcePath);
     await rules.importRules(authToken, hostname, sourcePath);

@@ -3,7 +3,7 @@
     "id": "build-release-task",
     "name": "CluedIn Build and Release Tools",
     "version": "0.0.1",
-    "publisher": "Robert Brown",
+    "publisher": "robobrown",
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
@@ -16,20 +16,329 @@
     "icons": {
         "default": "images/extension-icon.png"        
     },
+    "repository": {
+      "type": "git",
+      "uri": "https://github.com/robobrown/Cluedin.Build.Tasks"
+    },
+    "content": {
+      "details": {
+        "path": "marketplace.md"
+      },
+      "license": {
+        "path": "license.txt"
+      }
+    },
+    "links": {
+      "repository": {
+        "uri": "https://github.com/robobrown/Cluedin.Build.Tasks"
+      },
+      "issues": {
+        "uri": "https://github.com/robobrown/Cluedin.Build.Tasks/issues"
+      },
+      "support": {
+        "uri": "robobrown@gmail.com"
+      }
+    },
     "files": [
         {
-            "path": "buildandreleasetask"
+            "path": "tasks/deleteRules"
+        },
+        {
+            "path": "tasks/deleteStreams"
+        },
+        {
+            "path": "tasks/exportAllConfig"
+        },
+        {
+            "path": "tasks/exportConnectors"
+        },
+        {
+            "path": "tasks/exportDataSources"
+        },
+        {
+            "path": "tasks/exportEntityTypes"
+        },
+        {
+            "path": "tasks/exportGlossaries"
+        },
+        {
+            "path": "tasks/exportHierarchies"
+        },
+        {
+            "path": "tasks/exportRules"
+        },
+        {
+            "path": "tasks/exportStreams"
+        },
+        {
+            "path": "tasks/exportVocabularies"
+        },
+        {
+            "path": "tasks/importAllConfig"
+        },
+        {
+            "path": "tasks/importConnectors"
+        },
+        {
+            "path": "tasks/importDataSources"
+        },
+        {
+            "path": "tasks/importEntityTypes"
+        },
+        {
+            "path": "tasks/importGlossaries"
+        },
+        {
+            "path": "tasks/importHierarchies"
+        },
+        {
+            "path": "tasks/importRules"
+        },
+        {
+            "path": "tasks/importStreams"
+        },
+        {
+            "path": "tasks/removeEntities"
+        },
+        {
+            "path": "tasks/reprocessAllEntities"
+        },
+        {
+            "path": "tasks/reprocessEntitiesByType"
+        },
+        {
+            "path": "tasks/resyncDatastores"
         }
     ],
     "contributions": [
         {
-            "id": "custom-build-release-task",
+            "id": "cluedin-extension-delete-rules",
             "type": "ms.vss-distributed-task.task",
             "targets": [
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "buildandreleasetask"
+                "name": "tasks/deleteRules"
+            }
+        },
+        {
+            "id": "cluedin-extension-delete-streams",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/deleteStreams"
+            }
+        },
+        {
+            "id": "cluedin-extension-export-all-config",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/exportAllConfig"
+            }
+        },
+        {
+            "id": "cluedin-extension-export-connectors",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/exportConnectors"
+            }
+        },
+        {
+            "id": "cluedin-extension-export-datasoruces",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/exportDataSources"
+            }
+        },
+        {
+            "id": "cluedin-extension-export-entitytypes",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/exportEntityTypes"
+            }
+        },
+        {
+            "id": "cluedin-extension-export-glossaries",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/exportGlossaries"
+            }
+        },
+        {
+            "id": "cluedin-extension-export-hierarchies",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/exportHierarchies"
+            }
+        },
+        {
+            "id": "cluedin-extension-export-rules",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/exportRules"
+            }
+        },
+        {
+            "id": "cluedin-extension-export-streams",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/exportStreams"
+            }
+        },
+        {
+            "id": "cluedin-extension-export-vocabularies",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/exportVocabularies"
+            }
+        },
+        {
+            "id": "cluedin-extension-import-all-config",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/importAllConfig"
+            }
+        },
+        {
+            "id": "cluedin-extension-import-connectors",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/importConnectors"
+            }
+        },
+        {
+            "id": "cluedin-extension-import-datasources",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/importDataSources"
+            }
+        },
+        {
+            "id": "cluedin-extension-import-entitytypes",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/importEntityTypes"
+            }
+        },
+        {
+            "id": "cluedin-extension-import-glossaries",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/importGlossaries"
+            }
+        },
+        {
+            "id": "cluedin-extension-import-hierarchies",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/importHierarchies"
+            }
+        },
+        {
+            "id": "cluedin-extension-import-rules",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/importRules"
+            }
+        },
+        {
+            "id": "cluedin-extension-import-streams",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/importStreams"
+            }
+        },
+        {
+            "id": "cluedin-extension-remove-entities",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/removeEntities"
+            }
+        },
+        {
+            "id": "cluedin-extension-reprocess-all-entities",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/reprocessAllEntities"
+            }
+        },
+        {
+            "id": "cluedin-extension-reprocess-by-entitytype",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/reprocessEntitiesByType"
+            }
+        },
+        {
+            "id": "cluedin-extension-resync-datastores",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/resyncDatastores"
             }
         }
     ]

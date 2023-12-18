@@ -1,6 +1,6 @@
 import utils from "./utils";
 
-async function exportGlossaries(authToken: string, hostname: string, outputPath: string){
+export async function exportGlossaries(authToken: string, hostname: string, outputPath: string){
   const axios = require('axios');
   let data = JSON.stringify({
     query: `query getGlossaries {
@@ -42,9 +42,9 @@ async function exportGlossaries(authToken: string, hostname: string, outputPath:
     for (const glossaryCategory of response.data.data.management.glossaryCategories){
       //HACK, because the cluedin API is not returning the data of the term we have to get the info by ID.
       //Logged with Cluedin Support Ticket number #2192565630
-      const arrayData = [];
+      const arrayData: any[] = [];
       for (var term of glossaryCategory.terms.data) {
-          var fullTerm = await getGlossaryTermById(authToken, hostname, term.id);
+          var fullTerm: any = await getGlossaryTermById(authToken, hostname, term.id);
           arrayData.push(fullTerm);
       }
       
@@ -58,7 +58,7 @@ async function exportGlossaries(authToken: string, hostname: string, outputPath:
   });
 }
 
-async function importGlossaries(authToken: string, hostname: string, sourcePath: string){
+export async function importGlossaries(authToken: string, hostname: string, sourcePath: string){
   const fs = require('fs');
   const directoryPath = sourcePath + 'Glossaries';
 
@@ -351,10 +351,10 @@ async function getGloassaryById(authToken: string, hostname: string, gloassaryCa
        }
        //HACK, because the cluedin API is not returning the data of the term we have to get the info by ID.
        //Logged with Cluedin Support Ticket number #2192565630
-       const arrayData = [];
+       const arrayData: any[] = [];
 
        for (var term of response.data.data.management.glossaryCategory.terms.data){
-         var fullTerm = await getGlossaryTermById(authToken, hostname, term.id);
+         var fullTerm: any = await getGlossaryTermById(authToken, hostname, term.id);
          arrayData.push(fullTerm);
        }
 

@@ -1,6 +1,6 @@
 import utils from "./utils";
 
-async function exportRules(authToken: string, hostname: string, outputPath: string){
+export async function exportRules(authToken: string, hostname: string, outputPath: string){
     var pageNumber = 1;
     var total = 0;
     var count = 0;
@@ -22,7 +22,7 @@ async function exportRules(authToken: string, hostname: string, outputPath: stri
     }
  }
  
- async function importRules(authToken: string, hostname: string, sourcePath: string){
+ export async function importRules(authToken: string, hostname: string, sourcePath: string){
   const fs = require('fs');
   const directoryPath = sourcePath + 'Rules';
 
@@ -289,7 +289,7 @@ async function activateRule(authToken: string, hostname: string, ruleId: string)
   });
 }
 
-async function deleteRulesByName(authToken: string, hostname: string, ruleNames: string){
+export async function deleteRulesByName(authToken: string, hostname: string, ruleNames: string){
   var ruleIds:string[] = [];
 
   if (ruleNames == "*"){

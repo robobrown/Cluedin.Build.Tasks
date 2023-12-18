@@ -1,4 +1,9 @@
-node_modules/
-data/
-*.js
-.taskkey
+**/data/
+**/node_modules/
+**/*Extension*/
+**/*Installer*/
+**/*.taskkey
+**/*.vsix
+cluedin/*.js
+tasks/**/*.js
+**/*.js.map
