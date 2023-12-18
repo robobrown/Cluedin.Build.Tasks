@@ -1,9 +1,9 @@
 {
     "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
-    "id": "97fc4c21-2c09-4c5e-8501-ce5c6e230f29",
-    "name": "CluedInExportGlossariesTask",
-    "friendlyName": "CluedIn Export Glossaries Task",
-    "description": "Task for Exporting Glossaries to Json Files",
+    "id": "cf596565-42c5-4e03-83ce-8a5caacd4dd3",
+    "name": "CluedInImportGlossariesTask",
+    "friendlyName": "CluedIn Import Glossaries Task",
+    "description": "Task for Import CluedIn Glossaries Json Files",
     "helpMarkDown": "",
     "category": "Utility",
     "author": "Robert Brown",
@@ -12,7 +12,7 @@
         "Minor": 1,
         "Patch": 0
     },
-    "instanceNameFormat": "CluedIn Glossaries Exporter",
+    "instanceNameFormat": "CluedIn Glossary Importer",
     "inputs": [
         {
             "name": "cluedinUsername",
@@ -47,12 +47,12 @@
             "helpMarkDown": "Enter the Hostname the CluedIn App Instance"
           },
           {
-            "name": "outputPath",
+            "name": "sourcePath",
             "type": "string",
-            "label": "output path",
+            "label": "Json Source Path",
             "defaultValue": "../../data/",
             "required": true,
-            "helpMarkDown": "Enter the path where to output the data"
+            "helpMarkDown": "Enter the path where to get the json data"
           }
     ],
     "execution": {

@@ -24,6 +24,7 @@ async function importAll(authToken: string, hostname: string, outputPath: string
     await rules.importRules(authToken, hostname, outputPath);
     await streams.importStreams(authToken, hostname, outputPath);
     await datasources.importDataSources(authToken, hostname, outputPath);
+    await glossaries.importGlossaries(authToken, hostname, outputPath);
     console.log("Importing complete");
 }
 
