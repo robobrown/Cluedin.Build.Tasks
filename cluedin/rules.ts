@@ -33,6 +33,7 @@ async function exportRules(authToken: string, hostname: string, outputPath: stri
       } 
 
       for (const file of files) {
+        if (file.endsWith('.json') == false) continue;
         await importRule(authToken, hostname, file.replace('.json', ''), sourcePath);
       }
   });
@@ -71,6 +72,7 @@ async function getRulesByPage(pageNumber: number, authToken: string, hostname: s
           rules(pageNumber: $pageNumber) {
               total
               data {
+                  id
                   name
                   isActive
                   order
@@ -324,6 +326,12 @@ async function deleteRulesByName(authToken: string, hostname: string, ruleNames:
 }
 
 async function deleteRulesById(authToken: string, hostname: string, ruleIds: string[]){
+  for (const ruleId of ruleIds) {
+    await deleteRuleById(authToken, hostname, ruleId);
+  }
+  
+}
+async function deleteRuleById(authToken: string, hostname: string, ruleId: string){
   const axios = require('axios');
   let data = JSON.stringify({
     query: `mutation deleteRules($ruleIds: [ID]) {
@@ -332,7 +340,7 @@ async function deleteRulesById(authToken: string, hostname: string, ruleIds: str
       }
   }`,
     variables: {
-        ruleIds: ruleIds
+        ruleIds: [ruleId]
     }
   });
   

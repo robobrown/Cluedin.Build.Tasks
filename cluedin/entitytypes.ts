@@ -61,7 +61,6 @@ async function exportEntityTypes(authToken: string, hostname: string, outputPath
               continue;
             }
 
-            console.log('Exporting EntityTypes: ' + entityType.displayName);
             utils.saveToDisk(outputPath, "EntityTypes", entityType.displayName, entityType)
        };
 
