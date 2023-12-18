@@ -42,7 +42,7 @@ id
         if (response.data.errors != null && response.data.errors.length > 0){
             throw new Error(response.data.errors[0].message);
         }
-        return response.data;
+        return response.data.data;
     })
     .catch((error: Error) => {
       console.log(error);
@@ -84,7 +84,7 @@ id
       if (response.data.errors != null && response.data.errors.length > 0){
           throw new Error(response.data.errors[0].message);
       }
-      return response.data;
+      return response.data.data;
   })
   .catch((error: Error) => {
     console.log(error);
@@ -112,7 +112,7 @@ async function reprocessAllRules(authToken: string, hostname: string){
   axios.request(config)
   .then((response: any) => {
     // console.log(JSON.stringify(response.data));
-    return response.data;
+    return response.data.data;
   })
   .catch((error: Error) => {
     console.log(error);
@@ -141,7 +141,7 @@ console.log(config.url);
   axios.request(config)
   .then((response: any) => {
     // console.log(JSON.stringify(response.data));
-    return response.data;
+    return response.data.data;
   })
   .catch((error: Error) => {
     console.log(error);
@@ -168,7 +168,7 @@ console.log(config.url);
 
   axios.request(config)
   .then((response: any) => {
-    return response.data;
+    return response.data.data;
   })
   .catch((error: Error) => {
     console.log(error);

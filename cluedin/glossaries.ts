@@ -91,7 +91,11 @@ async function importGloassary(authToken: string, hostname: string, gloassaryNam
       await createGloassaryTerm(authToken, hostname, term, existingItem.id);
       existingItem = await getGloassaryCategoryByName(authToken, hostname, gloassaryName);
     }
-    await updateGloassaryTerm(authToken, hostname, term, existingItem.terms.data.find((x: any) => x.name == term.name));
+
+    var areEqual = utils.isEqual(existingItem, savedItem); 
+    if (!areEqual) {
+      await updateGloassaryTerm(authToken, hostname, term, existingItem.terms.data.find((x: any) => x.name == term.name));
+    }
   } 
 }
 

@@ -8,6 +8,7 @@ import entities from './entities'
 import vocabularies from './vocabularies'
 import hierarchies from './hierarchies'
 import glossaries from './glossaries'
+import entitytypes from './entitytypes'
 
 const mainmodule = {
     auth,
@@ -19,6 +20,7 @@ const mainmodule = {
     entities,
     vocabularies,
     hierarchies,
-    glossaries
+    glossaries,
+    entitytypes
 }
 export = mainmodule

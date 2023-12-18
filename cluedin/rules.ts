@@ -104,7 +104,7 @@ async function getRulesByPage(pageNumber: number, authToken: string, hostname: s
       throw new Error(response.data.errors[0].message);
     }
 
-     return response.data;
+     return response.data.data;
   })
   .catch((error: Error) => {
     console.log(error);
@@ -240,7 +240,7 @@ async function updateRule(authToken: string, hostname: string, savedRule: any, r
       if (response.data.errors != null && response.data.errors.length > 0){
           throw new Error(response.data.errors[0].message);
       }
-      return response.data;
+      return response.data.data;
   })
   .catch((error: Error) => {
     console.log(error);
@@ -281,7 +281,7 @@ async function activateRule(authToken: string, hostname: string, ruleId: string)
       if (response.data.errors != null && response.data.errors.length > 0){
           throw new Error(response.data.errors[0].message);
       }
-      return response.data;
+      return response.data.data;
   })
   .catch((error: Error) => {
     console.log(error);
@@ -353,7 +353,7 @@ async function deleteRulesById(authToken: string, hostname: string, ruleIds: str
       if (response.data.errors != null && response.data.errors.length > 0){
           throw new Error(response.data.errors[0].message);
       }
-      return response.data;
+      return response.data.data;
   })
   .catch((error: Error) => {
     console.log(error);

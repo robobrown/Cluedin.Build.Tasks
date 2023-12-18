@@ -63,12 +63,16 @@ async function getHierarchiesByPage(authToken: string, hostname: string, pageNum
     if (response.data.errors != null && response.data.errors.length > 0){
       throw new Error(response.data.errors[0].message);
     }
-     return response.data;
+     return response.data.data;
   })
   .catch((error: Error) => {
     console.log(error);
   });
 }
 
-export default { exportHierarchies };
+async function importHierarchies(authToken: string, hostname: string, outputPath: string){
+  throw new Error("Not implemented");
+}
+
+export default { exportHierarchies, importHierarchies };
 

@@ -1,5 +1,6 @@
 import utils from "./utils";
 import auth from "./auth";
+import vocabularies from "./vocabularies";
 
   async function exportDataSources(authToken: string, hostname: string, outputPath: string){
     const axios = require('axios');
@@ -103,7 +104,7 @@ import auth from "./auth";
          for (const dataSourceSet of response.data.data.inbound.dataSourceSets.data){
              utils.saveToDisk(outputPath, "DataSourceSets", dataSourceSet.name, dataSourceSet)
          };
-         return response.data;
+         return response.data.data;
     })
     .catch((error: Error) => {
       console.log(error);
@@ -175,8 +176,8 @@ import auth from "./auth";
               }
 
               if (savedDataSet.annotation != null) {
-                  var vocab = await getVocabByName(authToken, hostname, savedDataSet.annotation.vocabulary.vocabularyName);
-                  var vocabKeys = await getVocabKeysForVocabId(authToken, hostname, vocab.vocabularyId);
+                  var vocab = await vocabularies.getBasicVocabularyByName(authToken, hostname, savedDataSet.annotation.vocabulary.vocabularyName);
+                  var vocabKeys = await vocabularies.getVocabKeysForVocabId(authToken, hostname, vocab.vocabularyId);
 
                   var savedMappedFields = savedDataSet.fieldMappings.filter((mapping: any) => mapping.key != "--ignore--");
                   var savedIgnoredFields = savedDataSet.fieldMappings.filter((mapping: any) => mapping.key == "--ignore--").map(selectOriginalField);
@@ -494,104 +495,6 @@ import auth from "./auth";
     });
   }
   
-  async function getVocabByName(authToken: string, hostname: string, vocabularyName: string){
-    const axios = require('axios');
-    let data = JSON.stringify({
-        query: `query getVocabularyByName($name: String!) {
-            management {
-                vocabularies(searchName: $name) {
-                    total
-                    data {
-                        vocabularyId
-                        vocabularyName
-                        keyPrefix
-                        createdAt
-                        createdBy
-                        grouping
-                        isActive
-                        isCluedInCore
-                        isDynamic
-                        isProvider
-                        isVocabularyOwner
-                        providerId
-                        description
-                    }
-                }
-            }
-        }`,
-        variables: {
-            name: vocabularyName
-        }
-    });
-    
-    let config = {
-        method: 'post',
-        maxBodyLength: Infinity,
-        url: 'https://' + hostname + '/graphql',
-        headers: { 
-        'Content-Type': 'application/json', 
-        'Authorization': 'Bearer ' + authToken
-        },
-        data : data
-    };
-
-    return axios.request(config)
-    .then((response: any) => {
-        if (response.data.errors != null && response.data.errors.length > 0){
-            throw new Error(response.data.errors[0].message);
-        }
-        return response.data.data.management.vocabularies.data.find(function(x: any) { return x.vocabularyName == vocabularyName; });
-    })
-    .catch((error: Error) => {
-        console.log(error);
-    });
-  }
-
-  async function getVocabKeysForVocabId(authToken: string, hostname: string, vocabularyId: string){
-    const axios = require('axios');
-    let data = JSON.stringify({
-        query: `query getVocabularyKeysFromVocabularyId($vocabId: ID!) {
-            management {
-                vocabularyKeysFromVocabularyId(id: $vocabId) {
-                    total
-                    data {
-                        displayName
-                        vocabularyKeyId
-                        name
-                        key
-                        vocabularyId
-                    }
-                }
-            }
-        }`,
-        variables: {
-            vocabId: vocabularyId
-        }
-    });
-    
-    let config = {
-        method: 'post',
-        maxBodyLength: Infinity,
-        url: 'https://' + hostname + '/graphql',
-        headers: { 
-        'Content-Type': 'application/json', 
-        'Authorization': 'Bearer ' + authToken
-        },
-        data : data
-    };
-
-    return axios.request(config)
-    .then((response: any) => {
-        if (response.data.errors != null && response.data.errors.length > 0){
-            throw new Error(response.data.errors[0].message);
-        }
-        return response.data.data.management.vocabularyKeysFromVocabularyId.data;
-    })
-    .catch((error: Error) => {
-        console.log(error);
-    });
-  }
-
   async function getDataSourceSetByName(authToken: string, hostname: string, streamName: string){
     const axios = require('axios');
     let data = JSON.stringify({

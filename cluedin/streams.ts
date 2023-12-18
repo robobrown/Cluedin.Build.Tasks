@@ -67,7 +67,7 @@ import utils from "./utils";
           throw new Error(response.data.errors[0].message);
         }
         
-        return response.data;
+        return response.data.data;
      })
      .catch((error: Error) => {
        console.log(error);
@@ -413,7 +413,7 @@ import utils from "./utils";
         if (response.data.errors != null && response.data.errors.length > 0){
             throw new Error(response.data.errors[0].message);
         }
-        return response.data;
+        return response.data.data;
     })
     .catch((error: Error) => {
       console.log(error);
