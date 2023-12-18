@@ -8,7 +8,7 @@ async function exportVocabularies(authToken: string, hostname: string, outputPat
      while (count <= total){
        var result = await getVocabulariesByPage(authToken, hostname, pageNumber);
 
-       for (const vocabulary of result.data.management.vocabularies.data){
+       for (const vocabulary of result.data){
             if (includeCluedInCore == false && vocabulary.isCluedInCore){
               continue;
             }
@@ -16,13 +16,12 @@ async function exportVocabularies(authToken: string, hostname: string, outputPat
               continue;
             }
 
-            console.log('Exporting vocabulary: ' + vocabulary.vocabularyName);
             var vocabInfo = await getVocabularyDetails(authToken, hostname, vocabulary.vocabularyId);
             utils.saveToDisk(outputPath, "Vocabularies", vocabulary.vocabularyName, vocabInfo)
        };
 
-       total = result.data.management.vocabularies.total;
-       count += result.data.management.vocabularies.data.length;
+       total = result.total;
+       count += result.data.length;
        pageNumber = pageNumber + 1;
        if (count == total)
        { 
@@ -69,7 +68,7 @@ async function getVocabulariesByPage(authToken: string, hostname: string, pageNu
     if (response.data.errors != null && response.data.errors.length > 0){
       throw new Error(response.data.errors[0].message);
     }
-     return response.data.data;
+     return response.data.data.management.vocabularies;
   })
   .catch((error: Error) => {
     console.log(error);

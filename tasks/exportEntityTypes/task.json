@@ -57,10 +57,10 @@
         {
           "name": "entityTypeNames",
           "type": "string",
-          "label": "Entoty Type Names",
+          "label": "Entity Type Names",
           "defaultValue": "*",
           "required": true,
-          "helpMarkDown": "Enter a comma selarated list of entity type names to export, * is currently not supported"
+          "helpMarkDown": "Enter a comma separated list of entity type names to export, * exports non Standard Types"
         }
   ],
   "execution": {

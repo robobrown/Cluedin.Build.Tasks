@@ -8,12 +8,12 @@ async function exportRules(authToken: string, hostname: string, outputPath: stri
      while (count <= total){
        var result = await getRulesByPage(pageNumber, authToken, hostname);
 
-       for (const rule of result.data.management.rules.data){
+       for (const rule of result.data){
              utils.saveToDisk(outputPath, "Rules", rule.name, rule)
        };
 
-       total = result.data.management.rules.total;
-       count += result.data.management.rules.data.length;
+       total = result.total;
+       count += result.length;
        pageNumber = pageNumber + 1;
        if (count == total)
        { 
@@ -68,7 +68,7 @@ async function getRulesByPage(pageNumber: number, authToken: string, hostname: s
   let data = JSON.stringify({
     query: `query getRules($pageNumber: Int) {
       management {
-          rules(pageNumber: $pageNumber, pageSize: 20) {
+          rules(pageNumber: $pageNumber) {
               total
               data {
                   name
@@ -103,8 +103,8 @@ async function getRulesByPage(pageNumber: number, authToken: string, hostname: s
     if (response.data.errors != null && response.data.errors.length > 0){
       throw new Error(response.data.errors[0].message);
     }
-
-     return response.data.data;
+    console.log(response.data.data.management.rules);
+     return response.data.data.management.rules;
   })
   .catch((error: Error) => {
     console.log(error);
@@ -299,12 +299,12 @@ async function deleteRulesByName(authToken: string, hostname: string, ruleNames:
      while (count <= total){
        var result = await getRulesByPage(pageNumber, authToken, hostname);
 
-       for (const rule of result.data.management.rules.data){
+       for (const rule of result.data){
          ruleIds.push(rule.id);
        };
 
-       total = result.data.management.rules.total;
-       count += result.data.management.rules.data.length;
+       total = result.total;
+       count += result.data.length;
        pageNumber = pageNumber + 1;
        if (count == total)
        { 

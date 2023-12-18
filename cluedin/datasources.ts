@@ -104,7 +104,7 @@ import vocabularies from "./vocabularies";
          for (const dataSourceSet of response.data.data.inbound.dataSourceSets.data){
              utils.saveToDisk(outputPath, "DataSourceSets", dataSourceSet.name, dataSourceSet)
          };
-         return response.data.data;
+         return response.data.data.inbound.dataSourceSets;
     })
     .catch((error: Error) => {
       console.log(error);

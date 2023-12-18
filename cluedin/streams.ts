@@ -8,12 +8,12 @@ import utils from "./utils";
      while (count <= total){
       var result = await getStreamsByPage(pageNumber, authToken, hostname);
        
-      for (const stream of result.data.consume.streams.data){
+      for (const stream of result.data){
         utils.saveToDisk(outputPath, "Streams", stream.name, stream)
       };
 
-      total = result.data.consume.streams.total;
-      count += result.data.consume.streams.data.length;
+      total = result.total;
+      count += result.data.length;
       pageNumber = pageNumber + 1;
       if (count == total)
       { 
@@ -27,7 +27,7 @@ import utils from "./utils";
      let data = JSON.stringify({
        query: `query getStreams($pageNumber: Int) {
         consume {
-            streams(pageNumber: $pageNumber, pageSize: 20) {
+            streams(pageNumber: $pageNumber) {
                 total
                 data {
                     name
@@ -67,7 +67,7 @@ import utils from "./utils";
           throw new Error(response.data.errors[0].message);
         }
         
-        return response.data.data;
+        return response.data.data.consume.streams;
      })
      .catch((error: Error) => {
        console.log(error);
@@ -359,12 +359,12 @@ import utils from "./utils";
       while (count <= total){
         var result = await getStreamsByPage(pageNumber, authToken, hostname);
 
-        for (const stream of result.data.management.rules.data){
+        for (const stream of result.data){
           streamIds.push(stream.id);
         };
 
-        total = result.data.management.rules.total;
-        count += result.data.management.rules.data.length;
+        total = result.total;
+        count += result.data.length;
         pageNumber = pageNumber + 1;
         if (count == total)
         { 

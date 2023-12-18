@@ -16,7 +16,7 @@ async function exportAll(authToken: string, hostname: string, outputPath: string
     await vocabularies.exportVocabularies(authToken, hostname, outputPath, "*", false);
     await hierarchies.exportHierarchies(authToken, hostname, outputPath);
     await glossaries.exportGlossaries(authToken, hostname, outputPath);
-    // await entitytypes.exportEntityTypes(authToken, hostname, outputPath, "*");
+    await entitytypes.exportEntityTypes(authToken, hostname, outputPath, "*");
     console.log("Export complete");
 }
 

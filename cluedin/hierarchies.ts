@@ -8,12 +8,12 @@ async function exportHierarchies(authToken: string, hostname: string, outputPath
      while (count <= total){
        var result = await getHierarchiesByPage(authToken, hostname, pageNumber);
 
-       for (const hierarchie of result.data.management.hierarchies.data){
+       for (const hierarchie of result.data){
             utils.saveToDisk(outputPath, "Hierarchies", hierarchie.hierarchieName, hierarchie)
        };
 
-       total = result.data.management.hierarchies.total;
-       count += result.data.management.hierarchies.data.length;
+       total = result.total;
+       count += result.data.length;
        pageNumber = pageNumber + 1;
        if (count == total)
        { 
@@ -63,7 +63,7 @@ async function getHierarchiesByPage(authToken: string, hostname: string, pageNum
     if (response.data.errors != null && response.data.errors.length > 0){
       throw new Error(response.data.errors[0].message);
     }
-     return response.data.data;
+     return response.data.data.management.hierarchies;
   })
   .catch((error: Error) => {
     console.log(error);
