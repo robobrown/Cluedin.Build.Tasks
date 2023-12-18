@@ -13,7 +13,7 @@ async function exportRules(authToken: string, hostname: string, outputPath: stri
        };
 
        total = result.total;
-       count += result.length;
+       count += result.data.length;
        pageNumber = pageNumber + 1;
        if (count == total)
        { 
@@ -103,8 +103,7 @@ async function getRulesByPage(pageNumber: number, authToken: string, hostname: s
     if (response.data.errors != null && response.data.errors.length > 0){
       throw new Error(response.data.errors[0].message);
     }
-    console.log(response.data.data.management.rules);
-     return response.data.data.management.rules;
+    return response.data.data.management.rules;
   })
   .catch((error: Error) => {
     console.log(error);
