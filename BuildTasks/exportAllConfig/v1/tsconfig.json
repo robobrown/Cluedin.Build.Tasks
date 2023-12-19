@@ -1,0 +1,24 @@
+{
+    "extends": "../../tsconfig.v1.json",
+    "compilerOptions": {
+        // "outDir": "./", 
+        // "sourceRoot": "./"
+    },
+    "files": [
+        "index.ts"
+        // ,
+        // "../../common/auth.ts",
+        // "../../common/cluedin.ts",
+        // "../../common/connector.ts",
+        // "../../common/datasources.ts",
+        // "../../common/entities.ts",
+        // "../../common/entitytypes.ts",
+        // "../../common/glossaries.ts",
+        // "../../common/hierarchies.ts",
+        // "../../common/module.ts",
+        // "../../common/rules.ts",
+        // "../../common/streams.ts",
+        // "../../common/utils.ts",
+        // "../../common/vocabularies.ts"
+    ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "cluedin.build.tasks.delete.rules",
+  "version": "1.0.0",
+  "description": "CluedIn Delete Rules Build Task",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/robobrown/Cluedin.Build.Tasks.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.2",
+    "azure-pipelines-task-lib": "^4.7.0",
+    "qs": "^6.11.2"
+  }
+}

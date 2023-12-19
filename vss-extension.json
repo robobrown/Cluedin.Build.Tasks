@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "build-release-task",
     "name": "CluedIn Build and Release Tools",
-    "version": "0.0.1",
+    "version": "0.0.6",
     "publisher": "robobrown",
     "targets": [
         {
@@ -14,7 +14,7 @@
         "Azure Pipelines"
     ],
     "icons": {
-        "default": "images/extension-icon.png"        
+        "default": "extension-icon.png"        
     },
     "repository": {
       "type": "git",
@@ -41,73 +41,73 @@
     },
     "files": [
         {
-            "path": "tasks/deleteRules"
+            "path": "BuildTasks/deleteRules"
         },
         {
-            "path": "tasks/deleteStreams"
+            "path": "BuildTasks/deleteStreams"
         },
         {
-            "path": "tasks/exportAllConfig"
+            "path": "BuildTasks/exportAllConfig"
         },
         {
-            "path": "tasks/exportConnectors"
+            "path": "BuildTasks/exportConnectors"
         },
         {
-            "path": "tasks/exportDataSources"
+            "path": "BuildTasks/exportDataSources"
         },
         {
-            "path": "tasks/exportEntityTypes"
+            "path": "BuildTasks/exportEntityTypes"
         },
         {
-            "path": "tasks/exportGlossaries"
+            "path": "BuildTasks/exportGlossaries"
         },
         {
-            "path": "tasks/exportHierarchies"
+            "path": "BuildTasks/exportHierarchies"
         },
         {
-            "path": "tasks/exportRules"
+            "path": "BuildTasks/exportRules"
         },
         {
-            "path": "tasks/exportStreams"
+            "path": "BuildTasks/exportStreams"
         },
         {
-            "path": "tasks/exportVocabularies"
+            "path": "BuildTasks/exportVocabularies"
         },
         {
-            "path": "tasks/importAllConfig"
+            "path": "BuildTasks/importAllConfig"
         },
         {
-            "path": "tasks/importConnectors"
+            "path": "BuildTasks/importConnectors"
         },
         {
-            "path": "tasks/importDataSources"
+            "path": "BuildTasks/importDataSources"
         },
         {
-            "path": "tasks/importEntityTypes"
+            "path": "BuildTasks/importEntityTypes"
         },
         {
-            "path": "tasks/importGlossaries"
+            "path": "BuildTasks/importGlossaries"
         },
         {
-            "path": "tasks/importHierarchies"
+            "path": "BuildTasks/importHierarchies"
         },
         {
-            "path": "tasks/importRules"
+            "path": "BuildTasks/importRules"
         },
         {
-            "path": "tasks/importStreams"
+            "path": "BuildTasks/importStreams"
         },
         {
-            "path": "tasks/removeEntities"
+            "path": "BuildTasks/removeEntities"
         },
         {
-            "path": "tasks/reprocessAllEntities"
+            "path": "BuildTasks/reprocessAllEntities"
         },
         {
-            "path": "tasks/reprocessEntitiesByType"
+            "path": "BuildTasks/reprocessEntitiesByType"
         },
         {
-            "path": "tasks/resyncDatastores"
+            "path": "BuildTasks/resyncDatastores"
         }
     ],
     "contributions": [
@@ -118,7 +118,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "tasks/deleteRules"
+                "name": "BuildTasks/deleteRules"
             }
         },
         {
@@ -128,7 +128,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "tasks/deleteStreams"
+                "name": "BuildTasks/deleteStreams"
             }
         },
         {
@@ -138,7 +138,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "tasks/exportAllConfig"
+                "name": "BuildTasks/exportAllConfig"
             }
         },
         {
@@ -148,7 +148,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "tasks/exportConnectors"
+                "name": "BuildTasks/exportConnectors"
             }
         },
         {
@@ -158,7 +158,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "tasks/exportDataSources"
+                "name": "BuildTasks/exportDataSources"
             }
         },
         {
@@ -168,7 +168,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "tasks/exportEntityTypes"
+                "name": "BuildTasks/exportEntityTypes"
             }
         },
         {
@@ -178,7 +178,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "tasks/exportGlossaries"
+                "name": "BuildTasks/exportGlossaries"
             }
         },
         {
@@ -188,7 +188,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "tasks/exportHierarchies"
+                "name": "BuildTasks/exportHierarchies"
             }
         },
         {
@@ -198,7 +198,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "tasks/exportRules"
+                "name": "BuildTasks/exportRules"
             }
         },
         {
@@ -208,7 +208,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "tasks/exportStreams"
+                "name": "BuildTasks/exportStreams"
             }
         },
         {
@@ -218,7 +218,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "tasks/exportVocabularies"
+                "name": "BuildTasks/exportVocabularies"
             }
         },
         {
@@ -228,7 +228,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "tasks/importAllConfig"
+                "name": "BuildTasks/importAllConfig"
             }
         },
         {
@@ -238,7 +238,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "tasks/importConnectors"
+                "name": "BuildTasks/importConnectors"
             }
         },
         {
@@ -248,7 +248,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "tasks/importDataSources"
+                "name": "BuildTasks/importDataSources"
             }
         },
         {
@@ -258,7 +258,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "tasks/importEntityTypes"
+                "name": "BuildTasks/importEntityTypes"
             }
         },
         {
@@ -268,7 +268,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "tasks/importGlossaries"
+                "name": "BuildTasks/importGlossaries"
             }
         },
         {
@@ -278,7 +278,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "tasks/importHierarchies"
+                "name": "BuildTasks/importHierarchies"
             }
         },
         {
@@ -288,7 +288,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "tasks/importRules"
+                "name": "BuildTasks/importRules"
             }
         },
         {
@@ -298,7 +298,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "tasks/importStreams"
+                "name": "BuildTasks/importStreams"
             }
         },
         {
@@ -308,7 +308,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "tasks/removeEntities"
+                "name": "BuildTasks/removeEntities"
             }
         },
         {
@@ -318,7 +318,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "tasks/reprocessAllEntities"
+                "name": "BuildTasks/reprocessAllEntities"
             }
         },
         {
@@ -328,7 +328,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "tasks/reprocessEntitiesByType"
+                "name": "BuildTasks/reprocessEntitiesByType"
             }
         },
         {
@@ -338,7 +338,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "tasks/resyncDatastores"
+                "name": "BuildTasks/resyncDatastores"
             }
         }
     ]

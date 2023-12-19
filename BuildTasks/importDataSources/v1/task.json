@@ -1,0 +1,75 @@
+{
+    "id": "a386e04a-9e79-4376-89c4-647847eaa26d",
+    "name": "CluedInImportDataSources",
+    "friendlyName": "CluedIn Data Sources",
+    "description": "Task for Importing Data Sources from Json Files",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "author": "Robert Brown",
+    "version": {
+        "Major": 1,
+        "Minor": 2,
+        "Patch": 0
+    },
+    "visibility": [
+      "Build",
+      "Release"
+    ],
+    "demands": [
+      "npm"
+    ],
+    "minimumAgentVersion": "1.83.0",
+    "instanceNameFormat": "Cluedin Import Data Sources: $(publisherId).$(extensionId)",
+    "inputs": [
+        {
+            "name": "cluedinUsername",
+            "type": "string",
+            "label": "CluedIn Username",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the username used to access the CluedIn App Isntance"
+          },
+          {
+            "name": "cluedinPassword",
+            "type": "string",
+            "label": "CluedIn Password",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the username used to access the CluedIn App Isntance"
+          },
+          {
+            "name": "cluedinClientId",
+            "type": "string",
+            "label": "CluedIn ClientId",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the ClientId of the CluedIn App"
+          },
+          {
+            "name": "cluedinHostname",
+            "type": "string",
+            "label": "CluedIn Hostname",
+            "defaultValue": "app-oranization.yourdomain.com",
+            "required": true,
+            "helpMarkDown": "Enter the Hostname the CluedIn App Instance"
+          },
+          {
+            "name": "sourcePath",
+            "type": "string",
+            "label": "Json Source Path",
+            "defaultValue": "../../data/",
+            "required": true,
+            "helpMarkDown": "Enter the path where to get the json data"
+          }
+    ],
+    "execution": {
+      "Node10": {
+        "target": "index.js",
+        "argumentFormat": ""
+      },
+      "Node16": {
+        "target": "index.js",
+        "argumentFormat": ""
+      }
+    }
+    }

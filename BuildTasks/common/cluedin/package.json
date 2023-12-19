@@ -1,0 +1,11 @@
+{
+  "name": "cluedin.common",
+  "version": "1.0.0",
+  "description": "Collection of common functions used by the CluedIn tasks",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.2",
+    "qs": "^6.11.2"
+  }
+}
