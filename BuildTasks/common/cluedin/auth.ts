@@ -1,7 +1,8 @@
 export async function getToken(username: string, password: string, client_id: string, cluedinHostname: string){
   const axios = require('axios');
-  
-  const data = JSON.stringify({
+  const qs = require('qs');
+
+  const data = qs.stringify({
   'username': username,
   'password': password,
   'client_id': client_id,

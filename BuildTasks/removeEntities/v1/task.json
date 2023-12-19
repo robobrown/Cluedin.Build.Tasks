@@ -8,8 +8,8 @@
     "author": "Robert Brown",
     "version": {
         "Major": 1,
-        "Minor": 2,
-        "Patch": 0
+        "Minor": 0,
+        "Patch": 1
     },
     "visibility": [
       "Build",
@@ -79,12 +79,16 @@
           }
     ],
     "execution": {
+      "Node": {
+        "target": "removeEntities/v1/index.js",
+        "argumentFormat": ""
+      },
       "Node10": {
-        "target": "index.js",
+        "target": "removeEntities/v1/index.js",
         "argumentFormat": ""
       },
       "Node16": {
-        "target": "index.js",
+        "target": "removeEntities/v1/index.js",
         "argumentFormat": ""
       }
     }
