@@ -11,18 +11,18 @@
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   },
   "files": [
-    "./common/auth.ts",
-    "./common/cluedin.ts",
-    "./common/connector.ts",
-    "./common/datasources.ts",
-    "./common/entities.ts",
-    "./common/entitytypes.ts",
-    "./common/glossaries.ts",
-    "./common/hierarchies.ts",
-    "./common/module.ts",
-    "./common/rules.ts",
-    "./common/streams.ts",
-    "./common/utils.ts",
-    "./common/vocabularies.ts"
+    "./common/cluedin/auth.ts",
+    "./common/cluedin/cluedin.ts",
+    "./common/cluedin/connector.ts",
+    "./common/cluedin/datasources.ts",
+    "./common/cluedin/entities.ts",
+    "./common/cluedin/entitytypes.ts",
+    "./common/cluedin/glossaries.ts",
+    "./common/cluedin/hierarchies.ts",
+    "./common/cluedin/module.ts",
+    "./common/cluedin/rules.ts",
+    "./common/cluedin/streams.ts",
+    "./common/cluedin/utils.ts",
+    "./common/cluedin/vocabularies.ts"
   ],
 }

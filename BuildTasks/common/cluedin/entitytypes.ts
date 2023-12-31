@@ -1,4 +1,5 @@
 import utils from "./utils";
+import pagetemplate from './pagetemplate'
 
 export async function exportEntityTypes(authToken: string, hostname: string, outputPath: string, entityTypeNames: string){
   if (entityTypeNames != null && entityTypeNames != "*"){
@@ -96,7 +97,6 @@ async function getEntityTypeByName(authToken: string, hostname: string, entityNa
                     icon
                     id
                     layoutConfiguration
-                    pageTemplateId
                     path
                     route
                     template
@@ -104,7 +104,6 @@ async function getEntityTypeByName(authToken: string, hostname: string, entityNa
                     pageTemplate {
                         displayName
                         name
-                        pageTemplateId
                     }
                 }
                 total
@@ -145,40 +144,37 @@ async function getEntityTypeByName(authToken: string, hostname: string, entityNa
 }
 
 export async function importEntityTypes(authToken: string, hostname: string, sourcePath: string) {
-  const fs = require('fs');
+  const fs = require('fs/promises');
   const directoryPath = sourcePath + 'EntityTypes';
 
-  fs.readdir(directoryPath, async function (err: string, files: string[]) {
-      //handling error
-      if (err) {
-          return console.log('Unable to scan EntityTypes directory: ' + err);
-      } 
-    
-      for (const file of files) {
-        await importEntityTypeConfiguration(authToken, hostname, file.replace('.json', ''), sourcePath);
-      }
-  });
+  const files = await fs.readdir(directoryPath);
+  for (const file of files) {
+    if (file.endsWith('.json') == false) continue;
+    await importEntityTypeConfiguration(authToken, hostname, file.replace('.json', ''), sourcePath);
+  }
 }
 
 async function importEntityTypeConfiguration(authToken: string, hostname: string, entityTypeName: string, sourcePath: string){
-  console.log('Importing Entity Type Configuration ' + entityTypeName);
+  console.log('Importing EntityType ' + entityTypeName);
   let existingItem = await getEntityTypeByName(authToken, hostname, entityTypeName);
   const savedItem = utils.readFile(sourcePath + 'EntityTypes/' + entityTypeName + '.json');
 
+  let pageTemplate = await pagetemplate.getPageTemplateByName(authToken, hostname, savedItem.pageTemplate.name);
+
   if (existingItem == null || existingItem.id == null) {
       console.log('Creating Entity type Configuration');
-      await createEntityTypeConfiguration(authToken, hostname, savedItem);
+      await createEntityTypeConfiguration(authToken, hostname, savedItem, pageTemplate.pageTemplateId);
       existingItem = await getEntityTypeByName(authToken, hostname, entityTypeName);
   }
 
   const areEqual = utils.isEqual(existingItem, savedItem); 
   if (!areEqual) {
     console.log('Updating Entity Type Configuration ' + savedItem.displayName);
-    await updateEntityTypeConfiguration(authToken, hostname, savedItem, existingItem.id);
+    await updateEntityTypeConfiguration(authToken, hostname, savedItem, existingItem.id, pageTemplate.pageTemplateId);
   }
 }
 
-async function createEntityTypeConfiguration(authToken: string, hostname: string, entitytype: any){
+async function createEntityTypeConfiguration(authToken: string, hostname: string, entitytype: any, pageTemplateId: string){
   const axios = require('axios');
   const data = JSON.stringify({
     query: `mutation saveEntityTypeConfiguration(
@@ -202,7 +198,7 @@ async function createEntityTypeConfiguration(authToken: string, hostname: string
             "type": entitytype.type,
             "template": entitytype.template,
             "layoutConfiguration": entitytype.layoutConfiguration,
-            "pageTemplateId": entitytype.pageTemplateId,
+            "pageTemplateId": pageTemplateId,
             "active": entitytype.active
         }
     }
@@ -231,7 +227,7 @@ async function createEntityTypeConfiguration(authToken: string, hostname: string
   });
 }
 
-async function updateEntityTypeConfiguration(authToken: string, hostname: string, savedEntityTypeConfiguration: any, entitytypeConfigurationId: string){
+async function updateEntityTypeConfiguration(authToken: string, hostname: string, savedEntityTypeConfiguration: any, entitytypeConfigurationId: string, pageTemplateId: string){
   const axios = require('axios');
   const data = JSON.stringify({
     query: `mutation saveEntityTypeConfiguration(
@@ -256,7 +252,7 @@ async function updateEntityTypeConfiguration(authToken: string, hostname: string
             "type": savedEntityTypeConfiguration.type,
             "template": savedEntityTypeConfiguration.template,
             "layoutConfiguration": savedEntityTypeConfiguration.layoutConfiguration,
-            "pageTemplateId": savedEntityTypeConfiguration.pageTemplateId,
+            "pageTemplateId": pageTemplateId,
             "active": savedEntityTypeConfiguration.active
         }
     }
@@ -304,7 +300,6 @@ async function getEntityTypesByPage(authToken: string, hostname: string, pageNum
                   icon
                   id
                   layoutConfiguration
-                  pageTemplateId
                   path
                   route
                   template
@@ -312,7 +307,6 @@ async function getEntityTypesByPage(authToken: string, hostname: string, pageNum
                   pageTemplate {
                       displayName
                       name
-                      pageTemplateId
                   }
               }
               total

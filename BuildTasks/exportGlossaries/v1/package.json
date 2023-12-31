@@ -1,6 +1,6 @@
 {
   "name": "cluedin.build.tasks.export.glossaries",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "CluedIn Export Glossaries Build Task",
   "repository": {
     "type": "git",

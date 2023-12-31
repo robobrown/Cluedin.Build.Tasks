@@ -9,6 +9,7 @@ import vocabularies from './vocabularies'
 import hierarchies from './hierarchies'
 import glossaries from './glossaries'
 import entitytypes from './entitytypes'
+import pagetemplate from './pagetemplate'
 
 const mainmodule = {
     auth,
@@ -21,6 +22,7 @@ const mainmodule = {
     vocabularies,
     hierarchies,
     glossaries,
-    entitytypes
+    entitytypes,
+    pagetemplate
 }
 export = mainmodule

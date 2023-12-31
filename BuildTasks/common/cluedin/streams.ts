@@ -75,22 +75,18 @@ export async function exportStreams(authToken: string, hostname: string, outputP
   }
   
   export async function importStreams(authToken: string, hostname: string, sourcePath: string){
-    const fs = require('fs');
+    const fs = require('fs/promises');
     const directoryPath = sourcePath + 'Streams';
-
-    fs.readdir(directoryPath, async function (err: string, files: string[]) {
-        //handling error
-        if (err) {
-            return console.log('Unable to scan Streams directory: ' + err);
-        } 
-      
-        for (const file of files) {
-          await importStream(authToken, hostname, file.replace('.json', ''), sourcePath);
-        }
-    });
+  
+    const files = await fs.readdir(directoryPath);
+    for (const file of files) {
+      if (file.endsWith('.json') == false) continue;
+      await importStream(authToken, hostname, file.replace('.json', ''), sourcePath);
+    }
   }
 
   async function importStream(authToken: string, hostname: string, streamName: string, sourcePath: string){
+    console.log('Importing Stream ' + streamName);
     let existingStream = await getStreamByName(authToken, hostname, streamName);
     const savedStream = utils.readFile(sourcePath + 'Streams/' + streamName + '.json');
 
@@ -104,7 +100,7 @@ export async function exportStreams(authToken: string, hostname: string, outputP
     if (!areEqual) {
       console.log('Updating Stream ' + existingStream.id);
       await updateStream(authToken, hostname, savedStream, existingStream.id);
-      await setupConnectorStream(authToken, hostname, savedStream, existingStream.id);
+      await setupConnectorStream(authToken, hostname, savedStream, existingStream.id, existingStream.connectorProviderDefinitionId);
       if (savedStream.isActive)
       {
           await activateStream(authToken, hostname, existingStream.id);
@@ -250,7 +246,7 @@ export async function exportStreams(authToken: string, hostname: string, outputP
     });
   }
 
-  async function setupConnectorStream(authToken: string, hostname: string, savedStream: any, streamId: string){
+  async function setupConnectorStream(authToken: string, hostname: string, savedStream: any, streamId: string, connectorProviderDefinitionId: string){
     const axios = require('axios');
     const dataTypes = savedStream.mappingConfiguration.map(mapDataTypes);
               
@@ -270,7 +266,7 @@ export async function exportStreams(authToken: string, hostname: string, outputP
       variables: {
         streamId: streamId,
         exportConfiguration: {
-          connectorProviderDefinitionId: savedStream.connectorProviderDefinitionId,
+          connectorProviderDefinitionId: connectorProviderDefinitionId,
           containerName: savedStream.containerName,
           mode: savedStream.mode,
           exportOutgoingEdges: savedStream.exportOutgoingEdges,

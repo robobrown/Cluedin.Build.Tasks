@@ -16,13 +16,11 @@ import vocabularies from "./vocabularies";
                    dataSources {
                        type
                        name
-                       connectorConfigurationId
                        dataSets {
                            name
                            configuration
                            annotation {
                                id
-                               name
                                entityType
                                originEntityCodeKey
                                origin
@@ -112,23 +110,19 @@ import vocabularies from "./vocabularies";
   }
  
   export async function importDataSources(authToken: string, hostname: string, sourcePath: string){
-    const fs = require('fs');
+    const fs = require('fs/promises');
     const directoryPath = sourcePath + 'DataSourceSets';
     const userInfo = await auth.getUserInfo(authToken, hostname);
-
-    fs.readdir(directoryPath, async function (err: string, files: string[]) {
-        //handling error
-        if (err) {
-            return console.log('Unable to scan DataSourceSets directory: ' + err);
-        } 
-          
-        for (const file of files) {
-          await importDataSourceSet(authToken, hostname, userInfo.id, file.replace('.json', ''), sourcePath);
-        }
-    });
+  
+    const files = await fs.readdir(directoryPath);
+    for (const file of files) {
+      if (file.endsWith('.json') == false) continue;
+      await importDataSourceSet(authToken, hostname, userInfo.id, file.replace('.json', ''), sourcePath);
+    }
   }
 
   async function importDataSourceSet(authToken: string, hostname: string, userId: string, datasourceSetName: string, sourcePath: string){
+    console.log('Importing DataSourceSet ' + datasourceSetName);
     let existingDataSourceSet = await getDataSourceSetByName(authToken, hostname, datasourceSetName);
     const savedDataSourceSet = utils.readFile(sourcePath + 'DataSourceSets/' + datasourceSetName + '.json');
 
@@ -140,8 +134,6 @@ import vocabularies from "./vocabularies";
 
     const areEqual = utils.isEqual(existingDataSourceSet, savedDataSourceSet); 
     if (!areEqual) {
-        console.log(existingDataSourceSet.name + ' is not equal to ' + savedDataSourceSet.name);
-
         for (const savedDataSource of savedDataSourceSet.dataSources){
           let dataSourceId: string;
           let existingDataSource = existingDataSourceSet.dataSources.find(function(x: any) { return x.name == savedDataSource.name; });
@@ -161,45 +153,49 @@ import vocabularies from "./vocabularies";
           for (const savedDataSet of savedDataSource.dataSets){
               let dataSetId: string;
               let existingDataSet = existingDataSource.dataSets.find(function(x: any) { return x.name == savedDataSet.name; });
-              if (existingDataSet == null || existingDataSet.id == null) {
-                  const createdDataSet = await createDataSet(authToken, hostname, userId, savedDataSet, dataSourceId);
-                  dataSetId = createdDataSet.id;
-                  await createManualAnnotation(authToken, hostname, savedDataSet, createdDataSet);
-              
-                  existingDataSourceSet = await getDataSourceSetByName(authToken, hostname, savedDataSourceSet.name);
+              const dataSetsAreEqual = utils.isEqual(existingDataSet, savedDataSet); 
+              if (!dataSetsAreEqual) {
+                if (existingDataSet == null || existingDataSet.id == null) {
+                    console.log('Creating DataSet');
+                    const createdDataSet = await createDataSet(authToken, hostname, userId, savedDataSet, dataSourceId);
+                    dataSetId = createdDataSet.id;
+                    await createManualAnnotation(authToken, hostname, savedDataSet, createdDataSet);
+                
+                    existingDataSourceSet = await getDataSourceSetByName(authToken, hostname, savedDataSourceSet.name);
 
-                  existingDataSource = existingDataSourceSet.dataSources.find(function(x: any) { return x.name == savedDataSource.name; });
-                  existingDataSet = existingDataSource.dataSets.find(function(x: any) { return x.name == savedDataSet.name; });
-              } 
-              else {
-                  dataSetId = existingDataSource.dataSets.find(function(x: any) { return x.name == savedDataSet.name; }).id;
-              }
+                    existingDataSource = existingDataSourceSet.dataSources.find(function(x: any) { return x.name == savedDataSource.name; });
+                    existingDataSet = existingDataSource.dataSets.find(function(x: any) { return x.name == savedDataSet.name; });
+                } 
+                else {
+                    dataSetId = existingDataSource.dataSets.find(function(x: any) { return x.name == savedDataSet.name; }).id;
+                }
+        
+                if (savedDataSet.annotation != null) {
+                  const vocab = await vocabularies.getBasicVocabularyByName(authToken, hostname, savedDataSet.annotation.vocabulary.vocabularyName);
+                  const vocabKeys = await vocabularies.getVocabKeysForVocabId(authToken, hostname, vocab.vocabularyId);
 
-              if (savedDataSet.annotation != null) {
-                const vocab = await vocabularies.getBasicVocabularyByName(authToken, hostname, savedDataSet.annotation.vocabulary.vocabularyName);
-                const vocabKeys = await vocabularies.getVocabKeysForVocabId(authToken, hostname, vocab.vocabularyId);
+                  const savedMappedFields = savedDataSet.fieldMappings.filter((mapping: any) => mapping.key != "--ignore--");
+                  const savedIgnoredFields = savedDataSet.fieldMappings.filter((mapping: any) => mapping.key == "--ignore--").map(selectOriginalField);
+                  const existingMappedFields = existingDataSet.fieldMappings.filter((mapping: any) => mapping.key != "--ignore--");
+                  const existingIgnoredFields = existingDataSet.fieldMappings.filter((mapping: any) => mapping.key == "--ignore--").map(selectOriginalField);
 
-                const savedMappedFields = savedDataSet.fieldMappings.filter((mapping: any) => mapping.key != "--ignore--");
-                const savedIgnoredFields = savedDataSet.fieldMappings.filter((mapping: any) => mapping.key == "--ignore--").map(selectOriginalField);
-                const existingMappedFields = existingDataSet.fieldMappings.filter((mapping: any) => mapping.key != "--ignore--");
-                const existingIgnoredFields = existingDataSet.fieldMappings.filter((mapping: any) => mapping.key == "--ignore--").map(selectOriginalField);
-
-                const ignoredFields = savedIgnoredFields.filter((mapping: string) => !existingIgnoredFields.includes(mapping));
-                  
-                  if (ignoredFields.length > 0)
-                  {
-                      await addIgnoredFieldsToDataSet(authToken, hostname, dataSetId, ignoredFields);
-                  }
-                  for (const fieldMapping of savedMappedFields){
-                      //Add the field if it doesn't exist
-                      const match = existingMappedFields.find(function(x: any) { return x.originalField == fieldMapping.originalField && x.key == fieldMapping.key; });
-                      
-                      if (match == null)
-                      {
-                        const vocabKey = vocabKeys.find(function(x: any) { return x.key == fieldMapping.key; });
-                        await addPropertyMappingToCluedMappingConfiguration(authToken, hostname, fieldMapping.originalField, vocabKey.vocabularyId, vocabKey.vocabularyKeyId, dataSetId);
-                      }
-                  }
+                  const ignoredFields = savedIgnoredFields.filter((mapping: string) => !existingIgnoredFields.includes(mapping));
+                    
+                    if (ignoredFields.length > 0)
+                    {
+                        await addIgnoredFieldsToDataSet(authToken, hostname, dataSetId, ignoredFields);
+                    }
+                    for (const fieldMapping of savedMappedFields){
+                        //Add the field if it doesn't exist
+                        const match = existingMappedFields.find(function(x: any) { return x.originalField == fieldMapping.originalField && x.key == fieldMapping.key; });
+                        
+                        if (match == null)
+                        {
+                          const vocabKey = vocabKeys.find(function(x: any) { return x.key == fieldMapping.key; });
+                          await addPropertyMappingToCluedMappingConfiguration(authToken, hostname, fieldMapping.originalField, vocabKey.vocabularyId, vocabKey.vocabularyKeyId, dataSetId);
+                        }
+                    }
+                }   
               }
           }
       }
@@ -510,7 +506,6 @@ import vocabularies from "./vocabularies";
                             id
                             type
                             name
-                            connectorConfigurationId
                             createdAt
                             updatedAt
                             dataSets {
@@ -521,7 +516,6 @@ import vocabularies from "./vocabularies";
                                 updatedAt
                                 annotation {
                                     id
-                                    name
                                     entityType
                                     originEntityCodeKey
                                     origin

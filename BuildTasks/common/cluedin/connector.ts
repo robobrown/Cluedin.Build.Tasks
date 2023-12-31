@@ -15,7 +15,6 @@ export async function exportConnectors(authToken: string, hostname: string, outp
                     autoSync
                     codeName
                     streamModes
-                    entityId
                     failingAuthentication
                     providerId
                     source
@@ -57,22 +56,18 @@ export async function exportConnectors(authToken: string, hostname: string, outp
 }
 
 export async function importConnectors(authToken: string, hostname: string, sourcePath: string){
-  const fs = require('fs');
+  const fs = require('fs/promises');
   const directoryPath = sourcePath + 'Connectors';
 
-  fs.readdir(directoryPath, async function (err: string, files: string[]) {
-      //handling error
-      if (err) {
-          return console.log('Unable to scan Connectors directory: ' + err);
-      } 
-
-      for (const file of files) {
-        await importConnector(authToken, hostname, file.replace('.json', ''), sourcePath);
-      }
-  });
+  const files = await fs.readdir(directoryPath);
+  for (const file of files) {
+    if (file.endsWith('.json') == false) continue;
+    await importConnector(authToken, hostname, file.replace('.json', ''), sourcePath);
+  }
 }
 
 async function importConnector(authToken: string, hostname: string, connectorName: string, sourcePath: string){
+  console.log('Importing Connector ' + connectorName);
   const existingItem = await getConnectorByName(authToken, hostname, connectorName);
   const savedItem = utils.readFile(sourcePath + '/Connectors/' + connectorName + '.json');
 
@@ -187,7 +182,6 @@ async function getConnectorById(authToken: string, hostname: string, connectorId
               streamModes
               configuration
               createdDate
-              entityId
               failingAuthentication
               providerId
               source

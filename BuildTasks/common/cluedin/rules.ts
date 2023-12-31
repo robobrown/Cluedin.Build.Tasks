@@ -23,23 +23,18 @@ export async function exportRules(authToken: string, hostname: string, outputPat
  }
  
  export async function importRules(authToken: string, hostname: string, sourcePath: string){
-  const fs = require('fs');
+  const fs = require('fs/promises');
   const directoryPath = sourcePath + 'Rules';
 
-  fs.readdir(directoryPath, async function (err: string, files: string[]) {
-      //handling error
-      if (err) {
-          return console.log('Unable to scan Rules directory: ' + err);
-      } 
-
-      for (const file of files) {
-        if (file.endsWith('.json') == false) continue;
-        await importRule(authToken, hostname, file.replace('.json', ''), sourcePath);
-      }
-  });
+  const files = await fs.readdir(directoryPath);
+  for (const file of files) {
+    if (file.endsWith('.json') == false) continue;
+    await importRule(authToken, hostname, file.replace('.json', ''), sourcePath);
+  }
 }
 
 async function importRule(authToken: string, hostname: string, ruleName: string, sourcePath: string){
+  console.log('Importing Rule ' + ruleName);
   const savedRule = utils.readFile(sourcePath + 'Rules/' + ruleName + '.json');
   let existingRule = await getRuleByName(authToken, hostname, ruleName);
 

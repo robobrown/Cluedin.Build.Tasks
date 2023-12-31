@@ -299,7 +299,7 @@ async function getVocabularyByName(authToken: string, hostname: string, vocabula
        if (response.data.errors != null && response.data.errors.length > 0){
            throw new Error(response.data.errors[0].message);
        }
-       const vocabBasic =  response.data.data.management.vocabularies.data.find(function(x: any) { return x.name == vocabularyName; });
+       const vocabBasic = response.data.data.management.vocabularies.data.find(function(x: any) { return x.vocabularyName == vocabularyName; });
        return await getVocabularyDetails(authToken, hostname, vocabBasic.vocabularyId);
   })
   .catch((error: Error) => {
@@ -308,29 +308,23 @@ async function getVocabularyByName(authToken: string, hostname: string, vocabula
 }
 
 export async function importVocabularies(authToken: string, hostname: string, sourcePath: string){
-  const fs = require('fs');
+  const fs = require('fs/promises');
   const directoryPath = sourcePath + 'Vocabularies';
 
-  fs.readdir(directoryPath, async function (err: string, files: string[]) {
-      //handling error
-      if (err) {
-          return console.log('Unable to scan Vocabularies directory: ' + err);
-      } 
-
-      for (const file of files) {
-        await importVocabulary(authToken, hostname, file.replace('.json', ''), sourcePath);
-      }
-  });
+  const files = await fs.readdir(directoryPath);
+  for (const file of files) {
+    if (file.endsWith('.json') == false) continue;
+    await importVocabulary(authToken, hostname, file.replace('.json', ''), sourcePath);
+  }
 }
 
 async function importVocabulary(authToken: string, hostname: string, vocabularyName: string, sourcePath: string){
+  console.log('Importing Vocabulary ' + vocabularyName);
   const savedRecord = utils.readFile(sourcePath + 'Vocabularies/' + vocabularyName + '.json');
   let existingVocabulary = await getVocabularyByName(authToken, hostname, vocabularyName);
+  const savedVocabulary = savedRecord.management.vocabulary;
 
-  const savedVocabulary = savedRecord.data.management.vocabulary;
-  // let vocabularyGroupNames = savedRecord.data.management.vocabularyGroupNames;
-
-  if (existingVocabulary == null || existingVocabulary.id == null) {
+  if (existingVocabulary.management.vocabulary == null || existingVocabulary.management.vocabulary.vocabularyId == null) {
       //create the vocabulary
       console.log('Creating vocabulary: ' + vocabularyName);
       const id = await createVocabulary(authToken, hostname, savedVocabulary);
@@ -338,30 +332,29 @@ async function importVocabulary(authToken: string, hostname: string, vocabularyN
   }
 
   //update the vocabulary
-  const areEqual = utils.isEqual(existingVocabulary.data.management.vocabulary, savedVocabulary); 
+  const areEqual = utils.isEqual(existingVocabulary.management.vocabulary, savedVocabulary); 
   if (!areEqual) {
     console.log('Updating vocabulary: ' + vocabularyName);
-    await updateVocabulary(authToken, hostname, savedVocabulary, existingVocabulary.data.management.vocabulary.id);
+    await updateVocabulary(authToken, hostname, savedVocabulary, existingVocabulary.management.vocabulary.vocabularyId);
   }
 
-  const savedVocabularyKeys = savedRecord.data.management.vocabularyKeysFromVocabularyId.data;
-  const existingVocabularyKeys = existingVocabulary.data.management.vocabularyKeysFromVocabularyId.data;
+  const savedVocabularyKeys = savedRecord.management.vocabularyKeysFromVocabularyId.data;
+  const existingVocabularyKeys = existingVocabulary.management.vocabularyKeysFromVocabularyId.data;
 
-  //TODO create & update VocabularyKeys
   for (const savedVocabularyKey of savedVocabularyKeys){
     const existingVocabularyKey = existingVocabularyKeys.find(function(x: any) { return x.name == savedVocabularyKey.name; });
 
-    if (existingVocabularyKey == null || existingVocabularyKey.id == null) {
+    if (existingVocabularyKey == null || existingVocabularyKey.vocabularyKeyId == null) {
       //create the vocabulary key
       console.log('Creating vocabulary key: ' + savedVocabularyKey.name);
-      await createVocabularyKey(authToken, hostname, existingVocabulary.id, savedVocabularyKey);
+      await createVocabularyKey(authToken, hostname, existingVocabulary.management.vocabulary.vocabularyId, savedVocabularyKey);
     }
 
     //update the vocabulary key
     const areEqual = utils.isEqual(existingVocabularyKey, savedVocabularyKey); 
     if (!areEqual) {
-      console.log('Updating vocabulary key: ' + vocabularyName);
-      await updateVocabularyKey(authToken, hostname, savedVocabularyKey, existingVocabulary.data.management.vocabulary.id, existingVocabularyKey.id);
+      console.log('Updating vocabulary key: ' + savedVocabularyKey.name);
+      await updateVocabularyKey(authToken, hostname, savedVocabularyKey, existingVocabulary.management.vocabulary.vocabularyId, existingVocabularyKey.vocabularyKeyId);
     }
   }
 }

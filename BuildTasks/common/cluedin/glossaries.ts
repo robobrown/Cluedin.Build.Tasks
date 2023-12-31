@@ -59,22 +59,18 @@ export async function exportGlossaries(authToken: string, hostname: string, outp
 }
 
 export async function importGlossaries(authToken: string, hostname: string, sourcePath: string){
-  const fs = require('fs');
+  const fs = require('fs/promises');
   const directoryPath = sourcePath + 'Glossaries';
 
-  fs.readdir(directoryPath, async function (err: string, files: string[]) {
-      //handling error
-      if (err) {
-          return console.log('Unable to scan Glossaries directory: ' + err);
-      } 
-
-      for (const file of files) {
-        await importGloassary(authToken, hostname, file.replace('.json', ''), sourcePath);
-      }
-  });
+  const files = await fs.readdir(directoryPath);
+  for (const file of files) {
+    if (file.endsWith('.json') == false) continue;
+    await importGloassary(authToken, hostname, file.replace('.json', ''), sourcePath);
+  }
 }
 
 async function importGloassary(authToken: string, hostname: string, gloassaryName: string, sourcePath: string){
+  console.log('Importing Gloassary ' + gloassaryName);
   let existingItem = await getGloassaryCategoryByName(authToken, hostname, gloassaryName);
   const savedItem = utils.readFile(sourcePath + '/Glossaries/' + gloassaryName + '.json');
 

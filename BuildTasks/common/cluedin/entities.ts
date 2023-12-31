@@ -110,13 +110,11 @@ export async function reprocessAllRules(authToken: string, hostname: string){
   console.log(config.url);
   axios.request(config)
   .then((response: any) => {
-    // console.log(JSON.stringify(response.data));
     return response.data.data;
   })
   .catch((error: Error) => {
-    console.log(error);
+    // for this one ignore the error
   });
-
 }
 
 export async function reprocessRulesByEntityType(authToken: string, hostname: string, entityType: string){
@@ -138,11 +136,10 @@ console.log(config.url);
 
   axios.request(config)
   .then((response: any) => {
-    // console.log(JSON.stringify(response.data));
     return response.data.data;
   })
   .catch((error: Error) => {
-    console.log(error);
+    // for this one ignore the error
   });
 }
 
@@ -168,9 +165,8 @@ console.log(config.url);
     return response.data.data;
   })
   .catch((error: Error) => {
-    console.log(error);
+    // for this one ignore the error
   });
-
 }
 
 export default { deleteEntities, reprocessAllRules, reprocessRulesByEntityType, resyncDatastores };
