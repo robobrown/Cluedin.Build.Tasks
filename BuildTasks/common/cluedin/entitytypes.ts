@@ -159,7 +159,7 @@ async function importEntityTypeConfiguration(authToken: string, hostname: string
   let existingItem = await getEntityTypeByName(authToken, hostname, entityTypeName);
   const savedItem = utils.readFile(sourcePath + 'EntityTypes/' + entityTypeName + '.json');
 
-  let pageTemplate = await pagetemplate.getPageTemplateByName(authToken, hostname, savedItem.pageTemplate.name);
+  const pageTemplate = await pagetemplate.getPageTemplateByName(authToken, hostname, savedItem.pageTemplate.name);
 
   if (existingItem == null || existingItem.id == null) {
       console.log('Creating Entity type Configuration');
