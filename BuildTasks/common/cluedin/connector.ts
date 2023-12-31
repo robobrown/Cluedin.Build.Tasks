@@ -8,21 +8,8 @@ export async function exportConnectors(authToken: string, hostname: string, outp
             connectorConfigurations {
                 total
                 configurations {
-                    name
-                    accountDisplay
-                    accountId
-                    active
-                    autoSync
-                    codeName
-                    streamModes
-                    failingAuthentication
-                    providerId
-                    source
-                    sourceQuality
-                    status
-                    supportsAutomaticWebhookCreation
-                    supportsConfiguration
-                    supportsWebhooks
+                  id
+                  name
                 }
             }
         }
@@ -42,12 +29,13 @@ export async function exportConnectors(authToken: string, hostname: string, outp
     };
 
     axios.request(config)
-    .then((response: any) => {
+    .then(async (response: any) => {
         if (response.data.errors != null && response.data.errors.length > 0){
           throw new Error(response.data.errors[0].message);
         }
         for (const connector of response.data.data.inbound.connectorConfigurations.configurations){
-            utils.saveToDisk(outputPath, "Connectors", connector.name, connector)
+            const connectorInfo = await getConnectorById(authToken, hostname, connector.id);
+            utils.saveToDisk(outputPath, "Connectors", connectorInfo.name, connectorInfo)
         }
     })
     .catch((error: Error) => {
@@ -73,12 +61,11 @@ async function importConnector(authToken: string, hostname: string, connectorNam
 
   if (existingItem == null || existingItem.id == null) {
       //create the connector
-      console.log('Creating connector: ' + connectorName);
       await createConnector(authToken, hostname, savedItem);
   }
   else {
-      // console.log('Updating connector: ' + connectorName);
-      // console.warn('Updating connectors is not yet supported');
+      //update the connector
+      await updateConnector(authToken, hostname, savedItem, existingItem);
   }
   
 }
@@ -95,12 +82,10 @@ async function createConnector(authToken: string, hostname: string, savedConnect
     }`,
     variables: {
       connectorId: savedConnector.providerId,
-      authInfo: {
-        name: savedConnector.name
-      }
+      authInfo: savedConnector.helperConfiguration
     }
   });
-  
+
   const config = {
     method: 'post',
     maxBodyLength: Infinity,
@@ -117,7 +102,76 @@ async function createConnector(authToken: string, hostname: string, savedConnect
       if (response.data.errors != null && response.data.errors.length > 0){
           throw new Error(response.data.errors[0].message);
       }
-      return response.data.data.consume.createStream.id;
+      return response.data.data.consume.createConnection.id;
+  })
+  .catch((error: Error) => {
+    console.log(error);
+  });
+}
+
+async function updateConnector(authToken: string, hostname: string, savedConnector: any, existingConnector: any){
+  const axios = require('axios');
+  const data = JSON.stringify({
+    query: `mutation saveConnectorConfiguration(
+      $connectorConfiguration: InputConnectorConfiguration
+    ) {
+      inbound {
+        saveConnectorConfiguration(
+          connectorConfiguration: $connectorConfiguration
+        ) {
+          id
+          helperConfiguration
+        }
+      }
+    }`,
+    variables: {
+      "connectorConfiguration": {
+        "id": existingConnector.id,
+        "name": savedConnector.name,
+        "accountDisplay": savedConnector.accountDisplay,
+        "accountId": savedConnector.accountId,
+        "active": savedConnector.active,
+        "autoSync": savedConnector.autoSync,
+        "codeName": savedConnector.codeName,
+        "configuration": savedConnector.configuration,
+        "createdDate": existingConnector.createdDate,
+        "entityId": existingConnector.entityId,
+        "failingAuthentication": existingConnector.failingAuthentication,
+        "guide": savedConnector.guide,
+        "helperConfiguration": savedConnector.helperConfiguration,
+        "providerId": savedConnector.providerId,
+        "reAuthEndpoint": savedConnector.reAuthEndpoint,
+        "source": savedConnector.source,
+        "sourceQuality": existingConnector.sourceQuality,
+        "stats": existingConnector.stats,
+        "supportsAutomaticWebhookCreation": savedConnector.supportsAutomaticWebhookCreation,
+        "supportsConfiguration": savedConnector.supportsConfiguration,
+        "supportsWebhooks": savedConnector.supportsWebhooks,
+        "userId": existingConnector.userId,
+        "userName": existingConnector.userName,
+        "webhookManagementEndpoints": savedConnector.webhookManagementEndpoints,
+        "webhooks": savedConnector.webhooks
+      }
+    }
+  });
+
+  const config = {
+    method: 'post',
+    maxBodyLength: Infinity,
+    url: 'https://' + hostname + '/graphql',
+    headers: { 
+      'Content-Type': 'application/json', 
+      'Authorization': 'Bearer ' + authToken
+    },
+    data : data
+  };
+
+  return axios.request(config)
+  .then((response: any) => {
+      if (response.data.errors != null && response.data.errors.length > 0){
+          throw new Error(response.data.errors[0].message);
+      }
+      return response.data.data.inbound.saveConnectorConfiguration;
   })
   .catch((error: Error) => {
     console.log(error);
@@ -160,6 +214,11 @@ async function getConnectorByName(authToken: string, hostname: string, connector
            throw new Error(response.data.errors[0].message);
        }
        const connector = response.data.data.inbound.connectorConfigurations.configurations.find(function(x: any) { return x.name == connectorName; });
+       if (connector == null) {
+        console.log('Connector not found: ' + connectorName);
+        return null;
+       }
+
        return getConnectorById(authToken, hostname, connector.id);
   })
   .catch((error: Error) => {
@@ -173,24 +232,30 @@ async function getConnectorById(authToken: string, hostname: string, connectorId
     query: `query getConnectorById($connectorId: ID!) {
       inbound {
           connectorConfiguration(id: $connectorId) {
-              id
-              name
-              accountDisplay
-              accountId
-              autoSync
-              codeName
-              streamModes
-              configuration
-              createdDate
-              failingAuthentication
-              providerId
-              source
-              sourceQuality
-              supportsAutomaticWebhookCreation
-              supportsConfiguration
-              supportsWebhooks
-              userId
-              userName
+            id
+            name
+            accountDisplay
+            accountId
+            active
+            autoSync
+            codeName
+            streamModes
+            configuration
+            failingAuthentication
+            guide
+            helperConfiguration
+            isUnApproved
+            providerId
+            reAuthEndpoint
+            source
+            sourceQuality
+            stats
+            status
+            supportsAutomaticWebhookCreation
+            supportsConfiguration
+            supportsWebhooks
+            webhookManagementEndpoints
+            webhooks
           }
       }
   }`,
@@ -215,6 +280,7 @@ async function getConnectorById(authToken: string, hostname: string, connectorId
        if (response.data.errors != null && response.data.errors.length > 0){
            throw new Error(response.data.errors[0].message);
        }
+       console.log(JSON.stringify(response.data));
        return response.data.data.inbound.connectorConfiguration;
   })
   .catch((error: Error) => {
