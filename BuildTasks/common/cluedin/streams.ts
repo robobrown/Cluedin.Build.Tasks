@@ -1,4 +1,5 @@
 import utils from "./utils";
+import connectors from "./connector";
 
 export async function exportStreams(authToken: string, hostname: string, outputPath: string){
     let pageNumber = 1;
@@ -36,7 +37,6 @@ export async function exportStreams(authToken: string, hostname: string, outputP
                     rules
                     rulesApplied
                     containerName
-                    connectorProviderDefinitionId
                     mappingConfiguration
                     mode
                     exportOutgoingEdges
@@ -71,14 +71,19 @@ export async function exportStreams(authToken: string, hostname: string, outputP
      })
      .catch((error: Error) => {
        console.log(error);
+       throw error;
      });
   }
   
   export async function importStreams(authToken: string, hostname: string, sourcePath: string){
-    const fs = require('fs/promises');
+    const fs = require('fs');
     const directoryPath = sourcePath + 'Streams';
-  
-    const files = await fs.readdir(directoryPath);
+    
+    if (!fs.existsSync(directoryPath)){
+      return;
+    }
+
+    const files = await fs.readdirSync(directoryPath);
     for (const file of files) {
       if (file.endsWith('.json') == false) continue;
       await importStream(authToken, hostname, file.replace('.json', ''), sourcePath);
@@ -91,8 +96,7 @@ export async function exportStreams(authToken: string, hostname: string, outputP
     const savedStream = utils.readFile(sourcePath + 'Streams/' + streamName + '.json');
 
     if (existingStream == null || existingStream.id == null) {
-        console.log('Creating Stream');
-        await createStream(authToken, hostname, existingStream);
+        await createStream(authToken, hostname, savedStream);
         existingStream = await getStreamByName(authToken, hostname, streamName);
     }
 
@@ -100,7 +104,8 @@ export async function exportStreams(authToken: string, hostname: string, outputP
     if (!areEqual) {
       console.log('Updating Stream ' + existingStream.id);
       await updateStream(authToken, hostname, savedStream, existingStream.id);
-      await setupConnectorStream(authToken, hostname, savedStream, existingStream.id, existingStream.connectorProviderDefinitionId);
+
+      await setupConnectorStream(authToken, hostname, savedStream, existingStream.id, savedStream.connector.name);
       if (savedStream.isActive)
       {
           await activateStream(authToken, hostname, existingStream.id);
@@ -123,11 +128,13 @@ export async function exportStreams(authToken: string, hostname: string, outputP
                   rules
                   rulesApplied
                   containerName
-                  connectorProviderDefinitionId
                   mappingConfiguration
                   mode
                   exportOutgoingEdges
                   exportIncomingEdges
+                  connector {
+                    name
+                  }
               }
           }
       }
@@ -157,6 +164,7 @@ export async function exportStreams(authToken: string, hostname: string, outputP
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
   }
 
@@ -172,7 +180,7 @@ export async function exportStreams(authToken: string, hostname: string, outputP
         }
       }`,
       variables: {
-        rule: {
+        stream: {
             name: savedStream.name,
         }
       }
@@ -198,6 +206,7 @@ export async function exportStreams(authToken: string, hostname: string, outputP
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
   }
 
@@ -243,12 +252,14 @@ export async function exportStreams(authToken: string, hostname: string, outputP
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
   }
 
-  async function setupConnectorStream(authToken: string, hostname: string, savedStream: any, streamId: string, connectorProviderDefinitionId: string){
+  async function setupConnectorStream(authToken: string, hostname: string, savedStream: any, streamId: string, connectorName: string){
     const axios = require('axios');
     const dataTypes = savedStream.mappingConfiguration.map(mapDataTypes);
+    const connector = await connectors.getConnectorByName(authToken, hostname, connectorName);
               
     const data = JSON.stringify({
       query: `mutation setupConnectorStream($streamId: ID!, $exportConfiguration: InputExportConfiguration) {
@@ -266,7 +277,7 @@ export async function exportStreams(authToken: string, hostname: string, outputP
       variables: {
         streamId: streamId,
         exportConfiguration: {
-          connectorProviderDefinitionId: connectorProviderDefinitionId,
+          connectorProviderDefinitionId: connector.id,
           containerName: savedStream.containerName,
           mode: savedStream.mode,
           exportOutgoingEdges: savedStream.exportOutgoingEdges,
@@ -296,6 +307,7 @@ export async function exportStreams(authToken: string, hostname: string, outputP
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
   }
 
@@ -340,6 +352,7 @@ export async function exportStreams(authToken: string, hostname: string, outputP
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
   }
 
@@ -412,6 +425,7 @@ export async function exportStreams(authToken: string, hostname: string, outputP
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
   }
 

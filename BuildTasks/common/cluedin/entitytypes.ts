@@ -140,14 +140,19 @@ async function getEntityTypeByName(authToken: string, hostname: string, entityNa
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 
 export async function importEntityTypes(authToken: string, hostname: string, sourcePath: string) {
-  const fs = require('fs/promises');
+  const fs = require('fs');
   const directoryPath = sourcePath + 'EntityTypes';
+  
+  if (!fs.existsSync(directoryPath)){
+    return;
+  }
 
-  const files = await fs.readdir(directoryPath);
+  const files = await fs.readdirSync(directoryPath);
   for (const file of files) {
     if (file.endsWith('.json') == false) continue;
     await importEntityTypeConfiguration(authToken, hostname, file.replace('.json', ''), sourcePath);
@@ -224,6 +229,7 @@ async function createEntityTypeConfiguration(authToken: string, hostname: string
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 
@@ -278,6 +284,7 @@ async function updateEntityTypeConfiguration(authToken: string, hostname: string
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 
@@ -340,6 +347,7 @@ async function getEntityTypesByPage(authToken: string, hostname: string, pageNum
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 

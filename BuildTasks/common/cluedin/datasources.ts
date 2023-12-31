@@ -106,15 +106,21 @@ import vocabularies from "./vocabularies";
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
   }
  
   export async function importDataSources(authToken: string, hostname: string, sourcePath: string){
-    const fs = require('fs/promises');
+    const fs = require('fs');
     const directoryPath = sourcePath + 'DataSourceSets';
+
+    if (!fs.existsSync(directoryPath)){
+      return;
+    }
+
     const userInfo = await auth.getUserInfo(authToken, hostname);
   
-    const files = await fs.readdir(directoryPath);
+    const files = await fs.readdirSync(directoryPath);
     for (const file of files) {
       if (file.endsWith('.json') == false) continue;
       await importDataSourceSet(authToken, hostname, userInfo.id, file.replace('.json', ''), sourcePath);
@@ -236,6 +242,7 @@ import vocabularies from "./vocabularies";
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
   }
 
@@ -284,6 +291,7 @@ import vocabularies from "./vocabularies";
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
   }
 
@@ -330,6 +338,7 @@ import vocabularies from "./vocabularies";
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
   }
  
@@ -394,6 +403,7 @@ import vocabularies from "./vocabularies";
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
   }
 
@@ -446,6 +456,7 @@ import vocabularies from "./vocabularies";
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
   }
 
@@ -491,6 +502,7 @@ import vocabularies from "./vocabularies";
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
   }
   
@@ -604,6 +616,7 @@ import vocabularies from "./vocabularies";
     })
     .catch((error: Error) => {
         console.log(error);
+        throw error;
     });
   }
 

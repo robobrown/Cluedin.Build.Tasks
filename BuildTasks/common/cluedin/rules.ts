@@ -23,10 +23,14 @@ export async function exportRules(authToken: string, hostname: string, outputPat
  }
  
  export async function importRules(authToken: string, hostname: string, sourcePath: string){
-  const fs = require('fs/promises');
+  const fs = require('fs');
   const directoryPath = sourcePath + 'Rules';
+  
+  if (!fs.existsSync(directoryPath)){
+    return;
+  }
 
-  const files = await fs.readdir(directoryPath);
+  const files = await fs.readdirSync(directoryPath);
   for (const file of files) {
     if (file.endsWith('.json') == false) continue;
     await importRule(authToken, hostname, file.replace('.json', ''), sourcePath);
@@ -104,6 +108,7 @@ async function getRulesByPage(pageNumber: number, authToken: string, hostname: s
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 
@@ -152,6 +157,7 @@ async function getRuleByName(authToken: string, hostname: string, ruleName: stri
  })
  .catch((error: Error) => {
    console.log(error);
+   throw error;
  });
 }
 
@@ -193,6 +199,7 @@ async function createRule(authToken: string, hostname: string, savedRule: any){
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 
@@ -240,6 +247,7 @@ async function updateRule(authToken: string, hostname: string, savedRule: any, r
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 
@@ -281,6 +289,7 @@ async function activateRule(authToken: string, hostname: string, ruleId: string)
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 
@@ -359,6 +368,7 @@ async function deleteRuleById(authToken: string, hostname: string, ruleId: strin
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 

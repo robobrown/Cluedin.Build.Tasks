@@ -40,14 +40,19 @@ export async function exportConnectors(authToken: string, hostname: string, outp
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
 }
 
 export async function importConnectors(authToken: string, hostname: string, sourcePath: string){
-  const fs = require('fs/promises');
+  const fs = require('fs');
   const directoryPath = sourcePath + 'Connectors';
 
-  const files = await fs.readdir(directoryPath);
+  if (!fs.existsSync(directoryPath)){
+    return;
+  }
+
+  const files = await fs.readdirSync(directoryPath);
   for (const file of files) {
     if (file.endsWith('.json') == false) continue;
     await importConnector(authToken, hostname, file.replace('.json', ''), sourcePath);
@@ -106,6 +111,7 @@ async function createConnector(authToken: string, hostname: string, savedConnect
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 
@@ -175,6 +181,7 @@ async function updateConnector(authToken: string, hostname: string, savedConnect
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 
@@ -223,6 +230,7 @@ async function getConnectorByName(authToken: string, hostname: string, connector
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 
@@ -280,12 +288,12 @@ async function getConnectorById(authToken: string, hostname: string, connectorId
        if (response.data.errors != null && response.data.errors.length > 0){
            throw new Error(response.data.errors[0].message);
        }
-       console.log(JSON.stringify(response.data));
        return response.data.data.inbound.connectorConfiguration;
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 
-export default { exportConnectors, importConnectors };
+export default { exportConnectors, importConnectors, getConnectorByName };
