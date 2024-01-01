@@ -1,6 +1,6 @@
 {
   "name": "cluedin.build.tasks.export.hierarchies",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "CluedIn Export Hierarhies Build Task",
   "repository": {
     "type": "git",

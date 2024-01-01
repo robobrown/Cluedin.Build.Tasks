@@ -1,6 +1,6 @@
 {
   "name": "cluedin.build.tasks.remove.entities",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "CluedIn Remove Entities Build Task",
   "repository": {
     "type": "git",

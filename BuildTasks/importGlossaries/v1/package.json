@@ -1,6 +1,6 @@
 {
   "name": "cluedin.build.tasks.import.glossaries",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "CluedIn Import Gloassaries Build Task",
   "repository": {
     "type": "git",
