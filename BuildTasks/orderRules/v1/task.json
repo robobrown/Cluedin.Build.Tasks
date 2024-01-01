@@ -1,8 +1,8 @@
 {
-    "id": "3c11589a-3dd9-464d-801c-a2eb85a5bc58",
-    "name": "CluedInImportVocabularies",
-    "friendlyName": "CluedIn Import Vocabularies",
-    "description": "Task for Import CluedIn Vocabularies Json Files",
+    "id": "587bad80-bf84-4aec-b127-5a1a0f1fbf3c",
+    "name": "CluedInImportConnectors",
+    "friendlyName": "CluedIn Order Rules",
+    "description": "Task To Order CluedIn Rules",
     "helpMarkDown": "",
     "category": "Utility",
     "author": "Robert Brown",
@@ -19,7 +19,7 @@
       "npm"
     ],
     "minimumAgentVersion": "1.83.0",
-    "instanceNameFormat": "Cluedin Import Vocabularies: $(publisherId).$(extensionId)",
+    "instanceNameFormat": "Cluedin Import Connectors: $(publisherId).$(extensionId)",
     "inputs": [
         {
             "name": "cluedinUsername",
@@ -64,15 +64,15 @@
     ],
     "execution": {
       "Node": {
-        "target": "importVocabularies/v1/index.js",
+        "target": "orderRules/v1/index.js",
         "argumentFormat": ""
       },
       "Node10": {
-        "target": "importVocabularies/v1/index.js",
+        "target": "orderRules/v1/index.js",
         "argumentFormat": ""
       },
       "Node16": {
-        "target": "importVocabularies/v1/index.js",
+        "target": "orderRules/v1/index.js",
         "argumentFormat": ""
       }
     }
