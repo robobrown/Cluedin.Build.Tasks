@@ -11,8 +11,19 @@ export async function exportGlossaries(authToken: string, hostname: string, outp
               terms {
                   total
                   data {
-                      id
-                      name
+                    id
+                    name
+                    active
+                    shortDescription
+                    certificationLevel
+                    description
+                    version
+                    isObsolete
+                    categoryId
+                    rating
+                    userRating
+                    ruleSet
+                    isEndorsedByCurrentUser
                   }
               }
           }
@@ -40,16 +51,6 @@ export async function exportGlossaries(authToken: string, hostname: string, outp
     }
 
     for (const glossaryCategory of response.data.data.management.glossaryCategories){
-      //HACK, because the cluedin API is not returning the data of the term we have to get the info by ID.
-      //Logged with Cluedin Support Ticket number #2192565630
-      const arrayData: any[] = [];
-      for (const term of glossaryCategory.terms.data) {
-          const fullTerm: any = await getGlossaryTermById(authToken, hostname, term.id);
-          arrayData.push(fullTerm);
-      }
-      
-      glossaryCategory.terms.data = arrayData;
-
       utils.saveToDisk(outputPath, "Glossaries", glossaryCategory.name, glossaryCategory);
     }
   })
