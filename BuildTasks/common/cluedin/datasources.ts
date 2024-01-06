@@ -7,105 +7,114 @@ import annotation from "./annotation";
     const axios = require('axios');
     const data = JSON.stringify({
       query: `query getDataSources {
-       inbound {
-           dataSourceSets {
-               total
-               data {
-                   id
-                   name
-                   editors
-                   dataSources {
-                       type
-                       name
-                       dataSets {
-                           name
-                           configuration
-                           annotation {
-                               id
-                               entityType
-                               originEntityCodeKey
-                               origin
-                               nameKey
-                               vocabularyId
-                               isDynamicVocab
-                               useStrictEdgeCode
-                               useDefaultSourceCode
-                               annotationProperties {
-                                   displayName
-                                   key
-                                   vocabKey
-                                   coreVocab
-                                   useAsEntityCode
-                                   useAsAlias
-                                   useSourceCode
-                                   entityCodeOrigin
-                                   type
-                                   vocabularyKeyId
-                                   annotationEdges {
-                                    id
+        inbound {
+            dataSourceSets {
+                total
+                data {
+                    id
+                    name
+                    editors
+                    dataSources {
+                        type
+                        name
+                        dataSets {
+                            name
+                            configuration
+                            annotation {
+                                id
+                                entityType
+                                originEntityCodeKey
+                                origin
+                                nameKey
+                                vocabularyId
+                                isDynamicVocab
+                                useStrictEdgeCode
+                                useDefaultSourceCode
+                                annotationProperties {
+                                    displayName
                                     key
-                                    edgeType
-                                    entityType
-                                    origin
-                                    dataSourceGroupId
-                                    dataSourceId
-                                    dataSetId
-                                    direction
-                                    entityTypeConfiguration {
-                                        icon
-                                        displayName
-                                        entityType
-                                    }
-                                    edgeProperties {
+                                    vocabKey
+                                    coreVocab
+                                    useAsEntityCode
+                                    useAsAlias
+                                    useSourceCode
+                                    entityCodeOrigin
+                                    type
+                                    vocabularyKeyId
+                                    annotationEdges {
                                         id
-                                        annotationEdgeId
-                                        originalField
-                                        vocabularyKeyId
-                                        vocabularyKey {
+                                        key
+                                        edgeType
+                                        entityType
+                                        origin
+                                        dataSourceGroupId
+                                        dataSourceId
+                                        dataSetId
+                                        direction
+                                        entityTypeConfiguration {
+                                            icon
                                             displayName
+                                            entityType
+                                        }
+                                        edgeProperties {
+                                            id
+                                            annotationEdgeId
+                                            originalField
                                             vocabularyKeyId
+                                            vocabularyKey {
+                                                displayName
+                                                vocabularyKeyId
+                                            }
                                         }
                                     }
                                 }
-                               }
-                               vocabulary {
-                                   vocabularyId
-                                   vocabularyName
-                                   grouping
-                                   keyPrefix
-                                   isActive
-                                   isCluedInCore
-                                   isDynamic
-                                   isProvider
-                                   isVocabularyOwner
-                                   providerId
-                                   description
-                               }
-                               entityTypeConfiguration {
-                                   icon
-                                   displayName
-                                   entityType
-                               }
-                           }
-                           fieldMappings {
-                               id
-                               originalField
-                               key
-                               edges {
-                                   edgeType
-                                   dataSetId
-                                   dataSourceId
-                                   dataSourceGroupId
-                                   entityType
-                               }
-                           }
-                           originalFields
-                       }
-                   }
-               }
-           }
-       }
-   }`,
+                                vocabulary {
+                                    vocabularyId
+                                    vocabularyName
+                                    grouping
+                                    keyPrefix
+                                    isActive
+                                    isCluedInCore
+                                    isDynamic
+                                    isProvider
+                                    isVocabularyOwner
+                                    providerId
+                                    description
+                                }
+                                entityTypeConfiguration {
+                                    icon
+                                    displayName
+                                    entityType
+                                }
+                                descriptionKey
+                                cultureKey
+                                versionKey
+                                name
+                                createdDateMap
+                                modifiedDateMap
+                                beforeCreatingClue
+                                beforeSendingClue
+                            }
+                            fieldMappings {
+                                id
+                                originalField
+                                key
+                                edges {
+                                    edgeType
+                                    dataSetId
+                                    dataSourceId
+                                    dataSourceGroupId
+                                    entityType
+                                }
+                            }
+                            originalFields
+                        }
+                    }
+                }
+            }
+        }
+    }
+    `,
       variables: {
       }
     });
@@ -260,6 +269,8 @@ import annotation from "./annotation";
                           if (!areEqual) {
                             // update the edge
                             console.log("updating edge mapping " + annotationEdge.key)
+                            console.log(existingEdge);
+                            console.log(annotationEdge);
                             await annotation.editEdgeMapping(authToken, hostname, annotationEdge, existingEdge.edgeId);
                           }
                         }
@@ -531,6 +542,7 @@ import annotation from "./annotation";
                                 configuration
                                 createdAt
                                 updatedAt
+                                annotationId
                                 annotation {
                                     id
                                     name

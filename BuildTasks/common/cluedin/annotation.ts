@@ -261,59 +261,35 @@ export async function createManualAnnotation(authToken: string, hostname: string
                         id
                         key
                         edgeType
-                        entityTypeConfiguration {
-                            icon
-                            displayName
-                            entityType
-                        }
+                        entityType
                         origin
                         dataSourceGroupId
                         dataSourceId
                         dataSetId
                         direction
+                        entityTypeConfiguration {
+                            icon
+                            displayName
+                            entityType
+                        }
                         edgeProperties {
                             id
                             annotationEdgeId
                             originalField
-                        }
-                    }
-                    validations {
-                        id
-                        displayName
-                        inverse
-                        parameters {
-                            key
-                            value
-                        }
-                    }
-                    transformations {
-                        filters {
-                            parameters {
-                                key
-                                value
+                            vocabularyKeyId
+                            vocabularyKey {
+                                displayName
+                                vocabularyKeyId
                             }
-                            id
-                            displayName
-                            inverse
-                        }
-                        operations {
-                            inverse
-                            parameters {
-                                key
-                                value
-                            }
-                            id
-                            displayName
                         }
                     }
                 }
             }
         }
     }
-    
     `,
       variables: {
-        annotationId: annotationId
+        id: annotationId
       }
     });
     

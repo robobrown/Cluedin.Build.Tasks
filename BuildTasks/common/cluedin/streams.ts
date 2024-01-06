@@ -43,10 +43,17 @@ export async function exportStreams(authToken: string, hostname: string, outputP
                     mode
                     exportOutgoingEdges
                     exportIncomingEdges
+                    connector {
+                        name
+                        accountDisplay
+                        accountId
+                        codeName
+                    }
                 }
             }
         }
-    }`,
+    }
+    `,
        variables: {
          pageNumber: pageNumber
        }
@@ -104,6 +111,8 @@ export async function exportStreams(authToken: string, hostname: string, outputP
 
     const areEqual = utils.isEqual(existingStream, savedStream); 
     if (!areEqual) {
+      console.log(existingStream);
+      console.log(savedStream);
       console.log('Updating Stream ' + existingStream.id);
       await updateStream(authToken, hostname, savedStream, existingStream.id);
 
@@ -136,7 +145,10 @@ export async function exportStreams(authToken: string, hostname: string, outputP
                   exportIncomingEdges
                   connector {
                     name
-                  }
+                    accountDisplay
+                    accountId
+                    codeName
+                }
               }
           }
       }
@@ -162,7 +174,11 @@ export async function exportStreams(authToken: string, hostname: string, outputP
         if (response.data.errors != null && response.data.errors.length > 0){
             throw new Error(response.data.errors[0].message);
         }
-        return response.data.data.consume.streams.data.find(function(x: any) { return x.name == streamName; });
+        
+        let theStream = response.data.data.consume.streams.data.find(function(x: any) { return x.name == streamName; });
+        sortStream(theStream);
+        
+        return theStream;
   })
   .catch((error: Error) => {
     console.log(error);

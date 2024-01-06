@@ -171,7 +171,7 @@ async function importEntityTypeConfiguration(authToken: string, hostname: string
       await createEntityTypeConfiguration(authToken, hostname, savedItem, pageTemplate.pageTemplateId);
       existingItem = await getEntityTypeByName(authToken, hostname, entityTypeName);
   }
-
+  
   const areEqual = utils.isEqual(existingItem, savedItem); 
   if (!areEqual) {
     console.log('Updating Entity Type Configuration ' + savedItem.displayName);
@@ -194,17 +194,17 @@ async function createEntityTypeConfiguration(authToken: string, hostname: string
   }
   `,
     variables: {
-      "entityTypeConfiguration": {
-            "displayName": entitytype.displayName,
-            "icon": entitytype.icon,
-            "route": entitytype.route,
-            "path": entitytype.path,
-            "entityType": entitytype.entityType,
-            "type": entitytype.type,
-            "template": entitytype.template,
-            "layoutConfiguration": entitytype.layoutConfiguration,
-            "pageTemplateId": pageTemplateId,
-            "active": entitytype.active
+      entityTypeConfiguration: {
+            displayName: entitytype.displayName,
+            icon: entitytype.icon,
+            route: entitytype.route,
+            path: entitytype.path,
+            entityType: entitytype.entityType,
+            type: entitytype.type,
+            template: entitytype.template,
+            layoutConfiguration: entitytype.layoutConfiguration,
+            pageTemplateId: pageTemplateId,
+            active: entitytype.active
         }
     }
   });
@@ -248,18 +248,18 @@ async function updateEntityTypeConfiguration(authToken: string, hostname: string
   }
   `,
     variables: {
-      "entityTypeConfiguration": {
-            "id": entitytypeConfigurationId,
-            "displayName": savedEntityTypeConfiguration.displayName,
-            "icon": savedEntityTypeConfiguration.icon,
-            "route": savedEntityTypeConfiguration.route,
-            "path": savedEntityTypeConfiguration.path,
-            "entityType": savedEntityTypeConfiguration.entityType,
-            "type": savedEntityTypeConfiguration.type,
-            "template": savedEntityTypeConfiguration.template,
-            "layoutConfiguration": savedEntityTypeConfiguration.layoutConfiguration,
-            "pageTemplateId": pageTemplateId,
-            "active": savedEntityTypeConfiguration.active
+      entityTypeConfiguration: {
+            id: entitytypeConfigurationId,
+            displayName: savedEntityTypeConfiguration.displayName,
+            icon: savedEntityTypeConfiguration.icon,
+            route: savedEntityTypeConfiguration.route,
+            path: savedEntityTypeConfiguration.path,
+            entityType: savedEntityTypeConfiguration.entityType,
+            type: savedEntityTypeConfiguration.type,
+            template: savedEntityTypeConfiguration.template,
+            layoutConfiguration: savedEntityTypeConfiguration.layoutConfiguration,
+            pageTemplateId: pageTemplateId,
+            active: savedEntityTypeConfiguration.active
         }
     }
   });
