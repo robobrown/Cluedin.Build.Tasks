@@ -161,6 +161,9 @@ async function getVocabularyDetails(authToken: string, hostname: string, vocabul
     if (response.data.errors != null && response.data.errors.length > 0){
       throw new Error(response.data.errors[0].message);
     }
+    
+    sortVocabularies(response.data.data);
+
     return response.data.data;
   })
   .catch((error: Error) => {
@@ -567,6 +570,12 @@ async function updateVocabularyKey(authToken: string, hostname: string, savedVoc
     console.log(error);
     throw error;
   });
+}
+
+function sortVocabularies(response: any){
+  //Sort the arrays so that the GIT keeps a similar pattern
+  response.management.vocabularyGroupNames.mappingConfiguration.sort((a: any, b: any) => (a.name > b.name) ? 1 : -1);
+  response.management.vocabularyKeysFromVocabularyId.data.sort((a: any, b: any) => (a.key > b.key) ? 1 : -1);
 }
 
 export default { exportVocabularies, importVocabularies, getVocabKeysForVocabId, getBasicVocabularyByName };

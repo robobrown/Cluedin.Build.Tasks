@@ -126,8 +126,10 @@ import annotation from "./annotation";
          if (response.data.errors != null && response.data.errors.length > 0){
            throw new Error(response.data.errors[0].message);
          }
+
          for (const dataSourceSet of response.data.data.inbound.dataSourceSets.data){
-             utils.saveToDisk(outputPath, "DataSourceSets", dataSourceSet.name, dataSourceSet)
+            sortDataSourceSet(dataSourceSet);
+            utils.saveToDisk(outputPath, "DataSourceSets", dataSourceSet.name, dataSourceSet)
          }
          return response.data.data.inbound.dataSourceSets;
     })
@@ -137,6 +139,7 @@ import annotation from "./annotation";
     });
   }
  
+
   export async function importDataSources(authToken: string, hostname: string, sourcePath: string){
     const fs = require('fs');
     const directoryPath = sourcePath + 'DataSourceSets';
@@ -660,5 +663,33 @@ import annotation from "./annotation";
   function selectOriginalField (item:any){
     return item.originalField;
   }
-    
+  
+  function sortDataSourceSet(dataSourceSet: any){
+    if (dataSourceSet.dataSources == null) 
+      return;
+
+    for (const datasource of dataSourceSet.dataSources){
+      if (datasource.dataSets == null) 
+        continue;
+
+        for (const dataset of datasource.dataSets){
+          if (dataset.annotation != null && dataset.annotation.annotationProperties != null){
+            dataset.annotation.annotationProperties.sort((a: any, b: any) => (a.key > b.key) ? 1 : -1);
+          }
+
+          if (dataset.fieldMappings != null){
+            dataset.fieldMappings.sort((a: any, b: any) => (a.originalField > b.originalField) ? 1 : -1);
+          }
+
+          if (dataset.originalFields != null){
+            dataset.originalFields.sort();
+          }
+        }
+
+        datasource.dataSets.sort((a: any, b: any) => (a.name > b.name) ? 1 : -1);
+    }
+
+    dataSourceSet.dataSources.sort((a: any, b: any) => (a.name > b.name) ? 1 : -1);
+  }
+
 export default { exportDataSources, importDataSources };

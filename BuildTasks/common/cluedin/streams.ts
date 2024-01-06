@@ -10,6 +10,8 @@ export async function exportStreams(authToken: string, hostname: string, outputP
       const result = await getStreamsByPage(pageNumber, authToken, hostname);
        
       for (const stream of result.data){
+        sortStream(stream);
+
         utils.saveToDisk(outputPath, "Streams", stream.name, stream)
       }
 
@@ -427,6 +429,10 @@ export async function exportStreams(authToken: string, hostname: string, outputP
       console.log(error);
       throw error;
     });
+  }
+
+  function sortStream(stream: any){
+    stream.mappingConfiguration.sort((a: any, b: any) => (a.sourceDataType > b.sourceDataType) ? 1 : -1);
   }
 
 export default { exportStreams, importStreams, deleteStreamsByName };
