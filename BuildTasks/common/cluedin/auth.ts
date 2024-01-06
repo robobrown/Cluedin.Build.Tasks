@@ -25,6 +25,7 @@ export async function getToken(username: string, password: string, client_id: st
   })
   .catch((error: Error) => {
       console.log(error);
+      throw error;
   });
 }
 
@@ -62,6 +63,7 @@ export async function getUserInfo(authToken: string, hostname: string){
   })
   .catch((error: Error) => {
       console.log(error);
+      throw error;
   });
 }
 

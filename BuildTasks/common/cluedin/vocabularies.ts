@@ -72,6 +72,7 @@ async function getVocabulariesByPage(authToken: string, hostname: string, pageNu
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 
@@ -164,6 +165,7 @@ async function getVocabularyDetails(authToken: string, hostname: string, vocabul
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 
@@ -209,6 +211,7 @@ export async function getVocabKeysForVocabId(authToken: string, hostname: string
   })
   .catch((error: Error) => {
       console.log(error);
+      throw error;
   });
 }
 
@@ -260,6 +263,7 @@ export async function getBasicVocabularyByName(authToken: string, hostname: stri
   })
   .catch((error: Error) => {
       console.log(error);
+      throw error;
   });
 }
 
@@ -304,14 +308,19 @@ async function getVocabularyByName(authToken: string, hostname: string, vocabula
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 
 export async function importVocabularies(authToken: string, hostname: string, sourcePath: string){
-  const fs = require('fs/promises');
+  const fs = require('fs');
   const directoryPath = sourcePath + 'Vocabularies';
+  
+  if (!fs.existsSync(directoryPath)){
+    return;
+  }
 
-  const files = await fs.readdir(directoryPath);
+  const files = await fs.readdirSync(directoryPath);
   for (const file of files) {
     if (file.endsWith('.json') == false) continue;
     await importVocabulary(authToken, hostname, file.replace('.json', ''), sourcePath);
@@ -402,6 +411,7 @@ async function createVocabulary(authToken: string, hostname: string, savedVocabu
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 
@@ -418,16 +428,16 @@ async function updateVocabulary(authToken: string, hostname: string, savedVocabu
   }`,
     variables: {
        vocabulary: {
-          id: vocabularyId,
-          name: savedVocabulary.name,
-          isActive: savedVocabulary.isActive,
-          condition: savedVocabulary.condition,
-          vocabularies: savedVocabulary.vocabularies,
+          vocabularyId: vocabularyId,
+          vocabularyName: savedVocabulary.vocabularyName,
+          entityTypeConfiguration: savedVocabulary.entityTypeConfiguration,
+          keyPrefix: savedVocabulary.keyPrefix,
+          providerId: savedVocabulary.providerId,
           description: savedVocabulary.description
        }
     }
   });
-  
+
   const config = {
     method: 'post',
     maxBodyLength: Infinity,
@@ -448,6 +458,7 @@ async function updateVocabulary(authToken: string, hostname: string, savedVocabu
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 
@@ -494,6 +505,7 @@ async function createVocabularyKey(authToken: string, hostname: string, vocabula
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 
@@ -553,6 +565,7 @@ async function updateVocabularyKey(authToken: string, hostname: string, savedVoc
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 

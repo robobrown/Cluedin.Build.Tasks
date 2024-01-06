@@ -106,15 +106,21 @@ import vocabularies from "./vocabularies";
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
   }
  
   export async function importDataSources(authToken: string, hostname: string, sourcePath: string){
-    const fs = require('fs/promises');
+    const fs = require('fs');
     const directoryPath = sourcePath + 'DataSourceSets';
+
+    if (!fs.existsSync(directoryPath)){
+      return;
+    }
+
     const userInfo = await auth.getUserInfo(authToken, hostname);
   
-    const files = await fs.readdir(directoryPath);
+    const files = await fs.readdirSync(directoryPath);
     for (const file of files) {
       if (file.endsWith('.json') == false) continue;
       await importDataSourceSet(authToken, hostname, userInfo.id, file.replace('.json', ''), sourcePath);
@@ -127,7 +133,6 @@ import vocabularies from "./vocabularies";
     const savedDataSourceSet = utils.readFile(sourcePath + 'DataSourceSets/' + datasourceSetName + '.json');
 
     if (existingDataSourceSet == null || existingDataSourceSet.id == null) {
-        console.log('Creating DataSourceSet');
         await createDataSourceSet(authToken, hostname, userId, savedDataSourceSet.name);
         existingDataSourceSet = await getDataSourceSetByName(authToken, hostname, savedDataSourceSet.name);
     }
@@ -139,10 +144,9 @@ import vocabularies from "./vocabularies";
           let existingDataSource = existingDataSourceSet.dataSources.find(function(x: any) { return x.name == savedDataSource.name; });
           
           if (existingDataSource == null || existingDataSource.id == null) {
-              console.log('Creating DataSource');
               const createdDataSource = await createDataSource(authToken, hostname, userId, savedDataSource, existingDataSourceSet.id);
               dataSourceId = createdDataSource.id;
-              
+                    
               existingDataSourceSet = await getDataSourceSetByName(authToken, hostname, savedDataSourceSet.name);
               existingDataSource = existingDataSourceSet.dataSources.find(function(x: any) { return x.name == savedDataSource.name; })
           }
@@ -155,12 +159,12 @@ import vocabularies from "./vocabularies";
               let existingDataSet = existingDataSource.dataSets.find(function(x: any) { return x.name == savedDataSet.name; });
               const dataSetsAreEqual = utils.isEqual(existingDataSet, savedDataSet); 
               if (!dataSetsAreEqual) {
+                const vocab = await vocabularies.getBasicVocabularyByName(authToken, hostname, savedDataSet.annotation.vocabulary.vocabularyName);
+
                 if (existingDataSet == null || existingDataSet.id == null) {
-                    console.log('Creating DataSet');
                     const createdDataSet = await createDataSet(authToken, hostname, userId, savedDataSet, dataSourceId);
                     dataSetId = createdDataSet.id;
-                    await createManualAnnotation(authToken, hostname, savedDataSet, createdDataSet);
-                
+                    await createManualAnnotation(authToken, hostname, savedDataSet, createdDataSet, vocab.vocabularyId);
                     existingDataSourceSet = await getDataSourceSetByName(authToken, hostname, savedDataSourceSet.name);
 
                     existingDataSource = existingDataSourceSet.dataSources.find(function(x: any) { return x.name == savedDataSource.name; });
@@ -171,7 +175,7 @@ import vocabularies from "./vocabularies";
                 }
         
                 if (savedDataSet.annotation != null) {
-                  const vocab = await vocabularies.getBasicVocabularyByName(authToken, hostname, savedDataSet.annotation.vocabulary.vocabularyName);
+               
                   const vocabKeys = await vocabularies.getVocabKeysForVocabId(authToken, hostname, vocab.vocabularyId);
 
                   const savedMappedFields = savedDataSet.fieldMappings.filter((mapping: any) => mapping.key != "--ignore--");
@@ -183,7 +187,7 @@ import vocabularies from "./vocabularies";
                     
                     if (ignoredFields.length > 0)
                     {
-                        await addIgnoredFieldsToDataSet(authToken, hostname, dataSetId, ignoredFields);
+                      await addIgnoredFieldsToDataSet(authToken, hostname, dataSetId, ignoredFields);
                     }
                     for (const fieldMapping of savedMappedFields){
                         //Add the field if it doesn't exist
@@ -238,13 +242,14 @@ import vocabularies from "./vocabularies";
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
   }
 
   async function createDataSource(authToken: string, hostname: string, userId: string, dataSource: any, dataSourceSetId: string){
     const axios = require('axios');
     const data = JSON.stringify({
-      query: `mmutation createDataSource($dataSourceSetId: ID, $dataSource: InputDataSource) {
+      query: `mutation createDataSource($dataSourceSetId: ID, $dataSource: InputDataSource) {
         inbound {
           createDataSource(
             dataSourceSetId: $dataSourceSetId
@@ -264,7 +269,8 @@ import vocabularies from "./vocabularies";
         }
       }
     });
-    
+    console.log(JSON.parse(data));
+
     const config = {
       method: 'post',
       maxBodyLength: Infinity,
@@ -285,6 +291,7 @@ import vocabularies from "./vocabularies";
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
   }
 
@@ -331,10 +338,11 @@ import vocabularies from "./vocabularies";
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
   }
  
-  async function createManualAnnotation(authToken: string, hostname: string, dataSet: any, dataSetId: any){
+  async function createManualAnnotation(authToken: string, hostname: string, dataSet: any, dataSetId: any, vocabularyId: string){
     const axios = require('axios');
     const data = JSON.stringify({
       query: `mutation createManualAnnotation(
@@ -351,6 +359,7 @@ import vocabularies from "./vocabularies";
                 isDynamicVocab: $isDynamicVocab
             ) {
                 id
+                name
             }
         }
     }`,
@@ -364,13 +373,15 @@ import vocabularies from "./vocabularies";
                 new: false,
                 vocabularyName: dataSet.annotation.vocabulary.vocabularyName,
                 keyPrefix: dataSet.annotation.vocabulary.keyPrefix,
-                vocabularyId: dataSet.annotation.vocabulary.vocabularyId // TODO this might be different in other environments
+                vocabularyId: vocabularyId
             }
         },
         isDynamicVocab: true
       }
     });
     
+    console.log(data);
+
     const config = {
       method: 'post',
       maxBodyLength: Infinity,
@@ -387,10 +398,12 @@ import vocabularies from "./vocabularies";
         if (response.data.errors != null && response.data.errors.length > 0){
             throw new Error(response.data.errors[0].message);
         }
-        return response.data.data.inbound.createDataSet;
+        console.log(response.data.data);
+        return response.data.data.management.createManualAnnotation;
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
   }
 
@@ -443,6 +456,7 @@ import vocabularies from "./vocabularies";
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
   }
 
@@ -488,6 +502,7 @@ import vocabularies from "./vocabularies";
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
   }
   
@@ -601,6 +616,7 @@ import vocabularies from "./vocabularies";
     })
     .catch((error: Error) => {
         console.log(error);
+        throw error;
     });
   }
 

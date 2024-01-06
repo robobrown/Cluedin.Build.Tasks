@@ -1,0 +1,79 @@
+{
+    "id": "587bad80-bf84-4aec-b127-5a1a0f1fbf3c",
+    "name": "CluedInImportConnectors",
+    "friendlyName": "CluedIn Order Rules",
+    "description": "Task To Order CluedIn Rules",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "author": "Robert Brown",
+    "version": {
+        "Major": 1,
+        "Minor": 0,
+        "Patch": 3
+    },
+    "visibility": [
+      "Build",
+      "Release"
+    ],
+    "demands": [
+      "npm"
+    ],
+    "minimumAgentVersion": "1.83.0",
+    "instanceNameFormat": "Cluedin Import Connectors: $(publisherId).$(extensionId)",
+    "inputs": [
+        {
+            "name": "cluedinUsername",
+            "type": "string",
+            "label": "CluedIn Username",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the username used to access the CluedIn App Isntance"
+          },
+          {
+            "name": "cluedinPassword",
+            "type": "string",
+            "label": "CluedIn Password",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the username used to access the CluedIn App Isntance"
+          },
+          {
+            "name": "cluedinClientId",
+            "type": "string",
+            "label": "CluedIn ClientId",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the ClientId of the CluedIn App"
+          },
+          {
+            "name": "cluedinHostname",
+            "type": "string",
+            "label": "CluedIn Hostname",
+            "defaultValue": "app-oranization.yourdomain.com",
+            "required": true,
+            "helpMarkDown": "Enter the Hostname the CluedIn App Instance"
+          },
+          {
+            "name": "sourcePath",
+            "type": "string",
+            "label": "Json Source Path",
+            "defaultValue": "../../data/",
+            "required": true,
+            "helpMarkDown": "Enter the path where to get the json data"
+          }
+    ],
+    "execution": {
+      "Node": {
+        "target": "orderRules/v1/index.js",
+        "argumentFormat": ""
+      },
+      "Node10": {
+        "target": "orderRules/v1/index.js",
+        "argumentFormat": ""
+      },
+      "Node16": {
+        "target": "orderRules/v1/index.js",
+        "argumentFormat": ""
+      }
+    }
+    }

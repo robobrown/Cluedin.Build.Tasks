@@ -56,14 +56,19 @@ export async function exportGlossaries(authToken: string, hostname: string, outp
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 
 export async function importGlossaries(authToken: string, hostname: string, sourcePath: string){
-  const fs = require('fs/promises');
+  const fs = require('fs');
   const directoryPath = sourcePath + 'Glossaries';
 
-  const files = await fs.readdir(directoryPath);
+  if (!fs.existsSync(directoryPath)){
+    return;
+  }
+
+  const files = await fs.readdirSync(directoryPath);
   for (const file of files) {
     if (file.endsWith('.json') == false) continue;
     await importGloassary(authToken, hostname, file.replace('.json', ''), sourcePath);
@@ -134,6 +139,7 @@ async function createGloassary(authToken: string, hostname: string, savedGloassa
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 
@@ -178,6 +184,7 @@ async function createGloassaryTerm(authToken: string, hostname: string, savedGlo
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 
@@ -255,6 +262,7 @@ async function updateGloassaryTerm(authToken: string, hostname: string, savedGlo
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 
@@ -303,6 +311,7 @@ async function getGloassaryCategoryByName(authToken: string, hostname: string, c
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 
@@ -361,6 +370,7 @@ async function getGloassaryById(authToken: string, hostname: string, gloassaryCa
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 
@@ -412,6 +422,7 @@ async function getGlossaryTermById(authToken: string, hostname: string, glossary
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 

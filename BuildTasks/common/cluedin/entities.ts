@@ -46,6 +46,7 @@ id
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });    
 }
 
@@ -88,6 +89,7 @@ id
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });    
 }
 

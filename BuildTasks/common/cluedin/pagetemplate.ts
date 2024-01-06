@@ -52,6 +52,7 @@ async function getPageTemplateByName(authToken: string, hostname: string, pageTe
     })
     .catch((error: Error) => {
     console.log(error);
+    throw error;
     });
 }
 
