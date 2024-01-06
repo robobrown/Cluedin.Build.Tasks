@@ -1,4 +1,4 @@
-export async function createManualAnnotation(authToken: string, hostname: string, dataSet: any, dataSetId: any){
+export async function createManualAnnotation(authToken: string, hostname: string, dataSet: any, dataSetId: any, vocabularyId: string){
     const axios = require('axios');
     const data = JSON.stringify({
       query: `mutation createManualAnnotation(
@@ -27,7 +27,7 @@ export async function createManualAnnotation(authToken: string, hostname: string
                 new: false,
                 vocabularyName: dataSet.annotation.vocabulary.vocabularyName,
                 keyPrefix: dataSet.annotation.vocabulary.keyPrefix,
-                vocabularyId: dataSet.annotation.vocabulary.vocabularyId // TODO this might be different in other environments
+                vocabularyId: vocabularyId 
             }
         },
         isDynamicVocab: dataSet.annotation.isDynamicVocab
@@ -50,7 +50,7 @@ export async function createManualAnnotation(authToken: string, hostname: string
         if (response.data.errors != null && response.data.errors.length > 0){
             throw new Error(response.data.errors[0].message);
         }
-        return response.data.data.inbound.createDataSet;
+        return response.data.data.management.createManualAnnotation;
     })
     .catch((error: Error) => {
       console.log(error);
@@ -222,31 +222,21 @@ export async function createManualAnnotation(authToken: string, hostname: string
         preparation {
             annotation(id: $id) {
                 id
-                isDynamicVocab
                 name
                 entityType
+                originEntityCodeKey
+                origin
                 nameKey
                 descriptionKey
-                originEntityCodeKey
                 createdDateMap
                 modifiedDateMap
                 cultureKey
-                origin
                 versionKey
+                isDynamicVocab
                 beforeCreatingClue
                 beforeSendingClue
                 useStrictEdgeCode
                 useDefaultSourceCode
-                vocabulary {
-                    vocabularyName
-                    providerId
-                    keyPrefix
-                }
-                entityTypeConfiguration {
-                    icon
-                    displayName
-                    entityType
-                }
                 annotationProperties {
                     displayName
                     key
@@ -261,59 +251,55 @@ export async function createManualAnnotation(authToken: string, hostname: string
                         id
                         key
                         edgeType
-                        entityTypeConfiguration {
-                            icon
-                            displayName
-                            entityType
-                        }
+                        entityType
                         origin
                         dataSourceGroupId
                         dataSourceId
                         dataSetId
                         direction
+                        entityTypeConfiguration {
+                            icon
+                            displayName
+                            entityType
+                        }
                         edgeProperties {
                             id
                             annotationEdgeId
                             originalField
-                        }
-                    }
-                    validations {
-                        id
-                        displayName
-                        inverse
-                        parameters {
-                            key
-                            value
-                        }
-                    }
-                    transformations {
-                        filters {
-                            parameters {
-                                key
-                                value
+                            vocabularyKey {
+                                displayName
+                                name
+                                vocabulary {
+                                    vocabularyName
+                                }
                             }
-                            id
-                            displayName
-                            inverse
-                        }
-                        operations {
-                            inverse
-                            parameters {
-                                key
-                                value
-                            }
-                            id
-                            displayName
                         }
                     }
+                }
+                vocabulary {
+                  vocabularyId
+                  vocabularyName
+                  grouping
+                  keyPrefix
+                  isActive
+                  isCluedInCore
+                  isDynamic
+                  isProvider
+                  isVocabularyOwner
+                  providerId
+                  description
+                }
+                entityTypeConfiguration {
+                    icon
+                    displayName
+                    entityType
                 }
             }
         }
     }
-    
     `,
       variables: {
-        annotationId: annotationId
+        id: annotationId
       }
     });
     
@@ -333,11 +319,19 @@ export async function createManualAnnotation(authToken: string, hostname: string
         if (response.data.errors != null && response.data.errors.length > 0){
             throw new Error(response.data.errors[0].message);
         }
-        return response.data.data.preparation.annotation;
+        const theAnnotation = response.data.data.preparation.annotation;
+        sortAnnotation(theAnnotation);
+        return theAnnotation;
     })
     .catch((error: Error) => {
       console.log(error);
     });
+  }
+
+  function sortAnnotation(annotation: any){
+    if (annotation.annotationProperties == null) 
+      return;
+    annotation.annotationProperties.sort((a: any, b: any) => (a.vocabKey > b.vocabKey) ? 1 : -1);
   }
 
   export default { addEdgeMapping, editEdgeMapping, modifyAnnotation, createManualAnnotation, getAnnotationById };

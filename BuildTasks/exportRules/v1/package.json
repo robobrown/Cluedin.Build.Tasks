@@ -1,6 +1,6 @@
 {
   "name": "cluedin.build.tasks.export.rules",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "CluedIn Excport Rules Build Task",
   "repository": {
     "type": "git",

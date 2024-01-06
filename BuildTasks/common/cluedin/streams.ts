@@ -10,6 +10,8 @@ export async function exportStreams(authToken: string, hostname: string, outputP
       const result = await getStreamsByPage(pageNumber, authToken, hostname);
        
       for (const stream of result.data){
+        sortStream(stream);
+
         utils.saveToDisk(outputPath, "Streams", stream.name, stream)
       }
 
@@ -41,10 +43,17 @@ export async function exportStreams(authToken: string, hostname: string, outputP
                     mode
                     exportOutgoingEdges
                     exportIncomingEdges
+                    connector {
+                        name
+                        accountDisplay
+                        accountId
+                        codeName
+                    }
                 }
             }
         }
-    }`,
+    }
+    `,
        variables: {
          pageNumber: pageNumber
        }
@@ -134,7 +143,10 @@ export async function exportStreams(authToken: string, hostname: string, outputP
                   exportIncomingEdges
                   connector {
                     name
-                  }
+                    accountDisplay
+                    accountId
+                    codeName
+                }
               }
           }
       }
@@ -160,7 +172,11 @@ export async function exportStreams(authToken: string, hostname: string, outputP
         if (response.data.errors != null && response.data.errors.length > 0){
             throw new Error(response.data.errors[0].message);
         }
-        return response.data.data.consume.streams.data.find(function(x: any) { return x.name == streamName; });
+        
+        const theStream = response.data.data.consume.streams.data.find(function(x: any) { return x.name == streamName; });
+        sortStream(theStream);
+        
+        return theStream;
   })
   .catch((error: Error) => {
     console.log(error);
@@ -427,6 +443,12 @@ export async function exportStreams(authToken: string, hostname: string, outputP
       console.log(error);
       throw error;
     });
+  }
+
+  function sortStream(stream: any){
+    if (stream != null && stream.mappingConfiguration != null){
+      stream.mappingConfiguration.sort((a: any, b: any) => (a.sourceDataType > b.sourceDataType) ? 1 : -1);
+    }
   }
 
 export default { exportStreams, importStreams, deleteStreamsByName };

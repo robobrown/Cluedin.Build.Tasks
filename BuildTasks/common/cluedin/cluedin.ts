@@ -22,10 +22,10 @@ export async function exportAll(authToken: string, hostname: string, outputPath:
 
 export async function importAll(authToken: string, hostname: string, sourcePath: string){
     console.log("Importing data into CluedIn");
+    await entitytypes.importEntityTypes(authToken, hostname, sourcePath);
     await vocabularies.importVocabularies(authToken, hostname, sourcePath);
     await glossaries.importGlossaries(authToken, hostname, sourcePath);
-    // await hierarchies.importHierarchies(authToken, hostname, sourcePath);
-    await entitytypes.importEntityTypes(authToken, hostname, sourcePath);
+    // await hierarchies.importHierarchies(authToken, hostname, sourcePath); //not implemented
     await connector.importConnectors(authToken, hostname, sourcePath);
     await streams.importStreams(authToken, hostname, sourcePath);
     await rules.importRules(authToken, hostname, sourcePath);

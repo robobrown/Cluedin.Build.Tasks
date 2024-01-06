@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "build-release-task",
     "name": "CluedIn Build and Release Tools",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "publisher": "robobrown",
     "targets": [
         {
@@ -98,6 +98,12 @@
             "path": "BuildTasks/importStreams"
         },
         {
+            "path": "BuildTasks/importVocabularies"
+        },
+        {
+            "path": "BuildTasks/orderRules"
+        },
+        {
             "path": "BuildTasks/removeEntities"
         },
         {
@@ -108,6 +114,9 @@
         },
         {
             "path": "BuildTasks/resyncDatastores"
+        },
+        {
+            "path": "BuildTasks/setFeatureStatus"
         }
     ],
     "contributions": [
@@ -302,6 +311,26 @@
             }
         },
         {
+            "id": "cluedin-extension-import-vocabularies",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "BuildTasks/importVocabularies"
+            }
+        },
+        {
+            "id": "cluedin-extension-order-rules",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "BuildTasks/orderRules"
+            }
+        },
+        {
             "id": "cluedin-extension-remove-entities",
             "type": "ms.vss-distributed-task.task",
             "targets": [
@@ -339,6 +368,16 @@
             ],
             "properties": {
                 "name": "BuildTasks/resyncDatastores"
+            }
+        },
+        {
+            "id": "cluedin-extension-set-feature-status",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "BuildTasks/setFeatureStatus"
             }
         }
     ]

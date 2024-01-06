@@ -158,8 +158,8 @@ async function createGloassaryTerm(authToken: string, hostname: string, savedGlo
   `,
     variables: {
       term: {
-        "name": savedGlossaryTerm.name,
-        "categoryId": categoryId
+        name: savedGlossaryTerm.name,
+        categoryId: categoryId
       }
     }
   });
@@ -203,12 +203,8 @@ async function updateGloassaryTerm(authToken: string, hostname: string, savedGlo
                   name
               }
               active
-              createdBy
-              modifiedBy
               isEndorsedByCurrentUser
               ownedBy
-              createdAt
-              modifiedAt
               shortDescription
               certificationLevel
               userRating
@@ -228,16 +224,16 @@ async function updateGloassaryTerm(authToken: string, hostname: string, savedGlo
   `,
     variables: {
       term: {
-        "id": existingGlossaryTerm.id,
-        "name": savedGlossaryTerm.name,
-        "active": savedGlossaryTerm.active,
-        "ownedBy": existingGlossaryTerm.ownedBy,
-        "shortDescription": savedGlossaryTerm.shortDescription,
-        "certificationLevel": savedGlossaryTerm.certificationLevel,
-        "description": savedGlossaryTerm.description,
-        "categoryId": existingGlossaryTerm.categoryId,
-        "ruleSet": savedGlossaryTerm.ruleSet,
-        "relatedTags": savedGlossaryTerm.relatedTags
+        id: existingGlossaryTerm.id,
+        name: savedGlossaryTerm.name,
+        active: savedGlossaryTerm.active,
+        ownedBy: existingGlossaryTerm.ownedBy,
+        shortDescription: savedGlossaryTerm.shortDescription,
+        certificationLevel: savedGlossaryTerm.certificationLevel,
+        description: savedGlossaryTerm.description,
+        categoryId: existingGlossaryTerm.categoryId,
+        ruleSet: savedGlossaryTerm.ruleSet,
+        relatedTags: savedGlossaryTerm.relatedTags
       }
     }
   });

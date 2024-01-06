@@ -1,6 +1,6 @@
 {
   "name": "cluedin.build.tasks.export.streams",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "CluedIn Export Streams Build Task",
   "repository": {
     "type": "git",

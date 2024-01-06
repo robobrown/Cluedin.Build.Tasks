@@ -96,10 +96,8 @@ async function getEntityTypeByName(authToken: string, hostname: string, entityNa
                     entityType
                     icon
                     id
-                    layoutConfiguration
                     path
                     route
-                    template
                     type
                     pageTemplate {
                         displayName
@@ -168,18 +166,20 @@ async function importEntityTypeConfiguration(authToken: string, hostname: string
 
   if (existingItem == null || existingItem.id == null) {
       console.log('Creating Entity type Configuration');
-      await createEntityTypeConfiguration(authToken, hostname, savedItem, pageTemplate.pageTemplateId);
+      await createEntityTypeConfiguration(authToken, hostname, savedItem, pageTemplate);
       existingItem = await getEntityTypeByName(authToken, hostname, entityTypeName);
   }
-
+  
   const areEqual = utils.isEqual(existingItem, savedItem); 
   if (!areEqual) {
+    console.log(existingItem);
+    console.log(savedItem);
     console.log('Updating Entity Type Configuration ' + savedItem.displayName);
-    await updateEntityTypeConfiguration(authToken, hostname, savedItem, existingItem.id, pageTemplate.pageTemplateId);
+    await updateEntityTypeConfiguration(authToken, hostname, savedItem, existingItem.id, pageTemplate);
   }
 }
 
-async function createEntityTypeConfiguration(authToken: string, hostname: string, entitytype: any, pageTemplateId: string){
+async function createEntityTypeConfiguration(authToken: string, hostname: string, entitytype: any, pageTemplate: any){
   const axios = require('axios');
   const data = JSON.stringify({
     query: `mutation saveEntityTypeConfiguration(
@@ -194,17 +194,16 @@ async function createEntityTypeConfiguration(authToken: string, hostname: string
   }
   `,
     variables: {
-      "entityTypeConfiguration": {
-            "displayName": entitytype.displayName,
-            "icon": entitytype.icon,
-            "route": entitytype.route,
-            "path": entitytype.path,
-            "entityType": entitytype.entityType,
-            "type": entitytype.type,
-            "template": entitytype.template,
-            "layoutConfiguration": entitytype.layoutConfiguration,
-            "pageTemplateId": pageTemplateId,
-            "active": entitytype.active
+      entityTypeConfiguration: {
+            displayName: entitytype.displayName,
+            icon: entitytype.icon,
+            route: entitytype.route,
+            path: entitytype.path,
+            entityType: entitytype.entityType,
+            type: entitytype.type,
+            layoutConfiguration: pageTemplate.pageTemplateId,
+            pageTemplateId: pageTemplate.pageTemplateId,
+            active: entitytype.active
         }
     }
   });
@@ -233,7 +232,7 @@ async function createEntityTypeConfiguration(authToken: string, hostname: string
   });
 }
 
-async function updateEntityTypeConfiguration(authToken: string, hostname: string, savedEntityTypeConfiguration: any, entitytypeConfigurationId: string, pageTemplateId: string){
+async function updateEntityTypeConfiguration(authToken: string, hostname: string, savedEntityTypeConfiguration: any, entitytypeConfigurationId: string, pageTemplate: any){
   const axios = require('axios');
   const data = JSON.stringify({
     query: `mutation saveEntityTypeConfiguration(
@@ -248,18 +247,17 @@ async function updateEntityTypeConfiguration(authToken: string, hostname: string
   }
   `,
     variables: {
-      "entityTypeConfiguration": {
-            "id": entitytypeConfigurationId,
-            "displayName": savedEntityTypeConfiguration.displayName,
-            "icon": savedEntityTypeConfiguration.icon,
-            "route": savedEntityTypeConfiguration.route,
-            "path": savedEntityTypeConfiguration.path,
-            "entityType": savedEntityTypeConfiguration.entityType,
-            "type": savedEntityTypeConfiguration.type,
-            "template": savedEntityTypeConfiguration.template,
-            "layoutConfiguration": savedEntityTypeConfiguration.layoutConfiguration,
-            "pageTemplateId": pageTemplateId,
-            "active": savedEntityTypeConfiguration.active
+      entityTypeConfiguration: {
+            id: entitytypeConfigurationId,
+            displayName: savedEntityTypeConfiguration.displayName,
+            icon: savedEntityTypeConfiguration.icon,
+            route: savedEntityTypeConfiguration.route,
+            path: savedEntityTypeConfiguration.path,
+            entityType: savedEntityTypeConfiguration.entityType,
+            type: savedEntityTypeConfiguration.type,
+            layoutConfiguration: pageTemplate.pageTemplateId,
+            pageTemplateId: pageTemplate.pageTemplateId,
+            active: savedEntityTypeConfiguration.active
         }
     }
   });
@@ -306,10 +304,8 @@ async function getEntityTypesByPage(authToken: string, hostname: string, pageNum
                   entityType
                   icon
                   id
-                  layoutConfiguration
                   path
                   route
-                  template
                   type
                   pageTemplate {
                       displayName
@@ -323,7 +319,7 @@ async function getEntityTypesByPage(authToken: string, hostname: string, pageNum
   `,
     variables: {
       pageNumber: pageNumber,
-      pageSize: 20
+      pageSize: 200
     }
   });
   

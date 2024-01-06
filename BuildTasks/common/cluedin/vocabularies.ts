@@ -87,8 +87,6 @@ async function getVocabularyDetails(authToken: string, hostname: string, vocabul
               grouping
               keyPrefix
               isActive
-              createdAt
-              createdBy
               isCluedInCore
               isDynamic
               isProvider
@@ -161,6 +159,9 @@ async function getVocabularyDetails(authToken: string, hostname: string, vocabul
     if (response.data.errors != null && response.data.errors.length > 0){
       throw new Error(response.data.errors[0].message);
     }
+    
+    sortVocabularies(response.data.data);
+
     return response.data.data;
   })
   .catch((error: Error) => {
@@ -357,14 +358,18 @@ async function importVocabulary(authToken: string, hostname: string, vocabularyN
       //create the vocabulary key
       console.log('Creating vocabulary key: ' + savedVocabularyKey.name);
       await createVocabularyKey(authToken, hostname, existingVocabulary.management.vocabulary.vocabularyId, savedVocabularyKey);
+    } else {
+      //update the vocabulary key
+      const areEqual = utils.isEqual(existingVocabularyKey, savedVocabularyKey); 
+      if (!areEqual) {
+        console.log('Updating vocabulary key: ' + savedVocabularyKey.name);
+        if (existingVocabularyKey != null){
+          await updateVocabularyKey(authToken, hostname, savedVocabularyKey, existingVocabulary.management.vocabulary.vocabularyId, existingVocabularyKey.vocabularyKeyId);
+        }
+      }
     }
 
-    //update the vocabulary key
-    const areEqual = utils.isEqual(existingVocabularyKey, savedVocabularyKey); 
-    if (!areEqual) {
-      console.log('Updating vocabulary key: ' + savedVocabularyKey.name);
-      await updateVocabularyKey(authToken, hostname, savedVocabularyKey, existingVocabulary.management.vocabulary.vocabularyId, existingVocabularyKey.vocabularyKeyId);
-    }
+
   }
 }
 
@@ -381,12 +386,12 @@ async function createVocabulary(authToken: string, hostname: string, savedVocabu
       }
   }`,
     variables: {
-      "vocabulary": {
-        "vocabularyName": savedVocabulary.vocabularyName,
-        "entityTypeConfiguration": savedVocabulary.entityTypeConfiguration,
-        "providerId": savedVocabulary.providerId,
-        "keyPrefix": savedVocabulary.keyPrefix,
-        "description": savedVocabulary.description
+      vocabulary: {
+        vocabularyName: savedVocabulary.vocabularyName,
+        entityTypeConfiguration: savedVocabulary.entityTypeConfiguration,
+        providerId: savedVocabulary.providerId,
+        keyPrefix: savedVocabulary.keyPrefix,
+        description: savedVocabulary.description
       }
     }
   });
@@ -474,14 +479,16 @@ async function createVocabularyKey(authToken: string, hostname: string, vocabula
       }
     }`,
     variables: {
-      "vocabularyId": vocabularyId,
-      "displayName": savedVocabularyKey.displayName,
-      "name": savedVocabularyKey.name,
-      "groupName": savedVocabularyKey.groupName,
-      "isVisible": savedVocabularyKey.isVisible,
-      "dataType": savedVocabularyKey.dataType,
-      "dataClassificationCode": savedVocabularyKey.dataClassificationCode,
-      "description": savedVocabularyKey.description
+      vocabularyKey: {
+        vocabularyId: vocabularyId,
+        displayName: savedVocabularyKey.displayName,
+        name: savedVocabularyKey.name,
+        groupName: savedVocabularyKey.groupName,
+        isVisible: savedVocabularyKey.isVisible,
+        dataType: savedVocabularyKey.dataType,
+        dataClassificationCode: savedVocabularyKey.dataClassificationCode,
+        description: savedVocabularyKey.description
+      }
     }
   });
   
@@ -499,6 +506,8 @@ async function createVocabularyKey(authToken: string, hostname: string, vocabula
   return axios.request(config)
   .then((response: any) => {
       if (response.data.errors != null && response.data.errors.length > 0){
+          console.log(data);
+          console.log(response.data.errors);
           throw new Error(response.data.errors[0].message);
       }
       return response.data.data.management.createVocabularyKey.vocabularyKeyId;
@@ -521,26 +530,26 @@ async function updateVocabularyKey(authToken: string, hostname: string, savedVoc
       }
   }`,
     variables: {
-      "vocabularyKey": {
-        "vocabularyId": vocabularyId,
-        "vocabularyKeyId": vocabularyKeyId,
-        "displayName": savedVocabularyKey.displayName,
-        "name": savedVocabularyKey.name,
-        "isVisible": savedVocabularyKey.isVisible,
-        "groupName": savedVocabularyKey.groupName,
-        "dataAnnotationsIsEditable": null,
-        "dataAnnotationsIsNullable": null,
-        "dataAnnotationsIsPrimaryKey": null,
-        "dataAnnotationsIsRequired": null,
-        "dataAnnotationsMaximumLength": null,
-        "dataAnnotationsMinimumLength": null,
-        "dataType": savedVocabularyKey.dataType,
-        "storage": savedVocabularyKey.storage,
-        "dataClassificationCode": savedVocabularyKey.data,
-        "description": savedVocabularyKey.description,
-        "mapsToOtherKeyId": null,
-        "isValueChangeInsignificant": savedVocabularyKey.isValueChangeInsignificant,
-        "glossaryTermId": null
+      vocabularyKey: {
+        vocabularyId: vocabularyId,
+        vocabularyKeyId: vocabularyKeyId,
+        displayName: savedVocabularyKey.displayName,
+        name: savedVocabularyKey.name,
+        isVisible: savedVocabularyKey.isVisible,
+        groupName: savedVocabularyKey.groupName,
+        dataAnnotationsIsEditable: null,
+        dataAnnotationsIsNullable: null,
+        dataAnnotationsIsPrimaryKey: null,
+        dataAnnotationsIsRequired: null,
+        dataAnnotationsMaximumLength: null,
+        dataAnnotationsMinimumLength: null,
+        dataType: savedVocabularyKey.dataType,
+        storage: savedVocabularyKey.storage,
+        dataClassificationCode: savedVocabularyKey.data,
+        description: savedVocabularyKey.description,
+        mapsToOtherKeyId: null,
+        isValueChangeInsignificant: savedVocabularyKey.isValueChangeInsignificant,
+        glossaryTermId: null
       }
     }
   });
@@ -567,6 +576,17 @@ async function updateVocabularyKey(authToken: string, hostname: string, savedVoc
     console.log(error);
     throw error;
   });
+}
+
+function sortVocabularies(response: any){
+  //Sort the arrays so that the GIT keeps a similar pattern
+  if (response.management.vocabularyGroupNames != null && response.management.vocabularyGroupNames.mappingConfiguration !!= null){
+    response.management.vocabularyGroupNames.mappingConfiguration.sort((a: any, b: any) => (a.name > b.name) ? 1 : -1);
+  }
+  if (response.management.vocabularyKeysFromVocabularyId != null && response.management.vocabularyKeysFromVocabularyId.data != null){
+    response.management.vocabularyKeysFromVocabularyId.data.sort((a: any, b: any) => (a.key > b.key) ? 1 : -1);
+  }
+  
 }
 
 export default { exportVocabularies, importVocabularies, getVocabKeysForVocabId, getBasicVocabularyByName };

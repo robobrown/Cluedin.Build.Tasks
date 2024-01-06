@@ -107,7 +107,7 @@ async function createConnector(authToken: string, hostname: string, savedConnect
       if (response.data.errors != null && response.data.errors.length > 0){
           throw new Error(response.data.errors[0].message);
       }
-      return response.data.data.consume.createConnection.id;
+      return response.data.data;
   })
   .catch((error: Error) => {
     console.log(error);
@@ -131,32 +131,32 @@ async function updateConnector(authToken: string, hostname: string, savedConnect
       }
     }`,
     variables: {
-      "connectorConfiguration": {
-        "id": existingConnector.id,
-        "name": savedConnector.name,
-        "accountDisplay": savedConnector.accountDisplay,
-        "accountId": savedConnector.accountId,
-        "active": savedConnector.active,
-        "autoSync": savedConnector.autoSync,
-        "codeName": savedConnector.codeName,
-        "configuration": savedConnector.configuration,
-        "createdDate": existingConnector.createdDate,
-        "entityId": existingConnector.entityId,
-        "failingAuthentication": existingConnector.failingAuthentication,
-        "guide": savedConnector.guide,
-        "helperConfiguration": savedConnector.helperConfiguration,
-        "providerId": savedConnector.providerId,
-        "reAuthEndpoint": savedConnector.reAuthEndpoint,
-        "source": savedConnector.source,
-        "sourceQuality": existingConnector.sourceQuality,
-        "stats": existingConnector.stats,
-        "supportsAutomaticWebhookCreation": savedConnector.supportsAutomaticWebhookCreation,
-        "supportsConfiguration": savedConnector.supportsConfiguration,
-        "supportsWebhooks": savedConnector.supportsWebhooks,
-        "userId": existingConnector.userId,
-        "userName": existingConnector.userName,
-        "webhookManagementEndpoints": savedConnector.webhookManagementEndpoints,
-        "webhooks": savedConnector.webhooks
+      connectorConfiguration: {
+        id: existingConnector.id,
+        name: savedConnector.name,
+        accountDisplay: savedConnector.accountDisplay,
+        accountId: savedConnector.accountId,
+        active: savedConnector.active,
+        autoSync: savedConnector.autoSync,
+        codeName: savedConnector.codeName,
+        configuration: savedConnector.configuration,
+        createdDate: existingConnector.createdDate,
+        entityId: existingConnector.entityId,
+        failingAuthentication: existingConnector.failingAuthentication,
+        guide: savedConnector.guide,
+        helperConfiguration: savedConnector.helperConfiguration,
+        providerId: savedConnector.providerId,
+        reAuthEndpoint: savedConnector.reAuthEndpoint,
+        source: savedConnector.source,
+        sourceQuality: existingConnector.sourceQuality,
+        stats: existingConnector.stats,
+        supportsAutomaticWebhookCreation: savedConnector.supportsAutomaticWebhookCreation,
+        supportsConfiguration: savedConnector.supportsConfiguration,
+        supportsWebhooks: savedConnector.supportsWebhooks,
+        userId: existingConnector.userId,
+        userName: existingConnector.userName,
+        webhookManagementEndpoints: savedConnector.webhookManagementEndpoints,
+        webhooks: savedConnector.webhooks
       }
     }
   });
@@ -177,7 +177,7 @@ async function updateConnector(authToken: string, hostname: string, savedConnect
       if (response.data.errors != null && response.data.errors.length > 0){
           throw new Error(response.data.errors[0].message);
       }
-      return response.data.data.inbound.saveConnectorConfiguration;
+      return response.data.data;
   })
   .catch((error: Error) => {
     console.log(error);
