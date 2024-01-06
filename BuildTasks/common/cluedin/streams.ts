@@ -111,8 +111,6 @@ export async function exportStreams(authToken: string, hostname: string, outputP
 
     const areEqual = utils.isEqual(existingStream, savedStream); 
     if (!areEqual) {
-      console.log(existingStream);
-      console.log(savedStream);
       console.log('Updating Stream ' + existingStream.id);
       await updateStream(authToken, hostname, savedStream, existingStream.id);
 
@@ -175,7 +173,7 @@ export async function exportStreams(authToken: string, hostname: string, outputP
             throw new Error(response.data.errors[0].message);
         }
         
-        let theStream = response.data.data.consume.streams.data.find(function(x: any) { return x.name == streamName; });
+        const theStream = response.data.data.consume.streams.data.find(function(x: any) { return x.name == streamName; });
         sortStream(theStream);
         
         return theStream;
@@ -448,7 +446,9 @@ export async function exportStreams(authToken: string, hostname: string, outputP
   }
 
   function sortStream(stream: any){
-    stream.mappingConfiguration.sort((a: any, b: any) => (a.sourceDataType > b.sourceDataType) ? 1 : -1);
+    if (stream != null && stream.mappingConfiguration != null){
+      stream.mappingConfiguration.sort((a: any, b: any) => (a.sourceDataType > b.sourceDataType) ? 1 : -1);
+    }
   }
 
 export default { exportStreams, importStreams, deleteStreamsByName };

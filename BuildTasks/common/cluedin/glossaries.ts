@@ -203,12 +203,8 @@ async function updateGloassaryTerm(authToken: string, hostname: string, savedGlo
                   name
               }
               active
-              createdBy
-              modifiedBy
               isEndorsedByCurrentUser
               ownedBy
-              createdAt
-              modifiedAt
               shortDescription
               certificationLevel
               userRating

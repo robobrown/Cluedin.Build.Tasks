@@ -107,7 +107,7 @@ async function createConnector(authToken: string, hostname: string, savedConnect
       if (response.data.errors != null && response.data.errors.length > 0){
           throw new Error(response.data.errors[0].message);
       }
-      return response.data.data.consume.createConnection.id;
+      return response.data.data;
   })
   .catch((error: Error) => {
     console.log(error);
@@ -177,7 +177,7 @@ async function updateConnector(authToken: string, hostname: string, savedConnect
       if (response.data.errors != null && response.data.errors.length > 0){
           throw new Error(response.data.errors[0].message);
       }
-      return response.data.data.inbound.saveConnectorConfiguration;
+      return response.data.data;
   })
   .catch((error: Error) => {
     console.log(error);

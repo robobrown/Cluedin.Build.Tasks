@@ -87,8 +87,6 @@ async function getVocabularyDetails(authToken: string, hostname: string, vocabul
               grouping
               keyPrefix
               isActive
-              createdAt
-              createdBy
               isCluedInCore
               isDynamic
               isProvider

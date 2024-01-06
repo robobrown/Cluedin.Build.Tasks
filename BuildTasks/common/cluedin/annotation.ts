@@ -50,7 +50,7 @@ export async function createManualAnnotation(authToken: string, hostname: string
         if (response.data.errors != null && response.data.errors.length > 0){
             throw new Error(response.data.errors[0].message);
         }
-        return response.data.data.inbound.createDataSet;
+        return response.data.data.management.createManualAnnotation;
     })
     .catch((error: Error) => {
       console.log(error);
@@ -222,31 +222,21 @@ export async function createManualAnnotation(authToken: string, hostname: string
         preparation {
             annotation(id: $id) {
                 id
-                isDynamicVocab
                 name
                 entityType
+                originEntityCodeKey
+                origin
                 nameKey
                 descriptionKey
-                originEntityCodeKey
                 createdDateMap
                 modifiedDateMap
                 cultureKey
-                origin
                 versionKey
+                isDynamicVocab
                 beforeCreatingClue
                 beforeSendingClue
                 useStrictEdgeCode
                 useDefaultSourceCode
-                vocabulary {
-                    vocabularyName
-                    providerId
-                    keyPrefix
-                }
-                entityTypeConfiguration {
-                    icon
-                    displayName
-                    entityType
-                }
                 annotationProperties {
                     displayName
                     key
@@ -276,13 +266,33 @@ export async function createManualAnnotation(authToken: string, hostname: string
                             id
                             annotationEdgeId
                             originalField
-                            vocabularyKeyId
                             vocabularyKey {
                                 displayName
-                                vocabularyKeyId
+                                name
+                                vocabulary {
+                                    vocabularyName
+                                }
                             }
                         }
                     }
+                }
+                vocabulary {
+                  vocabularyId
+                  vocabularyName
+                  grouping
+                  keyPrefix
+                  isActive
+                  isCluedInCore
+                  isDynamic
+                  isProvider
+                  isVocabularyOwner
+                  providerId
+                  description
+                }
+                entityTypeConfiguration {
+                    icon
+                    displayName
+                    entityType
                 }
             }
         }
@@ -309,11 +319,19 @@ export async function createManualAnnotation(authToken: string, hostname: string
         if (response.data.errors != null && response.data.errors.length > 0){
             throw new Error(response.data.errors[0].message);
         }
-        return response.data.data.preparation.annotation;
+        const theAnnotation = response.data.data.preparation.annotation;
+        sortAnnotation(theAnnotation);
+        return theAnnotation;
     })
     .catch((error: Error) => {
       console.log(error);
     });
+  }
+
+  function sortAnnotation(annotation: any){
+    if (annotation.annotationProperties == null) 
+      return;
+    annotation.annotationProperties.sort((a: any, b: any) => (a.vocabKey > b.vocabKey) ? 1 : -1);
   }
 
   export default { addEdgeMapping, editEdgeMapping, modifyAnnotation, createManualAnnotation, getAnnotationById };

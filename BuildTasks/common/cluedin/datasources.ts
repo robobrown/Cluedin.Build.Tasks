@@ -15,19 +15,29 @@ import annotation from "./annotation";
                     name
                     editors
                     dataSources {
+                        id
                         type
                         name
                         dataSets {
+                            id
                             name
                             configuration
+                            annotationId
                             annotation {
                                 id
+                                name
                                 entityType
                                 originEntityCodeKey
                                 origin
                                 nameKey
-                                vocabularyId
+                                descriptionKey
+                                createdDateMap
+                                modifiedDateMap
+                                cultureKey
+                                versionKey
                                 isDynamicVocab
+                                beforeCreatingClue
+                                beforeSendingClue
                                 useStrictEdgeCode
                                 useDefaultSourceCode
                                 annotationProperties {
@@ -40,7 +50,6 @@ import annotation from "./annotation";
                                     useSourceCode
                                     entityCodeOrigin
                                     type
-                                    vocabularyKeyId
                                     annotationEdges {
                                         id
                                         key
@@ -60,10 +69,12 @@ import annotation from "./annotation";
                                             id
                                             annotationEdgeId
                                             originalField
-                                            vocabularyKeyId
                                             vocabularyKey {
                                                 displayName
-                                                vocabularyKeyId
+                                                name
+                                                vocabulary {
+                                                    vocabularyName
+                                                }
                                             }
                                         }
                                     }
@@ -86,14 +97,6 @@ import annotation from "./annotation";
                                     displayName
                                     entityType
                                 }
-                                descriptionKey
-                                cultureKey
-                                versionKey
-                                name
-                                createdDateMap
-                                modifiedDateMap
-                                beforeCreatingClue
-                                beforeSendingClue
                             }
                             fieldMappings {
                                 id
@@ -201,9 +204,9 @@ import annotation from "./annotation";
                 const vocab = await vocabularies.getBasicVocabularyByName(authToken, hostname, savedDataSet.annotation.vocabulary.vocabularyName);
 
                 if (existingDataSet == null || existingDataSet.id == null) {
-                    const createdDataSet = await createDataSet(authToken, hostname, userId, savedDataSet, dataSourceId);
-                    dataSetId = createdDataSet.id;
-                    await annotation.createManualAnnotation(authToken, hostname, savedDataSet, createdDataSet, vocab.vocabularyId);
+                    const newDataSet = await createDataSet(authToken, hostname, userId, savedDataSet, dataSourceId);
+                    dataSetId = newDataSet.id;
+                    await annotation.createManualAnnotation(authToken, hostname, savedDataSet, newDataSet, vocab.vocabularyId);
 
                     existingDataSourceSet = await getDataSourceSetByName(authToken, hostname, savedDataSourceSet.name);
 
@@ -217,12 +220,9 @@ import annotation from "./annotation";
                 if (savedDataSet.annotation != null) {
                
                   const vocabKeys = await vocabularies.getVocabKeysForVocabId(authToken, hostname, vocab.vocabularyId);
-
-                  const savedMappedFields = savedDataSet.fieldMappings.filter((mapping: any) => mapping.key != "--ignore--");
-                  const savedIgnoredFields = savedDataSet.fieldMappings.filter((mapping: any) => mapping.key == "--ignore--").map(selectOriginalField);
-                  const existingMappedFields = existingDataSet.fieldMappings.filter((mapping: any) => mapping.key != "--ignore--");
+                  
                   const existingIgnoredFields = existingDataSet.fieldMappings.filter((mapping: any) => mapping.key == "--ignore--").map(selectOriginalField);
-
+                  const savedIgnoredFields = savedDataSet.fieldMappings.filter((mapping: any) => mapping.key == "--ignore--").map(selectOriginalField);
                   const ignoredFields = savedIgnoredFields.filter((mapping: string) => !existingIgnoredFields.includes(mapping));
                     
                   if (ignoredFields.length > 0)
@@ -230,23 +230,48 @@ import annotation from "./annotation";
                       await addIgnoredFieldsToDataSet(authToken, hostname, dataSetId, ignoredFields);
                   }
 
+                  const savedMappedFields = savedDataSet.fieldMappings.filter((mapping: any) => mapping.key != "--ignore--");
+                  const existingMappedFields = existingDataSet.fieldMappings.filter((mapping: any) => mapping.key != "--ignore--");
+                  let existingAnnotation = await annotation.getAnnotationById(authToken, hostname, existingDataSet.annotationId);
+
                   for (const fieldMapping of savedMappedFields){
                       //Add the field if it doesn't exist
+                      const vocabKey = vocabKeys.find(function(x: any) { return x.key == fieldMapping.key; });
+                      const savedAnnotationProperty = savedDataSet.annotation.annotationProperties.find(function(x: any) { return x.vocabKey == fieldMapping.key; });
+
                       const match = existingMappedFields.find(function(x: any) { return x.originalField == fieldMapping.originalField && x.key == fieldMapping.key; });
-                      
                       if (match == null)
                       {
-                        const vocabKey = vocabKeys.find(function(x: any) { return x.key == fieldMapping.key; });
-                        await addPropertyMappingToCluedMappingConfiguration(authToken, hostname, fieldMapping.originalField, vocabKey.vocabularyId, vocabKey.vocabularyKeyId, dataSetId);
+                        console.log("addPropertyMappingToCluedMappingConfiguration " + fieldMapping.originalField)
+                        await addPropertyMappingToCluedMappingConfiguration(authToken, hostname, fieldMapping.originalField, vocabKey.vocabularyId, vocabKey.vocabularyKeyId, dataSetId, savedAnnotationProperty.useAsAlias, savedAnnotationProperty.useAsEntityCode);
+                        
+                        if ((savedAnnotationProperty.entityCodeOrigin != null && savedAnnotationProperty.entityCodeOrigin != "")
+                        || savedAnnotationProperty.useAsAlias == true
+                        || savedAnnotationProperty.useAsEntityCode == true){
+                          console.log("modifyBatchVocabularyClueMappingConfiguration - on Add " + fieldMapping.originalField)
+                          await modifyBatchVocabularyClueMappingConfiguration(authToken, hostname, existingDataSet.annotationId, fieldMapping.key, savedAnnotationProperty.entityCodeOrigin, savedAnnotationProperty.useAsAlias, savedAnnotationProperty.useAsEntityCode)
+                        }
+
+                      } else {
+                        const existingAnnotationProperty = existingAnnotation.annotationProperties.find((prop: any) => prop.vocabKey == match.key);
+                        if (savedAnnotationProperty.entityCodeOrigin != existingAnnotationProperty.entityCodeOrigin || savedAnnotationProperty.useAsAlias != existingAnnotationProperty.useAsAlias || savedAnnotationProperty.useAsEntityCode != existingAnnotationProperty.useAsEntityCode){
+                          console.log("modifyBatchVocabularyClueMappingConfiguration - on Update" + fieldMapping.originalField)
+                          await modifyBatchVocabularyClueMappingConfiguration(authToken, hostname, existingDataSet.annotationId, fieldMapping.key, savedAnnotationProperty.entityCodeOrigin, savedAnnotationProperty.useAsAlias, savedAnnotationProperty.useAsEntityCode)
+                        }
                       }
                   }
 
                   //modify the annotation to set originEntityCodeKey, customOrigin, nameKey, etc not all functionality is available on the Create Annotation
                   //also checked the other methods on CluedIn, seems like the "linking" of existing annotations requires an existing dataset to be loaded and we dont have this yet.
-                  await annotation.modifyAnnotation(authToken, hostname, savedDataSet.annotation, existingDataSet.annotationId, vocab.vocabularyId);
+                  existingAnnotation = await annotation.getAnnotationById(authToken, hostname, existingDataSet.annotationId);
+                  const areEqual = utils.isEqual(savedDataSet.annotation, existingAnnotation); 
+                  if (!areEqual) {
+                    console.log("modifyAnnotation " + savedDataSet.annotation.name)
+                    await annotation.modifyAnnotation(authToken, hostname, savedDataSet.annotation, existingDataSet.annotationId, vocab.vocabularyId);
+                    existingAnnotation = await annotation.getAnnotationById(authToken, hostname, existingDataSet.annotationId);
+                  }
 
-                  const existingAnnotation = await annotation.getAnnotationById(authToken, hostname, existingDataSet.annotationId);
-                  
+                  //Add the Edge Mappings
                   for (const annotationProperty of savedDataSet.annotation.annotationProperties){
                     //only if there are edges defined
                     if (annotationProperty.annotationEdges !== undefined){
@@ -269,8 +294,6 @@ import annotation from "./annotation";
                           if (!areEqual) {
                             // update the edge
                             console.log("updating edge mapping " + annotationEdge.key)
-                            console.log(existingEdge);
-                            console.log(annotationEdge);
                             await annotation.editEdgeMapping(authToken, hostname, annotationEdge, existingEdge.edgeId);
                           }
                         }
@@ -347,7 +370,6 @@ import annotation from "./annotation";
         }
       }
     });
-    console.log(JSON.parse(data));
 
     const config = {
       method: 'post',
@@ -420,7 +442,7 @@ import annotation from "./annotation";
     });
   }
  
-  async function addPropertyMappingToCluedMappingConfiguration(authToken: string, hostname: string, originalField: string, vocabularyId: string, vocabularyKeyId: string, dataSetId: string){
+  async function addPropertyMappingToCluedMappingConfiguration(authToken: string, hostname: string, originalField: string, vocabularyId: string, vocabularyKeyId: string, dataSetId: string, useAsAlias: boolean = false, useAsEntityCode: boolean = false){
     const axios = require('axios');
     const data = JSON.stringify({
       query: `mutation addPropertyMappingToCluedMappingConfiguration(
@@ -438,14 +460,67 @@ import annotation from "./annotation";
         dataSetId: dataSetId,
         propertyMappingConfiguration: {
             originalField: originalField,
-            useAsAlias: false,
-            useAsEntityCode: false,
+            useAsAlias: useAsAlias,
+            useAsEntityCode: useAsEntityCode,
             vocabularyKeyConfiguration: {
                 vocabularyId: vocabularyId,
                 new: false,
                 vocabularyKeyId: vocabularyKeyId
             }
         }
+      }
+    });
+    
+    const config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'https://' + hostname + '/graphql',
+      headers: { 
+        'Content-Type': 'application/json', 
+        'Authorization': 'Bearer ' + authToken
+      },
+      data : data
+    };
+
+    return axios.request(config)
+    .then((response: any) => {
+        if (response.data.errors != null && response.data.errors.length > 0){
+            throw new Error(response.data.errors[0].message);
+        }
+        return response.data.data;
+    })
+    .catch((error: Error) => {
+      console.log(error);
+      throw error;
+    });
+  }
+
+  async function modifyBatchVocabularyClueMappingConfiguration(authToken: string, hostname: string, annotationId: string, vocabularyKeyId: string, entityOrigin: string, useAsAlias: boolean = false, useAsEntityCode: boolean = false){
+    const axios = require('axios');
+    const data = JSON.stringify({
+      query: `mutation modifyBatchVocabularyClueMappingConfiguration(
+        $annotationId: ID!
+        $batchPropertyMappings: InputBatchPropertyMapping
+      ) {
+        management {
+          modifyBatchVocabularyClueMappingConfiguration(
+            annotationId: $annotationId
+            batchPropertyMappings: $batchPropertyMappings
+          )
+        }
+      }`,
+      variables: {
+        annotationId: annotationId,
+        batchPropertyMappings:             {
+                propertyMappingSettings: [
+                    {
+                        vocabKey: vocabularyKeyId,
+                        entityCodeOrigin: entityOrigin,
+                        useAsEntityCode: useAsEntityCode,
+                        useAsAlias: useAsAlias
+                    }
+                ]
+            }
       }
     });
     
@@ -523,122 +598,114 @@ import annotation from "./annotation";
     const axios = require('axios');
     const data = JSON.stringify({
         query: `query getDataSourceSetByName($name: String!) {
-            inbound {
-                dataSourceSetByName(name: $name) {
-                        id
-                        name
-                        editors
-                        createdAt
-                        updatedAt
-                        dataSources {
-                            id
-                            type
-                            name
-                            createdAt
-                            updatedAt
-                            dataSets {
-                                id
-                                name
-                                configuration
-                                createdAt
-                                updatedAt
-                                annotationId
-                                annotation {
-                                    id
-                                    name
-                                    entityType
-                                    originEntityCodeKey
-                                    origin
-                                    nameKey
-                                    descriptionKey
-                                    cultureKey
-                                    versionKey
-                                    updatedAt
-                                    createdAt
-                                    createdDateMap
-                                    modifiedDateMap
-                                    isDynamicVocab
-                                    beforeCreatingClue
-                                    beforeSendingClue
-                                    useStrictEdgeCode
-                                    useDefaultSourceCode
-                                    annotationProperties {
-                                        displayName
-                                        key
-                                        vocabKey
-                                        coreVocab
-                                        useAsEntityCode
-                                        useAsAlias
-                                        useSourceCode
-                                        entityCodeOrigin
-                                        type
-                                        vocabularyKeyId
-                                        annotationEdges {
-                                          id
-                                          key
-                                          edgeType
+          inbound {
+              dataSourceSetByName(name: $name) {
+                  id
+                  name
+                  editors
+                  dataSources {
+                      id
+                      type
+                      name
+                      dataSets {
+                          id
+                          name
+                          configuration
+                          annotationId
+                          annotation {
+                              id
+                              name
+                              entityType
+                              originEntityCodeKey
+                              origin
+                              nameKey
+                              descriptionKey
+                              createdDateMap
+                              modifiedDateMap
+                              cultureKey
+                              versionKey
+                              isDynamicVocab
+                              beforeCreatingClue
+                              beforeSendingClue
+                              useStrictEdgeCode
+                              useDefaultSourceCode
+                              annotationProperties {
+                                  displayName
+                                  key
+                                  vocabKey
+                                  coreVocab
+                                  useAsEntityCode
+                                  useAsAlias
+                                  useSourceCode
+                                  entityCodeOrigin
+                                  type
+                                  annotationEdges {
+                                      id
+                                      key
+                                      edgeType
+                                      entityType
+                                      origin
+                                      dataSourceGroupId
+                                      dataSourceId
+                                      dataSetId
+                                      direction
+                                      entityTypeConfiguration {
+                                          icon
+                                          displayName
                                           entityType
-                                          origin
-                                          dataSourceGroupId
-                                          dataSourceId
-                                          dataSetId
-                                          direction
-                                          entityTypeConfiguration {
-                                              icon
+                                      }
+                                      edgeProperties {
+                                          id
+                                          annotationEdgeId
+                                          originalField
+                                          vocabularyKey {
                                               displayName
-                                              entityType
-                                          }
-                                          edgeProperties {
-                                              id
-                                              annotationEdgeId
-                                              originalField
-                                              vocabularyKeyId
-                                              vocabularyKey {
-                                                  displayName
-                                                  vocabularyKeyId
+                                              name
+                                              vocabulary {
+                                                  vocabularyName
                                               }
                                           }
                                       }
-                                    }
-                                    vocabulary {
-                                        vocabularyId
-                                        vocabularyName
-                                        grouping
-                                        keyPrefix
-                                        isActive
-                                        createdAt
-                                        createdBy
-                                        isCluedInCore
-                                        isDynamic
-                                        isProvider
-                                        isVocabularyOwner
-                                        providerId
-                                        description
-                                    }
-                                    entityTypeConfiguration {
-                                        icon
-                                        displayName
-                                        entityType
-                                    }
-                                }
-                                fieldMappings {
-                                    id
-                                    originalField
-                                    key
-                                    edges {
-                                        edgeType
-                                        dataSetId
-                                        dataSourceId
-                                        dataSourceGroupId
-                                        entityType
-                                    }
-                                }
-                                originalFields
-                            }
-                        }
-                }
-            }
-        }`,
+                                  }
+                              }
+                              vocabulary {
+                                  vocabularyId
+                                  vocabularyName
+                                  grouping
+                                  keyPrefix
+                                  isActive
+                                  isCluedInCore
+                                  isDynamic
+                                  isProvider
+                                  isVocabularyOwner
+                                  providerId
+                                  description
+                              }
+                              entityTypeConfiguration {
+                                  icon
+                                  displayName
+                                  entityType
+                              }
+                          }
+                          fieldMappings {
+                              id
+                              originalField
+                              key
+                              edges {
+                                  edgeType
+                                  dataSetId
+                                  dataSourceId
+                                  dataSourceGroupId
+                                  entityType
+                              }
+                          }
+                          originalFields
+                      }
+                  }
+              }
+          }
+      }
+      `,
         variables: {
             name: streamName
         }
