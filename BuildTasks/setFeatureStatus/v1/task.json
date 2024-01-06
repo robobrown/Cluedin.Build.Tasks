@@ -1,0 +1,87 @@
+{
+    "id": "526efafe-12eb-4c1f-8765-577f6f403a8a",
+    "name": "CluedInSetFeatureStatus",
+    "friendlyName": "CluedIn Set Feature Status",
+    "description": "Task for setting CluedIn feature status",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "author": "Robert Brown",
+    "version": {
+        "Major": 1,
+        "Minor": 0,
+        "Patch": 3
+    },
+    "visibility": [
+      "Build",
+      "Release"
+    ],
+    "demands": [
+      "npm"
+    ],
+    "minimumAgentVersion": "1.83.0",
+    "instanceNameFormat": "Cluedin Set Feature Status: $(publisherId).$(extensionId)",
+    "inputs": [
+        {
+            "name": "cluedinUsername",
+            "type": "string",
+            "label": "CluedIn Username",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the username used to access the CluedIn App Isntance"
+          },
+          {
+            "name": "cluedinPassword",
+            "type": "string",
+            "label": "CluedIn Password",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the username used to access the CluedIn App Isntance"
+          },
+          {
+            "name": "cluedinClientId",
+            "type": "string",
+            "label": "CluedIn ClientId",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the ClientId of the CluedIn App"
+          },
+          {
+            "name": "cluedinHostname",
+            "type": "string",
+            "label": "CluedIn Hostname",
+            "defaultValue": "app-oranization.yourdomain.com",
+            "required": true,
+            "helpMarkDown": "Enter the Hostname the CluedIn App Instance"
+          },
+          {
+            "name": "featureName",
+            "type": "string",
+            "label": "Feature Name",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the name of the Cluedin Feature"
+          },
+          {
+            "name": "isEnabled",
+            "type": "boolean",
+            "label": "Is Enabled",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Is the feature Enabled or Disabled?"
+          }
+    ],
+    "execution": {
+      "Node": {
+        "target": "importConnectors/v1/index.js",
+        "argumentFormat": ""
+      },
+      "Node10": {
+        "target": "importConnectors/v1/index.js",
+        "argumentFormat": ""
+      },
+      "Node16": {
+        "target": "importConnectors/v1/index.js",
+        "argumentFormat": ""
+      }
+    }
+    }
