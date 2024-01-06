@@ -133,15 +133,21 @@ import annotation from "./annotation";
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
   }
  
   export async function importDataSources(authToken: string, hostname: string, sourcePath: string){
-    const fs = require('fs/promises');
+    const fs = require('fs');
     const directoryPath = sourcePath + 'DataSourceSets';
+
+    if (!fs.existsSync(directoryPath)){
+      return;
+    }
+
     const userInfo = await auth.getUserInfo(authToken, hostname);
   
-    const files = await fs.readdir(directoryPath);
+    const files = await fs.readdirSync(directoryPath);
     for (const file of files) {
       if (file.endsWith('.json') == false) continue;
       await importDataSourceSet(authToken, hostname, userInfo.id, file.replace('.json', ''), sourcePath);
@@ -154,7 +160,6 @@ import annotation from "./annotation";
     const savedDataSourceSet = utils.readFile(sourcePath + 'DataSourceSets/' + datasourceSetName + '.json');
 
     if (existingDataSourceSet == null || existingDataSourceSet.id == null) {
-        console.log('Creating DataSourceSet');
         await createDataSourceSet(authToken, hostname, userId, savedDataSourceSet.name);
         existingDataSourceSet = await getDataSourceSetByName(authToken, hostname, savedDataSourceSet.name);
     }
@@ -166,10 +171,9 @@ import annotation from "./annotation";
           let existingDataSource = existingDataSourceSet.dataSources.find(function(x: any) { return x.name == savedDataSource.name; });
           
           if (existingDataSource == null || existingDataSource.id == null) {
-              console.log('Creating DataSource');
               const createdDataSource = await createDataSource(authToken, hostname, userId, savedDataSource, existingDataSourceSet.id);
               dataSourceId = createdDataSource.id;
-              
+                    
               existingDataSourceSet = await getDataSourceSetByName(authToken, hostname, savedDataSourceSet.name);
               existingDataSource = existingDataSourceSet.dataSources.find(function(x: any) { return x.name == savedDataSource.name; })
           }
@@ -182,12 +186,13 @@ import annotation from "./annotation";
               let existingDataSet = existingDataSource.dataSets.find(function(x: any) { return x.name == savedDataSet.name; });
               const dataSetsAreEqual = utils.isEqual(existingDataSet, savedDataSet); 
               if (!dataSetsAreEqual) {
+                const vocab = await vocabularies.getBasicVocabularyByName(authToken, hostname, savedDataSet.annotation.vocabulary.vocabularyName);
+
                 if (existingDataSet == null || existingDataSet.id == null) {
-                    console.log('Creating DataSet');
                     const createdDataSet = await createDataSet(authToken, hostname, userId, savedDataSet, dataSourceId);
                     dataSetId = createdDataSet.id;
-                    await annotation.createManualAnnotation(authToken, hostname, savedDataSet, createdDataSet);
-                
+                    await annotation.createManualAnnotation(authToken, hostname, savedDataSet, createdDataSet, vocab.vocabularyId);
+
                     existingDataSourceSet = await getDataSourceSetByName(authToken, hostname, savedDataSourceSet.name);
 
                     existingDataSource = existingDataSourceSet.dataSources.find(function(x: any) { return x.name == savedDataSource.name; });
@@ -198,7 +203,7 @@ import annotation from "./annotation";
                 }
         
                 if (savedDataSet.annotation != null) {
-                  const vocab = await vocabularies.getBasicVocabularyByName(authToken, hostname, savedDataSet.annotation.vocabulary.vocabularyName);
+               
                   const vocabKeys = await vocabularies.getVocabKeysForVocabId(authToken, hostname, vocab.vocabularyId);
 
                   const savedMappedFields = savedDataSet.fieldMappings.filter((mapping: any) => mapping.key != "--ignore--");
@@ -301,13 +306,14 @@ import annotation from "./annotation";
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
   }
 
   async function createDataSource(authToken: string, hostname: string, userId: string, dataSource: any, dataSourceSetId: string){
     const axios = require('axios');
     const data = JSON.stringify({
-      query: `mmutation createDataSource($dataSourceSetId: ID, $dataSource: InputDataSource) {
+      query: `mutation createDataSource($dataSourceSetId: ID, $dataSource: InputDataSource) {
         inbound {
           createDataSource(
             dataSourceSetId: $dataSourceSetId
@@ -327,7 +333,8 @@ import annotation from "./annotation";
         }
       }
     });
-    
+    console.log(JSON.parse(data));
+
     const config = {
       method: 'post',
       maxBodyLength: Infinity,
@@ -348,6 +355,7 @@ import annotation from "./annotation";
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
   }
 
@@ -394,6 +402,7 @@ import annotation from "./annotation";
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
   }
  
@@ -446,6 +455,7 @@ import annotation from "./annotation";
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
   }
 
@@ -491,6 +501,7 @@ import annotation from "./annotation";
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
   }
   
@@ -638,6 +649,7 @@ import annotation from "./annotation";
     })
     .catch((error: Error) => {
         console.log(error);
+        throw error;
     });
   }
 

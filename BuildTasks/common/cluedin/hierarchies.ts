@@ -67,6 +67,7 @@ async function getHierarchiesByPage(authToken: string, hostname: string, pageNum
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 

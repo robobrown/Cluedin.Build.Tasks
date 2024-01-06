@@ -22,15 +22,21 @@ export async function exportRules(authToken: string, hostname: string, outputPat
     }
  }
  
- export async function importRules(authToken: string, hostname: string, sourcePath: string){
-  const fs = require('fs/promises');
+export async function importRules(authToken: string, hostname: string, sourcePath: string){
+  const fs = require('fs');
   const directoryPath = sourcePath + 'Rules';
+  
+  if (!fs.existsSync(directoryPath)){
+    return;
+  }
 
-  const files = await fs.readdir(directoryPath);
+  const files = await fs.readdirSync(directoryPath);
   for (const file of files) {
     if (file.endsWith('.json') == false) continue;
     await importRule(authToken, hostname, file.replace('.json', ''), sourcePath);
   }
+  
+  await orderRules(authToken, hostname, sourcePath);
 }
 
 async function importRule(authToken: string, hostname: string, ruleName: string, sourcePath: string){
@@ -104,6 +110,7 @@ async function getRulesByPage(pageNumber: number, authToken: string, hostname: s
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 
@@ -152,6 +159,7 @@ async function getRuleByName(authToken: string, hostname: string, ruleName: stri
  })
  .catch((error: Error) => {
    console.log(error);
+   throw error;
  });
 }
 
@@ -193,6 +201,7 @@ async function createRule(authToken: string, hostname: string, savedRule: any){
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 
@@ -240,6 +249,7 @@ async function updateRule(authToken: string, hostname: string, savedRule: any, r
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 
@@ -281,6 +291,7 @@ async function activateRule(authToken: string, hostname: string, ruleId: string)
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 
@@ -326,6 +337,7 @@ async function deleteRulesById(authToken: string, hostname: string, ruleIds: str
   }
   
 }
+
 async function deleteRuleById(authToken: string, hostname: string, ruleId: string){
   const axios = require('axios');
   const data = JSON.stringify({
@@ -359,7 +371,71 @@ async function deleteRuleById(authToken: string, hostname: string, ruleId: strin
   })
   .catch((error: Error) => {
     console.log(error);
+    throw error;
   });
 }
 
-export default { exportRules, importRules, deleteRulesByName };
+export async function orderRules(authToken: string, hostname: string, sourcePath: string){
+  const fs = require('fs');
+  const directoryPath = sourcePath + 'Rules';
+  
+  if (!fs.existsSync(directoryPath)){
+    return;
+  }
+
+  const rules = [];
+
+  const files = await fs.readdirSync(directoryPath);
+  for (const file of files) {
+    if (file.endsWith('.json') == false) continue;
+    const ruleName = file.replace('.json', '');
+    const savedRule = utils.readFile(sourcePath + 'Rules/' + ruleName + '.json');
+    const existingRule = await getRuleByName(authToken, hostname, ruleName);
+    
+    if (savedRule.isActive) {
+      const myRule = {id: existingRule.id, name: savedRule.name, order: savedRule.order};
+      rules.push(myRule);
+    }
+  }
+
+  const ruleIds =  rules.sort((a, b) => a.order - b.order).map(a=>a.id);
+
+  const axios = require('axios');
+
+  const data = JSON.stringify({
+    query: `mutation orderRules($rulesIds: [ID]) {
+      management {
+        id
+        orderRules(rulesIds: $rulesIds)
+      }
+    }`,
+    variables: {
+      rulesIds: ruleIds
+    }
+  });
+  
+  const config = {
+    method: 'post',
+    maxBodyLength: Infinity,
+    url: 'https://' + hostname + '/graphql',
+    headers: { 
+      'Content-Type': 'application/json', 
+      'Authorization': 'Bearer ' + authToken
+    },
+    data : data
+  };
+
+  return axios.request(config)
+  .then((response: any) => {
+      if (response.data.errors != null && response.data.errors.length > 0){
+          throw new Error(response.data.errors[0].message);
+      }
+      return response.data.data;
+  })
+  .catch((error: Error) => {
+    console.log(error);
+    throw error;
+  });
+}
+
+export default { exportRules, importRules, deleteRulesByName, orderRules };

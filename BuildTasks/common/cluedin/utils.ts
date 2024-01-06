@@ -31,7 +31,6 @@ function replacer(key: string, value: string)
     else if (key=="organizationId") return undefined;
     else if (key=="updatedAt") return undefined;
     else if (key=="vocabularyId") return undefined;
-    else if (key=="connectorProviderDefinitionId") return undefined;
     
     else return value;
 }
