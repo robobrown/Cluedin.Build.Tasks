@@ -1,6 +1,6 @@
 {
   "name": "cluedin.build.tasks.reprocess.allentities",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "CluedIn Reporocess All Entities Build Task",
   "repository": {
     "type": "git",

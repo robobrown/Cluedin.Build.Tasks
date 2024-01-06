@@ -1,4 +1,4 @@
-export async function createManualAnnotation(authToken: string, hostname: string, dataSet: any, dataSetId: any){
+export async function createManualAnnotation(authToken: string, hostname: string, dataSet: any, dataSetId: any, vocabularyId: string){
     const axios = require('axios');
     const data = JSON.stringify({
       query: `mutation createManualAnnotation(
@@ -27,7 +27,7 @@ export async function createManualAnnotation(authToken: string, hostname: string
                 new: false,
                 vocabularyName: dataSet.annotation.vocabulary.vocabularyName,
                 keyPrefix: dataSet.annotation.vocabulary.keyPrefix,
-                vocabularyId: dataSet.annotation.vocabulary.vocabularyId // TODO this might be different in other environments
+                vocabularyId: vocabularyId 
             }
         },
         isDynamicVocab: dataSet.annotation.isDynamicVocab

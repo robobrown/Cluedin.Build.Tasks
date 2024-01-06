@@ -233,13 +233,13 @@ import annotation from "./annotation";
                   //also checked the other methods on CluedIn, seems like the "linking" of existing annotations requires an existing dataset to be loaded and we dont have this yet.
                   await annotation.modifyAnnotation(authToken, hostname, savedDataSet.annotation, existingDataSet.annotationId, vocab.vocabularyId);
 
-                  var existingAnnotation = await annotation.getAnnotationById(authToken, hostname, existingDataSet.annotationId);
+                  const existingAnnotation = await annotation.getAnnotationById(authToken, hostname, existingDataSet.annotationId);
                   
                   for (const annotationProperty of savedDataSet.annotation.annotationProperties){
                     //only if there are edges defined
                     if (annotationProperty.annotationEdges !== undefined){
                       //get the existing annotation property
-                      let existingAnnotationProperty = existingAnnotation.annotationProperties.find((prop: any) => prop.key == annotationProperty.key);
+                      const existingAnnotationProperty = existingAnnotation.annotationProperties.find((prop: any) => prop.key == annotationProperty.key);
 
                       for (const annotationEdge of annotationProperty.annotationEdges){
                         let existingEdge = undefined;
