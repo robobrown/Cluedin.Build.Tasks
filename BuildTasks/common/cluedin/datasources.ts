@@ -110,7 +110,6 @@ import annotation from "./annotation";
                                     entityType
                                 }
                             }
-                            originalFields
                         }
                     }
                 }
@@ -699,7 +698,6 @@ import annotation from "./annotation";
                                   entityType
                               }
                           }
-                          originalFields
                       }
                   }
               }
@@ -758,10 +756,6 @@ import annotation from "./annotation";
 
           if (dataset.fieldMappings != null){
             dataset.fieldMappings.sort((a: any, b: any) => (a.originalField > b.originalField) ? 1 : -1);
-          }
-
-          if (dataset.originalFields != null){
-            dataset.originalFields.sort();
           }
         }
 
