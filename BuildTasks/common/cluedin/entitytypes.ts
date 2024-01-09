@@ -46,7 +46,7 @@ export async function exportEntityTypes(authToken: string, hostname: string, out
             || entityType.entityType == "/Document/Template/Presentation" || entityType.entityType == "/Process" || entityType.entityType == "/ProcessStage"|| entityType.entityType == "/Product"
             || entityType.entityType == "/Planning/Scrum/Role/ProductOwner" || entityType.entityType == "/Project" || entityType.entityType == "/Planning/ProjectPlan" || entityType.entityType == "/SourceCode/PullRequest"
             || entityType.entityType == "/Temporal/Quarter" || entityType.entityType == "/Question" || entityType.entityType == "/Document/Report" || entityType.entityType == "/SourceCode/Repository"
-            || entityType.entityType == "/Repudiation" || entityType.entityType == "/Sales/Sale" || entityType.entityType == "/Sales/Contract" || entityType.entityType == "/Sales/Deal"
+            || entityType.entityType == "/Sales/Sale" || entityType.entityType == "/Sales/Contract" || entityType.entityType == "/Sales/Deal"
             || entityType.entityType == "/Sales/Lead" || entityType.entityType == "/Sales/Oppurtunity" || entityType.entityType == "/Sales/Opportunity" || entityType.entityType == "/Sales/Order"
             || entityType.entityType == "/Sales/Quote" || entityType.entityType == "/Planning/Scrum/Role/ScrumMaster" || entityType.entityType == "/Planning/Scrum" || entityType.entityType == "/Infrastructure/Host/Server"
             || entityType.entityType == "/Infrastructure/Site" || entityType.entityType == "/Skill" || entityType.entityType == "/Sms" || entityType.entityType == "/Comment/Social"
