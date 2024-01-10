@@ -8,14 +8,31 @@ export async function deleteEntities(authToken: string, hostname: string, entity
     }
 }
 
-async function deleteAllEntities(authToken: string, hostname: string, entityType: string, pageSize: number){
+export async function deleteAllEntities(authToken: string, hostname: string, entityType: string, pageSize: number){
+  //NB apparently there is a limit of 10 000 on GQL for deletions, this code may need to loop 
+  let total = 0;
+  let count = 0;
+ 
+   while (count <= total){
+    const result = await deleteAllEntities_internal(authToken, hostname, entityType, pageSize);
+    
+    total = result.search.totalResults;
+    count += result.search.entries.length;
+    if (count == total)
+    { 
+      break;
+    }
+   }
+}
+
+async function deleteAllEntities_internal(authToken: string, hostname: string, entityType: string, pageSize: number) {
   const axios = require('axios');
   const data = JSON.stringify({
       query: `query deleteAllEntitiesFromSpecificType($entityType: String, $pageSize: Int) {
         search(query: $entityType, pageSize: $pageSize) {
           totalResults
-          entries {
-id
+          actions {
+            deleteEntity
           }
         }
       }
@@ -36,7 +53,7 @@ id
       },
       data : data
     };
-  
+
     return axios.request(config)
     .then((response: any) => {
         if (response.data.errors != null && response.data.errors.length > 0){
@@ -47,17 +64,34 @@ id
     .catch((error: Error) => {
       console.log(error);
       throw error;
-    });    
+    }); 
 }
 
-async function deleteAllEntitiesWithFilter(authToken: string, hostname: string, entityType: string, filter: string, pageSize: number){
+export async function deleteAllEntitiesWithFilter(authToken: string, hostname: string, entityType: string, filter: string, pageSize: number){
+  //NB apparently there is a limit of 10 000 on GQL for deletions, this code may need to loop 
+  let total = 0;
+  let count = 0;
+ 
+   while (count <= total){
+    const result = await deleteAllEntitiesWithFilter_internal(authToken, hostname, entityType, filter, pageSize);
+    
+    total = result.search.totalResults;
+    count += result.search.entries.length;
+    if (count == total)
+    { 
+      break;
+    }
+   }
+}
+
+async function deleteAllEntitiesWithFilter_internal(authToken: string, hostname: string, entityType: string, filter: string, pageSize: number){
   const axios = require('axios');
   const data = JSON.stringify({
     query: `query deleteAllEntitiesFromSpecificType($entityType: String, $filter: String, $pageSize: Int) {
       search(query: $entityType, filter: $filter, pageSize: $pageSize) {
         totalResults
-        entries {
-id
+        actions {
+          deleteEntity
         }
       }
     }
@@ -90,7 +124,7 @@ id
   .catch((error: Error) => {
     console.log(error);
     throw error;
-  });    
+  }); 
 }
 
 export async function reprocessAllRules(authToken: string, hostname: string){
@@ -172,3 +206,4 @@ console.log(config.url);
 }
 
 export default { deleteEntities, reprocessAllRules, reprocessRulesByEntityType, resyncDatastores };
+
