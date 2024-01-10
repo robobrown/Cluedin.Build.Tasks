@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "build-release-task",
     "name": "CluedIn Build and Release Tools",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "publisher": "robobrown",
     "targets": [
         {
