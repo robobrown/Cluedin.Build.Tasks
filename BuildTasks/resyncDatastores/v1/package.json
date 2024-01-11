@@ -1,6 +1,6 @@
 {
   "name": "cluedin.build.tasks.resync.datastores",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "CluedIn Resync Datastores Build Task",
   "repository": {
     "type": "git",
