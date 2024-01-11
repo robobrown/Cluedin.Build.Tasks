@@ -19,7 +19,7 @@
       "npm"
     ],
     "minimumAgentVersion": "1.83.0",
-    "instanceNameFormat": "Cluedin Delete Rules: $(publisherId).$(extensionId)",
+    "instanceNameFormat": "Cluedin Delete Rules",
     "inputs": [
         {
             "name": "cluedinUsername",

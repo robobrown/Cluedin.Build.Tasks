@@ -19,7 +19,7 @@
       "npm"
     ],
     "minimumAgentVersion": "1.83.0",
-    "instanceNameFormat": "Cluedin Import Streams: $(publisherId).$(extensionId)",
+    "instanceNameFormat": "Cluedin Import Streams",
     "inputs": [
         {
             "name": "cluedinUsername",

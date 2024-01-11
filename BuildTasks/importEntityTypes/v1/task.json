@@ -19,7 +19,7 @@
       "npm"
     ],
     "minimumAgentVersion": "1.83.0",
-    "instanceNameFormat": "Cluedin Import Entity Types: $(publisherId).$(extensionId)",
+    "instanceNameFormat": "Cluedin Import Entity Types",
     "inputs": [
         {
             "name": "cluedinUsername",

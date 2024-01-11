@@ -19,7 +19,7 @@
       "npm"
     ],
     "minimumAgentVersion": "1.83.0",
-    "instanceNameFormat": "Cluedin Export Glossaries: $(publisherId).$(extensionId)",
+    "instanceNameFormat": "Cluedin Export Glossaries",
     "inputs": [
         {
             "name": "cluedinUsername",

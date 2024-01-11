@@ -19,7 +19,7 @@
       "npm"
     ],
     "minimumAgentVersion": "1.83.0",
-    "instanceNameFormat": "Cluedin Delete Streams: $(publisherId).$(extensionId)",
+    "instanceNameFormat": "Cluedin Delete Streams",
     "inputs": [
         {
             "name": "cluedinUsername",

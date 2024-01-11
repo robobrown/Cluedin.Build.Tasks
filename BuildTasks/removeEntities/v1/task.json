@@ -19,7 +19,7 @@
       "npm"
     ],
     "minimumAgentVersion": "1.83.0",
-    "instanceNameFormat": "Cluedin Remove Entities: $(publisherId).$(extensionId)",
+    "instanceNameFormat": "Cluedin Remove Entities",
     "inputs": [
         {
             "name": "cluedinUsername",

@@ -19,7 +19,7 @@
       "npm"
     ],
     "minimumAgentVersion": "1.83.0",
-    "instanceNameFormat": "Cluedin Resync Datastores: $(publisherId).$(extensionId)",
+    "instanceNameFormat": "Cluedin Resync Datastores",
     "inputs": [
         {
             "name": "cluedinUsername",

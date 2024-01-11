@@ -19,7 +19,7 @@
       "npm"
     ],
     "minimumAgentVersion": "1.83.0",
-    "instanceNameFormat": "Cluedin Reprocess Entities By Type: $(publisherId).$(extensionId)",
+    "instanceNameFormat": "Cluedin Reprocess Entities By Type",
     "inputs": [
         {
             "name": "cluedinUsername",

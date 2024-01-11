@@ -19,7 +19,7 @@
       "npm"
     ],
     "minimumAgentVersion": "1.83.0",
-    "instanceNameFormat": "Cluedin Set Feature Status: $(publisherId).$(extensionId)",
+    "instanceNameFormat": "Cluedin Set Feature Status",
     "inputs": [
         {
             "name": "cluedinUsername",
@@ -72,15 +72,15 @@
     ],
     "execution": {
       "Node": {
-        "target": "importConnectors/v1/index.js",
+        "target": "setFeatureStatus/v1/index.js",
         "argumentFormat": ""
       },
       "Node10": {
-        "target": "importConnectors/v1/index.js",
+        "target": "setFeatureStatus/v1/index.js",
         "argumentFormat": ""
       },
       "Node16": {
-        "target": "importConnectors/v1/index.js",
+        "target": "setFeatureStatus/v1/index.js",
         "argumentFormat": ""
       }
     }
