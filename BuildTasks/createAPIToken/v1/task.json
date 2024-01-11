@@ -1,0 +1,93 @@
+{
+    "id": "a6ef5efc-e6a9-4d1f-afd8-0fbc3f1a281b",
+    "name": "CluedInCreateAPIToken",
+    "friendlyName": "CluedIn Create API Token",
+    "description": "Task for Creating CluedIn API Token",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "author": "Robert Brown",
+    "version": {
+      "Major": 1,
+      "Minor": 0,
+      "Patch": 5
+    },
+    "visibility": [
+      "Build",
+      "Release"
+    ],
+    "demands": [
+      "npm"
+    ],
+    "minimumAgentVersion": "1.83.0",
+    "instanceNameFormat": "Cluedin Set Connector Config Value",
+    "inputs": [
+      {
+        "name": "cluedinUsername",
+        "type": "string",
+        "label": "CluedIn Username",
+        "defaultValue": "",
+        "required": true,
+        "helpMarkDown": "Enter the username used to access the CluedIn App Isntance"
+      },
+      {
+        "name": "cluedinPassword",
+        "type": "string",
+        "label": "CluedIn Password",
+        "defaultValue": "",
+        "required": true,
+        "helpMarkDown": "Enter the username used to access the CluedIn App Isntance"
+      },
+      {
+        "name": "cluedinClientId",
+        "type": "string",
+        "label": "CluedIn ClientId",
+        "defaultValue": "",
+        "required": true,
+        "helpMarkDown": "Enter the ClientId of the CluedIn App"
+      },
+      {
+        "name": "cluedinHostname",
+        "type": "string",
+        "label": "CluedIn Hostname",
+        "defaultValue": "app-oranization.yourdomain.com",
+        "required": true,
+        "helpMarkDown": "Enter the Hostname the CluedIn App Instance"
+      },
+      {
+        "name": "tokenName",
+        "type": "string",
+        "label": "Token Name",
+        "defaultValue": "",
+        "required": true,
+        "helpMarkDown": "Enter the name of the Token"
+      },
+      {
+        "name": "tokenExpiryHours",
+        "type": "string",
+        "label": "Expiry Hours",
+        "defaultValue": "8772",
+        "required": true,
+        "helpMarkDown": "Enter the name duration in hours that the token is valid for"
+      }
+    ],
+    "outputVariables": [
+      {
+          "name": "theToken",
+          "description": "Generated Token from CluedIn."
+      }
+    ],
+    "execution": {
+      "Node": {
+        "target": "setConnectorConfigValue/v1/index.js",
+        "argumentFormat": ""
+      },
+      "Node10": {
+        "target": "setConnectorConfigValue/v1/index.js",
+        "argumentFormat": ""
+      },
+      "Node16": {
+        "target": "setConnectorConfigValue/v1/index.js",
+        "argumentFormat": ""
+      }
+    }
+}
