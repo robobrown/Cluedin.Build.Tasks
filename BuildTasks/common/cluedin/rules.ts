@@ -75,6 +75,7 @@ async function getRulesByPage(pageNumber: number, authToken: string, hostname: s
               data {
                   id
                   name
+                  description
                   isActive
                   order
                   condition
@@ -124,6 +125,7 @@ async function getRuleByName(authToken: string, hostname: string, ruleName: stri
               data {
                   id
                   name
+                  description
                   isActive
                   order
                   condition
