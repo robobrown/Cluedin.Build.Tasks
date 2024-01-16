@@ -41,6 +41,22 @@ jobs:
         files: '${{github.workspace}}/BuildTasks/**/package.json'
         patch-syntax: |
           = /version => "${{ steps.gitversion.outputs.semVer }}"
+          
+    - name: update metadata in vss-extension.json
+      uses: onlyutkarsh/patch-files-action@v1.0.1
+      with:
+        files: '${{github.workspace}}/vss-extension.json'
+        patch-syntax: |
+          = /version => "${{ steps.gitversion.outputs.semVer }}"
+
+    - name: update metadata in task.json
+      uses: onlyutkarsh/patch-files-action@v1.0.1
+      with:
+        files: '${{github.workspace}}/BuildTasks/**/task.json'
+        patch-syntax: |
+          = /Major => ${{ steps.gitversion.outputs.major }}
+          = /Minor => ${{ steps.gitversion.outputs.minor }}
+          = /Patch => ${{ steps.gitversion.outputs.patch }}
 
     - name: Package
       run: npm run package
