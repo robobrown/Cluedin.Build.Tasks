@@ -7,18 +7,47 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [ 16.x ]
-
     steps:
     - uses: actions/checkout@v3
 
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: install gitversion tool
+      uses: gittools/actions/gitversion/setup@v0.9
+      with:
+          versionSpec: '1.0.x'
+          
+    - name: execute gitversion
+      id: gitversion # step id used as a reference for output values
+      uses: gittools/actions/gitversion/execute@v0.9
+        
+    - name: print gitversion
+      run: |
+        echo "Major: ${{ steps.gitversion.outputs.major }}"
+        echo "Minor: ${{ steps.gitversion.outputs.minor }}"
+        echo "Patch: ${{ steps.gitversion.outputs.patch }}"
+        echo "MajorMinorPatch: ${{ steps.gitversion.outputs.majorMinorPatch }}"
+        echo "SemVer: ${{ steps.gitversion.outputs.semVer }}"
+        
+    - name: Use Node.js 16.x
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 16.x
       
-    - name: NPM Package
+    - name: update metadata in package.json
+      uses: onlyutkarsh/patch-files-action@v1.0.1
+      with:
+        files: '${{github.workspace}}/BuildTasks/**/package.json'
+        patch-syntax: |
+          = /version => "${{ steps.gitversion.outputs.semVer }}"
+
+    - name: Package
       run: npm run package
+      
+    - name: print vsix path
+      run: |
+        echo "VSIX Path: ${{ env.vsix_path }}"
+
+    - name: upload vsix as artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: vsix-viewer-${{steps.gitversion.outputs.semVer}}.vsix
+        path: ${{github.workspace}}/dist/robobrown.build-release-task-${{steps.gitversion.outputs.semVer}}.vsix
