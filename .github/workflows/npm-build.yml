@@ -3,8 +3,6 @@ name: Package Extension
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
   build:
@@ -21,9 +19,6 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-
-    - name: NPM Install
-      run: npm install
       
     - name: NPM Package
       run: npm run package
