@@ -1,4 +1,3 @@
-next-version: 0.0.7
 assembly-versioning-scheme: MajorMinorPatch
 assembly-file-versioning-scheme: MajorMinorPatchTag
 assembly-informational-format: '{InformationalVersion}'
@@ -15,8 +14,5 @@ build-metadata-padding: 4
 commits-since-version-source-padding: 4
 commit-message-incrementing: Enabled
 commit-date-format: 'yyyy-MM-dd'
-ignore:
-  sha: 
-    - dde4d4cfc7d1e37f66675f825945b6ac56c3fd53
 merge-message-formats: {}
 update-build-number: true
