@@ -54,9 +54,9 @@ jobs:
       with:
         files: '${{github.workspace}}/BuildTasks/**/task.json'
         patch-syntax: |
-          = /Major => ${{ steps.gitversion.outputs.major }}
-          = /Minor => ${{ steps.gitversion.outputs.minor }}
-          = /Patch => ${{ steps.gitversion.outputs.patch }}
+          = /version/Major => ${{ steps.gitversion.outputs.major }}
+          = /version/Minor => ${{ steps.gitversion.outputs.minor }}
+          = /version/Patch => ${{ steps.gitversion.outputs.patch }}
 
     - name: Package
       run: npm run package
@@ -68,5 +68,5 @@ jobs:
     - name: upload vsix as artifact
       uses: actions/upload-artifact@v1
       with:
-        name: vsix-viewer-${{steps.gitversion.outputs.semVer}}.vsix
+        name: build-release-task-${{steps.gitversion.outputs.semVer}}.vsix
         path: ${{github.workspace}}/dist/robobrown.build-release-task-${{steps.gitversion.outputs.semVer}}.vsix
