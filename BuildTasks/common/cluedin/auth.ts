@@ -151,7 +151,7 @@ export async function getTokenByName(authToken: string, hostname: string, tokenN
       if (response.data.errors != null && response.data.errors.length > 0){
           throw new Error(response.data.errors[0].message);
       }
-      return response.data.data.administration.apiTokens.find(function(x: any) { return x.name == tokenName; });;
+      return response.data.data.administration.apiTokens.find(function(x: any) { return x.name == tokenName; });
   })
   .catch((error: Error) => {
       console.log(error);

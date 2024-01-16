@@ -1,0 +1,79 @@
+{
+    "id": "d30c7ee6-3ad2-4f40-9d88-134a8b6e775f",
+    "name": "CluedInDeleteOrphanedStreams",
+    "friendlyName": "CluedIn Delete Orphaned Streams",
+    "description": "Task for Removing Streams From CluedIn that do not exist in the Source Folder",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "author": "Robert Brown",
+    "version": {
+        "Major": 1,
+        "Minor": 0,
+        "Patch": 7
+    },
+    "visibility": [
+      "Build",
+      "Release"
+    ],
+    "demands": [
+      "npm"
+    ],
+    "minimumAgentVersion": "1.83.0",
+    "instanceNameFormat": "Cluedin Delete Orphaned Streams",
+    "inputs": [
+        {
+            "name": "cluedinUsername",
+            "type": "string",
+            "label": "CluedIn Username",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the username used to access the CluedIn App Isntance"
+          },
+          {
+            "name": "cluedinPassword",
+            "type": "string",
+            "label": "CluedIn Password",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the username used to access the CluedIn App Isntance"
+          },
+          {
+            "name": "cluedinClientId",
+            "type": "string",
+            "label": "CluedIn ClientId",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the ClientId of the CluedIn App"
+          },
+          {
+            "name": "cluedinHostname",
+            "type": "string",
+            "label": "CluedIn Hostname",
+            "defaultValue": "app-oranization.yourdomain.com",
+            "required": true,
+            "helpMarkDown": "Enter the Hostname the CluedIn App Instance"
+          },
+          {
+            "name": "sourcePath",
+            "type": "string",
+            "label": "Json Source Path",
+            "defaultValue": "../../data/",
+            "required": true,
+            "helpMarkDown": "Enter the path where to get the json data"
+          }
+    ],
+    "execution": {
+      "Node": {
+        "target": "deleteOrphanedStreams/v1/index.js",
+        "argumentFormat": ""
+      },
+      "Node10": {
+        "target": "deleteOrphanedStreams/v1/index.js",
+        "argumentFormat": ""
+      },
+      "Node16": {
+        "target": "deleteOrphanedStreams/v1/index.js",
+        "argumentFormat": ""
+      }
+    }
+    }

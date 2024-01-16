@@ -60,9 +60,8 @@ export async function importConnectors(authToken: string, hostname: string, sour
 }
 
 export async function setConnectorConfigValue(authToken: string, hostname: string, connectorName: string, connectorConfigName: string, connectorConfigValue: string){
-  var existingConnector = await getConnectorByName(authToken, hostname, connectorName);
-
-  let helperConfiguration = existingConnector.helperConfiguration;
+  const existingConnector = await getConnectorByName(authToken, hostname, connectorName);
+  const helperConfiguration = existingConnector.helperConfiguration;
   
   Object.keys(helperConfiguration).forEach(function(key) {
     if (key == connectorConfigName)
@@ -193,8 +192,6 @@ async function importConnector(authToken: string, hostname: string, connectorNam
   console.log('Importing Connector ' + connectorName);
   const existingItem = await getConnectorByName(authToken, hostname, connectorName);
   const savedItem = utils.readFile(sourcePath + '/Connectors/' + connectorName + '.json');
-
-  //TODO update the savedItem with the "new" configuration parameters
 
   if (existingItem == null || existingItem.id == null) {
       //create the connector

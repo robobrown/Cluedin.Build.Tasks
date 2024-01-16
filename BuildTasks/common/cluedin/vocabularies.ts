@@ -580,7 +580,7 @@ async function updateVocabularyKey(authToken: string, hostname: string, savedVoc
 
 function sortVocabularies(response: any){
   //Sort the arrays so that the GIT keeps a similar pattern
-  if (response.management.vocabularyGroupNames != null && response.management.vocabularyGroupNames.mappingConfiguration !!= null){
+  if (response.management.vocabularyGroupNames != null && response.management.vocabularyGroupNames.mappingConfiguration != null){
     response.management.vocabularyGroupNames.mappingConfiguration.sort((a: any, b: any) => (a.name > b.name) ? 1 : -1);
   }
   if (response.management.vocabularyKeysFromVocabularyId != null && response.management.vocabularyKeysFromVocabularyId.data != null){

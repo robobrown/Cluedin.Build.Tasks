@@ -385,6 +385,26 @@
             "properties": {
                 "name": "BuildTasks/setFeatureStatus"
             }
+        },
+        {
+            "id": "cluedin-extension-delete-orphaned-rules",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "BuildTasks/deleteOrphanedRules"
+            }
+        },
+        {
+            "id": "cluedin-extension-delete-orphaned-streams",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "BuildTasks/deleteOrphanedStreams"
+            }
         }
     ]
 }

@@ -105,6 +105,7 @@ export async function exportStreams(authToken: string, hostname: string, outputP
     const savedStream = utils.readFile(sourcePath + 'Streams/' + streamName + '.json');
 
     if (existingStream == null || existingStream.id == null) {
+        console.log('Creating Stream ' + existingStream.id);
         await createStream(authToken, hostname, savedStream);
         existingStream = await getStreamByName(authToken, hostname, streamName);
     }
@@ -450,5 +451,46 @@ export async function exportStreams(authToken: string, hostname: string, outputP
       stream.mappingConfiguration.sort((a: any, b: any) => (a.sourceDataType > b.sourceDataType) ? 1 : -1);
     }
   }
+  
+export async function deleteOrphanedStreams(authToken: string, hostname: string, sourcePath: string){
+  const fs = require('fs');
+  const directoryPath = sourcePath + 'Streams';
+  const savedStreamNames: string[] = [];
+  const existingStreams: any[] = [];
+  let pageNumber = 1;
+  let total = 0;
+  let count = 0;
 
-export default { exportStreams, importStreams, deleteStreamsByName };
+  if (!fs.existsSync(directoryPath)){
+    return;
+  }
+
+  const files = await fs.readdirSync(directoryPath);
+  for (const file of files) {
+    savedStreamNames.push(file.replace('.json', ''));
+  }
+  
+  while (count <= total){
+    const result = await getStreamsByPage(pageNumber, authToken, hostname);
+
+    for (const stream of result.data){
+      existingStreams.push(stream);
+    }
+
+    total = result.total;
+    count += result.data.length;
+    pageNumber = pageNumber + 1;
+    if (count == total)
+    { 
+      break;
+    }
+  }
+  
+  const orphanedStreams: any[] = existingStreams.filter(x => !savedStreamNames.includes(x.name));
+  orphanedStreams.forEach(async (oStream) => {
+    console.log('Deleting Orphaned Stream ' + oStream.name);
+    await deleteStreamsById(authToken, hostname, oStream.id);
+  });
+}
+
+export default { exportStreams, importStreams, deleteStreamsByName, deleteOrphanedStreams };

@@ -66,16 +66,20 @@ import annotation from "./annotation";
                                             entityType
                                         }
                                         edgeProperties {
-                                            id
-                                            annotationEdgeId
-                                            originalField
-                                            vocabularyKey {
-                                                displayName
-                                                name
-                                                vocabulary {
-                                                    vocabularyName
-                                                }
-                                            }
+                                          id
+                                          annotationEdgeId
+                                          originalField
+                                          vocabularyKey {
+                                              displayName
+                                              name
+                                              vocabulary {
+                                                  vocabularyName
+                                              }
+                                              groupName
+                                              storage
+                                              dataType
+                                              key
+                                          }
                                         }
                                     }
                                 }
@@ -253,8 +257,11 @@ import annotation from "./annotation";
 
                       } else {
                         const existingAnnotationProperty = existingAnnotation.annotationProperties.find((prop: any) => prop.vocabKey == match.key);
-                        if (savedAnnotationProperty.entityCodeOrigin != existingAnnotationProperty.entityCodeOrigin || savedAnnotationProperty.useAsAlias != existingAnnotationProperty.useAsAlias || savedAnnotationProperty.useAsEntityCode != existingAnnotationProperty.useAsEntityCode){
-                          console.log("modifyBatchVocabularyClueMappingConfiguration - on Update" + fieldMapping.originalField)
+                        if (savedAnnotationProperty.useAsEntityCode && ( //only do this if the saved annotation is use as entity code otherise we need to remove the entity codes
+                          savedAnnotationProperty.entityCodeOrigin != existingAnnotationProperty.entityCodeOrigin || 
+                          savedAnnotationProperty.useAsAlias != existingAnnotationProperty.useAsAlias || 
+                          savedAnnotationProperty.useAsEntityCode != existingAnnotationProperty.useAsEntityCode)){
+                          console.log("modifyBatchVocabularyClueMappingConfiguration - on Update " + fieldMapping.originalField)
                           await modifyBatchVocabularyClueMappingConfiguration(authToken, hostname, existingDataSet.annotationId, fieldMapping.key, savedAnnotationProperty.entityCodeOrigin, savedAnnotationProperty.useAsAlias, savedAnnotationProperty.useAsEntityCode)
                         }
                       }
@@ -264,7 +271,7 @@ import annotation from "./annotation";
                   //also checked the other methods on CluedIn, seems like the "linking" of existing annotations requires an existing dataset to be loaded and we dont have this yet.
                   existingAnnotation = await annotation.getAnnotationById(authToken, hostname, existingDataSet.annotationId);
                   const areEqual = utils.isEqual(savedDataSet.annotation, existingAnnotation); 
-                  if (!areEqual) {
+                  if (!areEqual) {                    
                     console.log("modifyAnnotation " + savedDataSet.annotation.name)
                     await annotation.modifyAnnotation(authToken, hostname, savedDataSet.annotation, existingDataSet.annotationId, vocab.vocabularyId);
                     existingAnnotation = await annotation.getAnnotationById(authToken, hostname, existingDataSet.annotationId);
@@ -292,8 +299,12 @@ import annotation from "./annotation";
                           const areEqual = utils.isEqual(existingEdge, annotationEdge); 
                           if (!areEqual) {
                             // update the edge
-                            console.log("updating edge mapping " + annotationEdge.key)
-                            await annotation.editEdgeMapping(authToken, hostname, annotationEdge, existingEdge.edgeId);
+                            console.log("edges are different");
+                            console.log(JSON.stringify(existingEdge));
+                            console.log(JSON.stringify(annotationEdge));
+
+                            console.log("updating edge mapping " + annotationEdge.key);
+                            await annotation.editEdgeMapping(authToken, hostname, annotationEdge, existingEdge);
                           }
                         }
                       }
@@ -654,16 +665,20 @@ import annotation from "./annotation";
                                           entityType
                                       }
                                       edgeProperties {
-                                          id
-                                          annotationEdgeId
-                                          originalField
-                                          vocabularyKey {
-                                              displayName
-                                              name
-                                              vocabulary {
-                                                  vocabularyName
-                                              }
-                                          }
+                                        id
+                                        annotationEdgeId
+                                        originalField
+                                        vocabularyKey {
+                                            displayName
+                                            name
+                                            vocabulary {
+                                                vocabularyName
+                                            }
+                                            groupName
+                                            storage
+                                            dataType
+                                            key
+                                        }
                                       }
                                   }
                               }
@@ -750,8 +765,9 @@ import annotation from "./annotation";
         continue;
 
         for (const dataset of datasource.dataSets){
-          if (dataset.annotation != null && dataset.annotation.annotationProperties != null){
-            dataset.annotation.annotationProperties.sort((a: any, b: any) => (a.key > b.key) ? 1 : -1);
+          if (dataset.annotation != null){//} && dataset.annotation.annotationProperties != null){
+            // dataset.annotation.annotationProperties.sort((a: any, b: any) => (a.key > b.key) ? 1 : -1);
+            annotation.sortAnnotation(dataset.annotation);
           }
 
           if (dataset.fieldMappings != null){

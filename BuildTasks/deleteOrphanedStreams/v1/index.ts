@@ -1,5 +1,5 @@
-import * as tl from "azure-pipelines-task-lib";
-import {auth } from "../../common/cluedin/module";
+import * as tl from "azure-pipelines-task-lib/task";
+import { auth, streams } from "../../common/cluedin/module";
 
 async function run() {
     try {
@@ -8,12 +8,10 @@ async function run() {
         const cluedinPassword: string = tl.getInputRequired('cluedinPassword');
         const cluedinClientId: string = tl.getInputRequired('cluedinClientId');
         const cluedinHostname: string = tl.getInputRequired('cluedinHostname');
-        const tokenName: string = tl.getInputRequired('tokenName');
-        const tokenExpiryHours: string = tl.getPathInputRequired('tokenExpiryHours');
-        
+        const sourcePath: string = tl.getInputRequired('sourcePath');
+
         const token = await auth.getToken(cluedinUsername, cluedinPassword, cluedinClientId, cluedinHostname);
-        const theToken: any = await auth.createToken(token, cluedinHostname, tokenName, parseInt(tokenExpiryHours));
-        tl.setVariable('theToken', theToken.accessToken);
+        await streams.deleteOrphanedStreams(token, cluedinHostname, sourcePath);
     }
     catch (err) {
         if (err instanceof Error) {
