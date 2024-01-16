@@ -1,0 +1,79 @@
+{
+    "id": "28dc73c7-cd96-4946-a4de-6d873991f3e8",
+    "name": "CluedInDeleteOrphanedRules",
+    "friendlyName": "CluedIn Delete Orphaned Rules",
+    "description": "Task for Removing Orphaned Rules From CluedIn",
+    "author": "Robert Brown",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "version": {
+        "Major": 1,
+        "Minor": 0,
+        "Patch": 7
+    },
+    "visibility": [
+      "Build",
+      "Release"
+    ],
+    "demands": [
+      "npm"
+    ],
+    "minimumAgentVersion": "1.83.0",
+    "instanceNameFormat": "Cluedin Delete Orphaned Rules",
+    "inputs": [
+        {
+            "name": "cluedinUsername",
+            "type": "string",
+            "label": "CluedIn Username",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the username used to access the CluedIn App Isntance"
+          },
+          {
+            "name": "cluedinPassword",
+            "type": "string",
+            "label": "CluedIn Password",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the username used to access the CluedIn App Isntance"
+          },
+          {
+            "name": "cluedinClientId",
+            "type": "string",
+            "label": "CluedIn ClientId",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the ClientId of the CluedIn App"
+          },
+          {
+            "name": "cluedinHostname",
+            "type": "string",
+            "label": "CluedIn Hostname",
+            "defaultValue": "app-oranization.yourdomain.com",
+            "required": true,
+            "helpMarkDown": "Enter the Hostname the CluedIn App Instance"
+          },
+          {
+            "name": "sourcePath",
+            "type": "string",
+            "label": "Json Source Path",
+            "defaultValue": "../../data/",
+            "required": true,
+            "helpMarkDown": "Enter the path where to get the json data"
+          }
+    ],
+    "execution": {
+      "Node": {
+        "target": "deleteOrphanedRules/v1/index.js",
+        "argumentFormat": ""
+      },
+      "Node10": {
+        "target": "deleteOrphanedRules/v1/index.js",
+        "argumentFormat": ""
+      },
+      "Node16": {
+        "target": "deleteOrphanedRules/v1/index.js",
+        "argumentFormat": ""
+      }
+    }
+    }

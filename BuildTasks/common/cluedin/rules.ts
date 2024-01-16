@@ -1,3 +1,4 @@
+import { rules } from "./module";
 import utils from "./utils";
 
 export async function exportRules(authToken: string, hostname: string, outputPath: string){
@@ -25,7 +26,7 @@ export async function exportRules(authToken: string, hostname: string, outputPat
 export async function importRules(authToken: string, hostname: string, sourcePath: string){
   const fs = require('fs');
   const directoryPath = sourcePath + 'Rules';
-  
+
   if (!fs.existsSync(directoryPath)){
     return;
   }
@@ -37,6 +38,46 @@ export async function importRules(authToken: string, hostname: string, sourcePat
   }
   
   await orderRules(authToken, hostname, sourcePath);
+}
+
+export async function deleteOrphanedRules(authToken: string, hostname: string, sourcePath: string){
+  const fs = require('fs');
+  const directoryPath = sourcePath + 'Rules';
+  const savedRuleNames: string[] = [];
+  const existingRules: any[] = [];
+  let pageNumber = 1;
+  let total = 0;
+  let count = 0;
+  if (!fs.existsSync(directoryPath)){
+    return;
+  }
+
+  const files = await fs.readdirSync(directoryPath);
+  for (const file of files) {
+    savedRuleNames.push(file.replace('.json', ''));
+  }
+  
+  while (count <= total){
+    const result = await getRulesByPage(pageNumber, authToken, hostname);
+
+    for (const rule of result.data){
+      existingRules.push(rule);
+    }
+
+    total = result.total;
+    count += result.data.length;
+    pageNumber = pageNumber + 1;
+    if (count == total)
+    { 
+      break;
+    }
+  }
+  
+  const orphanedRules: any[] = existingRules.filter(x => !savedRuleNames.includes(x.name));
+  orphanedRules.forEach(async (oRule) => {
+    console.log('Deleting orphaned rule ' + oRule.name);
+    await deleteRuleById(authToken, hostname, oRule.id);
+  });
 }
 
 async function importRule(authToken: string, hostname: string, ruleName: string, sourcePath: string){
@@ -75,6 +116,7 @@ async function getRulesByPage(pageNumber: number, authToken: string, hostname: s
               data {
                   id
                   name
+                  description
                   isActive
                   order
                   condition
@@ -124,6 +166,7 @@ async function getRuleByName(authToken: string, hostname: string, ruleName: stri
               data {
                   id
                   name
+                  description
                   isActive
                   order
                   condition
@@ -438,4 +481,4 @@ export async function orderRules(authToken: string, hostname: string, sourcePath
   });
 }
 
-export default { exportRules, importRules, deleteRulesByName, orderRules };
+export default { exportRules, importRules, deleteRulesByName, orderRules, deleteOrphanedRules };

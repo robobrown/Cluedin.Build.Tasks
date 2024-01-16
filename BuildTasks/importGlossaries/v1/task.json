@@ -9,7 +9,7 @@
     "version": {
         "Major": 1,
         "Minor": 0,
-        "Patch": 6
+        "Patch": 7
     },
     "visibility": [
       "Build",
@@ -19,7 +19,7 @@
       "npm"
     ],
     "minimumAgentVersion": "1.83.0",
-    "instanceNameFormat": "Cluedin Import Glossaries: $(publisherId).$(extensionId)",
+    "instanceNameFormat": "Cluedin Import Glossaries",
     "inputs": [
         {
             "name": "cluedinUsername",

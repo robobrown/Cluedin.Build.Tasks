@@ -1,3 +1,5 @@
+import vocabularies from "./vocabularies";
+
 export async function createManualAnnotation(authToken: string, hostname: string, dataSet: any, dataSetId: any, vocabularyId: string){
     const axios = require('axios');
     const data = JSON.stringify({
@@ -54,6 +56,7 @@ export async function createManualAnnotation(authToken: string, hostname: string
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
   }
 
@@ -103,11 +106,37 @@ export async function createManualAnnotation(authToken: string, hostname: string
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
   }
 
   export async function addEdgeMapping(authToken: string, hostname: string, savedAnnotationEdge: any, annotationId: number){
     const axios = require('axios');
+    const edgeProperties: any[] = [];
+
+    if (savedAnnotationEdge.edgeProperties != null){
+      for (const edgeProperty of savedAnnotationEdge.edgeProperties){
+
+        const vocab = await vocabularies.getBasicVocabularyByName(authToken, hostname, edgeProperty.vocabularyKey.vocabulary.vocabularyName);
+        const vocabKeys = await vocabularies.getVocabKeysForVocabId(authToken, hostname, vocab.vocabularyId);
+        const vocabKey = vocabKeys.find(function(x: any) { return x.key == edgeProperty.vocabularyKey.key; });
+
+        edgeProperties.push({
+          originalField: edgeProperty.originalField,
+          vocabularyKeyConfiguration: {
+            vocabularyId: vocab.vocabularyId,
+            vocabularyKeyId: vocabKey.vocabularyKeyId,
+            
+            vocabularyKeyName: edgeProperty.vocabularyKey.vocabulary.vocabularyName,
+            displayName: edgeProperty.vocabularyKey.displayName,
+            dataType: edgeProperty.vocabularyKey.dataType,
+            key: edgeProperty.vocabularyKey.key,
+            groupName: edgeProperty.vocabularyKey.groupName
+          }
+        });
+      }
+    }
+
     const data = JSON.stringify({
       query: `mutation addEdgeMapping(
         $annotationId: ID!
@@ -125,7 +154,7 @@ export async function createManualAnnotation(authToken: string, hostname: string
       variables: {
         annotationId: annotationId,
         edgeConfiguration: {
-          edgeProperties: [],
+          edgeProperties: edgeProperties,
           entityTypeConfiguration: {
             new: false,
             icon: savedAnnotationEdge.entityTypeConfiguration.icon,
@@ -162,32 +191,64 @@ export async function createManualAnnotation(authToken: string, hostname: string
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
   }
 
-  export async function editEdgeMapping(authToken: string, hostname: string, savedAnnotationEdge: any, edgeId: number){
+  export async function editEdgeMapping(authToken: string, hostname: string, savedEdge: any, existingEdge: any){
     const axios = require('axios');
+    const edgeProperties: any[] = [];
+
+    if (savedEdge.edgeProperties != null){
+      for (const edgeProperty of savedEdge.edgeProperties){
+        const existingEdgeProperty = existingEdge.edgeProperties.find((x: any) => x.originalField == edgeProperty.originalField);
+        const existingId: string = existingEdgeProperty != null ? existingEdgeProperty.id : null;
+
+        const vocab = await vocabularies.getBasicVocabularyByName(authToken, hostname, edgeProperty.vocabularyKey.vocabulary.vocabularyName);
+        const vocabKeys = await vocabularies.getVocabKeysForVocabId(authToken, hostname, vocab.vocabularyId);
+        const vocabKey = vocabKeys.find(function(x: any) { return x.key == edgeProperty.vocabularyKey.key; });
+
+        edgeProperties.push({
+          id: existingId,
+          originalField: edgeProperty.originalField,
+          vocabularyKeyConfiguration: {
+            vocabularyId: vocab.vocabularyId,
+            vocabularyKeyId: vocabKey.vocabularyKeyId,
+            
+            vocabularyKeyName: edgeProperty.vocabularyKey.vocabulary.vocabularyName,
+            displayName: edgeProperty.vocabularyKey.displayName,
+            dataType: edgeProperty.vocabularyKey.dataType,
+            key: edgeProperty.vocabularyKey.key,
+            groupName: edgeProperty.vocabularyKey.groupName
+          }
+        });
+
+      }
+    }
+
     const data = JSON.stringify({
       query: `mutation editEdge($edgeId: ID!, $edgeConfiguration: InputEdgeConfiguration) {
         management {
             editEdge(edgeId: $edgeId, edgeConfiguration: $edgeConfiguration)
-        }`,
+        }
+    }
+    `,
       variables: {
-        edgeId: edgeId,
+        edgeId: existingEdge.id,
         edgeConfiguration: {
-          edgeProperties: savedAnnotationEdge.edgeProperties,
+          edgeProperties: edgeProperties,
           entityTypeConfiguration: {
-            icon: savedAnnotationEdge.entityTypeConfiguration.icon,
-            entityType: savedAnnotationEdge.entityTypeConfiguration.entityType,
-            displayName: savedAnnotationEdge.entityTypeConfiguration.displayName
+            icon: savedEdge.entityTypeConfiguration.icon,
+            entityType: savedEdge.entityTypeConfiguration.entityType,
+            displayName: savedEdge.entityTypeConfiguration.displayName
           },
-          origin: savedAnnotationEdge.origin,
-          edgeType: savedAnnotationEdge.edgeType,
-          direction: savedAnnotationEdge.direction,
-          dataSetId: null, // Currently Not Supported, we dont have the names to get the new ID's
-          dataSourceGroupId: null, // Currently Not Supported, we dont have the names to get the new ID's
-          dataSourceId: null,  // Currently Not Supported, we dont have the names to get the new ID's
-          key: savedAnnotationEdge.key
+          origin: savedEdge.origin,
+          edgeType: savedEdge.edgeType,
+          direction: savedEdge.direction,
+          dataSetId: "", // Currently Not Supported, we dont have the names to get the new ID's
+          dataSourceGroupId: "", // Currently Not Supported, we dont have the names to get the new ID's
+          dataSourceId: "",  // Currently Not Supported, we dont have the names to get the new ID's
+          key: savedEdge.key
         }
       }
     });
@@ -212,6 +273,7 @@ export async function createManualAnnotation(authToken: string, hostname: string
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
   }
   
@@ -263,16 +325,20 @@ export async function createManualAnnotation(authToken: string, hostname: string
                             entityType
                         }
                         edgeProperties {
-                            id
-                            annotationEdgeId
-                            originalField
-                            vocabularyKey {
-                                displayName
-                                name
-                                vocabulary {
-                                    vocabularyName
-                                }
-                            }
+                          id
+                          annotationEdgeId
+                          originalField
+                          vocabularyKey {
+                              displayName
+                              name
+                              vocabulary {
+                                  vocabularyName
+                              }
+                              groupName
+                              storage
+                              dataType
+                              key
+                          }
                         }
                     }
                 }
@@ -325,13 +391,28 @@ export async function createManualAnnotation(authToken: string, hostname: string
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
   }
 
-  function sortAnnotation(annotation: any){
+  export function sortAnnotation(annotation: any){
     if (annotation.annotationProperties == null) 
       return;
     annotation.annotationProperties.sort((a: any, b: any) => (a.vocabKey > b.vocabKey) ? 1 : -1);
+
+    for (const annotationProperty of annotation.annotationProperties){
+      if (annotationProperty.annotationEdges == null) 
+        continue;
+
+      annotationProperty.annotationEdges.sort((a: any, b: any) => (a.key > b.key) ? 1 : -1);
+      for (const annotationEdge of annotationProperty.annotationEdges){
+
+        if (annotationEdge.edgeProperties == null) 
+          continue;
+        
+          annotationEdge.edgeProperties.sort((a: any, b: any) => (a.originalField > b.originalField) ? 1 : -1);
+      }
+    }
   }
 
-  export default { addEdgeMapping, editEdgeMapping, modifyAnnotation, createManualAnnotation, getAnnotationById };
+  export default { addEdgeMapping, editEdgeMapping, modifyAnnotation, createManualAnnotation, getAnnotationById, sortAnnotation };

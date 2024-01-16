@@ -37,6 +37,7 @@ export async function setFeatureStatus(authToken: string, hostname: string, feat
     })
     .catch((error: Error) => {
       console.log(error);
+      throw error;
     });
 }
 

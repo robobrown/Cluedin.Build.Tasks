@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "build-release-task",
     "name": "CluedIn Build and Release Tools",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "publisher": "robobrown",
     "targets": [
         {
@@ -117,6 +117,12 @@
         },
         {
             "path": "BuildTasks/setFeatureStatus"
+        },
+        {
+            "path": "BuildTasks/createAPIToken"
+        },
+        {
+            "path": "BuildTasks/setConnectorConfigValue"
         }
     ],
     "contributions": [
@@ -378,6 +384,26 @@
             ],
             "properties": {
                 "name": "BuildTasks/setFeatureStatus"
+            }
+        },
+        {
+            "id": "cluedin-extension-delete-orphaned-rules",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "BuildTasks/deleteOrphanedRules"
+            }
+        },
+        {
+            "id": "cluedin-extension-delete-orphaned-streams",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "BuildTasks/deleteOrphanedStreams"
             }
         }
     ]

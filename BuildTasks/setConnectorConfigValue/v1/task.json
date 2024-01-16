@@ -1,0 +1,95 @@
+{
+    "id": "ffe08e7a-c19a-4a29-99e9-09fa00e0b0dc",
+    "name": "CluedInSetConenctorConfigValue",
+    "friendlyName": "CluedIn Set Connector Config Value",
+    "description": "Task for setting CluedIn Connector Config Value",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "author": "Robert Brown",
+    "version": {
+      "Major": 1,
+      "Minor": 0,
+      "Patch": 7
+    },
+    "visibility": [
+      "Build",
+      "Release"
+    ],
+    "demands": [
+      "npm"
+    ],
+    "minimumAgentVersion": "1.83.0",
+    "instanceNameFormat": "Cluedin Set Connector Config Value",
+    "inputs": [
+        {
+            "name": "cluedinUsername",
+            "type": "string",
+            "label": "CluedIn Username",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the username used to access the CluedIn App Isntance"
+          },
+          {
+            "name": "cluedinPassword",
+            "type": "string",
+            "label": "CluedIn Password",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the username used to access the CluedIn App Isntance"
+          },
+          {
+            "name": "cluedinClientId",
+            "type": "string",
+            "label": "CluedIn ClientId",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the ClientId of the CluedIn App"
+          },
+          {
+            "name": "cluedinHostname",
+            "type": "string",
+            "label": "CluedIn Hostname",
+            "defaultValue": "app-oranization.yourdomain.com",
+            "required": true,
+            "helpMarkDown": "Enter the Hostname the CluedIn App Instance"
+          },
+          {
+            "name": "connectorName",
+            "type": "string",
+            "label": "Connector Name",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the name of the Config entry to update"
+          },
+          {
+            "name": "configName",
+            "type": "string",
+            "label": "Config Entry Name",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the name of the Config entry to update"
+          },
+          {
+            "name": "configValue",
+            "type": "string",
+            "label": "Config Entry Value",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Enter the value of the Config entry to update"
+          }
+    ],
+    "execution": {
+      "Node": {
+        "target": "setConnectorConfigValue/v1/index.js",
+        "argumentFormat": ""
+      },
+      "Node10": {
+        "target": "setConnectorConfigValue/v1/index.js",
+        "argumentFormat": ""
+      },
+      "Node16": {
+        "target": "setConnectorConfigValue/v1/index.js",
+        "argumentFormat": ""
+      }
+    }
+    }

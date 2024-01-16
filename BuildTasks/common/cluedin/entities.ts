@@ -150,6 +150,7 @@ export async function reprocessAllRules(authToken: string, hostname: string){
   })
   .catch((error: Error) => {
     // for this one ignore the error
+    console.log(error);
   });
 }
 
@@ -176,6 +177,7 @@ console.log(config.url);
   })
   .catch((error: Error) => {
     // for this one ignore the error
+    console.log(error);
   });
 }
 
@@ -202,6 +204,7 @@ console.log(config.url);
   })
   .catch((error: Error) => {
     // for this one ignore the error
+    console.log(error);
   });
 }
 
