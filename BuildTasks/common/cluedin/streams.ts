@@ -105,11 +105,11 @@ export async function exportStreams(authToken: string, hostname: string, outputP
     const savedStream = utils.readFile(sourcePath + 'Streams/' + streamName + '.json');
 
     if (existingStream == null || existingStream.id == null) {
-        console.log('Creating Stream ' + existingStream.id);
+        console.log('Creating Stream ' + streamName);
         await createStream(authToken, hostname, savedStream);
         existingStream = await getStreamByName(authToken, hostname, streamName);
     }
-
+    console.log("here2");
     const areEqual = utils.isEqual(existingStream, savedStream); 
     if (!areEqual) {
       console.log('Updating Stream ' + existingStream.id);
