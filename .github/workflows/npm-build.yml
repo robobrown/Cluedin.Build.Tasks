@@ -74,10 +74,6 @@ jobs:
         name: build-release-task-${{steps.gitversion.outputs.semVer}}.vsix
         path: ${{github.workspace}}/dist/robobrown.build-release-task-${{steps.gitversion.outputs.semVer}}.vsix
 
-    - name: publish to marketplace
-      if: github.ref == 'refs/heads/main'
-      run: npm run tfx extension publish --manifest-globs ${{github.workspace}}/vss-extension.json --vsix ${{github.workspace}}/dist/robobrown.build-release-task-${{steps.gitversion.outputs.semVer}}.vsix --token ${{ env.PAT }}
-
     - name: create a release
       if: github.ref == 'refs/heads/main'
       uses: actions/create-release@v1
@@ -86,3 +82,7 @@ jobs:
       with:
         tag_name: v${{ steps.gitversion.outputs.semVer }}
         release_name: v${{ steps.gitversion.outputs.semVer }}
+        
+    - name: publish to marketplace
+      if: github.ref == 'refs/heads/main'
+      run: tfx extension publish --manifest-globs ${{github.workspace}}/vss-extension.json --vsix ${{github.workspace}}/dist/robobrown.build-release-task-${{steps.gitversion.outputs.semVer}}.vsix --token ${{ env.PAT }}
