@@ -28,14 +28,17 @@ export async function deleteAllEntities(authToken: string, hostname: string, ent
 async function deleteAllEntities_internal(authToken: string, hostname: string, entityType: string, pageSize: number) {
   const axios = require('axios');
   const data = JSON.stringify({
-      query: `query deleteAllEntitiesFromSpecificType($entityType: String, $pageSize: Int) {
+      query: `
+      query deleteAllEntitiesFromSpecificType($entityType: String, $pageSize: Int) {
         search(query: $entityType, pageSize: $pageSize) {
-          totalResults
-          actions {
-            deleteEntity
-          }
+            totalResults
+            entries {
+                actions {
+                    deleteEntity
+                }
+            }
         }
-      }
+    }
       `,
       variables: {
           entityType: "entityType:" + entityType,
@@ -87,14 +90,20 @@ export async function deleteAllEntitiesWithFilter(authToken: string, hostname: s
 async function deleteAllEntitiesWithFilter_internal(authToken: string, hostname: string, entityType: string, filter: string, pageSize: number){
   const axios = require('axios');
   const data = JSON.stringify({
-    query: `query deleteAllEntitiesFromSpecificType($entityType: String, $filter: String, $pageSize: Int) {
+    query: `query deleteAllEntitiesFromSpecificType(
+      $entityType: String
+      $filter: String
+      $pageSize: Int
+  ) {
       search(query: $entityType, filter: $filter, pageSize: $pageSize) {
-        totalResults
-        actions {
-          deleteEntity
-        }
+          totalResults
+          entries {
+              actions {
+                  deleteEntity
+              }
+          }
       }
-    }
+  }
     `,
     variables: {
         entityType: "entityType:" + entityType,
