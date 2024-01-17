@@ -1,5 +1,5 @@
 {
-    "id": "28dc73c7-cd96-4946-a4de-6d873991f3e8",
+    "id": "41100573-972a-4818-97bd-2cc6a5731bfd",
     "name": "CluedInDeleteOrphanedRules",
     "friendlyName": "CluedIn Delete Orphaned Rules",
     "description": "Task for Removing Orphaned Rules From CluedIn",
@@ -9,7 +9,7 @@
     "version": {
         "Major": 1,
         "Minor": 0,
-        "Patch": 7
+        "Patch": 8
     },
     "visibility": [
       "Build",
@@ -76,4 +76,4 @@
         "argumentFormat": ""
       }
     }
-    }
+}   

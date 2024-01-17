@@ -1,6 +1,6 @@
 {
   "name": "cluedin.build.tasks.export.allconfig",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "CluedIn Export All Config Build Task",
   "repository": {
     "type": "git",

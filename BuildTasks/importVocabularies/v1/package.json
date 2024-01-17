@@ -1,6 +1,6 @@
 {
   "name": "cluedin.build.tasks.import.connectors",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "CluedIn Import Connectors Build Task",
   "repository": {
     "type": "git",

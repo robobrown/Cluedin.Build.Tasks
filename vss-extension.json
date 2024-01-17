@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "build-release-task",
     "name": "CluedIn Build and Release Tools",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "publisher": "robobrown",
     "targets": [
         {
@@ -123,6 +123,12 @@
         },
         {
             "path": "BuildTasks/setConnectorConfigValue"
+        },
+        {
+            "path": "BuildTasks/deleteOrphanedRules"
+        },
+        {
+            "path": "BuildTasks/deleteOrphanedStreams"
         }
     ],
     "contributions": [
