@@ -109,7 +109,7 @@ export async function exportStreams(authToken: string, hostname: string, outputP
         await createStream(authToken, hostname, savedStream);
         existingStream = await getStreamByName(authToken, hostname, streamName);
     }
-    console.log("here2");
+
     const areEqual = utils.isEqual(existingStream, savedStream); 
     if (!areEqual) {
       console.log('Updating Stream ' + existingStream.id);

@@ -23,7 +23,7 @@
     "build:clean": "npm run clean && npm run initdev && npm run build",
     "build:tasks": "npm run compile:tasks",
     "package": "npm run build:clean && npm run package:tasks",
-    "publish": "tfx extension publish --root . --manifest-globs vss-extension.json",
+    "publish": "tfx extension publish --manifest-globs vss-extension.json --bypass-validation",
     "clean": "git clean -fdX"
   },
   "author": "Robert Brown",

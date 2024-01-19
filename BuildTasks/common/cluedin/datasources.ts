@@ -299,10 +299,6 @@ import annotation from "./annotation";
                           const areEqual = utils.isEqual(existingEdge, annotationEdge); 
                           if (!areEqual) {
                             // update the edge
-                            console.log("edges are different");
-                            console.log(JSON.stringify(existingEdge));
-                            console.log(JSON.stringify(annotationEdge));
-
                             console.log("updating edge mapping " + annotationEdge.key);
                             await annotation.editEdgeMapping(authToken, hostname, annotationEdge, existingEdge);
                           }

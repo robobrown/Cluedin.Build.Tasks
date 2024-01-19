@@ -537,19 +537,19 @@ async function updateVocabularyKey(authToken: string, hostname: string, savedVoc
         name: savedVocabularyKey.name,
         isVisible: savedVocabularyKey.isVisible,
         groupName: savedVocabularyKey.groupName,
-        dataAnnotationsIsEditable: null,
-        dataAnnotationsIsNullable: null,
-        dataAnnotationsIsPrimaryKey: null,
-        dataAnnotationsIsRequired: null,
-        dataAnnotationsMaximumLength: null,
-        dataAnnotationsMinimumLength: null,
+        dataAnnotationsIsEditable: savedVocabularyKey.dataAnnotationsIsEditable,
+        dataAnnotationsIsNullable: savedVocabularyKey.dataAnnotationsIsNullable,
+        dataAnnotationsIsPrimaryKey: savedVocabularyKey.dataAnnotationsIsPrimaryKey,
+        dataAnnotationsIsRequired: savedVocabularyKey.dataAnnotationsIsRequired,
+        dataAnnotationsMaximumLength: savedVocabularyKey.dataAnnotationsMaximumLength,
+        dataAnnotationsMinimumLength: savedVocabularyKey.dataAnnotationsMinimumLength,
         dataType: savedVocabularyKey.dataType,
         storage: savedVocabularyKey.storage,
-        dataClassificationCode: savedVocabularyKey.data,
+        dataClassificationCode: savedVocabularyKey.dataClassificationCode,
         description: savedVocabularyKey.description,
-        mapsToOtherKeyId: null,
+        mapsToOtherKeyId: savedVocabularyKey.mapsToOtherKeyId,
         isValueChangeInsignificant: savedVocabularyKey.isValueChangeInsignificant,
-        glossaryTermId: null
+        glossaryTermId: savedVocabularyKey.glossaryTermId
       }
     }
   });
