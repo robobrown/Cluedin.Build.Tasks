@@ -292,26 +292,32 @@ import annotation from "./annotation";
 
                         if (existingEdge == null){
                           // if the specific edge type does not exist add it
-                          console.log("adding edge mapping " + annotationEdge.key)
+                          console.log("adding edge mapping " + annotationEdge.key + " on " + savedDataSet.name)
                           await annotation.addEdgeMapping(authToken, hostname, annotationEdge, existingDataSet.annotationId);
                         } 
                         else {
                           const areEqual = utils.isEqual(existingEdge, annotationEdge); 
                           if (!areEqual) {
                             // update the edge
-                            console.log("updating edge mapping " + annotationEdge.key);
+                            console.log("updating edge mapping " + annotationEdge.key + " on " + savedDataSet.name);
                             await annotation.editEdgeMapping(authToken, hostname, annotationEdge, existingEdge);
                           }
                         }
                       }
                     }
-                    if (existingAnnotationProperty.annotationEdges != null){
-                      const existingEdgesToRemove = existingAnnotationProperty.annotationEdges.filter((edge: any) => annotationProperty.annotationEdges == null || annotationProperty.annotationEdges.find((x: any) => x.edgeType == edge.edgeType) == null);
-                      
+                    
+                    if (existingAnnotationProperty != null && existingAnnotationProperty.annotationEdges != null){
+                      let existingEdgesToRemove: any;
+                      if (annotationProperty.annotationEdges == null){
+                        existingEdgesToRemove = existingAnnotationProperty.annotationEdges;
+                      } else {
+                        existingEdgesToRemove = existingAnnotationProperty.annotationEdges.filter((edge: any) => annotationProperty.annotationEdges.find((x: any) => x.edgeType == edge.edgeType) == null);
+                      }              
+
                       for (const existingEdge of existingEdgesToRemove){
                         // remove the edge
-                        console.log("deleting edge mapping " + existingEdge.key);
-                        await annotation.deleteEdgeMapping(authToken, hostname, existingEdge);
+                        console.log("deleting edge mapping " + existingEdge.key + " on " + savedDataSet.name);
+                        await annotation.deleteEdgeMapping(authToken, hostname, existingEdge.id);
                       }
                     }
                   }
