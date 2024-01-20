@@ -415,4 +415,43 @@ export async function createManualAnnotation(authToken: string, hostname: string
     }
   }
 
-  export default { addEdgeMapping, editEdgeMapping, modifyAnnotation, createManualAnnotation, getAnnotationById, sortAnnotation };
+  export async function deleteEdgeMapping(authToken: string, hostname: string, edgeId: number){
+    const axios = require('axios');
+    const data = JSON.stringify({
+      query: `mutation deleteEdge($edgeId: ID!) {
+        management {
+            deleteEdge(edgeId: $edgeId)
+        }
+    }
+    
+    `,
+      variables: {
+        edgeId: edgeId
+      }
+    });
+    
+    const config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'https://' + hostname + '/graphql',
+      headers: { 
+        'Content-Type': 'application/json', 
+        'Authorization': 'Bearer ' + authToken
+      },
+      data : data
+    };
+
+    return axios.request(config)
+    .then((response: any) => {
+        if (response.data.errors != null && response.data.errors.length > 0){
+            throw new Error(response.data.errors[0].message);
+        }
+        return response.data.data;
+    })
+    .catch((error: Error) => {
+      console.log(error);
+      throw error;
+    });
+  }
+
+  export default { addEdgeMapping, editEdgeMapping, modifyAnnotation, createManualAnnotation, getAnnotationById, sortAnnotation, deleteEdgeMapping };
