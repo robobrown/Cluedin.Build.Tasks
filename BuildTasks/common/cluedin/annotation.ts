@@ -348,12 +348,6 @@ export async function createManualAnnotation(authToken: string, hostname: string
                   grouping
                   keyPrefix
                   isActive
-                  isCluedInCore
-                  isDynamic
-                  isProvider
-                  isVocabularyOwner
-                  providerId
-                  description
                 }
                 entityTypeConfiguration {
                     icon

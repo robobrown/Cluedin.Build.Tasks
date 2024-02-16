@@ -89,12 +89,6 @@ import annotation from "./annotation";
                                     grouping
                                     keyPrefix
                                     isActive
-                                    isCluedInCore
-                                    isDynamic
-                                    isProvider
-                                    isVocabularyOwner
-                                    providerId
-                                    description
                                 }
                                 entityTypeConfiguration {
                                     icon
@@ -699,12 +693,6 @@ import annotation from "./annotation";
                                   grouping
                                   keyPrefix
                                   isActive
-                                  isCluedInCore
-                                  isDynamic
-                                  isProvider
-                                  isVocabularyOwner
-                                  providerId
-                                  description
                               }
                               entityTypeConfiguration {
                                   icon
