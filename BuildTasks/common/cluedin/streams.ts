@@ -33,22 +33,25 @@ export async function exportStreams(authToken: string, hostname: string, outputP
             streams(pageNumber: $pageNumber) {
                 total
                 data {
-                    name
-                    isActive
-                    condition
-                    rules
-                    rulesApplied
-                    containerName
-                    mappingConfiguration
-                    mode
-                    exportOutgoingEdges
-                    exportIncomingEdges
-                    connector {
-                        name
-                        accountDisplay
-                        accountId
-                        codeName
-                    }
+                  name
+                  condition
+                  rules
+                  rulesApplied
+                  containerName
+                  mappingConfiguration
+                  mode
+                  exportOutgoingEdges
+                  exportIncomingEdges
+                  connector {
+                      name
+                      accountDisplay
+                      accountId
+                      codeName
+                  }
+                  description
+                  exportOutgoingEdgeProperties
+                  exportIncomingEdgeProperties
+                  type
                 }
             }
         }
@@ -118,7 +121,8 @@ export async function exportStreams(authToken: string, hostname: string, outputP
       await setupConnectorStream(authToken, hostname, savedStream, existingStream.id, savedStream.connector.name);
       if (savedStream.isActive)
       {
-          await activateStream(authToken, hostname, existingStream.id);
+          // Version 2024.01.00 does not have active streams
+          // await activateStream(authToken, hostname, existingStream.id);
       }
     }
   }
@@ -133,7 +137,6 @@ export async function exportStreams(authToken: string, hostname: string, outputP
               data {
                   id
                   name
-                  isActive
                   condition
                   rules
                   rulesApplied
@@ -148,6 +151,10 @@ export async function exportStreams(authToken: string, hostname: string, outputP
                     accountId
                     codeName
                 }
+                description
+                exportOutgoingEdgeProperties
+                exportIncomingEdgeProperties
+                type
               }
           }
       }

@@ -100,13 +100,8 @@ import annotation from "./annotation";
                                 id
                                 originalField
                                 key
-                                edges {
-                                    edgeType
-                                    dataSetId
-                                    dataSourceId
-                                    dataSourceGroupId
-                                    entityType
-                                }
+                                columnType
+                                columnSubType
                             }
                         }
                     }
