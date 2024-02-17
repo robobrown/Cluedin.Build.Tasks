@@ -32,6 +32,7 @@ function saveReplacer(key: string, value: string)
     else if (key=="organizationId") return undefined;
     else if (key=="updatedAt") return undefined;
     else if (key=="vocabularyId") return undefined;
+    else if (key=="vocabularyKeyId") return undefined;    
     else if (key=="pageTemplateId") return undefined;
     else if (key=="layoutConfiguration") return undefined;
     else if (key=="annotationId") return undefined;

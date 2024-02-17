@@ -2,6 +2,7 @@ import vocabularies from "./vocabularies";
 
 export async function createManualAnnotation(authToken: string, hostname: string, dataSet: any, dataSetId: any, vocabularyId: string){
     const axios = require('axios');
+
     const data = JSON.stringify({
       query: `mutation createManualAnnotation(
         $dataSetId: ID!
@@ -196,6 +197,7 @@ export async function createManualAnnotation(authToken: string, hostname: string
   }
 
   export async function editEdgeMapping(authToken: string, hostname: string, savedEdge: any, existingEdge: any){
+    console.log("Edit Edge Mapping");
     const axios = require('axios');
     const edgeProperties: any[] = [];
 
