@@ -146,12 +146,13 @@ async function getRulesByPage(pageNumber: number, authToken: string, hostname: s
   return axios.request(config)
   .then((response: any) => {
     if (response.data.errors != null && response.data.errors.length > 0){
+      console.log(JSON.stringify(response.data.errors));
       throw new Error(response.data.errors[0].message);
     }
     return response.data.data.management.rules;
   })
   .catch((error: Error) => {
-    console.log(error);
+    
     throw error;
   });
 }
@@ -196,12 +197,12 @@ async function getRuleByName(authToken: string, hostname: string, ruleName: stri
  return axios.request(config)
  .then((response: any) => {
       if (response.data.errors != null && response.data.errors.length > 0){
-          throw new Error(response.data.errors[0].message);
+        console.log(JSON.stringify(response.data.errors));
+        throw new Error(response.data.errors[0].message);
       }
       return response.data.data.management.rules.data.find(function(x: any) { return x.name == ruleName; });
  })
  .catch((error: Error) => {
-   console.log(error);
    throw error;
  });
 }
@@ -238,12 +239,12 @@ async function createRule(authToken: string, hostname: string, savedRule: any){
   return axios.request(config)
   .then((response: any) => {
       if (response.data.errors != null && response.data.errors.length > 0){
-          throw new Error(response.data.errors[0].message);
+        console.log(JSON.stringify(response.data.errors));
+        throw new Error(response.data.errors[0].message);
       }
       return response.data.data.management.createRule.id;
   })
   .catch((error: Error) => {
-    console.log(error);
     throw error;
   });
 }
@@ -286,12 +287,12 @@ async function updateRule(authToken: string, hostname: string, savedRule: any, r
   return axios.request(config)
   .then((response: any) => {
       if (response.data.errors != null && response.data.errors.length > 0){
+          console.log(JSON.stringify(response.data.errors));
           throw new Error(response.data.errors[0].message);
       }
       return response.data.data;
   })
   .catch((error: Error) => {
-    console.log(error);
     throw error;
   });
 }
@@ -328,12 +329,12 @@ async function activateRule(authToken: string, hostname: string, ruleId: string)
   return axios.request(config)
   .then((response: any) => {
       if (response.data.errors != null && response.data.errors.length > 0){
-          throw new Error(response.data.errors[0].message);
+        console.log(JSON.stringify(response.data.errors));
+        throw new Error(response.data.errors[0].message);
       }
       return response.data.data;
   })
   .catch((error: Error) => {
-    console.log(error);
     throw error;
   });
 }
@@ -408,12 +409,12 @@ async function deleteRuleById(authToken: string, hostname: string, ruleId: strin
   return axios.request(config)
   .then((response: any) => {
       if (response.data.errors != null && response.data.errors.length > 0){
-          throw new Error(response.data.errors[0].message);
+        console.log(JSON.stringify(response.data.errors));
+        throw new Error(response.data.errors[0].message);
       }
       return response.data.data;
   })
   .catch((error: Error) => {
-    console.log(error);
     throw error;
   });
 }
@@ -471,12 +472,12 @@ export async function orderRules(authToken: string, hostname: string, sourcePath
   return axios.request(config)
   .then((response: any) => {
       if (response.data.errors != null && response.data.errors.length > 0){
-          throw new Error(response.data.errors[0].message);
+        console.log(JSON.stringify(response.data.errors));
+        throw new Error(response.data.errors[0].message);
       }
       return response.data.data;
   })
   .catch((error: Error) => {
-    console.log(error);
     throw error;
   });
 }

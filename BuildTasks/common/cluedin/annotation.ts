@@ -51,12 +51,12 @@ export async function createManualAnnotation(authToken: string, hostname: string
     return axios.request(config)
     .then((response: any) => {
         if (response.data.errors != null && response.data.errors.length > 0){
+            console.log(JSON.stringify(response.data.errors));
             throw new Error(response.data.errors[0].message);
         }
         return response.data.data.management.createManualAnnotation;
     })
     .catch((error: Error) => {
-      console.log(error);
       throw error;
     });
   }
@@ -101,12 +101,12 @@ export async function createManualAnnotation(authToken: string, hostname: string
     return axios.request(config)
     .then((response: any) => {
         if (response.data.errors != null && response.data.errors.length > 0){
+            console.log(JSON.stringify(response.data.errors));
             throw new Error(response.data.errors[0].message);
         }
         return response.data.data;
     })
     .catch((error: Error) => {
-      console.log(error);
       throw error;
     });
   }
@@ -186,12 +186,12 @@ export async function createManualAnnotation(authToken: string, hostname: string
     return axios.request(config)
     .then((response: any) => {
         if (response.data.errors != null && response.data.errors.length > 0){
-            throw new Error(response.data.errors[0].message);
+          console.log(JSON.stringify(response.data.errors));
+          throw new Error(response.data.errors[0].message);
         }
         return response.data.data;
     })
     .catch((error: Error) => {
-      console.log(error);
       throw error;
     });
   }
@@ -269,12 +269,12 @@ export async function createManualAnnotation(authToken: string, hostname: string
     return axios.request(config)
     .then((response: any) => {
         if (response.data.errors != null && response.data.errors.length > 0){
-            throw new Error(response.data.errors[0].message);
+          console.log(JSON.stringify(response.data.errors));
+          throw new Error(response.data.errors[0].message);
         }
         return response.data.data;
     })
     .catch((error: Error) => {
-      console.log(error);
       throw error;
     });
   }
@@ -379,14 +379,14 @@ export async function createManualAnnotation(authToken: string, hostname: string
     return axios.request(config)
     .then((response: any) => {
         if (response.data.errors != null && response.data.errors.length > 0){
-            throw new Error(response.data.errors[0].message);
+          console.log(JSON.stringify(response.data.errors));
+          throw new Error(response.data.errors[0].message);
         }
         const theAnnotation = response.data.data.preparation.annotation;
         sortAnnotation(theAnnotation);
         return theAnnotation;
     })
     .catch((error: Error) => {
-      console.log(error);
       throw error;
     });
   }
@@ -440,12 +440,12 @@ export async function createManualAnnotation(authToken: string, hostname: string
     return axios.request(config)
     .then((response: any) => {
         if (response.data.errors != null && response.data.errors.length > 0){
-            throw new Error(response.data.errors[0].message);
+          console.log(JSON.stringify(response.data.errors));
+          throw new Error(response.data.errors[0].message);
         }
         return response.data.data;
     })
     .catch((error: Error) => {
-      console.log(error);
       throw error;
     });
   }

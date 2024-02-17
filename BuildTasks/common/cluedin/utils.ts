@@ -58,6 +58,7 @@ function compareReplacer(key: string, value: string)
     else if (key=="annotationId") return undefined;
     else if (key=="annotationEdgeId") return undefined;
     else if (key=="vocabularyKeyId") return undefined;
+    else if (key=="order") return undefined;
     
     //These next 2 fields are on the annotation even tho they are removed on the UI, but the value useAsEntityCode is set to false
     else if (key=="useSourceCode") return undefined;

@@ -66,12 +66,12 @@ async function getVocabulariesByPage(authToken: string, hostname: string, pageNu
   return axios.request(config)
   .then((response: any) => {
     if (response.data.errors != null && response.data.errors.length > 0){
+      console.log(JSON.stringify(response.data.errors));
       throw new Error(response.data.errors[0].message);
     }
      return response.data.data.management.vocabularies;
   })
   .catch((error: Error) => {
-    console.log(error);
     throw error;
   });
 }
@@ -157,6 +157,7 @@ async function getVocabularyDetails(authToken: string, hostname: string, vocabul
   return axios.request(config)
   .then((response: any) => {
     if (response.data.errors != null && response.data.errors.length > 0){
+      console.log(JSON.stringify(response.data.errors));
       throw new Error(response.data.errors[0].message);
     }
     
@@ -165,7 +166,6 @@ async function getVocabularyDetails(authToken: string, hostname: string, vocabul
     return response.data.data;
   })
   .catch((error: Error) => {
-    console.log(error);
     throw error;
   });
 }
@@ -206,12 +206,12 @@ export async function getVocabKeysForVocabId(authToken: string, hostname: string
   return axios.request(config)
   .then((response: any) => {
       if (response.data.errors != null && response.data.errors.length > 0){
-          throw new Error(response.data.errors[0].message);
+        console.log(JSON.stringify(response.data.errors));
+        throw new Error(response.data.errors[0].message);
       }
       return response.data.data.management.vocabularyKeysFromVocabularyId.data;
   })
   .catch((error: Error) => {
-      console.log(error);
       throw error;
   });
 }
@@ -258,12 +258,12 @@ export async function getBasicVocabularyByName(authToken: string, hostname: stri
   return axios.request(config)
   .then((response: any) => {
       if (response.data.errors != null && response.data.errors.length > 0){
-          throw new Error(response.data.errors[0].message);
+        console.log(JSON.stringify(response.data.errors));
+        throw new Error(response.data.errors[0].message);
       }
       return response.data.data.management.vocabularies.data.find(function(x: any) { return x.vocabularyName == vocabularyName; });
   })
   .catch((error: Error) => {
-      console.log(error);
       throw error;
   });
 }
@@ -302,7 +302,8 @@ async function getVocabularyByName(authToken: string, hostname: string, vocabula
   return axios.request(config)
   .then(async (response: any) => {
        if (response.data.errors != null && response.data.errors.length > 0){
-           throw new Error(response.data.errors[0].message);
+        console.log(JSON.stringify(response.data.errors));
+        throw new Error(response.data.errors[0].message);
        }
        const vocabBasic = response.data.data.management.vocabularies.data.find(function(x: any) { return x.vocabularyName == vocabularyName; });
        if (vocabBasic == null){
@@ -312,7 +313,6 @@ async function getVocabularyByName(authToken: string, hostname: string, vocabula
        return await getVocabularyDetails(authToken, hostname, vocabBasic.vocabularyId);
   })
   .catch((error: Error) => {
-    console.log(error);
     throw error;
   });
 }
@@ -414,14 +414,14 @@ async function createVocabulary(authToken: string, hostname: string, savedVocabu
   return axios.request(config)
   .then((response: any) => {
       if (response.data.errors != null && response.data.errors.length > 0){
-          throw new Error(response.data.errors[0].message);
+        console.log(JSON.stringify(response.data.errors));
+        throw new Error(response.data.errors[0].message);
       }
       console.log('Vocabulary created: ' + response.data.data.management.createVocabulary.vocabularyName);
       console.log(response.data.data.management.createVocabulary);
       return response.data.data.management.createVocabulary.vocabularyId;
   })
   .catch((error: Error) => {
-    console.log(error);
     throw error;
   });
 }
@@ -463,12 +463,12 @@ async function updateVocabulary(authToken: string, hostname: string, savedVocabu
   return axios.request(config)
   .then((response: any) => {
       if (response.data.errors != null && response.data.errors.length > 0){
-          throw new Error(response.data.errors[0].message);
+        console.log(JSON.stringify(response.data.errors));
+        throw new Error(response.data.errors[0].message);
       }
       return response.data.data;
   })
   .catch((error: Error) => {
-    console.log(error);
     throw error;
   });
 }
@@ -522,14 +522,12 @@ async function createVocabularyKey(authToken: string, hostname: string, vocabula
   return axios.request(config)
   .then((response: any) => {
       if (response.data.errors != null && response.data.errors.length > 0){
-          console.log(data);
-          console.log(response.data.errors);
+          console.log(JSON.stringify(response.data.errors));
           throw new Error(response.data.errors[0].message);
       }
       return response.data.data.management.createVocabularyKey.vocabularyKeyId;
   })
   .catch((error: Error) => {
-    console.log(error);
     throw error;
   });
 }
@@ -584,13 +582,12 @@ async function updateVocabularyKey(authToken: string, hostname: string, savedVoc
   return axios.request(config)
   .then((response: any) => {
       if (response.data.errors != null && response.data.errors.length > 0){
-          console.log(response.data);
+          console.log(JSON.stringify(response.data.errors));
           throw new Error(response.data.errors[0].message);
       }
       return response.data.data;
   })
   .catch((error: Error) => {
-    console.log(error);
     throw error;
   });
 }

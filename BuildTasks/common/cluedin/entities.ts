@@ -60,12 +60,12 @@ async function deleteAllEntities_internal(authToken: string, hostname: string, e
     return axios.request(config)
     .then((response: any) => {
         if (response.data.errors != null && response.data.errors.length > 0){
-            throw new Error(response.data.errors[0].message);
+          console.log(JSON.stringify(response.data.errors));
+          throw new Error(response.data.errors[0].message);
         }
         return response.data.data;
     })
     .catch((error: Error) => {
-      console.log(error);
       throw error;
     }); 
 }
@@ -126,12 +126,12 @@ async function deleteAllEntitiesWithFilter_internal(authToken: string, hostname:
   return axios.request(config)
   .then((response: any) => {
       if (response.data.errors != null && response.data.errors.length > 0){
-          throw new Error(response.data.errors[0].message);
+        console.log(JSON.stringify(response.data.errors));
+        throw new Error(response.data.errors[0].message);
       }
       return response.data.data;
   })
   .catch((error: Error) => {
-    console.log(error);
     throw error;
   }); 
 }

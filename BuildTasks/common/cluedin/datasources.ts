@@ -133,7 +133,8 @@ import annotation from "./annotation";
     return axios.request(config)
     .then((response: any) => {
          if (response.data.errors != null && response.data.errors.length > 0){
-           throw new Error(response.data.errors[0].message);
+          console.log(JSON.stringify(response.data.errors));
+          throw new Error(response.data.errors[0].message);
          }
 
          for (const dataSourceSet of response.data.data.inbound.dataSourceSets.data){
@@ -143,7 +144,6 @@ import annotation from "./annotation";
          return response.data.data.inbound.dataSourceSets;
     })
     .catch((error: Error) => {
-      console.log(error);
       throw error;
     });
   }
@@ -367,12 +367,12 @@ import annotation from "./annotation";
     return axios.request(config)
     .then((response: any) => {
         if (response.data.errors != null && response.data.errors.length > 0){
-            throw new Error(response.data.errors[0].message);
+          console.log(JSON.stringify(response.data.errors));
+          throw new Error(response.data.errors[0].message);
         }
         return response.data.data.inbound.createDataSourceSet;
     })
     .catch((error: Error) => {
-      console.log(error);
       throw error;
     });
   }
@@ -415,12 +415,12 @@ import annotation from "./annotation";
     return axios.request(config)
     .then((response: any) => {
         if (response.data.errors != null && response.data.errors.length > 0){
-            throw new Error(response.data.errors[0].message);
+          console.log(JSON.stringify(response.data.errors));
+          throw new Error(response.data.errors[0].message);
         }
         return response.data.data.inbound.createDataSource;
     })
     .catch((error: Error) => {
-      console.log(error);
       throw error;
     });
   }
@@ -462,12 +462,12 @@ import annotation from "./annotation";
     return axios.request(config)
     .then((response: any) => {
         if (response.data.errors != null && response.data.errors.length > 0){
-            throw new Error(response.data.errors[0].message);
+          console.log(JSON.stringify(response.data.errors));
+          throw new Error(response.data.errors[0].message);
         }
         return response.data.data.inbound.createDataSet;
     })
     .catch((error: Error) => {
-      console.log(error);
       throw error;
     });
   }
@@ -515,12 +515,12 @@ import annotation from "./annotation";
     return axios.request(config)
     .then((response: any) => {
         if (response.data.errors != null && response.data.errors.length > 0){
-            throw new Error(response.data.errors[0].message);
+          console.log(JSON.stringify(response.data.errors));
+          throw new Error(response.data.errors[0].message);
         }
         return response.data.data;
     })
     .catch((error: Error) => {
-      console.log(error);
       throw error;
     });
   }
@@ -568,12 +568,12 @@ import annotation from "./annotation";
     return axios.request(config)
     .then((response: any) => {
         if (response.data.errors != null && response.data.errors.length > 0){
-            throw new Error(response.data.errors[0].message);
+          console.log(JSON.stringify(response.data.errors));
+          throw new Error(response.data.errors[0].message);
         }
         return response.data.data;
     })
     .catch((error: Error) => {
-      console.log(error);
       throw error;
     });
   }
@@ -614,12 +614,12 @@ import annotation from "./annotation";
     return axios.request(config)
     .then((response: any) => {
         if (response.data.errors != null && response.data.errors.length > 0){
-            throw new Error(response.data.errors[0].message);
+          console.log(JSON.stringify(response.data.errors));
+          throw new Error(response.data.errors[0].message);
         }
         return response.data.data;
     })
     .catch((error: Error) => {
-      console.log(error);
       throw error;
     });
   }
@@ -747,12 +747,12 @@ import annotation from "./annotation";
     return axios.request(config)
     .then((response: any) => {
             if (response.data.errors != null && response.data.errors.length > 0){
-                throw new Error(response.data.errors[0].message);
+              console.log(JSON.stringify(response.data.errors));
+              throw new Error(response.data.errors[0].message);
             }
             return response.data.data.inbound.dataSourceSetByName;
     })
     .catch((error: Error) => {
-        console.log(error);
         throw error;
     });
   }

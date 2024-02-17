@@ -32,11 +32,11 @@ export async function setFeatureStatus(authToken: string, hostname: string, feat
     axios.request(config)
     .then((response: any) => {
         if (response.data.errors != null && response.data.errors.length > 0){
+          console.log(JSON.stringify(response.data.errors));
           throw new Error(response.data.errors[0].message);
         }
     })
     .catch((error: Error) => {
-      console.log(error);
       throw error;
     });
 }
