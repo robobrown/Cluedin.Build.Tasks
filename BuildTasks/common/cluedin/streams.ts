@@ -33,22 +33,25 @@ export async function exportStreams(authToken: string, hostname: string, outputP
             streams(pageNumber: $pageNumber) {
                 total
                 data {
-                    name
-                    isActive
-                    condition
-                    rules
-                    rulesApplied
-                    containerName
-                    mappingConfiguration
-                    mode
-                    exportOutgoingEdges
-                    exportIncomingEdges
-                    connector {
-                        name
-                        accountDisplay
-                        accountId
-                        codeName
-                    }
+                  name
+                  condition
+                  rules
+                  rulesApplied
+                  containerName
+                  mappingConfiguration
+                  mode
+                  exportOutgoingEdges
+                  exportIncomingEdges
+                  connector {
+                      name
+                      accountDisplay
+                      accountId
+                      codeName
+                  }
+                  description
+                  exportOutgoingEdgeProperties
+                  exportIncomingEdgeProperties
+                  type
                 }
             }
         }
@@ -73,13 +76,13 @@ export async function exportStreams(authToken: string, hostname: string, outputP
      return axios.request(config)
      .then((response: any) => {
         if (response.data.errors != null && response.data.errors.length > 0){
+          console.log(JSON.stringify(response.data.errors));
           throw new Error(response.data.errors[0].message);
         }
         
         return response.data.data.consume.streams;
      })
      .catch((error: Error) => {
-       console.log(error);
        throw error;
      });
   }
@@ -118,7 +121,8 @@ export async function exportStreams(authToken: string, hostname: string, outputP
       await setupConnectorStream(authToken, hostname, savedStream, existingStream.id, savedStream.connector.name);
       if (savedStream.isActive)
       {
-          await activateStream(authToken, hostname, existingStream.id);
+          // Version 2024.01.00 does not have active streams
+          // await activateStream(authToken, hostname, existingStream.id);
       }
     }
   }
@@ -133,7 +137,6 @@ export async function exportStreams(authToken: string, hostname: string, outputP
               data {
                   id
                   name
-                  isActive
                   condition
                   rules
                   rulesApplied
@@ -148,6 +151,10 @@ export async function exportStreams(authToken: string, hostname: string, outputP
                     accountId
                     codeName
                 }
+                description
+                exportOutgoingEdgeProperties
+                exportIncomingEdgeProperties
+                type
               }
           }
       }
@@ -171,7 +178,8 @@ export async function exportStreams(authToken: string, hostname: string, outputP
   return axios.request(config)
   .then((response: any) => {
         if (response.data.errors != null && response.data.errors.length > 0){
-            throw new Error(response.data.errors[0].message);
+          console.log(JSON.stringify(response.data.errors));
+          throw new Error(response.data.errors[0].message);
         }
         
         const theStream = response.data.data.consume.streams.data.find(function(x: any) { return x.name == streamName; });
@@ -180,7 +188,6 @@ export async function exportStreams(authToken: string, hostname: string, outputP
         return theStream;
   })
   .catch((error: Error) => {
-    console.log(error);
     throw error;
   });
   }
@@ -217,12 +224,12 @@ export async function exportStreams(authToken: string, hostname: string, outputP
     return axios.request(config)
     .then((response: any) => {
         if (response.data.errors != null && response.data.errors.length > 0){
-            throw new Error(response.data.errors[0].message);
+          console.log(JSON.stringify(response.data.errors));
+          throw new Error(response.data.errors[0].message);
         }
         return response.data.data.consume.createStream;
     })
     .catch((error: Error) => {
-      console.log(error);
       throw error;
     });
   }
@@ -263,12 +270,12 @@ export async function exportStreams(authToken: string, hostname: string, outputP
     return axios.request(config)
     .then((response: any) => {
         if (response.data.errors != null && response.data.errors.length > 0){
-            throw new Error(response.data.errors[0].message);
+          console.log(JSON.stringify(response.data.errors));
+          throw new Error(response.data.errors[0].message);
         }
         return response.data.data;
     })
     .catch((error: Error) => {
-      console.log(error);
       throw error;
     });
   }
@@ -318,12 +325,12 @@ export async function exportStreams(authToken: string, hostname: string, outputP
     return axios.request(config)
     .then((response: any) => {
         if (response.data.errors != null && response.data.errors.length > 0){
-            throw new Error(response.data.errors[0].message);
+          console.log(JSON.stringify(response.data.errors));
+          throw new Error(response.data.errors[0].message);
         }
         return response.data.data;
     })
     .catch((error: Error) => {
-      console.log(error);
       throw error;
     });
   }
@@ -363,12 +370,12 @@ export async function exportStreams(authToken: string, hostname: string, outputP
     return axios.request(config)
     .then((response: any) => {
         if (response.data.errors != null && response.data.errors.length > 0){
-            throw new Error(response.data.errors[0].message);
+          console.log(JSON.stringify(response.data.errors));
+          throw new Error(response.data.errors[0].message);
         }
         return response.data.data;
     })
     .catch((error: Error) => {
-      console.log(error);
       throw error;
     });
   }
@@ -436,12 +443,12 @@ export async function exportStreams(authToken: string, hostname: string, outputP
     return axios.request(config)
     .then((response: any) => {
         if (response.data.errors != null && response.data.errors.length > 0){
-            throw new Error(response.data.errors[0].message);
+          console.log(JSON.stringify(response.data.errors));
+          throw new Error(response.data.errors[0].message);
         }
         return response.data.data;
     })
     .catch((error: Error) => {
-      console.log(error);
       throw error;
     });
   }

@@ -31,6 +31,7 @@ export async function exportConnectors(authToken: string, hostname: string, outp
     axios.request(config)
     .then(async (response: any) => {
         if (response.data.errors != null && response.data.errors.length > 0){
+          console.log(JSON.stringify(response.data.errors));
           throw new Error(response.data.errors[0].message);
         }
         for (const connector of response.data.data.inbound.connectorConfigurations.configurations){
@@ -39,7 +40,6 @@ export async function exportConnectors(authToken: string, hostname: string, outp
         }
     })
     .catch((error: Error) => {
-      console.log(error);
       throw error;
     });
 }
@@ -129,12 +129,12 @@ export async function setConnectorConfigValue(authToken: string, hostname: strin
   return axios.request(config)
   .then((response: any) => {
       if (response.data.errors != null && response.data.errors.length > 0){
-          throw new Error(response.data.errors[0].message);
+        console.log(JSON.stringify(response.data.errors));
+        throw new Error(response.data.errors[0].message);
       }
       return response.data.data;
   })
   .catch((error: Error) => {
-    console.log(error);
     throw error;
   });
 }
@@ -172,7 +172,8 @@ export async function getConnectorByName(authToken: string, hostname: string, co
   return axios.request(config)
   .then((response: any) => {
        if (response.data.errors != null && response.data.errors.length > 0){
-           throw new Error(response.data.errors[0].message);
+        console.log(JSON.stringify(response.data.errors));
+        throw new Error(response.data.errors[0].message);
        }
        const connector = response.data.data.inbound.connectorConfigurations.configurations.find(function(x: any) { return x.name == connectorName; });
        if (connector == null) {
@@ -183,7 +184,6 @@ export async function getConnectorByName(authToken: string, hostname: string, co
        return getConnectorById(authToken, hostname, connector.id);
   })
   .catch((error: Error) => {
-    console.log(error);
     throw error;
   });
 }
@@ -234,12 +234,12 @@ async function createConnector(authToken: string, hostname: string, savedConnect
   return axios.request(config)
   .then((response: any) => {
       if (response.data.errors != null && response.data.errors.length > 0){
-          throw new Error(response.data.errors[0].message);
+        console.log(JSON.stringify(response.data.errors));
+        throw new Error(response.data.errors[0].message);
       }
       return response.data.data;
   })
   .catch((error: Error) => {
-    console.log(error);
     throw error;
   });
 }
@@ -304,12 +304,12 @@ async function updateConnector(authToken: string, hostname: string, savedConnect
   return axios.request(config)
   .then((response: any) => {
       if (response.data.errors != null && response.data.errors.length > 0){
-          throw new Error(response.data.errors[0].message);
+        console.log(JSON.stringify(response.data.errors));
+        throw new Error(response.data.errors[0].message);
       }
       return response.data.data;
   })
   .catch((error: Error) => {
-    console.log(error);
     throw error;
   });
 }
@@ -366,12 +366,12 @@ async function getConnectorById(authToken: string, hostname: string, connectorId
   return axios.request(config)
   .then((response: any) => {
        if (response.data.errors != null && response.data.errors.length > 0){
-           throw new Error(response.data.errors[0].message);
+        console.log(JSON.stringify(response.data.errors));
+        throw new Error(response.data.errors[0].message);
        }
        return response.data.data.inbound.connectorConfiguration;
   })
   .catch((error: Error) => {
-    console.log(error);
     throw error;
   });
 }

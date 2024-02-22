@@ -85,6 +85,6 @@ jobs:
     #     tag_name: v${{ steps.gitversion.outputs.semVer }}
     #     release_name: v${{ steps.gitversion.outputs.semVer }}
 
-    - name: publish to marketplace
-      if: github.ref == 'refs/heads/main'
-      run: npm run publish -- --vsix ${{github.workspace}}/dist/robobrown.build-release-task-${{steps.gitversion.outputs.semVer}}.vsix --token ${{ env.vsts_pat }}
+    # - name: publish to marketplace
+    #   if: github.ref == 'refs/heads/main'
+    #   run: npm run publish -- --vsix ${{github.workspace}}/dist/robobrown.build-release-task-${{steps.gitversion.outputs.semVer}}.vsix --token ${{ env.vsts_pat }}

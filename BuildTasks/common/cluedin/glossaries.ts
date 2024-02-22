@@ -47,6 +47,7 @@ export async function exportGlossaries(authToken: string, hostname: string, outp
   return axios.request(config)
   .then(async (response: any) => {
     if (response.data.errors != null && response.data.errors.length > 0){
+      console.log(JSON.stringify(response.data.errors));
       throw new Error(response.data.errors[0].message);
     }
 
@@ -55,7 +56,6 @@ export async function exportGlossaries(authToken: string, hostname: string, outp
     }
   })
   .catch((error: Error) => {
-    console.log(error);
     throw error;
   });
 }
@@ -133,12 +133,12 @@ async function createGloassary(authToken: string, hostname: string, savedGloassa
   return axios.request(config)
   .then((response: any) => {
       if (response.data.errors != null && response.data.errors.length > 0){
-          throw new Error(response.data.errors[0].message);
+        console.log(JSON.stringify(response.data.errors));
+        throw new Error(response.data.errors[0].message);
       }
       return response.data.data.management.createGlossaryCategory.id;
   })
   .catch((error: Error) => {
-    console.log(error);
     throw error;
   });
 }
@@ -178,12 +178,12 @@ async function createGloassaryTerm(authToken: string, hostname: string, savedGlo
   return axios.request(config)
   .then((response: any) => {
       if (response.data.errors != null && response.data.errors.length > 0){
-          throw new Error(response.data.errors[0].message);
+        console.log(JSON.stringify(response.data.errors));
+        throw new Error(response.data.errors[0].message);
       }
       return response.data.data.management.createGlossaryTerm.id;
   })
   .catch((error: Error) => {
-    console.log(error);
     throw error;
   });
 }
@@ -252,12 +252,12 @@ async function updateGloassaryTerm(authToken: string, hostname: string, savedGlo
   return axios.request(config)
   .then((response: any) => {
       if (response.data.errors != null && response.data.errors.length > 0){
-          throw new Error(response.data.errors[0].message);
+        console.log(JSON.stringify(response.data.errors));
+        throw new Error(response.data.errors[0].message);
       }
       return response.data.data.management.saveGlossaryTerm.id;
   })
   .catch((error: Error) => {
-    console.log(error);
     throw error;
   });
 }
@@ -300,13 +300,13 @@ async function getGloassaryCategoryByName(authToken: string, hostname: string, c
   return axios.request(config)
   .then((response: any) => {
        if (response.data.errors != null && response.data.errors.length > 0){
-           throw new Error(response.data.errors[0].message);
+        console.log(JSON.stringify(response.data.errors));
+        throw new Error(response.data.errors[0].message);
        }
        const gloassary = response.data.data.management.glossaryCategoryByName;
        return getGloassaryById(authToken, hostname, gloassary.id);
   })
   .catch((error: Error) => {
-    console.log(error);
     throw error;
   });
 }
@@ -349,7 +349,8 @@ async function getGloassaryById(authToken: string, hostname: string, gloassaryCa
   return axios.request(config)
   .then(async (response: any) => {
        if (response.data.errors != null && response.data.errors.length > 0){
-           throw new Error(response.data.errors[0].message);
+        console.log(JSON.stringify(response.data.errors));
+        throw new Error(response.data.errors[0].message);
        }
        //HACK, because the cluedin API is not returning the data of the term we have to get the info by ID.
        //Logged with Cluedin Support Ticket number #2192565630
@@ -365,7 +366,6 @@ async function getGloassaryById(authToken: string, hostname: string, gloassaryCa
        return response.data.data.management.glossaryCategory;
   })
   .catch((error: Error) => {
-    console.log(error);
     throw error;
   });
 }
@@ -412,12 +412,12 @@ async function getGlossaryTermById(authToken: string, hostname: string, glossary
   return axios.request(config)
   .then((response: any) => {
        if (response.data.errors != null && response.data.errors.length > 0){
-           throw new Error(response.data.errors[0].message);
+        console.log(JSON.stringify(response.data.errors));
+        throw new Error(response.data.errors[0].message);
        }
        return response.data.data.management.glossaryTerm;
   })
   .catch((error: Error) => {
-    console.log(error);
     throw error;
   });
 }

@@ -24,7 +24,6 @@ export async function getToken(username: string, password: string, client_id: st
     return response.data.access_token;
   })
   .catch((error: Error) => {
-      console.log(error);
       throw error;
   });
 }
@@ -57,12 +56,12 @@ export async function getUserInfo(authToken: string, hostname: string){
   return axios.request(config)
   .then((response: any) => {
       if (response.data.errors != null && response.data.errors.length > 0){
-          throw new Error(response.data.errors[0].message);
+        console.log(JSON.stringify(response.data.errors));
+        throw new Error(response.data.errors[0].message);
       }
       return response.data.data.administration.me.client;
   })
   .catch((error: Error) => {
-      console.log(error);
       throw error;
   });
 }
@@ -104,14 +103,14 @@ export async function createToken(authToken: string, hostname: string, tokenName
   return axios.request(config)
   .then(async (response: any) => {
       if (response.data.errors != null && response.data.errors.length > 0){
-          throw new Error(response.data.errors[0].message);
+        console.log(JSON.stringify(response.data.errors));
+        throw new Error(response.data.errors[0].message);
       }
       // return response.data.data.administration.createToken; //BUG, the CluedIn Token does not return
       const theToken = await getTokenByName(authToken, hostname, tokenName);
       return theToken;
   })
   .catch((error: Error) => {
-      console.log(error);
       throw error;
   });
 }
@@ -149,12 +148,12 @@ export async function getTokenByName(authToken: string, hostname: string, tokenN
   return axios.request(config)
   .then((response: any) => {
       if (response.data.errors != null && response.data.errors.length > 0){
-          throw new Error(response.data.errors[0].message);
+        console.log(JSON.stringify(response.data.errors));
+        throw new Error(response.data.errors[0].message);
       }
       return response.data.data.administration.apiTokens.find(function(x: any) { return x.name == tokenName; });
   })
   .catch((error: Error) => {
-      console.log(error);
       throw error;
   });
 }

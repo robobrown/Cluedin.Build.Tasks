@@ -1,6 +1,6 @@
 {
   "name": "cluedin.build.tasks.import.allconfig",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "CluedIn Import All Config Build Task",
   "repository": {
     "type": "git",
