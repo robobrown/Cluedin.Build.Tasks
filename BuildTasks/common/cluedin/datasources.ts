@@ -100,8 +100,6 @@ import annotation from "./annotation";
                                 id
                                 originalField
                                 key
-                                columnType
-                                columnSubType
                             }
                         }
                     }
@@ -714,8 +712,6 @@ import annotation from "./annotation";
                               id
                               originalField
                               key
-                              columnType
-                              columnSubType
                           }
                       }
                   }

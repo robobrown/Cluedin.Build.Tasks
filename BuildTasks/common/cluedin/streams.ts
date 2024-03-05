@@ -49,8 +49,6 @@ export async function exportStreams(authToken: string, hostname: string, outputP
                       codeName
                   }
                   description
-                  exportOutgoingEdgeProperties
-                  exportIncomingEdgeProperties
                   type
                 }
             }
@@ -152,8 +150,6 @@ export async function exportStreams(authToken: string, hostname: string, outputP
                     codeName
                 }
                 description
-                exportOutgoingEdgeProperties
-                exportIncomingEdgeProperties
                 type
               }
           }
