@@ -210,6 +210,7 @@ import annotation from "./annotation";
     const areEqual = utils.isEqual(existingDataSource, savedDataSource); 
     if (!areEqual) {
       console.log('Updating DataSource ' + datasourceSetName + '/' + dataSetName);
+
       for (const savedDataSet of savedDataSource.dataSets){
           let dataSetId: string;
           let existingDataSet = existingDataSource.dataSets.find(function(x: any) { return x.name == savedDataSet.name; });
@@ -232,7 +233,6 @@ import annotation from "./annotation";
                 dataSetId = existingDataSource.dataSets.find(function(x: any) { return x.name == savedDataSet.name; }).id;
             }
     
-
             if (savedDataSet.annotation != null) {
               const vocab = await vocabularies.getBasicVocabularyByName(authToken, hostname, savedDataSet.annotation.vocabulary.vocabularyName);
               if (vocab == null){
@@ -246,11 +246,17 @@ import annotation from "./annotation";
                 
               if (ignoredFields.length > 0)
               {
+                  console.log("addIgnoredFieldsToDataSet " + savedDataSet.name);
                   await addIgnoredFieldsToDataSet(authToken, hostname, dataSetId, ignoredFields);
               }
 
               const savedMappedFields = savedDataSet.fieldMappings.filter((mapping: any) => mapping.key != "--ignore--");
               const existingMappedFields = existingDataSet.fieldMappings.filter((mapping: any) => mapping.key != "--ignore--");
+
+              if (existingDataSet.annotationId == null){
+                continue; // BUG - this should not happen, but it does, so we need to skip this for now
+              }
+
               let existingAnnotation = await annotation.getAnnotationById(authToken, hostname, existingDataSet.annotationId);
 
               for (const fieldMapping of savedMappedFields){
@@ -302,7 +308,7 @@ import annotation from "./annotation";
                 existingAnnotation = await annotation.getAnnotationById(authToken, hostname, existingDataSet.annotationId);
               }
 
-              //Add the Edge Mappings
+              // Add the Edge Mappings
               for (const annotationProperty of savedDataSet.annotation.annotationProperties){
                 //get the existing annotation property
                 const existingAnnotationProperty = existingAnnotation.annotationProperties.find((prop: any) => prop.key == annotationProperty.key);
@@ -809,6 +815,7 @@ import annotation from "./annotation";
               console.log(JSON.stringify(response.data.errors));
               throw new Error(response.data.errors[0].message);
             }
+            sortDataSource(response.data.data.inbound.dataSource);
             return response.data.data.inbound.dataSource;
     })
     .catch((error: Error) => {
@@ -847,6 +854,24 @@ import annotation from "./annotation";
     }
 
     dataSourceSet.dataSources.sort((a: any, b: any) => (a.name > b.name) ? 1 : -1);
+  }
+
+  function sortDataSource(datasource: any){
+    if (datasource.dataSets == null) 
+      return;
+ 
+      for (const dataset of datasource.dataSets){
+      if (dataset.annotation != null){//} && dataset.annotation.annotationProperties != null){
+        // dataset.annotation.annotationProperties.sort((a: any, b: any) => (a.key > b.key) ? 1 : -1);
+        annotation.sortAnnotation(dataset.annotation);
+      }
+
+      if (dataset.fieldMappings != null){
+        dataset.fieldMappings.sort((a: any, b: any) => (a.originalField > b.originalField) ? 1 : -1);
+      }
+    }
+
+    datasource.dataSets.sort((a: any, b: any) => (a.name > b.name) ? 1 : -1);
   }
 
 export default { exportDataSources, importDataSources };
