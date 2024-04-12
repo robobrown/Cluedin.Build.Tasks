@@ -37,7 +37,7 @@ export async function importRules(authToken: string, hostname: string, sourcePat
     await importRule(authToken, hostname, file.replace('.json', ''), sourcePath);
   }
   
-  await orderRules(authToken, hostname, sourcePath);
+  // await orderRules(authToken, hostname, sourcePath);
 }
 
 export async function deleteOrphanedRules(authToken: string, hostname: string, sourcePath: string){
