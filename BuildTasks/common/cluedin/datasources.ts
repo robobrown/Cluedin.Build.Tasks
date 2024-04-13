@@ -182,7 +182,7 @@ import annotation from "./annotation";
 
   async function importDataSourceSet(authToken: string, hostname: string, userId: string, datasourceSetName: string){
     console.log('Importing DataSourceSet ' + datasourceSetName);
-    let existingDataSourceSet = await getDataSourceSetByName(authToken, hostname, datasourceSetName);
+    const existingDataSourceSet = await getDataSourceSetByName(authToken, hostname, datasourceSetName);
 
     if (existingDataSourceSet == null || existingDataSourceSet.id == null) {
         console.log('Creating DataSourceSet ' + datasourceSetName);
@@ -192,7 +192,7 @@ import annotation from "./annotation";
 
   async function importDataSource(authToken: string, hostname: string, userId: string, datasourceSetName: string, dataSetName: string, sourcePath: string){
     console.log('Importing DataSource ' + datasourceSetName + '/' + dataSetName);
-    let existingDataSourceSet = await getDataSourceSetByName(authToken, hostname, datasourceSetName);
+    const existingDataSourceSet = await getDataSourceSetByName(authToken, hostname, datasourceSetName);
     let existingDataSource = existingDataSourceSet.dataSources.find(function(x: any) { return x.name == dataSetName; });
     const savedDataSource = utils.readFile(sourcePath + '/' + dataSetName + '.json');
 
