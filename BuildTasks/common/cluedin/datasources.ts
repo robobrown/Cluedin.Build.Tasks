@@ -218,11 +218,13 @@ import annotation from "./annotation";
           if (!dataSetsAreEqual) {
 
             if (existingDataSet == null || existingDataSet.id == null) {
+                console.log('Create DataSet ' + savedDataSet.name);
                 const newDataSet = await createDataSet(authToken, hostname, userId, savedDataSet, dataSourceId);
                 dataSetId = newDataSet.id;
 
                 if (savedDataSet.annotation != null){
                   const vocab = await vocabularies.getBasicVocabularyByName(authToken, hostname, savedDataSet.annotation.vocabulary.vocabularyName);
+                  console.log('Create Manual Annotation');
                   await annotation.createManualAnnotation(authToken, hostname, savedDataSet, newDataSet, vocab.vocabularyId);
                 }
 
@@ -234,6 +236,21 @@ import annotation from "./annotation";
             }
     
             if (savedDataSet.annotation != null) {
+              console.log('Update Annotation ' + savedDataSet.annotation.name + ' on ' + savedDataSet.name);
+
+              if (existingDataSet.annotationId == null){
+                console.log("AnnotationId is null for " + savedDataSet.name);
+                // continue; // BUG - this should not happen, but it does, so we need to skip this for now
+                if (savedDataSet.annotation != null){
+                  const vocab = await vocabularies.getBasicVocabularyByName(authToken, hostname, savedDataSet.annotation.vocabulary.vocabularyName);
+                  console.log('Create Manual Annotation');
+                  await annotation.createManualAnnotation(authToken, hostname, savedDataSet, existingDataSet, vocab.vocabularyId);
+                }
+
+                existingDataSource = await getDataSourceById(authToken, hostname, dataSourceId);
+                existingDataSet = existingDataSource.dataSets.find(function(x: any) { return x.name == savedDataSet.name; });
+              }
+
               const vocab = await vocabularies.getBasicVocabularyByName(authToken, hostname, savedDataSet.annotation.vocabulary.vocabularyName);
               if (vocab == null){
                 throw new Error("Vocabulary not found " + savedDataSet.annotation.vocabulary.vocabularyName);
@@ -253,13 +270,12 @@ import annotation from "./annotation";
               const savedMappedFields = savedDataSet.fieldMappings.filter((mapping: any) => mapping.key != "--ignore--");
               const existingMappedFields = existingDataSet.fieldMappings.filter((mapping: any) => mapping.key != "--ignore--");
 
-              if (existingDataSet.annotationId == null){
-                continue; // BUG - this should not happen, but it does, so we need to skip this for now
-              }
 
               let existingAnnotation = await annotation.getAnnotationById(authToken, hostname, existingDataSet.annotationId);
 
               for (const fieldMapping of savedMappedFields){
+                  console.log("FieldMapping " + fieldMapping.originalField + " on " + savedDataSet.name);
+                  
                   //Add the field if it doesn't exist
                   const vocabKey = vocabKeys.find(function(x: any) { return x.key == fieldMapping.key; });
                   const savedAnnotationProperty = savedDataSet.annotation.annotationProperties.find(function(x: any) { return x.vocabKey == fieldMapping.key; });
