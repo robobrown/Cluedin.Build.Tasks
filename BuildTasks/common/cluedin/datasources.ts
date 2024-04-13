@@ -150,6 +150,7 @@ import annotation from "./annotation";
   }
 
   export async function importDataSources(authToken: string, hostname: string, sourcePath: string){
+    console.log('Importing DataSources');
     const fs = require('fs');
     const path = require('node:path');
     const directoryPath = sourcePath + 'DataSourceSets';
@@ -270,12 +271,9 @@ import annotation from "./annotation";
               const savedMappedFields = savedDataSet.fieldMappings.filter((mapping: any) => mapping.key != "--ignore--");
               const existingMappedFields = existingDataSet.fieldMappings.filter((mapping: any) => mapping.key != "--ignore--");
 
-
               let existingAnnotation = await annotation.getAnnotationById(authToken, hostname, existingDataSet.annotationId);
 
               for (const fieldMapping of savedMappedFields){
-                  console.log("FieldMapping " + fieldMapping.originalField + " on " + savedDataSet.name);
-                  
                   //Add the field if it doesn't exist
                   const vocabKey = vocabKeys.find(function(x: any) { return x.key == fieldMapping.key; });
                   const savedAnnotationProperty = savedDataSet.annotation.annotationProperties.find(function(x: any) { return x.vocabKey == fieldMapping.key; });

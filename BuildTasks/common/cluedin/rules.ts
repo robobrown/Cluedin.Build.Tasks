@@ -420,6 +420,7 @@ async function deleteRuleById(authToken: string, hostname: string, ruleId: strin
 }
 
 export async function orderRules(authToken: string, hostname: string, sourcePath: string){
+  console.log('Ordering Rules');
   const fs = require('fs');
   const directoryPath = sourcePath + 'Rules';
   
