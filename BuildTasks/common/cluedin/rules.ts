@@ -37,7 +37,7 @@ export async function importRules(authToken: string, hostname: string, sourcePat
     await importRule(authToken, hostname, file.replace('.json', ''), sourcePath);
   }
   
-  await orderRules(authToken, hostname, sourcePath);
+  // await orderRules(authToken, hostname, sourcePath);
 }
 
 export async function deleteOrphanedRules(authToken: string, hostname: string, sourcePath: string){
@@ -420,6 +420,7 @@ async function deleteRuleById(authToken: string, hostname: string, ruleId: strin
 }
 
 export async function orderRules(authToken: string, hostname: string, sourcePath: string){
+  console.log('Ordering Rules');
   const fs = require('fs');
   const directoryPath = sourcePath + 'Rules';
   

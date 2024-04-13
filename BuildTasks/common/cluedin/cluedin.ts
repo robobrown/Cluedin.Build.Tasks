@@ -29,6 +29,8 @@ export async function importAll(authToken: string, hostname: string, sourcePath:
     await connector.importConnectors(authToken, hostname, sourcePath);
     await streams.importStreams(authToken, hostname, sourcePath);
     await rules.importRules(authToken, hostname, sourcePath);
+    await rules.orderRules(authToken, hostname, sourcePath);
+    
     await datasources.importDataSources(authToken, hostname, sourcePath);
     console.log("Importing complete");
 }

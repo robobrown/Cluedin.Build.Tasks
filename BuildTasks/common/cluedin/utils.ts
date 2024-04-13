@@ -59,7 +59,7 @@ function compareReplacer(key: string, value: string)
     else if (key=="annotationEdgeId") return undefined;
     else if (key=="vocabularyKeyId") return undefined;
     else if (key=="order") return undefined;
-    
+
     //These next 2 fields are on the annotation even tho they are removed on the UI, but the value useAsEntityCode is set to false
     else if (key=="useSourceCode") return undefined;
     else if (key=="entityCodeOrigin") return undefined;
@@ -70,7 +70,7 @@ function compareReplacer(key: string, value: string)
 
     //Annotation Properties are not created directly, they are created via the mapped fields, 
     //we had a situation where the dev environment had additional properties because the mapping was created then removed from the field
-    else if (key=="annotationProperties") return undefined;
+    // else if (key=="annotationProperties") return undefined;
 
     //Streams account ID
     else if (key=="accountId") return undefined;
