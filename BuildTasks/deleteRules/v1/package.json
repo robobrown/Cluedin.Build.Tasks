@@ -1,6 +1,6 @@
 {
   "name": "cluedin.build.tasks.delete.rules",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "CluedIn Delete Rules Build Task",
   "type": "module",
   "repository": {

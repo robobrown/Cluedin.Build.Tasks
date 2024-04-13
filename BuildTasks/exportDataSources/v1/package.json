@@ -1,6 +1,6 @@
 {
   "name": "cluedin.build.tasks.export.datasources",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "CluedIn Export DataSources Build Task",
   "repository": {
     "type": "git",

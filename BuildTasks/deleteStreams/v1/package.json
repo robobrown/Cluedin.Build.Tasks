@@ -1,6 +1,6 @@
 {
   "name": "cluedin.build.tasks.delete.streams",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "CluedIn Delete Streams Build Task",
   "repository": {
     "type": "git",
