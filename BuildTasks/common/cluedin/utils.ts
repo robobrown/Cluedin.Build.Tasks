@@ -37,6 +37,7 @@ function saveReplacer(key: string, value: string)
     else if (key=="layoutConfiguration") return undefined;
     else if (key=="annotationId") return undefined;
     else if (key=="annotationEdgeId") return undefined;
+    else if (key=="archivedBy") return undefined;
     
     else return value;
 }

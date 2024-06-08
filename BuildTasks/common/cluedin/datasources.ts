@@ -124,7 +124,7 @@ import annotation from "./annotation";
     };
  
     return axios.request(config)
-    .then((response: any) => {
+    .then(async (response: any) => {
          if (response.data.errors != null && response.data.errors.length > 0){
           console.log(JSON.stringify(response.data.errors));
           throw new Error(response.data.errors[0].message);
@@ -138,6 +138,13 @@ import annotation from "./annotation";
     
             console.log('Looping dataSources' );
             for (const dataSource of dataSourceSet.dataSources){
+              for(const dataSet of dataSource.dataSets){
+                //annotationId
+                if (dataSet.annotationId != null){
+                  var codes = await annotation.getAnnotationCodes(dataSet.annotationId, authToken, hostname)
+                  dataSet.annotationCodes = codes;
+                }
+              }
               utils.saveToDisk(outputPath + "DataSourceSets/", dataSourceSet.name, dataSource.name, dataSource)
             }
     
@@ -363,6 +370,17 @@ import annotation from "./annotation";
                     // remove the edge
                     console.log("deleting edge mapping " + existingEdge.key + " on " + savedDataSet.name);
                     await annotation.deleteEdgeMapping(authToken, hostname, existingEdge.id);
+                  }
+                }
+              }
+
+              if (savedDataSet.annotationCodes != null){
+                var existingAnnotationCodes = await annotation.getAnnotationCodes(existingDataSet.annotationId, authToken, hostname);
+                for (const annotationCode of savedDataSet.annotationCodes){
+                  const existingAnnotationCode = existingAnnotationCodes.find((code: any) => code.key == annotationCode.key);
+                  if (existingAnnotationCode == null){
+                     console.log("adding annotation code " + annotationCode + " on " + savedDataSet.name);
+                     await annotation.createAnnotationCode(authToken, hostname, annotationCode.vocabKey, annotationCode.entityCodeOrigin, annotationCode.key, annotationCode.type, existingDataSet.annotationId, annotationCode.sourceCode);
                   }
                 }
               }
