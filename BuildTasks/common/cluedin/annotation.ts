@@ -1,6 +1,6 @@
 import vocabularies from "./vocabularies";
 
-export async function createManualAnnotation(authToken: string, hostname: string, dataSet: any, dataSetId: any, vocabularyId: string){
+  export async function createManualAnnotation(authToken: string, hostname: string, dataSet: any, dataSetId: any, vocabularyId: string){
     const axios = require('axios');
 
     const data = JSON.stringify({
@@ -450,4 +450,101 @@ export async function createManualAnnotation(authToken: string, hostname: string
     });
   }
 
-  export default { addEdgeMapping, editEdgeMapping, modifyAnnotation, createManualAnnotation, getAnnotationById, sortAnnotation, deleteEdgeMapping };
+  export async function getAnnotationCodes(annotationId: string, authToken: string, hostname: string){
+    const axios = require('axios');
+    const data = JSON.stringify({
+      query: `query getAnnotationCodes($annotationId: ID!) {
+        preparation {
+            id
+            getAnnotationCodes(annotationId: $annotationId) {
+                id
+                annotationId
+                key
+                entityCodeOrigin
+                sourceCode
+                type
+                vocabKey
+            }
+        }
+    }
+    `,
+      variables: {
+        annotationId: annotationId
+      }
+    });
+    
+    const config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'https://' + hostname + '/graphql',
+      headers: { 
+        'Content-Type': 'application/json', 
+        'Authorization': 'Bearer ' + authToken
+      },
+      data : data
+    };
+    
+    return axios.request(config)
+    .then((response: any) => {
+      if (response.data.errors != null && response.data.errors.length > 0){
+        console.log(JSON.stringify(response.data.errors));
+        throw new Error(response.data.errors[0].message);
+      }
+      
+      return response.data.data.preparation.getAnnotationCodes;
+    })
+    .catch((error: Error) => {
+      throw error;
+    });
+  }
+
+  export async function createAnnotationCode(authToken: string, hostname: string, vocabKey: string, entityCodeOrigin: string, key: string, type: string, annotationId: string, sourceCode: boolean){
+    const axios = require('axios');
+
+    const data = JSON.stringify({
+      query: `mutation createAnnotationCode($annotationCode: InputAnnotationCode) {
+        preparation {
+            id
+            createAnnotationCode(annotationCode: $annotationCode) {
+                id
+            }
+        }
+      }`,
+      variables: {
+        "annotationCode": {
+          "vocabKey": vocabKey,
+          "entityCodeOrigin": entityCodeOrigin,
+          "key": key,
+          "type": type,
+          "annotationId": annotationId,
+          "sourceCode": sourceCode
+        }
+      }
+    });
+    
+    const config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'https://' + hostname + '/graphql',
+      headers: { 
+        'Content-Type': 'application/json', 
+        'Authorization': 'Bearer ' + authToken
+      },
+      data : data
+    };
+
+    return axios.request(config)
+    .then((response: any) => {
+        if (response.data.errors != null && response.data.errors.length > 0){
+            console.log(JSON.stringify(response.data.errors));
+            throw new Error(response.data.errors[0].message);
+        }
+        return response.data.data.preparation.createAnnotationCode;
+    })
+    .catch((error: Error) => {
+      throw error;
+    });
+  }
+
+
+  export default { addEdgeMapping, editEdgeMapping, modifyAnnotation, createManualAnnotation, getAnnotationById, sortAnnotation, deleteEdgeMapping, getAnnotationCodes, createAnnotationCode };
