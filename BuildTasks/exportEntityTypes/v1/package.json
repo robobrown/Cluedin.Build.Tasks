@@ -1,6 +1,6 @@
 {
   "name": "cluedin.build.tasks.export.entitytypes",
-  "version": "1.0.9",
+  "version": "1.0.11",
   "description": "CluedIn Export Entity Types Build Task",
   "repository": {
     "type": "git",

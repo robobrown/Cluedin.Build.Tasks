@@ -1,6 +1,6 @@
 {
   "name": "cluedin.build.tasks.import.hierarchies",
-  "version": "1.0.9",
+  "version": "1.0.11",
   "description": "CluedIn Import Hierarchies Build Task",
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
 {
   "name": "cluedin.build.tasks.export.connectors",
-  "version": "1.0.9",
+  "version": "1.0.11",
   "description": "CluedIn Export Connectors Build Task",
   "repository": {
     "type": "git",

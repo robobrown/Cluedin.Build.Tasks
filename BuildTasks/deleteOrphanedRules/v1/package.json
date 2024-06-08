@@ -1,6 +1,6 @@
 {
   "name": "cluedin.build.tasks.delete.orphaned.rules",
-  "version": "1.0.9",
+  "version": "1.0.11",
   "description": "CluedIn Delete Orphaned Rules Build Task",
   "repository": {
     "type": "git",
