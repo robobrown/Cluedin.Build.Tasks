@@ -141,7 +141,7 @@ import annotation from "./annotation";
               for(const dataSet of dataSource.dataSets){
                 //annotationId
                 if (dataSet.annotationId != null){
-                  let codes = await annotation.getAnnotationCodes(dataSet.annotationId, authToken, hostname)
+                  const codes = await annotation.getAnnotationCodes(dataSet.annotationId, authToken, hostname)
                   dataSet.annotationCodes = codes;
                 }
               }
@@ -375,7 +375,7 @@ import annotation from "./annotation";
               }
 
               if (savedDataSet.annotationCodes != null){
-                let existingAnnotationCodes = await annotation.getAnnotationCodes(existingDataSet.annotationId, authToken, hostname);
+                const existingAnnotationCodes = await annotation.getAnnotationCodes(existingDataSet.annotationId, authToken, hostname);
                 for (const annotationCode of savedDataSet.annotationCodes){
                   const existingAnnotationCode = existingAnnotationCodes.find((code: any) => code.key == annotationCode.key);
                   if (existingAnnotationCode == null){
