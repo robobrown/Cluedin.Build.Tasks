@@ -337,8 +337,6 @@ async function getConnectorById(authToken: string, hostname: string, connectorId
             reAuthEndpoint
             source
             sourceQuality
-            stats
-            status
             supportsAutomaticWebhookCreation
             supportsConfiguration
             supportsWebhooks
