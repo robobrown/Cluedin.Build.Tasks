@@ -41,3 +41,26 @@ Specify the license under which your Azure DevOps Task project is distributed.
 ## Connectors
 
 Currently we do not support moving connector settings e.g. connection strings.
+
+
+## Sample Usage
+$env:INPUT_SOURCEPATH="C:\code\Cluedin.Exporter-1\data\"  
+$env:INPUT_outputPath="C:\code\Cluedin.Exporter-1\data\"  
+ 
+#dev
+$env:INPUT_cluedinUsername="cluedinadmin@guardrisk.co.za"  
+$env:INPUT_cluedinPassword=""  
+$env:INPUT_cluedinClientId="cluedindev"  
+$env:INPUT_cluedinHostname="app-cluedindev.guardrisk.co.za"  
+ 
+#uat
+$env:INPUT_cluedinUsername="cluedinadmin@guardrisk.co.za"  
+$env:INPUT_cluedinPassword=""  
+$env:INPUT_cluedinClientId="cluedinuat"  
+$env:INPUT_cluedinHostname="app-cluedinuat.guardrisk.co.za"  
+ 
+#prod
+$env:INPUT_cluedinUsername="cluedinadmin@guardrisk.co.za"  
+$env:INPUT_cluedinPassword=""  
+$env:INPUT_cluedinClientId="cluedin"  
+$env:INPUT_cluedinHostname="app-cluedin.guardrisk.co.za"
