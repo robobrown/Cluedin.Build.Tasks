@@ -41,7 +41,6 @@ import annotation from "./annotation";
                                 useStrictEdgeCode
                                 useDefaultSourceCode
                                 annotationProperties {
-                                    displayName
                                     key
                                     vocabKey
                                     coreVocab
@@ -50,38 +49,6 @@ import annotation from "./annotation";
                                     useSourceCode
                                     entityCodeOrigin
                                     type
-                                    annotationEdges {
-                                        id
-                                        key
-                                        edgeType
-                                        entityType
-                                        origin
-                                        dataSourceGroupId
-                                        dataSourceId
-                                        dataSetId
-                                        direction
-                                        entityTypeConfiguration {
-                                            icon
-                                            displayName
-                                            entityType
-                                        }
-                                        edgeProperties {
-                                          id
-                                          annotationEdgeId
-                                          originalField
-                                          vocabularyKey {
-                                              displayName
-                                              name
-                                              vocabulary {
-                                                  vocabularyName
-                                              }
-                                              groupName
-                                              storage
-                                              dataType
-                                              key
-                                          }
-                                        }
-                                    }
                                 }
                                 vocabulary {
                                     vocabularyId
@@ -308,12 +275,15 @@ import annotation from "./annotation";
 
                   } else {
                     const existingAnnotationProperty = existingAnnotation.annotationProperties.find((prop: any) => prop.vocabKey == match.key);
-                    if (savedAnnotationProperty.useAsEntityCode && ( //only do this if the saved annotation is use as entity code otherise we need to remove the entity codes
-                      savedAnnotationProperty.entityCodeOrigin != existingAnnotationProperty.entityCodeOrigin || 
-                      savedAnnotationProperty.useAsAlias != existingAnnotationProperty.useAsAlias || 
-                      savedAnnotationProperty.useAsEntityCode != existingAnnotationProperty.useAsEntityCode)){
-                      console.log("modifyBatchVocabularyClueMappingConfiguration - on Update " + fieldMapping.originalField)
-                      await modifyBatchVocabularyClueMappingConfiguration(authToken, hostname, existingDataSet.annotationId, fieldMapping.key, savedAnnotationProperty.entityCodeOrigin, savedAnnotationProperty.useAsAlias, savedAnnotationProperty.useAsEntityCode)
+                    if (existingAnnotationProperty !== undefined && savedAnnotationProperty !== undefined)
+                    {
+                      if (savedAnnotationProperty.useAsEntityCode && ( //only do this if the saved annotation is use as entity code otherise we need to remove the entity codes
+                        savedAnnotationProperty.entityCodeOrigin != existingAnnotationProperty.entityCodeOrigin || 
+                        savedAnnotationProperty.useAsAlias != existingAnnotationProperty.useAsAlias || 
+                        savedAnnotationProperty.useAsEntityCode != existingAnnotationProperty.useAsEntityCode)){
+                        console.log("modifyBatchVocabularyClueMappingConfiguration - on Update " + fieldMapping.originalField)
+                        await modifyBatchVocabularyClueMappingConfiguration(authToken, hostname, existingDataSet.annotationId, fieldMapping.key, savedAnnotationProperty.entityCodeOrigin, savedAnnotationProperty.useAsAlias, savedAnnotationProperty.useAsEntityCode)
+                      }
                     }
                   }
               }
@@ -379,7 +349,7 @@ import annotation from "./annotation";
                 for (const annotationCode of savedDataSet.annotationCodes){
                   const existingAnnotationCode = existingAnnotationCodes.find((code: any) => code.key == annotationCode.key);
                   if (existingAnnotationCode == null){
-                     console.log("adding annotation code " + annotationCode + " on " + savedDataSet.name);
+                     console.log("adding annotation code " + annotationCode.vocabKey + " on " + savedDataSet.name);
                      await annotation.createAnnotationCode(authToken, hostname, annotationCode.vocabKey, annotationCode.entityCodeOrigin, annotationCode.key, annotationCode.type, existingDataSet.annotationId, annotationCode.sourceCode);
                   }
                 }
@@ -760,7 +730,6 @@ import annotation from "./annotation";
                           useStrictEdgeCode
                           useDefaultSourceCode
                           annotationProperties {
-                              displayName
                               key
                               vocabKey
                               coreVocab
@@ -783,22 +752,6 @@ import annotation from "./annotation";
                                       icon
                                       displayName
                                       entityType
-                                  }
-                                  edgeProperties {
-                                      id
-                                      annotationEdgeId
-                                      originalField
-                                      vocabularyKey {
-                                          displayName
-                                          name
-                                          vocabulary {
-                                              vocabularyName
-                                          }
-                                          groupName
-                                          storage
-                                          dataType
-                                          key
-                                      }
                                   }
                               }
                           }

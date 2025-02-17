@@ -302,7 +302,6 @@ import vocabularies from "./vocabularies";
                 useStrictEdgeCode
                 useDefaultSourceCode
                 annotationProperties {
-                    displayName
                     key
                     vocabKey
                     coreVocab
